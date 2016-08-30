@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login</title>
     <script src="<c:url value="/resources/js/main.js" />" type="text/javascript"></script>
 </head>
 <body>
