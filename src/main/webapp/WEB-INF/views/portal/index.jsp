@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html lang="ru" class=""><head id="Head1">
     <meta charset="UTF-8">
@@ -5,7 +6,7 @@
     <link rel="stylesheet" href="http://css.rabota.com.ua/v78.2/theme/rua/css/bundles/jobsearch.css">
     <style>
         #header_img.header_img_variant_1 {
-            background-image: url(http://img1.rabota.com.ua/static/2015/04/1.jpg);
+            background-image: url(<c:url value="/resources/images/header3.jpg" />);
         }
         #header_img.header_img_variant_2 {
             background-image: url(http://img1.rabota.com.ua/static/2015/04/2.jpg);
@@ -598,7 +599,7 @@
     </div>
     <div class="rua-l-wrapper mtmb">
         <div class="row middle m-text-center">
-            <div class="col d-1of2 m-1of1"> <img src="http://img1.rabota.com.ua/static/2014/11/MAC.png"> </div>
+            <div class="col d-1of2 m-1of1"> <img src="<c:url value="/resources/images/mac.png" />"> </div>
             <div class="col d-1of2 m-1of1 m-pl-1of1">
                 <h2 class="headline mtmb"> Почему стоит с нами сотрудничать?</h2>
                 <div class="rua-p-c-mid" style="display: inline-block; margin: auto; text-align: left;">
@@ -612,7 +613,7 @@
             </div>
         </div>
     </div>
-    <div class="text-center" style="margin: 0; margin-bottom: -40px; background: #f7f7f7 url(http://img1.rabota.com.ua/static/2014/11/bg1.jpg); overflow: hidden;">
+    <div class="text-center" style="margin: 0; margin-bottom: -40px; background: #f7f7f7 url(<c:url value="/resources/images/header3.jpg" />); overflow: hidden;">
         <h2 class="headline centered mtmb rua-p-c-white">еще крутой текст<br>самый крутой</h2>
         <p class="mtmb"> <a class="btn btn-primary" href="/%D0%B2%D0%B0%D0%BA%D0%B0%D0%BD%D1%81%D0%B8%D0%B8">зачем эта кнопка?</a>
         </p>
