@@ -15,7 +15,7 @@ body {
 }
 .form .field {
     position: relative;
-    margin: 0 50px;
+    margin: 0 50px 20px;
 }
 .form .field i {
     font-size: 18px;
@@ -111,9 +111,11 @@ body {
     background: #f7f3eb;
     color: #777;
     transition: color 0.3s ease-out;
+    width: 270px;
+    height: 45px;
 }
 .form input[type=text] {
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
 }
 .form input[type=text]:hover ~ i,
 .form input[type=password]:hover ~ i {
