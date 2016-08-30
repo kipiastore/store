@@ -104,8 +104,6 @@ body {
     font-weight: 400;
     padding: 10px 15px 10px 55px;
     position: relative;
-    width: 200px;
-    height: 24px;
     color: #676056;
     border: none;
     background: #f7f3eb;
@@ -115,7 +113,7 @@ body {
     height: 45px;
 }
 .form input[type=text] {
-    /*margin-bottom: 15px;*/
+
 }
 .form input[type=text]:hover ~ i,
 .form input[type=password]:hover ~ i {
@@ -131,7 +129,7 @@ body {
     outline: none;
 }
 .form input[type=submit] {
-    margin-top: 15px;
+    margin-top: 8px;
     width: 270px;
     text-align: center;
     font-size: 14px;

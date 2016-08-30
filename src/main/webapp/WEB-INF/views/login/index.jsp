@@ -8,7 +8,7 @@
 <body>
     <div class="login">
         <h1>Login</h1>
-        <form class="form" method="post" action="#">
+        <form class="form" method="post" action="login/action">
             <p class="field">
                 <input type="text" name="login" placeholder="Username" required/>
                 <i class="fa fa-user"></i>
