@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Вход</title>
     <meta charset="UTF-8"/>
     <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet" />
 </head>

@@ -11,7 +11,7 @@
     <header class="header header-anon header-sticky" id="Header_header">
         <ul class="header-inner">
             <li class="header-item header-menu">
-                <a class="header-link" href="">Найти что-то</a>
+                <a class="header-link" href="">Поиск</a>
                 <ul class="header-menu-inner">
                     <li class="header-menu-item">
                         <a class="header-menu-link" href="">По рубрикам</a>
@@ -25,7 +25,7 @@
                 </ul>
             </li>
             <li class="header-item">
-                <a class="header-link header-link-button" href="">Сделать что-то</a>
+                <a class="header-link header-link-button" href="login">Вход</a>
             </li>
         </ul>
     </header>
@@ -170,13 +170,13 @@
                 <h2 class="headline mtmb" id="headlinemtmb">Почему стоит с нами сотрудничать?</h2>
                 <div class="rua-p-c-mid">
                     <ol>
-                        <li>пункт</li>
+                        <li>1</li>
                         <li>2</li>
                         <li>3</li>
                     </ol>
                 </div>
                 <p class="mtmb">
-                    <a class="btn btn-danger" href="">связаться с нами</a>
+                    <a class="btn btn-danger" href="">Оставить заявку</a>
                 </p>
             </div>
         </div>
@@ -184,10 +184,9 @@
     <div class="text-center" style="margin: 0; margin-bottom: -40px; background: #f7f7f7 url(<c:url value="/resources/images/header3.jpg" />); overflow: hidden;">
         <h2 class="headline centered mtmb rua-p-c-white">еще крутой текст<br>самый крутой</h2>
         <p class="mtmb">
-            <a class="btn btn-primary" href="">зачем эта кнопка?</a>
+            <a class="btn btn-primary" href="">кнопка</a>
         </p>
     </div>
-
     <footer class="f">
         <div class="c">
             <ul>
@@ -208,7 +207,6 @@
                 <li>
                     <b>клиенту</b>
                     <a href="">Добавить</a>
-                    <a href="">Поиск</a>
                     <a href="">Рассылка</a>
                     <a href="">Наши услуги</a>
                     <a href="">Советы</a>
