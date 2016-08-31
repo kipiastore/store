@@ -1,0 +1,322 @@
+#header_img .headline > small {
+    display: block;
+    color: inherit;
+}
+.box, .box .border {
+    width: 220px;
+    height: 220px;
+}
+.box {
+    position: relative;
+    margin: auto;
+}
+.box .border {
+    border: 1px solid #B71810;
+    border-radius: 50%;
+    -moz-transition: border-radius .3s ease-in-out;
+    -o-transition: border-radius .3s ease-in-out;
+    -webkit-transition: border-radius .3s ease-in-out;
+    transition: border-radius .3s ease-in-out;
+}
+.box:hover .border {
+    border-radius: 20px;
+}
+.front {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 29%;
+    text-align: center;
+    font-size: 17px;
+    opacity: 1;
+}
+.front strong {
+    font: normal 32px/1.5 Arial;
+    color: #B71810;
+    display: block;
+}
+.back {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 20px;
+    color: #7e7e7e;
+    text-align: left;
+    opacity: 0;
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.box:hover .back {
+    opacity: 1;
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.box:hover .front {
+    opacity: 0;
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+}
+.front,
+.box:hover .front,
+.back,
+.box:hover .back {
+    -moz-transition: opacity .1s ease-in-out .1s, transform .1s ease-in-out .1s;
+    -o-transition: opacity .1s ease-in-out .1s, transform .1s ease-in-out .1s;
+    -webkit-transition: opacity .1s ease-in-out .1s, transform .1s ease-in-out .1s;
+    transition: opacity .1s ease-in-out .1s, transform .1s ease-in-out .1s;
+}
+.rptShort {
+    overflow: hidden;
+    text-align: center;
+}
+.rptShort a {
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    display: inline-block;
+    padding-top: 70px;
+    text-align: center;
+    color: #7e7e7e;
+    text-decoration: none;
+    float: left;
+    width: 20%;
+    box-sizing: border-box;
+    padding: 70px 10px 0 10px;
+    margin-bottom: 20px;
+}
+.rptShort a:nth-child(5n+1) {
+    clear: left;
+}
+.rptShort a:hover {
+    color: #B71810;
+    text-decoration: none;
+}
+.rptShort span {
+    display: block;
+}
+.rptShort a[data-id="3"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/hr.png');
+}
+.rptShort a[data-id="3"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/hr_red.png');
+}
+.rptShort a[data-id="1"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/it.png');
+}
+.rptShort a[data-id="1"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/it_red.png');
+}
+.rptShort a[data-id="33"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/auto.png');
+}
+.rptShort a[data-id="33"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/auto_red.png');
+}
+.rptShort a[data-id="11"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/administrative_stuff.png');
+}
+.rptShort a[data-id="11"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/administrative_stuff_red.png');
+}
+.rptShort a[data-id="18"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/banks.png');
+}
+.rptShort a[data-id="18"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/banks_red.png');
+}
+.rptShort a[data-id="6"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/accounting.png');
+}
+.rptShort a[data-id="6"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/accounting_red.png');
+}
+.rptShort a[data-id="8"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/hotels.png');
+}
+.rptShort a[data-id="8"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/hotels_red.png');
+}
+.rptShort a[data-id="15"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/design.png');
+}
+.rptShort a[data-id="15"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/design_red.png');
+}
+.rptShort a[data-id="31"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/purchasing.png');
+}
+.rptShort a[data-id="31"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/purchasing_red.png');
+}
+.rptShort a[data-id="14"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/consulting.png');
+}
+.rptShort a[data-id="14"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/consulting_red.png');
+}
+.rptShort a[data-id="21"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/culture.png');
+}
+.rptShort a[data-id="21"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/culture_red.png');
+}
+.rptShort a[data-id="5"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/logistics.png');
+}
+.rptShort a[data-id="5"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/logistics_red.png');
+}
+.rptShort a[data-id="24"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/marketing.png');
+}
+.rptShort a[data-id="24"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/marketing_red.png');
+}
+.rptShort a[data-id="22"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/media.png');
+}
+.rptShort a[data-id="22"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/media_red.png');
+}
+.rptShort a[data-id="9"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/medicine.png');
+}
+.rptShort a[data-id="9"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/medicine_red.png');
+}
+.rptShort a[data-id="25"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/sea.png');
+}
+.rptShort a[data-id="25"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/sea_red.png');
+}
+.rptShort a[data-id="10"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/science.png');
+}
+.rptShort a[data-id="10"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/science_red.png');
+}
+.rptShort a[data-id="28"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/real_estate.png');
+}
+.rptShort a[data-id="28"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/real_estate_red.png');
+}
+.rptShort a[data-id="13"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/ngo.png');
+}
+.rptShort a[data-id="13"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/ngo_red.png');
+}
+.rptShort a[data-id="4"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/safety.png');
+}
+.rptShort a[data-id="4"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/safety_red.png');
+}
+.rptShort a[data-id="17"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/sales.png');
+}
+.rptShort a[data-id="17"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/sales_red.png');
+}
+.rptShort a[data-id="32"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/manufacture.png');
+}
+.rptShort a[data-id="32"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/manufacture_red.png');
+}
+.rptShort a[data-id="20"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/workforce.png');
+}
+.rptShort a[data-id="20"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/workforce_red.png');
+}
+.rptShort a[data-id="26"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/agriculture.png');
+}
+.rptShort a[data-id="26"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/agriculture_red.png');
+}
+.rptShort a[data-id="7"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/sport.png');
+}
+.rptShort a[data-id="7"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/sport_red.png');
+}
+.rptShort a[data-id="19"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/insurance.png');
+}
+.rptShort a[data-id="19"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/insurance_red.png');
+}
+.rptShort a[data-id="27"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/construction.png');
+}
+.rptShort a[data-id="27"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/construction_red.png');
+}
+.rptShort a[data-id="30"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/students.png');
+}
+.rptShort a[data-id="30"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/students_red.png');
+}
+.rptShort a[data-id="2"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/telecommunications.png');
+}
+.rptShort a[data-id="2"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/telecommunications_red.png');
+}
+.rptShort a[data-id="12"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/top.png');
+}
+.rptShort a[data-id="12"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/top_red.png');
+}
+.rptShort a[data-id="16"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/trade.png');
+}
+.rptShort a[data-id="16"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/trade_red.png');
+}
+.rptShort a[data-id="23"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/tourism.png');
+}
+.rptShort a[data-id="23"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/tourism_red.png');
+}
+.rptShort a[data-id="29"] {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/law.png');
+}
+.rptShort a[data-id="29"]:hover {
+    background-image: url('http://img1.rabota.com.ua/static/2014/11/rubrics/law_red.png');
+}
+.rptShort a {
+    width: 50%;
+    background-position: 0 50%;
+    padding: 0 0 0 30px;
+    text-align: left;
+    background-size: 16px;
+    margin-bottom: 5px;
+}
+.rptShort span {
+    float: right;
+}
+.rptShort a:nth-child(5n+1) {
+    clear: none;
+}
+.rptShort a:nth-child(2n+1) {
+    clear: left;
+    padding-right: 20px;
+}
