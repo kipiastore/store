@@ -7,21 +7,23 @@
 </head>
 <body>
     <div class="login">
-        <h1>Login</h1>
+        <h1>Вход</h1>
         <form class="form" method="post" action="login/action">
             <p class="field">
-                <input type="text" name="login" placeholder="Username" required/>
+                <input type="text" name="login" placeholder="Логин" required/>
                 <i class="fa fa-user"></i>
             </p>
             <p class="field">
-                <input type="password" name="password" placeholder="Password" required/>
+                <input type="password" name="password" placeholder="Пароль" required/>
                 <i class="fa fa-lock"></i>
             </p>
-            <p class="submit"><input type="submit" name="sent" value="Login"></p>
+            <p class="submit"><input type="submit" name="sent" value="Войти"></p>
+            <span class="err"><b><%= request.getParameter("msg") == null ? "" : request.getParameter("msg") %></b></span>
         </form>
     </div><!--/ Login-->
     <div class="copyright">
-        <p>Copyright &copy; 2016. Created by <a href="http://google.com" target="_blank">Google</a></p>
+        <p><a href="home">Главная страница</a></p>
+        <p>Copyright &copy; 2016. Created by <a href="http://myframeteam.com" target="_blank">MyFrameTeam</a></p>
     </div>
 </body>
 </html>

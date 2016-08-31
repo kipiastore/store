@@ -91,11 +91,11 @@ body {
     color: #f2672e;
 }
 ::-webkit-input-placeholder {
-    color: #ded9cf;
+    color: #cec7ba;
     //font-family: 'Open Sans';
 }
 :-moz-placeholder {
-    color: #ded9cf !important;
+    color: #cec7ba !important;
     //font-family: 'Open Sans';
 }
 .form input[type=text], input[type=password] {
@@ -111,9 +111,6 @@ body {
     transition: color 0.3s ease-out;
     width: 270px;
     height: 45px;
-}
-.form input[type=text] {
-
 }
 .form input[type=text]:hover ~ i,
 .form input[type=password]:hover ~ i {
@@ -230,4 +227,10 @@ body {
 }
 .copyright p a:hover, .copyright a a:hover {
     color: #f2672e;
+}
+.err {
+    text-align: center;
+    display: block;
+    color: #f36767;
+    margin-top: -18px;
 }
