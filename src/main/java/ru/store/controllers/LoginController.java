@@ -43,13 +43,14 @@ public class LoginController {
 
         if (isNotRobot && isLogged) {
             if (isAdmin)
-                return "admin/index";
+                return "redirect:/admin";
             if (isManager)
-                return "manager/index";
+                return "redirect:/manager";
             if (isUser)
-                return "portal/index";
+                return "redirect:/portal";
         }
-        return "redirect:/login";
+        String msg = "Вы ввели неверные данные.";
+        return "redirect:/login?msg=" + msg;
     }
 
 }
