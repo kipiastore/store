@@ -1,49 +1,48 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<html lang="ru" class="">
-<head id="Head1">
-    <meta charset="UTF-8">
-    <link rel="alternate" media="handheld" href="http://rabota.ua/mobile/list">
-    <link rel="stylesheet" href="http://css.rabota.com.ua/v78.2/theme/rua/css/bundles/jobsearch.css">
-    <link rel="stylesheet" href="
-      <c:url value="/resources/css/home.css" />
-      ">
-    <style>
-        #header_img.header_img_variant_1 {
-            background-image: url(<c:url value="/resources/images/header3.jpg" />);
-        }
-    </style>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="ru">
+<head>
+    <title>Home Page</title>
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
 </head>
-<body class="rua-l-body">
-<form method="post" action="" id="form1" class="inversed-header jobsearcher anonymous">
-    <header id="Header_header" class="header header-anon header-sticky">
+<body>
+<form method="post">
+    <header class="header header-anon header-sticky" id="Header_header">
         <ul class="header-inner">
             <li class="header-item header-menu">
-                <a class="header-link" href="">Найти что-то
-                </a>
+                <a class="header-link" href="">Найти что-то</a>
                 <ul class="header-menu-inner">
-                    <li class="header-menu-item "><a class="header-menu-link" href="">По рубрикам
-                    </a>
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="">По рубрикам</a>
                     </li>
-                    <li class="header-menu-item "><a class="header-menu-link" href="">по районам</a>
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="">По районам</a>
                     </li>
-                    <li class="header-menu-item "><a class="header-menu-link" href="">По компаниям
-                    </a>
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="">По компаниям</a>
                     </li>
                 </ul>
             </li>
-            <li class="header-item"><a class="header-link header-link-button" href=""> Разместить что-то</a></li>
+            <li class="header-item">
+                <a class="header-link header-link-button" href="">Сделать что-то</a>
+            </li>
         </ul>
     </header>
-    <div id="header_img" class="header_img_variant_1">
-        <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">еще текст<small class="rua-p-white">текст</small></h2>
-        <div id="search_holder">
-            <div id="beforeContentZone_vacSearch_pnlsearch" class="searchform form-inline">
+    <div class="header_img_variant_1" id="header_img">
+        <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">еще текст<small>текст</small></h2>
+        <div>
+            <div class="searchform form-inline">
                 <div class="rua-l-wrapper">
-                    <div class="main-form">
-                        <div class="rua-g-right"> <a id="beforeContentZone_vacSearch_lnkSearch" class="btn btn-primary btn-block submit_button" href="">Поиск</a> </div>
+                    <div>
+                        <div class="rua-g-right">
+                            <a class="btn btn-primary btn-block submit_button" href="">Поиск</a>
+                        </div>
                         <div class="rua-g-clearfix">
-                            <div class="row-fluid"> <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input name="ctl00$beforeContentZone$vacSearch$Keyword" type="text" id="beforeContentZone_vacSearch_Keyword" class="keyword input-block-level ui-autocomplete-input" placeholder="Введите ключевые" autocomplete="off"> </div>
+                            <div>
+                                <input name="search" type="text" class="keyword input-block-level ui-autocomplete-input" placeholder="Введите ключевые" autocomplete="off"/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,12 +50,12 @@
         </div>
     </div>
     <div style="margin-top: -30px;">
-        <div style="padding: 40px 0; background: white;">
+        <div style="padding: 40px 0;">
             <div class="rua-l-wrapper" style="margin-top: 20px; margin-bottom: 40px;">
                 <div class="row text-center">
                     <div class="col d-1of3 m-1of1">
                         <div class="box">
-                            <div class="border">&nbsp;</div>
+                            <div class="border"></div>
                             <div class="front"><strong>100%</strong><span>проверенные<br>кто-то</span></div>
                             <div class="back">
                                 <div class="rua-p-c-light">Наша команда профессиональных модераторов внимательно изучает кого-то и что-то.. там делает</div>
@@ -65,7 +64,7 @@
                     </div>
                     <div class="col d-1of3 m-1of1">
                         <div class="box">
-                            <div class="border">&nbsp;</div>
+                            <div class="border"></div>
                             <div class="front"><strong>24/7</strong><span>актуальные<br>данные</span></div>
                             <div class="back">
                                 <div class="rua-p-c-light">вы видите только актуальные предложения и т.д.</div>
@@ -74,7 +73,7 @@
                     </div>
                     <div class="col d-1of3 m-1of1">
                         <div class="box">
-                            <div class="border">&nbsp;</div>
+                            <div class="border"></div>
                             <div class="front"><strong>153 000</strong><span>наибольшее количество<br>всякой херни</span></div>
                             <div class="back">
                                 <div class="rua-p-c-light">Ежемесячно компании размещают на нашем сайте более..</div>
@@ -83,22 +82,22 @@
                     </div>
                 </div>
             </div>
-            <hr style="width: 190px; margin: 20px auto 35px auto;">
+            <hr style="width: 300px; margin: 20px auto 35px auto;"/>
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">Поиск по рубрикам в Одессе </h2>
+                <h2 class="headline centered mtmb">Поиск по рубрикам в Одессе</h2>
                 <div class="rptShort">
                     <div class="rptShort-inner">
-                        <a data-id="3" href=""> HR специалисты - Бизнес-тренеры<span class="rua-p-c-red">1605</span></a>
-                        <a data-id="1" href=""> IT<span class="rua-p-c-red">7797</span> </a>
-                        <a data-id="33" href=""> Автобизнес - Сервисное обслуживание<span class="rua-p-c-red">4123</span> </a>
-                        <a data-id="11" href=""> Административный персонал - Водители - Курьеры<span class="rua-p-c-red">11418</span> </a>
-                        <a data-id="18" href=""> Банки - Инвестиции - Лизинг<span class="rua-p-c-red">3938</span> </a>
-                        <a data-id="6" href=""> Бухгалтерия - Налоги - Финансы предприятия<span class="rua-p-c-red">4687</span> </a>
-                        <a data-id="8" href=""> Гостиницы - Рестораны - Кафе<span class="rua-p-c-red">8647</span> </a>
-                        <a data-id="15" href=""> Дизайн - Графика - Фото<span class="rua-p-c-red">1976</span> </a>
+                        <a data-id="3" href="">HR специалисты - Бизнес-тренеры<span class="rua-p-c-red">1605</span></a>
+                        <a data-id="1" href="">IT<span class="rua-p-c-red">7797</span> </a>
+                        <a data-id="33" href="">Автобизнес - Сервисное обслуживание<span class="rua-p-c-red">4123</span> </a>
+                        <a data-id="11" href="">Административный персонал - Водители - Курьеры<span class="rua-p-c-red">11418</span> </a>
+                        <a data-id="18" href="">Банки - Инвестиции - Лизинг<span class="rua-p-c-red">3938</span> </a>
+                        <a data-id="6" href="">Бухгалтерия - Налоги - Финансы предприятия<span class="rua-p-c-red">4687</span> </a>
+                        <a data-id="8" href="">Гостиницы - Рестораны - Кафе<span class="rua-p-c-red">8647</span> </a>
+                        <a data-id="15" href="">Дизайн - Графика - Фото<span class="rua-p-c-red">1976</span> </a>
                         <a data-id="31" href=""> Закупки - Снабжение<span class="rua-p-c-red">1325</span> </a>
                         <a data-id="14" href=""> Консалтинг - Аналитика - Аудит
-                        <span class="rua-p-c-red">533</span> </a> <a data-id="21" href=""> Культура - Шоу-бизнес - Развлечения
+                            <span class="rua-p-c-red">533</span> </a> <a data-id="21" href=""> Культура - Шоу-бизнес - Развлечения
                         <span class="rua-p-c-red">1257</span> </a> <a data-id="5" href=""> Логистика - Таможня - Склад
                         <span class="rua-p-c-red">10454</span> </a> <a data-id="24" href=""> Маркетинг - Реклама - PR
                         <span class="rua-p-c-red">7159</span> </a> <a data-id="22" href=""> Медиа - Издательское дело
@@ -130,7 +129,7 @@
     <div style="background: #f7f7f7; overflow: hidden;">
         <h2 class="headline centered mtmb">Лучшие кто-то там</h2>
         <div class="rua-l-wrapper text-center mtmb">
-            <table id="beforeContentZone_vacTop_CompanyGallaryDataList" class="logos" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+            <table class="logos">
                 <tbody>
                 <tr>
                     <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Imperial-Tobako-Yukrejn---Imperial-Tobacco-Group---ITG_20141113030253.png);">Работа в Імперіал Тобако Юкрейн / Imperial Tobacco Group / ITG</a></td>
@@ -166,11 +165,11 @@
     <div class="rua-l-wrapper mtmb">
         <div class="row middle m-text-center">
             <div class="col d-1of2 m-1of1">
-                <img src="<c:url value="/resources/images/mac.png"/>">
+                <img src="<c:url value="/resources/images/mac.png"/>"/>
             </div>
             <div class="col d-1of2 m-1of1 m-pl-1of1">
-                <h2 class="headline mtmb">Почему стоит с нами сотрудничать?</h2>
-                <div class="rua-p-c-mid" style="display: inline-block; margin: auto; text-align: left;">
+                <h2 class="headline mtmb" id="headlinemtmb">Почему стоит с нами сотрудничать?</h2>
+                <div class="rua-p-c-mid">
                     <ol>
                         <li>пункт</li>
                         <li>2</li>
@@ -183,13 +182,13 @@
             </div>
         </div>
     </div>
-    <div class="text-center" style="margin: 0; margin-bottom: -40px; background: #f7f7f7 url(<c:url value="/resources/images/header3.jpg" /> ); overflow: hidden;">
+    <div class="text-center" style="margin: 0; margin-bottom: -40px; background: #f7f7f7 url(<c:url value="/resources/images/header3.jpg" />); overflow: hidden;">
         <h2 class="headline centered mtmb rua-p-c-white">еще крутой текст<br>самый крутой</h2>
         <p class="mtmb">
             <a class="btn btn-primary" href="">зачем эта кнопка?</a>
         </p>
     </div>
-    <div class="rua-l-wrapper"></div>
+
     <footer class="f">
         <div class="c">
             <ul>
