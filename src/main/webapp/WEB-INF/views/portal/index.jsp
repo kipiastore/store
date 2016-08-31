@@ -4,7 +4,6 @@
 <head>
     <title>Home Page</title>
     <meta charset="UTF-8"/>
-
     <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
 </head>
 <body>

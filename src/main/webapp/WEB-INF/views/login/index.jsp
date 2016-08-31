@@ -1,8 +1,10 @@
+<%@ page import="java.net.URLDecoder" %>
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Login</title>
+    <meta charset="UTF-8"/>
     <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet" />
 </head>
 <body>
@@ -18,7 +20,9 @@
                 <i class="fa fa-lock"></i>
             </p>
             <p class="submit"><input type="submit" name="sent" value="Войти"></p>
-            <span class="err"><b><%= request.getParameter("msg") == null ? "" : request.getParameter("msg") %></b></span>
+            <span class="err">
+                <b><%= request.getParameter("msg") == null ? "" : URLDecoder.decode(request.getParameter("msg"), "UTF-8") %></b>
+            </span>
         </form>
     </div><!--/ Login-->
     <div class="copyright">

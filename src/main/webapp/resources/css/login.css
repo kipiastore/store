@@ -33,11 +33,11 @@ body {
 }
 .login {
     position: relative;
-    margin: 100px auto;
     width: 370px;
     height: 315px;
     background: white;
     border-radius: 3px;
+    margin: 100px auto 50px;
 }
 .login:before {
     content: '';
