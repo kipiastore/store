@@ -240,16 +240,23 @@ h2 small {
 .rua-g-right {
     float: right
 }
-.searchform .btn.btn-primary.submit_button, .searchform .btn.btn-primary.submit_button:hover, .searchform
-.btn.btn-primary.submit_button:active, .searchform .btn.btn-primary.submit_button:focus {
-    background: #B71810;
+.searchform .btn.btn-primary.submit_button {
+    background: #16a085;
     color: white;
     padding: 16px 20px 17px 20px;
     height: 50px;
 }
+.searchform .btn.btn-primary.submit_button:hover, .searchform .btn.btn-primary.submit_button:focus {
+    box-shadow: inset 0 50px 0 0 #1abc9c;
+    -webkit-animation: shadowHover 0.4s;
+    -moz-animation: shadowHover 0.4s;
+}
 .searchform .btn.btn-primary.submit_button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    box-shadow: inset 0 0 0 0 #1abc9c;
+    -webkit-animation: shadowFadeOut 0.4s;
+    -moz-animation: shadowFadeOut 0.4s;
 }
 .searchform input.keyword, .searchform .city-picker, .searchform .btn.btn-primary.submit_button {
     font-size: 16px;
@@ -257,7 +264,7 @@ h2 small {
 .btn.btn-primary, .btn.btn-primary:visited {
     color: white;
     background: #B71810 none;
-    border-color: #B71810;
+    border-color: #16a085;
     text-shadow: none;
 }
 .btn, .btn:visited {
@@ -556,7 +563,7 @@ footer.f .cr {
 
 
 #header_img.header_img_variant_1 {
-    background-image: url("../images/header3.jpg");
+    background-image: url("../images/header.jpg");
 }
 #header_img .headline > small {
     display: block;
@@ -972,6 +979,57 @@ footer.f .cr {
 body {
     min-width: 980px;
 }
-#topHideButt {
+.topHideButt {
     opacity: 0;
+    right: 30px;
+    position: fixed;
+    top: 100px;
+    background: rgba(26, 188, 156, 0.48);
+    color: #fff;
+    width: 50px;
+    height: 70px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 40px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #4cd0b6;
+    -webkit-animation: shadowFadeOut 0.4s;
+    -moz-animation: shadowFadeOut 0.4s;
+}
+.topHideButt:hover, .topHideButt:focus {
+    box-shadow: inset 0 50px 0 0 #1abc9c;
+    -webkit-animation: shadowHover 0.4s;
+    -moz-animation: shadowHover 0.4s;
+}
+@keyframes shadowHover {
+    0% {
+        box-shadow: inset 0 0 0 0 #1abc9c;
+        color: #fff;
+    }
+    100% {
+        box-shadow: inset 0 50px 0 0 #1abc9c;
+        color: #fff;
+    }
+}
+@-moz-keyframes shadowHover {
+    0% {
+        box-shadow: inset 0 0 0 0 #1abc9c;
+        color: #fff;
+    }
+    100% {
+        box-shadow: inset 0 50px 0 0 #1abc9c;
+        color: #fff;
+    }
+}
+@-webkit-keyframes shadowHover {
+    0% {
+        box-shadow: inset 0 0 0 0 #1abc9c;
+        color: #fff;
+    }
+    100% {
+        box-shadow: inset 0 50px 0 0 #1abc9c;
+        color: #fff;
+    }
 }

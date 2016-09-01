@@ -31,7 +31,7 @@
                 <a class="header-link header-link-button" href="login">Вход</a>
             </li>
         </ul>
-        <a id="topHideButt" href="#top">Наверх</a>
+        <div class="topHideButt" onClick="window.location.href='#top'"><br/>&uarr;</div>
     </header>
     <div class="header_img_variant_1" id="header_img">
         <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">еще текст<small>текст</small></h2>
@@ -185,7 +185,7 @@
             </div>
         </div>
     </div>
-    <div class="text-center" style="margin: 0; margin-bottom: -40px; background: #f7f7f7 url(<c:url value="/resources/images/header3.jpg" />); overflow: hidden;">
+    <div class="text-center" style="margin: 0; margin-bottom: -40px; background: #f7f7f7 url(<c:url value="/resources/images/header.jpg" />); overflow: hidden;">
         <h2 class="headline centered mtmb rua-p-c-white">еще крутой текст<br>самый крутой</h2>
         <p class="mtmb">
             <a class="btn btn-primary" href="">кнопка</a>

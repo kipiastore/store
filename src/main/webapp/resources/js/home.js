@@ -8,10 +8,10 @@ window.onscroll = function() {
     if (window.pageYOffset < 200 && !isShowing)
         return;
     if (window.pageYOffset > 200) {
-        $('#topHideButt').animate({opacity: 1}, 500);
+        $('.topHideButt').animate({opacity: 1}, 500);
         isShowing = true;
     } else {
-        $('#topHideButt').animate({opacity: 0}, 500);
+        $('.topHideButt').animate({opacity: 0}, 300);
         isShowing = false;
     }
 }
