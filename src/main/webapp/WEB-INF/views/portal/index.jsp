@@ -31,7 +31,7 @@
                 <a class="header-link header-link-button" href="login">Вход</a>
             </li>
         </ul>
-        <a id="topHideButt" href="#top" style="display: none">Наверх</a>
+        <a id="topHideButt" href="#top">Наверх</a>
     </header>
     <div class="header_img_variant_1" id="header_img">
         <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">еще текст<small>текст</small></h2>

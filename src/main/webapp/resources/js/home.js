@@ -1,24 +1,20 @@
 /**
  * Created by Asura on 31.08.2016.
  */
-/*
+var isShowing = false;
 window.onscroll = function() {
-    if (window.pageYOffset > 100)
-        document.getElementById('topHideButt').style.display = 'block';
-    else
-        document.getElementById('topHideButt').style.display = 'none';
-}*/
-//http://easywebscripts.net/javascript/opacity.php
-
-/*
- $('img', '#jq_op')
- .each(function (){
- $(this).data('op',$(this).css('opacity'));
- })
- .mouseover(function (){
- $(this).animate({opacity: 1}, 500 );
- })
- .mouseout(function (){
- $(this).stop(true,true).animate({opacity: $(this).data('op')}, 500 );
- });
- */
+    if (window.pageYOffset > 200 && isShowing)
+        return;
+    if (window.pageYOffset < 200 && !isShowing)
+        return;
+    if (window.pageYOffset > 200) {
+        $('#topHideButt').animate({opacity: 1}, 500);
+        isShowing = true;
+    } else {
+        $('#topHideButt').animate({opacity: 0}, 500);
+        isShowing = false;
+    }
+}
+window.onload = function() {
+    $('#Header_header').animate({opacity: 1}, 300);
+}
