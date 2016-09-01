@@ -5,8 +5,11 @@
     <title>Home Page</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 </head>
 <body>
+<a name="top"></a>
 <form method="post">
     <header class="header header-anon header-sticky" id="Header_header">
         <ul class="header-inner">
@@ -28,6 +31,7 @@
                 <a class="header-link header-link-button" href="login">Вход</a>
             </li>
         </ul>
+        <a id="topHideButt" href="#top" style="display: none">Наверх</a>
     </header>
     <div class="header_img_variant_1" id="header_img">
         <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">еще текст<small>текст</small></h2>
