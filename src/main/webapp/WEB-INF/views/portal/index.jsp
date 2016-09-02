@@ -130,15 +130,14 @@
     </div>
     <div class="additionalBlock">
         <div class="additionalLeft">
-            <div class="additionalLeftInner"></div>
+            <div class="additionalLeftInner">
+                <div id="additionalLeftInner">wqre jh jhew rjhweqr jh wrejhwre qjhkr wjhrw ehjkwr ejhkwq rehjwr qejhr wqejhk wqrekjh wqrekhjqw rekhj wqrekhj wrqekhj qwhew eqrjhe rwq</div>
+            </div>
         </div>
         <div class="additionalRight">
-            <!--
-            <span class="additionalBlockButt">
-                -<br/>
-                -<br/>
-                -
-            </span>-->
+            <div class="additionalButton" style="border-radius: 0 3px 0 0;"></div>
+            <div class="additionalButton"></div>
+            <div class="additionalButton" style="border-radius: 0 0 3px 0;"></div>
         </div>
     </div>
     <div style="background: #f7f7f7; overflow: hidden;">

@@ -21,10 +21,14 @@ window.onload = function() {
 var isOpen = false;
 $('.additionalRight').on("focus click", function() {
     if (!isOpen) {
-        $('.additionalLeftInner').animate({width: 500}, 500);
+        $('.additionalLeftInner').animate({width: 400}, 500);
         isOpen = true;
+        $('#additionalLeftInner').show();
+        $('#additionalLeftInner').animate({opacity: 1}, 500);
     } else {
-        $('.additionalLeftInner').animate({width: 0}, 500);
+        $('.additionalLeftInner').animate({width: 0}, 200);
         isOpen = false;
+        //$('#additionalLeftInner').animate({opacity: 0}, 500);
+        $('#additionalLeftInner').hide();
     }
 });

@@ -1038,7 +1038,7 @@ body {
     top: 405px;
 }
 .additionalLeft {
-    background-color: #1abc9c;
+    background-color: #1aa0bc;
     float: left;
     border-radius: 0 0 7px 0;
 }
@@ -1049,22 +1049,31 @@ body {
     margin: 8px 8px 8px 0;
     border-radius: 0 0 3px 0;
 }
+#additionalLeftInner {
+    opacity: 0;
+    display: none;
+}
 .additionalRight {
     height: 47px;
     width: 40px;
-    background-color: #1abc9c;
+    background-color: #1aa0bc;
     border-radius: 0 10px 10px 0;
     float: right;
     cursor: pointer;
+    padding-top: 3px;
 }
-.additionalBlockButt {
-    color: #fff;
-    font-size: 80px;
-    display: block;
-    margin-right: 7px;
-    line-height: 0.15;
-    text-align: right;
+.additionalButton {
+    margin-top: 5px;
+    background-color: #fff;
+    width: 32px;
+    height: 8px;
 }
+
+
+
+
+
+
 
 /* it's seems it's working only for line-elements */
 p::selection {
