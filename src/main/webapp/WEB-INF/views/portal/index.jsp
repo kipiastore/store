@@ -6,7 +6,6 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
-    <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 </head>
 <body>
 <a name="top"></a>
@@ -129,6 +128,19 @@
             </div>
         </div>
     </div>
+    <div class="additionalBlock">
+        <div class="additionalLeft">
+            <div class="additionalLeftInner"></div>
+        </div>
+        <div class="additionalRight">
+            <!--
+            <span class="additionalBlockButt">
+                -<br/>
+                -<br/>
+                -
+            </span>-->
+        </div>
+    </div>
     <div style="background: #f7f7f7; overflow: hidden;">
         <h2 class="headline centered mtmb">Лучшие ресурсы</h2>
         <div class="rua-l-wrapper text-center mtmb">
@@ -233,4 +245,5 @@
     </footer>
 </form>
 </body>
+<script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 </html>

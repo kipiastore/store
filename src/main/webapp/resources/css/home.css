@@ -1033,3 +1033,43 @@ body {
         color: #fff;
     }
 }
+.additionalBlock {
+    position: fixed;
+    top: 405px;
+}
+.additionalLeft {
+    background-color: #1abc9c;
+    float: left;
+    border-radius: 0 0 7px 0;
+}
+.additionalLeftInner {
+    background-color: #fff;
+    height: 300px;
+    width: 0;
+    margin: 8px 8px 8px 0;
+    border-radius: 0 0 3px 0;
+}
+.additionalRight {
+    height: 47px;
+    width: 40px;
+    background-color: #1abc9c;
+    border-radius: 0 10px 10px 0;
+    float: right;
+    cursor: pointer;
+}
+.additionalBlockButt {
+    color: #fff;
+    font-size: 80px;
+    display: block;
+    margin-right: 7px;
+    line-height: 0.15;
+    text-align: right;
+}
+
+/* it's seems it's working only for line-elements */
+p::selection {
+    background: #c8c8c8;
+}
+p::-moz-selection {
+    background: #c8c8c8;
+}

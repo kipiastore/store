@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - @localhost" uuid="41ec14ce-2d68-4ccd-b3cf-76b22d1e2753">
+    <data-source name="MySQL - sql7134021@sql7.freemysqlhosting.net" uuid="b2adda3d-768d-4706-a0aa-57caf4c9cffe">
       <secret-storage>master_key</secret-storage>
-      <user-name>root</user-name>
-      <schema-pattern>blog.*</schema-pattern>
-      <default-schemas>blog.*</default-schemas>
+      <user-name>sql7134021</user-name>
+      <schema-pattern>sql7134021.*</schema-pattern>
+      <default-schemas>sql7134021.*</default-schemas>
     </data-source>
   </component>
 </project>

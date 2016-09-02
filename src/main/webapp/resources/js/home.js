@@ -18,3 +18,13 @@ window.onscroll = function() {
 window.onload = function() {
     $('#Header_header').animate({opacity: 1}, 300);
 }
+var isOpen = false;
+$('.additionalRight').on("focus click", function() {
+    if (!isOpen) {
+        $('.additionalLeftInner').animate({width: 500}, 500);
+        isOpen = true;
+    } else {
+        $('.additionalLeftInner').animate({width: 0}, 500);
+        isOpen = false;
+    }
+});
