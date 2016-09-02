@@ -264,7 +264,7 @@ h2 small {
 .btn.btn-primary, .btn.btn-primary:visited {
     color: white;
     background: #B71810 none;
-    border-color: #16a085;
+    border-color: #b9dcd5;
     text-shadow: none;
 }
 .btn, .btn:visited {
@@ -571,14 +571,14 @@ footer.f .cr {
 }
 .box, .box .border {
     width: 220px;
-    height: 220px;
+    height: 0;
 }
 .box {
     position: relative;
     margin: auto;
 }
 .box .border {
-    border: 1px solid #B71810;
+    border: 1px solid #16a085;
     border-radius: 50%;
     -moz-transition: border-radius .3s ease-in-out;
     -o-transition: border-radius .3s ease-in-out;
@@ -599,7 +599,7 @@ footer.f .cr {
 }
 .front strong {
     font: normal 32px/1.5 Arial;
-    color: #B71810;
+    color: #16a085;
     display: block;
 }
 .back {

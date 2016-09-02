@@ -14,7 +14,7 @@
     <header class="header header-anon header-sticky" id="Header_header">
         <ul class="header-inner">
             <li class="header-item header-menu">
-                <a class="header-link" href="">Поиск</a>
+                <a class="header-link" href="">Страница поиска</a>
                 <ul class="header-menu-inner">
                     <li class="header-menu-item">
                         <a class="header-menu-link" href="">По рубрикам</a>
@@ -34,7 +34,7 @@
         <div class="topHideButt" onClick="window.location.href='#top'"><br/>&uarr;</div>
     </header>
     <div class="header_img_variant_1" id="header_img">
-        <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">еще текст<small>текст</small></h2>
+        <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">Заголовок 1<small>Текст 2</small></h2>
         <div>
             <div class="searchform form-inline">
                 <div class="rua-l-wrapper">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="rua-g-clearfix">
                             <div>
-                                <input name="search" type="text" class="keyword input-block-level ui-autocomplete-input" placeholder="Введите ключевые" autocomplete="off"/>
+                                <input name="search" type="text" class="keyword input-block-level ui-autocomplete-input" placeholder="Введите ключевые слова" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -59,35 +59,35 @@
                     <div class="col d-1of3 m-1of1">
                         <div class="box">
                             <div class="border"></div>
-                            <div class="front"><strong>100%</strong><span>проверенные<br>кто-то</span></div>
+                            <div class="front"><strong>100%</strong><span>Проверенные<br>данные</span></div>
                             <div class="back">
-                                <div class="rua-p-c-light">Наша команда профессиональных модераторов внимательно изучает кого-то и что-то.. там делает</div>
+                                <div class="rua-p-c-light">Наша команда профессиональных модераторов внимательно изучает новые ресурсы.</div>
                             </div>
                         </div>
                     </div>
                     <div class="col d-1of3 m-1of1">
                         <div class="box">
                             <div class="border"></div>
-                            <div class="front"><strong>24/7</strong><span>актуальные<br>данные</span></div>
+                            <div class="front"><strong>53 765</strong><span>Наибольшее количество<br>предложений</span></div>
                             <div class="back">
-                                <div class="rua-p-c-light">вы видите только актуальные предложения и т.д.</div>
+                                <div class="rua-p-c-light">Ежемесячно на нашем сайте размещают более 500 новых ресурсов.</div>
                             </div>
                         </div>
                     </div>
                     <div class="col d-1of3 m-1of1">
                         <div class="box">
                             <div class="border"></div>
-                            <div class="front"><strong>153 000</strong><span>наибольшее количество<br>всякой херни</span></div>
+                            <div class="front"><strong>24/7</strong><span>Актуальные<br>данные</span></div>
                             <div class="back">
-                                <div class="rua-p-c-light">Ежемесячно компании размещают на нашем сайте более..</div>
+                                <div class="rua-p-c-light">Вы видите только актуальные предложения.</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr style="width: 300px; margin: 20px auto 35px auto;"/>
+            <hr style="width: 300px; margin: 110px auto 35px auto;"/>
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">Поиск по рубрикам в Одессе</h2>
+                <h2 class="headline centered mtmb">Поиск по рубрикам</h2>
                 <div class="rptShort">
                     <div class="rptShort-inner">
                         <a data-id="3" href="">HR специалисты - Бизнес-тренеры<span class="rua-p-c-red">1605</span></a>
@@ -130,7 +130,7 @@
         </div>
     </div>
     <div style="background: #f7f7f7; overflow: hidden;">
-        <h2 class="headline centered mtmb">Лучшие кто-то там</h2>
+        <h2 class="headline centered mtmb">Лучшие ресурсы</h2>
         <div class="rua-l-wrapper text-center mtmb">
             <table class="logos">
                 <tbody>
@@ -174,9 +174,9 @@
                 <h2 class="headline mtmb" id="headlinemtmb">Почему стоит с нами сотрудничать?</h2>
                 <div class="rua-p-c-mid">
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
                     </ol>
                 </div>
                 <p class="mtmb">
