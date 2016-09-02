@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="webappstore:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="webappstore-1.0.war">
+      <element id="artifact" artifact-name="webappstore:war exploded" />
+    </root>
+  </artifact>
+</component>
