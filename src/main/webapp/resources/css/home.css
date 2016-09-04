@@ -378,7 +378,7 @@ hr {
     border-bottom: 1px solid #ffffff;
 }
 .rua-p-c-red {
-    color: #16a085;
+    color: #ff7f7f;
 }
 .mtmb {
     margin-top: 40px;
@@ -503,7 +503,7 @@ footer.f .c>ul {
 footer.f ul, footer.f li {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 40px 0 0;
 }
 footer.f .c>ul li {
     float: left;
@@ -666,7 +666,7 @@ footer.f .cr {
     clear: left;
 }
 .rptShort a:hover {
-    color: #1059b7;
+    color: #16a085;
     transition: color 0.3s ease-out;
     text-decoration: none;
 }
@@ -731,31 +731,31 @@ footer.f .cr {
 }
 @-moz-keyframes shadowFadeOut {
     0% {
-        box-shadow: inset 0 44px 0 0 #1abc9c;
+        box-shadow: inset 0 46px 0 0 #a3dee2;
         color: #fff;
     }
     100% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
+        box-shadow: inset 0 0 0 0 #a3dee2;
         color: #fff;
     }
 }
 @-webkit-keyframes shadowFadeOut {
     0% {
-        box-shadow: inset 0 46px 0 0 #1abc9c;
+        box-shadow: inset 0 46px 0 0 #a3dee2;
         color: #fff;
     }
     100% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
+        box-shadow: inset 0 0 0 0 #a3dee2;
         color: #fff;
     }
 }
 @keyframes shadowFadeOut {
     0% {
-        box-shadow: inset 0 46px 0 0 #1abc9c;
+        box-shadow: inset 0 46px 0 0 #a3dee2;
         color: #fff;
     }
     100% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
+        box-shadow: inset 0 0 0 0 #a3dee2;
         color: #fff;
     }
 }
@@ -795,7 +795,7 @@ footer.f .cr {
     right: 30px;
     position: fixed;
     top: 100px;
-    background: rgba(26, 188, 156, 0.48);
+    background: #67bec4;
     color: #fff;
     width: 50px;
     height: 70px;
@@ -805,42 +805,40 @@ footer.f .cr {
     text-align: center;
     font-size: 40px;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #4cd0b6;
-    -webkit-animation: shadowFadeOut 0.4s;
-    -moz-animation: shadowFadeOut 0.4s;
+    box-shadow: inset 0 0 0 0 #a3dee2;
 }
 .topHideButt:hover, .topHideButt:focus {
-    box-shadow: inset 0 50px 0 0 #1abc9c;
+    box-shadow: inset 0 50px 0 0 #a3dee2;
     -webkit-animation: shadowHover 0.4s;
     -moz-animation: shadowHover 0.4s;
 }
 @keyframes shadowHover {
     0% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
+        box-shadow: inset 0 0 0 0 #a3dee2;
         color: #fff;
     }
     100% {
-        box-shadow: inset 0 50px 0 0 #1abc9c;
+        box-shadow: inset 0 50px 0 0 #a3dee2;
         color: #fff;
     }
 }
 @-moz-keyframes shadowHover {
     0% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
+        box-shadow: inset 0 0 0 0 #a3dee2;
         color: #fff;
     }
     100% {
-        box-shadow: inset 0 50px 0 0 #1abc9c;
+        box-shadow: inset 0 50px 0 0 #a3dee2;
         color: #fff;
     }
 }
 @-webkit-keyframes shadowHover {
     0% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
+        box-shadow: inset 0 0 0 0 #a3dee2;
         color: #fff;
     }
     100% {
-        box-shadow: inset 0 50px 0 0 #1abc9c;
+        box-shadow: inset 0 50px 0 0 #a3dee2;
         color: #fff;
     }
 }
@@ -850,7 +848,7 @@ footer.f .cr {
     left: -50px;
 }
 .additionalLeft {
-    background-color: #16a085;
+    background-color: #67bec4;
     float: left;
     border-radius: 0 0 7px 0;
 }
@@ -860,7 +858,6 @@ footer.f .cr {
     width: 0;
     margin: 8px 8px 8px 0;
     border-radius: 0 3px 3px 0;
-    //box-shadow: inset 0 0 1em #34c59d, 0 0 1em #91dfcf;
 }
 #additionalLeftInner {
     opacity: 0;
@@ -869,7 +866,7 @@ footer.f .cr {
 .additionalRight {
     height: 47px;
     width: 40px;
-    background-color: #16a085;
+    background-color: #67bec4;
     border-radius: 0 10px 10px 0;
     float: right;
     cursor: pointer;
@@ -923,8 +920,15 @@ p::-moz-selection {
     padding-top: 8px;
     padding-right: 20px;
     direction: ltr;
+    display: flex;
 }
 .header-menu-ul {
     float: left;
     padding: 6px 0 20px 30px;
+}
+.phoneSpan {
+    margin-top: 18px;
+    margin-right: 30px;
+    font-size: 20px;
+    color: black;
 }
