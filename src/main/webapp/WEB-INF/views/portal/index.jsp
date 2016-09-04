@@ -11,25 +11,39 @@
 <a name="top"></a>
 <form method="post">
     <header class="header header-anon header-sticky" id="Header_header">
-        <ul class="header-inner">
-            <li class="header-item header-menu">
-                <a class="header-link" href="">Страница поиска</a>
-                <ul class="header-menu-inner">
-                    <li class="header-menu-item">
-                        <a class="header-menu-link" href="">По рубрикам</a>
-                    </li>
-                    <li class="header-menu-item">
-                        <a class="header-menu-link" href="">По районам</a>
-                    </li>
-                    <li class="header-menu-item">
-                        <a class="header-menu-link" href="">По компаниям</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="header-item">
-                <a class="header-link header-link-button" href="login">Вход</a>
-            </li>
-        </ul>
+        <div class="header-inner">
+            <ul class="header-menu-ul">
+                <li class="header-item">
+                    <a class="header-link" href="">Главная страница</a>
+                </li>
+                <li class="header-item header-menu">
+                    <a class="header-link" href="">Страница поиска</a>
+                    <ul class="header-menu-inner">
+                        <li class="header-menu-item">
+                            <a class="header-menu-link" href="">По рубрикам</a>
+                        </li>
+                        <li class="header-menu-item">
+                            <a class="header-menu-link" href="">По районам</a>
+                        </li>
+                        <li class="header-menu-item">
+                            <a class="header-menu-link" href="">По компаниям</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="header-item">
+                    <a class="header-link header-link-button" href="" style="background-color: #ff7f7f;">Акции</a>
+                </li>
+                <li class="header-item">
+                    <a class="header-link header-link-button" href="login">Вход</a>
+                </li>
+            </ul>
+            <div class="logo">
+                <span>+38048<span>111 11 11</span></span>
+                <a href="">
+                    <img src="<c:url value="/resources/images/logo.png" />">
+                </a>
+            </div>
+        </div>
         <div class="topHideButt" onClick="window.location.href='#top'"><br/>&uarr;</div>
     </header>
     <div class="header_img_variant_1" id="header_img">
@@ -131,7 +145,7 @@
     <div class="additionalBlock">
         <div class="additionalLeft">
             <div class="additionalLeftInner">
-                <div id="additionalLeftInner">wqre jh jhew rjhweqr jh wrejhwre qjhkr wjhrw ehjkwr ejhkwq rehjwr qejhr wqejhk wqrekjh wqrekhjqw rekhj wqrekhj wrqekhj qwhew eqrjhe rwq</div>
+                <div id="additionalLeftInner">Кнопки ссылки и прочее.</div>
             </div>
         </div>
         <div class="additionalRight">
@@ -146,30 +160,30 @@
             <table class="logos">
                 <tbody>
                 <tr>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Imperial-Tobako-Yukrejn---Imperial-Tobacco-Group---ITG_20141113030253.png);">Работа в Імперіал Тобако Юкрейн / Imperial Tobacco Group / ITG</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Samsung-Electronics_20160217035710.png);">Работа в Samsung Electronics</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/lifecell_20160622022534.png);">Работа в lifecell</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Tikkurila_20160617035953.png);">Работа в KOLORIT</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/AShAN_20160118022934.png);">Работа в АШАН</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Comfy_20160413033301.png);">Работа в Comfy</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/JTI---Japan-Tobacco-International_20141113030408.png);">Работа в JTI / Japan Tobacco International</a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
                 </tr>
                 <tr>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/PP-Etana-Pivdenj_20150618101439.png);">Работа в Точка, розничная сеть</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/MTS-Ukraina_20160317041048.jpg);">Работа в Vodafone</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/1-1-media_20141113025548.png);">Работа в 1+1 медіа</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/FORA-OOO_20160316125227.jpg);">Работа в ФОРА, ООО</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Filip-Morris-Ukraina--Filip-Morris-Ukraіna_20141113031000.png);">Работа в Філіп Морріс Україна*</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/British-American-Tobacco-Ukraіna_20141113025807.png);">Работа в British American Tobacco Україна</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Siljpo-Fozzy-Group---Fozzi-Grupp_20141114094220.png);">Работа в Сильпо, Fozzy Group / Фоззи Групп</a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
                 </tr>
                 <tr>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Kyivstar---Kievstar_20160210093519.png);">Работа в Kyivstar / Киевстар</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Epitsentr-K---Epitsentr-K_20141113025952.png);">Работа в Эпицентр К / Епіцентр К</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Fokstrot-Tehnika-dlya-doma_20111006112851.jpg);">Работа в Фокстрот. Техника для дома</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/TVOYa-LOGISTIKA-OOO_20160822095843.png);">Работа в Твоя Логистика, ООО</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Novaya-Liniya_20140603115045.jpg);">Работа в Новая Линия</a></td>
-                    <td><a href="" title="" style="background-image: url(http://img1.rabota.com.ua/Data/cImg/Mondelis-Ukraіna-PAT---Kraft-Fudz-Ukraіna_20140410041234.png);">Работа в Монделіс Україна, ПАТ / Крафт Фудз Україна</a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
+                    <td><a href="" title="" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a></td>
                     <td></td>
                 </tr>
                 </tbody>
@@ -178,11 +192,8 @@
     </div>
     <div class="rua-l-wrapper mtmb">
         <div class="row middle m-text-center">
-            <div class="col d-1of2 m-1of1">
-                <img src="<c:url value="/resources/images/mac.png"/>"/>
-            </div>
             <div class="col d-1of2 m-1of1 m-pl-1of1">
-                <h2 class="headline mtmb" id="headlinemtmb">Почему стоит с нами сотрудничать?</h2>
+                <h2 class="headline mtmb" id="headlinemtmb">Присоединяйтесь к нам!</h2>
                 <div class="rua-p-c-mid">
                     <ol>
                         <li></li>
@@ -194,13 +205,22 @@
                     <a class="btn btn-danger" href="">Оставить заявку</a>
                 </p>
             </div>
+            <div class="col d-1of2 m-1of1">
+                <img src="<c:url value="/resources/images/mac.png"/>"/>
+            </div>
         </div>
     </div>
-    <div class="text-center" style="margin: 0; margin-bottom: -40px; background: #f7f7f7 url(<c:url value="/resources/images/header.jpg" />); overflow: hidden;">
-        <h2 class="headline centered mtmb rua-p-c-white">еще крутой текст<br>самый крутой</h2>
-        <p class="mtmb">
-            <a class="btn btn-primary" href="">кнопка</a>
-        </p>
+    <div class="text-center" id="secondImg" style="">
+        <div>
+            <div class="secondImgText">
+                <h2 class="headline centered mtmb rua-p-c-white" id="imgH3text">Текст 1<br>Текст 2</h2>
+            </div>
+            <div class="secondImgButt">
+                <p class="mtmb">
+                    <a class="btn btn-primary" id="imgButt" href="">Кнопка</a>
+                </p>
+            </div>
+        </div>
     </div>
     <footer class="f">
         <div class="c">
@@ -212,15 +232,14 @@
                     <a href="" rel="nofollow">Карта сайта</a>
                 </li>
                 <li>
-                    <b>кому-то</b>
+                    <b>Посетителю</b>
                     <a id="Footer_lnkVacancyLink" href="">Найти</a>
                     <a href="">Рассылка</a>
-                    <a href="">Как</a>
                     <a href="">Советы</a>
                     <a href="" rel="nofollow">Архив</a>
                 </li>
                 <li>
-                    <b>клиенту</b>
+                    <b>Клиенту</b>
                     <a href="">Добавить</a>
                     <a href="">Рассылка</a>
                     <a href="">Наши услуги</a>
@@ -235,7 +254,7 @@
             </ul>
             <div class="media rua-p-t-12">
                 <div class="media-body">
-                    <b>ООО «Store Интернешнл» © 2016</b>
+                    <b>ООО «Store» © 2016</b>
                     <br>Все права защищены и охраняются действующим законодательством Украины. Использование материалов с данного сайта возможно только с письменного разрешения компании ООО «Store Интернешнл». Администрация сайта не несет ответственности за содержание размещенных объявлений.
                 </div>
             </div>
