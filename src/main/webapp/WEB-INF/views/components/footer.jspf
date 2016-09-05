@@ -1,0 +1,41 @@
+<%@ page pageEncoding="UTF-8" %>
+<footer class="f">
+    <div class="c">
+        <ul>
+            <li>
+                <a class="b" href="">Написать нам</a>
+                <div>
+                    <p>Присылайте свои замечания и пожелания по работе и наполнению портала.</p>
+                </div>
+            </li>
+            <li>
+                <b>store.ua</b>
+                <a href="">О store.ua</a>
+                <a href="">Конфиденциальность</a>
+                <a href="" rel="nofollow">Карта сайта</a>
+            </li>
+            <li>
+                <b>Посетителю</b>
+                <a id="Footer_lnkVacancyLink" href="">Найти</a>
+                <a href="">Рассылка</a>
+                <a href="">Советы</a>
+                <a href="" rel="nofollow">Архив</a>
+            </li>
+            <li>
+                <b>Клиенту</b>
+                <a href="">Добавить</a>
+                <a href="">Рассылка</a>
+                <a href="">Наши услуги</a>
+                <a href="">Советы</a>
+            </li>
+        </ul>
+        <div class="media rua-p-t-12">
+            <div class="media-body">
+                <b>ООО «Store» © 2016</b>
+                <br>Все права защищены и охраняются действующим законодательством Украины.
+                Администрация сайта не несет ответственности за содержание размещенных объявлений.
+            </div>
+        </div>
+        <p class="cr"></p>
+    </div>
+</footer>

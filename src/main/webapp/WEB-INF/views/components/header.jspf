@@ -1,0 +1,38 @@
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ page pageEncoding="UTF-8" %>
+<header class="header header-anon header-sticky" id="Header_header">
+    <div class="header-inner">
+        <ul class="header-menu-ul">
+            <li class="header-item">
+                <a class="header-link" href="home">Главная страница</a>
+            </li>
+            <li class="header-item header-menu">
+                <a class="header-link" href="search">Страница поиска</a>
+                <ul class="header-menu-inner">
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="search/1">По рубрикам</a>
+                    </li>
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="search/2">По районам</a>
+                    </li>
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="search/3">По компаниям</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="header-item">
+                <a class="header-link header-link-button" href="discounts" id="discounts">Акции</a>
+            </li>
+            <li class="header-item">
+                <a class="header-link header-link-button" href="login">Вход</a>
+            </li>
+        </ul>
+        <div class="logo">
+            <span class="phoneSpan">+38048 <span>111 11 11</span></span>
+            <a href="callcenter">
+                <img src="<c:url value="/resources/images/logo.png" />">
+            </a>
+        </div>
+    </div>
+    <div class="topHideButt" onClick="window.location.href='#top'"><br/>&uarr;</div>
+</header>

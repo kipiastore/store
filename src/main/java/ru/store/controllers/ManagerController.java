@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ManagerController {
 
+
+    /**
+     *
+     * MANAGER
+     *
+     */
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String main() {
-        return "manager/index";
+        return "portal/manager/managerhome";
     }
 
 }

@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AdminController {
 
+
+    /**
+     *
+     * ADMIN
+     *
+     */
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String main() {
-        return "admin/index";
+        return "portal/admin/adminhome";
     }
 
 }

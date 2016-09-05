@@ -5,7 +5,7 @@
 <head>
     <title>Вход</title>
     <meta charset="UTF-8"/>
-    <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet" />
+    <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet"/>
 </head>
 <body>
     <div class="login">
@@ -19,15 +19,17 @@
                 <input type="password" name="password" placeholder="Пароль" required/>
                 <i class="fa fa-lock"></i>
             </p>
-            <p class="submit"><input type="submit" name="sent" value="Войти"></p>
+            <p class="submit">
+                <input type="submit" name="sent" value="Войти">
+            </p>
             <span class="err">
                 <b><%= request.getParameter("msg") == null ? "" : URLDecoder.decode(request.getParameter("msg"), "UTF-8") %></b>
             </span>
         </form>
-    </div><!--/ Login-->
+    </div>
     <div class="copyright">
         <p><a href="home">Главная страница</a></p>
-        <p>Copyright &copy; 2016. Created by <a href="http://myframeteam.com" target="_blank">MyFrameTeam</a></p>
+        <p>Copyright &copy; 2016. Created by <a href="">MyFrameTeam</a></p>
     </div>
 </body>
 </html>

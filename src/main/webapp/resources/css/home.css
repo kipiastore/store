@@ -932,3 +932,6 @@ p::-moz-selection {
     font-size: 20px;
     color: black;
 }
+#discounts {
+    background: #ff7f7f;
+}
