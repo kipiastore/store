@@ -28,11 +28,20 @@
             </li>
         </ul>
         <div class="logo">
-            <span class="phoneSpan">+38048 <span>111 11 11</span></span>
-            <a href="callCenter">
-                <img src="<c:url value="/resources/images/logo.png" />">
-            </a>
+            <span class="phoneSpan">
+                +38048&nbsp;
+                <span class="phoneSpanNum">111&nbsp;11&nbsp;11</span>
+            </span>
+            <div class="circleBorder">
+                <a href="callCenter" class="circle">
+                    <img class="phoneImg" src="<c:url value="/resources/images/phone.png" />">
+                </a>
+            </div>
         </div>
     </div>
-    <div class="topHideButt" onClick="window.location.href='#top'"><br/>&uarr;</div>
+    <div class="topHideButt">
+        <div class="circle" onClick="window.location.href='#top'">
+            <img class="up" src="<c:url value="/resources/images/up.png" />">
+        </div>
+    </div>
 </header>

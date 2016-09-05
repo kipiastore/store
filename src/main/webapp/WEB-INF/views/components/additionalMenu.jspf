@@ -2,12 +2,18 @@
 <div class="additionalBlock">
     <div class="additionalLeft">
         <div class="additionalLeftInner">
-            <div id="additionalLeftInner">Кнопки ссылки и прочее.</div>
+            <div id="additionalLeftInner">
+                <div class="inner-elem" style="background-color: #eac5c5;"></div>
+                <div class="inner-elem" style="background-color: #c7d9ec;"></div>
+                <div class="inner-elem" style="background-color: #c1b4d6;"></div>
+                <div class="inner-elem" style="background-color: #aedab1;"></div>
+                <div class="inner-elem" style="background-color: #e7e8c2;"></div>
+            </div>
         </div>
     </div>
     <div class="additionalRight">
-        <div class="additionalButton" style="border-radius: 0 3px 0 0;"></div>
-        <div class="additionalButton"></div>
-        <div class="additionalButton" style="border-radius: 0 0 3px 0;"></div>
+        <a class="circle">
+            <img class="starImg" src="<c:url value="/resources/images/star.png" />">
+        </a>
     </div>
 </div>
