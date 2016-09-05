@@ -5,17 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class AdminController {
+public class CompanyController {
 
-
-    /**
-     *
-     * ADMIN
-     *
-     */
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String main() {
-        return "portal/admin/adminhome";
+    @RequestMapping(value = "/company/*", method = RequestMethod.GET)
+    public String company() {
+        return "portal/company";
     }
 
 }

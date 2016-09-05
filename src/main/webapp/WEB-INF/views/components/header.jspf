@@ -21,7 +21,7 @@
                 </ul>
             </li>
             <li class="header-item">
-                <a class="header-link header-link-button" href="discounts" id="discounts">Акции</a>
+                <a class="header-link header-link-button" href="discount" id="discounts">Акции</a>
             </li>
             <li class="header-item">
                 <a class="header-link header-link-button" href="login">Вход</a>
@@ -29,7 +29,7 @@
         </ul>
         <div class="logo">
             <span class="phoneSpan">+38048 <span>111 11 11</span></span>
-            <a href="callcenter">
+            <a href="callCenter">
                 <img src="<c:url value="/resources/images/logo.png" />">
             </a>
         </div>

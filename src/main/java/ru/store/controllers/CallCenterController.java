@@ -5,17 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class ManagerController {
+public class CallCenterController {
 
-
-    /**
-     *
-     * MANAGER
-     *
-     */
-    @RequestMapping(value = "/manager", method = RequestMethod.GET)
-    public String main() {
-        return "portal/manager/managerhome";
+    @RequestMapping(value = "/callCenter", method = RequestMethod.GET)
+    public String callCenter() {
+        return "portal/callCenter";
     }
 
 }
