@@ -22,7 +22,10 @@ public class HomeController {
         List<MenuItem> menuItemList = new ArrayList<>();
         MenuItem menuItem;
         for (int i = 0; i < 30; i++) {
-            menuItem = new MenuItem(i + "", "Дизайн - Графика - Фото", (int) (Math.random() * 3000));
+            menuItem = new MenuItem();
+            menuItem.setCounter((int) (Math.random() * 3000));
+            menuItem.setId(i + "");
+            menuItem.setTitle("Дизайн - Графика - Фото");
             menuItemList.add(menuItem);
         }
 
@@ -32,7 +35,10 @@ public class HomeController {
         for (int k = 0; k < 3; k++) {
             bestResourcesItemList = new ArrayList<>();
             for (int i = 0; i < 7; i++) {
-                resourcesItem = new BestResourcesItem(i + "", "Дизайн - Графика - Фото", i + "");
+                resourcesItem = new BestResourcesItem();
+                resourcesItem.setTitle("Дизайн - Графика - Фото");
+                resourcesItem.setId(i + "");
+                resourcesItem.setImageUrl("testLogo.jpg");
                 bestResourcesItemList.add(resourcesItem);
             }
             bestResourcesItemMap.put(k + "", bestResourcesItemList);

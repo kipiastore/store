@@ -935,3 +935,7 @@ p::-moz-selection {
 #discounts {
     background: #ff7f7f;
 }
+.bestResources {
+    background: #f7f7f7;
+    overflow: hidden;
+}

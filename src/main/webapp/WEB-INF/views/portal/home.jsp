@@ -71,7 +71,7 @@
                 <div class="rptShort">
                     <div class="rptShort-inner">
                         <k:forEach var="item" items="${homeModel.menuItemList}">
-                            <a data-id="${item.id}" href="company/${item.id}">${item.title}
+                            <a data-id="${item.id}" href="partition/${item.id}">${item.title}
                                 <span class="rua-p-c-red">${item.counter}</span>
                             </a>
                         </k:forEach>
@@ -81,7 +81,7 @@
         </div>
     </div>
     <%@include file="/WEB-INF/views/components/additionalMenu.jspf"%>
-    <div style="background: #f7f7f7; overflow: hidden;">
+    <div class="bestResources">
         <h2 class="headline centered mtmb">Лучшие ресурсы</h2>
         <div class="rua-l-wrapper text-center mtmb">
             <table class="logos">
@@ -90,7 +90,7 @@
                         <tr>
                             <k:forEach var="item" items="${homeModel.bestResourcesItemMap.get(key)}">
                                 <td>
-                                    <a href="" title="${item.title}" style="background-image: url(<c:url value="/resources/images/testLogo.jpg"/>);"></a>
+                                    <a href="company/${item.id}" title="${item.title}" style="background-image: url(<c:url value="/resources/images/${item.imageUrl}"/>);"></a>
                                 </td>
                             </k:forEach>
                         </tr>
