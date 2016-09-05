@@ -917,10 +917,11 @@ footer.f .cr {
 }
 #secondImg {
     margin: 0 0 -40px;
-    background: url("../images/header.jpg");
+    //background: url("../images/header.jpg");
     overflow: hidden;
     background-size: cover;
     height: 200px;
+    background-color: #f3e7d9;
 }
 #Header_header {
     direction: rtl;
