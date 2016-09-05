@@ -1,6 +1,7 @@
-<%@ page import="java.net.URLDecoder" %>
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="k" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="false"%>
 <html>
 <head>
     <title>Вход</title>
@@ -10,7 +11,7 @@
 <body>
     <div class="login">
         <h1>Вход</h1>
-        <form class="form" method="post" action="login/action">
+        <form class="form" method="post" action="<k:url value='/j_spring_security_check' />">
             <p class="field">
                 <input type="text" name="login" placeholder="Логин" required/>
                 <i class="fa fa-user"></i>
@@ -22,9 +23,18 @@
             <p class="submit">
                 <input type="submit" name="sent" value="Войти">
             </p>
+            <k:if test="${not empty error}">
+                <span class="err">${error}</span>
+            </k:if>
+            <k:if test="${not empty msg}">
+                <span class="err">${msg}</span>
+            </k:if>
+            <!--
             <span class="err">
-                <b><%= request.getParameter("msg") == null ? "" : URLDecoder.decode(request.getParameter("msg"), "UTF-8") %></b>
+                <b><%= ""/*request.getParameter("msg") == null ? "" : URLDecoder.decode(request.getParameter("msg"), "UTF-8")*/ %></b>
             </span>
+            -->
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
     </div>
     <div class="copyright">

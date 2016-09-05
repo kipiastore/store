@@ -8,7 +8,7 @@
       <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
       <property name="hibernate.show_sql">true</property>
 
-      <mapping resource="ru/store/entities/Page.hbm.xml"/>
+      <mapping resource="ru/store/entities/UserRoles.hbm.xml"/>
       <mapping resource="ru/store/entities/User.hbm.xml"/>
 
   </session-factory>

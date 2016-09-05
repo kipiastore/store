@@ -1,135 +1,61 @@
 package ru.store.entities;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Date;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity
-public class User implements Serializable {
-    private Integer id;
-    private String userName;
-    private String email;
+public class User{
+
+    private String username;
     private String password;
-    private Date createDate;
-    private Integer status;
-    private String activationKey;
-    private Integer role;
-    private Collection<Page> pagesById;
+    private boolean enabled=true;
+    private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
-    @Id
-    @Column(name = "id")
-    public Integer getId() {
-        return id;
+    public User() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public User(String username, String password, boolean enabled) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
     }
 
-    @Basic
-    @Column(name = "user_name")
-    public String getUserName() {
-        return userName;
+    public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.userRole = userRole;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getUsername() {
+        return this.username;
     }
 
-    @Basic
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "create_date")
-    public Date getCreateDate() {
-        return createDate;
+    public boolean isEnabled() {
+        return this.enabled;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    @Basic
-    @Column(name = "status")
-    public Integer getStatus() {
-        return status;
+    public Set<UserRole> getUserRole() {
+        return this.userRole;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
     }
 
-    @Basic
-    @Column(name = "activation_key")
-    public String getActivationKey() {
-        return activationKey;
-    }
-
-    public void setActivationKey(String activationKey) {
-        this.activationKey = activationKey;
-    }
-
-    @Basic
-    @Column(name = "role")
-    public Integer getRole() {
-        return role;
-    }
-
-    public void setRole(Integer role) {
-        this.role = role;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        return result;
-    }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<Page> getPagesById() {
-        return pagesById;
-    }
-
-    public void setPagesById(Collection<Page> pagesById) {
-        this.pagesById = pagesById;
-    }
-
-    @Override
-    public String toString() {
-        return userName;
-    }
 }
-
-

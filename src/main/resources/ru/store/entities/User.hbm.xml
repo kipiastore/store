@@ -1,23 +1,23 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
-    <class name="ru.store.entities.User" table="user" schema="" catalog="blog">
-        <id name="id" column="id"/>
-        <property name="userName" column="user_name"/>
-        <property name="email" column="email"/>
-        <property name="password" column="password"/>
-        <property name="createDate" column="create_date"/>
-        <property name="status" column="status"/>
-        <property name="activationKey" column="activation_key"/>
-        <property name="role" column="role"/>
-        <set name="pagesById" inverse="true">
+    <class name="ru.store.entities.User" table="user" >
+        <id name="username" type="string">
+            <column name="username" length="45" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="60" not-null="true" />
+        </property>
+        <property name="enabled" type="boolean">
+            <column name="enabled" not-null="true" />
+        </property>
+        <set name="userRole" table="user_roles" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="user_id" not-null="true"/>
+                <column name="username" length="45" not-null="true" />
             </key>
-            <one-to-many not-found="ignore" class="ru.store.entities.Page"/>
+            <one-to-many class="ru.store.entities.UserRole" />
         </set>
     </class>
 </hibernate-mapping>
