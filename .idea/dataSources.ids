@@ -8,6 +8,10 @@
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
     <database-model serializer="dbm" rdbms="MYSQL" format-version="2.4">
       <schema id="1" name="sql7134021"/>
+      <table id="2" parent="1" name="table_name"/>
+      <column id="3" parent="2" name="column_1">
+        <data-type>int(11)</data-type>
+      </column>
     </database-model>
   </data-source>
 </component>
