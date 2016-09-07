@@ -13,7 +13,7 @@
         <h1>Вход</h1>
         <form class="form" method="post" action="<k:url value='/j_spring_security_check' />">
             <p class="field">
-                <input type="text" name="login" placeholder="Логин" required/>
+                <input type="text" name="username" placeholder="Логин" required/>
                 <i class="fa fa-user"></i>
             </p>
             <p class="field">
@@ -24,14 +24,14 @@
                 <input type="submit" name="sent" value="Войти">
             </p>
             <k:if test="${not empty error}">
-                <span class="err">${error}</span>
+                <b><span class="err">${error}</span></b>
             </k:if>
             <k:if test="${not empty msg}">
-                <span class="err">${msg}</span>
+                <b><span class="err">${msg}</span></b>
             </k:if>
             <!--
             <span class="err">
-                <b><%= ""/*request.getParameter("msg") == null ? "" : URLDecoder.decode(request.getParameter("msg"), "UTF-8")*/ %></b>
+                <b> request.getParameter("msg") == null ? "" : URLDecoder.decode(request.getParameter("msg"), "UTF-8") </b>
             </span>
             -->
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

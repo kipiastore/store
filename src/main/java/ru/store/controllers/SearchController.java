@@ -11,14 +11,17 @@ public class SearchController {
     public String search() {
         return "portal/search";
     }
+
     @RequestMapping(value = "/search/1", method = RequestMethod.GET)
     public String search1() {
         return "portal/search";
     }
+
     @RequestMapping(value = "/search/2", method = RequestMethod.GET)
     public String search2() {
         return "portal/search";
     }
+
     @RequestMapping(value = "/search/3", method = RequestMethod.GET)
     public String search3() {
         return "portal/search";
