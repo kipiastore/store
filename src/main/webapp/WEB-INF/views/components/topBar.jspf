@@ -1,0 +1,47 @@
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ page pageEncoding="UTF-8" %>
+<header class="header header-anon header-sticky" id="Header_header">
+    <div class="header-inner">
+        <ul class="header-menu-ul">
+            <li class="header-item">
+                <a class="header-link" href="home">Главная страница</a>
+            </li>
+            <li class="header-item header-menu">
+                <a class="header-link" href="search">Страница поиска</a>
+                <ul class="header-menu-inner">
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="search/1">По рубрикам</a>
+                    </li>
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="search/2">По районам</a>
+                    </li>
+                    <li class="header-menu-item">
+                        <a class="header-menu-link" href="search/3">По компаниям</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="header-item">
+                <a class="header-link header-link-button" href="discount" id="discounts">Акции</a>
+            </li>
+            <li class="header-item">
+                <a class="header-link header-link-button" href="login">Вход</a>
+            </li>
+        </ul>
+        <div class="logo">
+            <span class="phoneSpan">
+                +38048&nbsp;
+                <span class="phoneSpanNum">111&nbsp;11&nbsp;11</span>
+            </span>
+            <div class="circleBorder">
+                <a href="callCenter" class="circle">
+                    <img class="phoneImg" src="<c:url value="/resources/images/phone.png" />">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="topHideButt">
+        <div class="circle" onClick="window.location.href='#top'">
+            <img class="up" src="<c:url value="/resources/images/up.png" />">
+        </div>
+    </div>
+</header>

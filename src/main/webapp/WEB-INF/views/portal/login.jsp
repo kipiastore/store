@@ -29,11 +29,6 @@
             <k:if test="${not empty msg}">
                 <b><span class="err">${msg}</span></b>
             </k:if>
-            <!--
-            <span class="err">
-                <b> request.getParameter("msg") == null ? "" : URLDecoder.decode(request.getParameter("msg"), "UTF-8") </b>
-            </span>
-            -->
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
     </div>

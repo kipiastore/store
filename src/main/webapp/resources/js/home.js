@@ -1,6 +1,3 @@
-/**
- * Created by Asura on 31.08.2016.
- */
 var isShowing = false;
 var isOpen = false;
 var additionalLeftInner = $('#additionalLeftInner');
@@ -9,6 +6,8 @@ var additionalBlock = $('.additionalBlock');
 var topHideButt = $('.topHideButt');
 
 window.onload = function() {
+
+    $('.preloader').hide();
     $('#Header_header').animate({opacity: 1}, 500);
     if (window.pageYOffset < 333)
         additionalBlock.css('top', 435 -  Math.round(window.pageYOffset));
@@ -17,7 +16,6 @@ window.onload = function() {
     additionalBlock.animate({left: 0}, 500);
 };
 window.onscroll = function() {
-
     if (window.pageYOffset < 333)
         additionalBlock.css('top', 435 -  Math.round(window.pageYOffset));
     else if (additionalBlock.css('top') != '100px')

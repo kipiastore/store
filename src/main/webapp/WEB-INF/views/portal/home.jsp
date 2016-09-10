@@ -11,27 +11,9 @@
 <body>
 <a name="top"></a>
 <form method="get" action="search" id="mainForm">
+    <%@include file="/WEB-INF/views/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/components/header.jspf"%>
-    <div class="header_img_variant_1" id="header_img">
-        <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">Заголовок 1<small>Текст 2</small></h2>
-        <div>
-            <div class="searchform form-inline">
-                <div class="rua-l-wrapper">
-                    <div>
-                        <div class="rua-g-right">
-                            <a class="btn btn-primary btn-block submit_button" onclick="submit()">Поиск</a>
-                        </div>
-                        <div class="rua-g-clearfix">
-                            <div>
-                                <input name="value" type="text" class="keyword input-block-level ui-autocomplete-input"
-                                       placeholder="Введите ключевые слова" autocomplete="off"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <%@include file="/WEB-INF/views/components/additionalMenu.jspf"%>
     <div style="margin-top: -30px;">
         <div style="padding: 40px 0;">
             <div class="rua-l-wrapper" style="margin-top: 20px; margin-bottom: 40px;">
@@ -80,7 +62,6 @@
             </div>
         </div>
     </div>
-    <%@include file="/WEB-INF/views/components/additionalMenu.jspf"%>
     <div class="bestResources">
         <h2 class="headline centered mtmb">Лучшие ресурсы</h2>
         <div class="rua-l-wrapper text-center mtmb">

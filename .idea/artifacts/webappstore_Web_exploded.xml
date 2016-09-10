@@ -45,6 +45,8 @@
           <element id="library" level="project" name="Maven: org.hsqldb:hsqldb:2.2.9" />
         </element>
       </element>
+      <element id="artifact" artifact-name="webappstore:war exploded" />
+      <element id="artifact" artifact-name="webappstore:war" />
     </root>
   </artifact>
 </component>
