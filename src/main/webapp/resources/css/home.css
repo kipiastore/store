@@ -1201,3 +1201,15 @@ p::-moz-selection {
     position: relative;
     right: 150px;
 }
+
+
+.subsection {
+    display: none;
+    width: 300px;
+    position: relative;
+    left: 100px;
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 10px;
+}

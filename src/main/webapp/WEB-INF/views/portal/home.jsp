@@ -54,9 +54,12 @@
                 <div class="rptShort">
                     <div class="rptShort-inner">
                         <k:forEach var="item" items="${homeModel.menuItemList}">
-                            <a data-id="${item.id}" href="partition/${item.id}">${item.title}
-                                <span class="rua-p-c-red">${item.counter}</span>
+                            <a class="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
+                                <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
                             </a>
+                            <div class="subsection" id="item-${item.id}">
+                                test-${item.id}
+                            </div>
                         </k:forEach>
                     </div>
                 </div>

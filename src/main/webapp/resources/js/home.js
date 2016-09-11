@@ -1,10 +1,10 @@
-var isShowing = false;
-var isOpen = false;
+var isShowingUpButton = false;
+var isOpenAdditionalBlock = false;
 var additionalLeftInner = $('#additionalLeftInner');
 var additionalLeftInnerClass = $('.additionalLeftInner');
 var additionalBlock = $('.additionalBlock');
 var topHideButt = $('.topHideButt');
-
+var currentItemId;
 function calculateAdditionalBlockPosition() {
     if (window.pageYOffset < 333)
         additionalBlock.css('top', 435 -  Math.round(window.pageYOffset));
@@ -25,46 +25,58 @@ $(window).on('load', function() {
 
 topHideButt.on("click", function () {
     var top = $('#top').offset().top;
-    $('body,html').animate({scrollTop: 0}, 1000);
+    $('body,html').animate({scrollTop: 0}, 700);
 });
 
 $(window).on('scroll', function() {
     calculateAdditionalBlockPosition();
 
-    if (window.pageYOffset > 250 && isShowing)
+    if (window.pageYOffset > 250 && isShowingUpButton)
         return;
-    if (window.pageYOffset < 250 && !isShowing)
+    if (window.pageYOffset < 250 && !isShowingUpButton)
         return;
     if (window.pageYOffset > 250) {
         topHideButt.show();
         topHideButt.animate({opacity: 1}, 500);
-        isShowing = true;
+        isShowingUpButton = true;
     } else {
         topHideButt.animate({opacity: 0}, 300);
         setTimeout(function() { topHideButt.hide(); }, 300);
-        isShowing = false;
+        isShowingUpButton = false;
     }
 });
 
 $('.additionalRight').on("click", function() {
-    if (!isOpen) {
+    if (!isOpenAdditionalBlock) {
         additionalLeftInnerClass.animate({width: 250}, 500);
         additionalLeftInner.show();
         additionalLeftInner.animate({opacity: 1}, 500);
-        isOpen = true;
+        isOpenAdditionalBlock = true;
     } else {
         setTimeout(function() { additionalLeftInner.hide(); }, 200);
         additionalLeftInner.animate({opacity: 0}, 200);
         additionalLeftInnerClass.animate({width: 0}, 200);
         additionalLeftInner.css('opacity', 0);
-        isOpen = false;
+        isOpenAdditionalBlock = false;
     }
 });
 
-$(document).on('mouseup', function (e) {
-    if (additionalBlock.has(e.target).length === 0){
+$(document).on('mouseup', function (event) {
+    if (additionalBlock.has(event.target).length === 0){
         additionalLeftInnerClass.animate({width: 0}, 200);
         additionalLeftInner.hide();
         isOpen = false;
     }
+});
+
+$('.item-i').on('mouseenter', function(event) {
+    currentItemId = event.target.getAttribute('data-id');
+    $('#item-'+currentItemId).show();
+});
+
+$(document).on('mousemove', function(event) {
+    if (event.target.getAttribute('class') != 'subsection' || event.target.getAttribute('data-id') != currentItemId)
+    console.log(event.target.getAttribute('class'));
+        //$('.subsection').hide();
+    //http://dimox.name/beautiful-tooltips-with-jquery/
 });
