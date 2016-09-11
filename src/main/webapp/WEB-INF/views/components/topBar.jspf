@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="topHideButt">
-        <div class="circle" onClick="window.location.href='#top'">
+        <div class="circle">
             <img class="up" src="<c:url value="/resources/images/up.png" />">
         </div>
     </div>

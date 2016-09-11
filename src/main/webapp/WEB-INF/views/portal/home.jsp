@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="k" %>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <title>Справочная</title>
@@ -9,7 +10,7 @@
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
 </head>
 <body>
-<a name="top"></a>
+<a name="top" id="top"></a>
 <form method="get" action="search" id="mainForm">
     <%@include file="/WEB-INF/views/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/components/header.jspf"%>
@@ -92,7 +93,7 @@
                     </ol>
                 </div>
                 <p class="mtmb">
-                    <a class="btn btn-danger" href="">Оставить заявку</a>
+                    <a class="header-link header-link-button" id="requestButt" href="">Оставить заявку</a>
                 </p>
             </div>
             <div class="col d-1of2 m-1of1">
@@ -102,6 +103,9 @@
     </div>
     <div class="text-center" id="secondImg">
         <div>
+            <div class="secondGraphImg">
+                <img src="<c:url value="/resources/images/graph.png"/>" class="graphImg">
+            </div>
             <div class="secondImgText">
                 <h2 class="headline centered mtmb rua-p-c-white" id="imgH3text">Текст 1<br>Текст 2</h2>
             </div>
@@ -114,6 +118,6 @@
     </div>
     <%@include file="/WEB-INF/views/components/footer.jspf"%>
 </form>
-</body>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
+</body>
 </html>
