@@ -14,8 +14,7 @@
 <form method="get" action="search" id="mainForm">
     <%@include file="/WEB-INF/views/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/components/header.jspf"%>
-    <%@include file="/WEB-INF/views/components/additionalMenu.jspf"%>
-    <div style="margin-top: -30px;">
+    <div style="margin-top: -30px;" class="">
         <div style="padding: 40px 0;">
             <div class="rua-l-wrapper" style="margin-top: 20px; margin-bottom: 40px;">
                 <div class="row text-center">
@@ -57,7 +56,7 @@
                             <a class="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
                                 <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
                             </a>
-                            <div class="subsection" id="item-${item.id}">
+                            <div class="subsection" id="item-${item.id}" data-id="${item.id}">
                                 test-${item.id}
                             </div>
                         </k:forEach>
@@ -119,6 +118,7 @@
             </div>
         </div>
     </div>
+    <%@include file="/WEB-INF/views/components/additionalMenu.jspf"%>
     <%@include file="/WEB-INF/views/components/footer.jspf"%>
 </form>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>

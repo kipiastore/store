@@ -1,10 +1,10 @@
-var isShowingUpButton = false;
-var isOpenAdditionalBlock = false;
 var additionalLeftInner = $('#additionalLeftInner');
 var additionalLeftInnerClass = $('.additionalLeftInner');
 var additionalBlock = $('.additionalBlock');
 var topHideButt = $('.topHideButt');
 var currentItemId;
+var isShowingUpButton = false;
+var isOpenAdditionalBlock = false;
 function calculateAdditionalBlockPosition() {
     if (window.pageYOffset < 333)
         additionalBlock.css('top', 435 -  Math.round(window.pageYOffset));
@@ -74,9 +74,10 @@ $('.item-i').on('mouseenter', function(event) {
     $('#item-'+currentItemId).show();
 });
 
-$(document).on('mousemove', function(event) {
-    if (event.target.getAttribute('class') != 'subsection' || event.target.getAttribute('data-id') != currentItemId)
-    console.log(event.target.getAttribute('class'));
-        //$('.subsection').hide();
+$('document').on('mousemove', function(event) {
+    if (event.target.getAttribute('data-id') != currentItemId) {
+        $('.subsection').hide();
+        console.log('ss');
+    }
     //http://dimox.name/beautiful-tooltips-with-jquery/
 });
