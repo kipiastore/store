@@ -77,7 +77,6 @@
                                     </ul>
                                 </li>
                             </k:forEach>
-                            test
                         </ul>
                     </div>
                 </div>
