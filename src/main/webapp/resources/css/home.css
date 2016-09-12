@@ -415,7 +415,7 @@ html, body, .rua-l-body, .ui-widget {
 .header-link-button {
     border: 0 solid;
     border-radius: 3px;
-    box-sizing: border-box
+    box-sizing: border-box;
     font-size: inherit;
 }
 .header-link-button:hover {
