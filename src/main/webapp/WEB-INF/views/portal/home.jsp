@@ -14,7 +14,6 @@
 <form method="get" action="search" id="mainForm">
     <%@include file="/WEB-INF/views/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/components/header.jspf"%>
-    <%@include file="/WEB-INF/views/components/additionalMenu.jspf"%>
     <div style="margin-top: -30px;">
         <div style="padding: 40px 0;">
             <div class="rua-l-wrapper" style="margin-top: 20px; margin-bottom: 40px;">
@@ -53,14 +52,32 @@
                 <h2 class="headline centered mtmb">Поиск по рубрикам</h2>
                 <div class="rptShort">
                     <div class="rptShort-inner">
-                        <k:forEach var="item" items="${homeModel.menuItemList}">
-                            <a class="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
-                                <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
-                            </a>
-                            <div class="subsection" id="item-${item.id}">
-                                test-${item.id}
-                            </div>
-                        </k:forEach>
+                        <ul>
+                            <k:forEach var="item" items="${homeModel.menuItemList}">
+                                <li class="header-item header-menu">
+                                    <a data-id="${item.id}" href="partition/${item.id}">${item.title}
+                                        <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
+                                    </a>
+                                    <ul class="menu-inner">
+                                        <li class="header-menu-item">
+                                            <a id="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
+                                                <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
+                                            </a>
+                                        </li>
+                                        <li class="header-menu-item">
+                                            <a id="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
+                                                <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
+                                            </a>
+                                        </li>
+                                        <li class="header-menu-item">
+                                            <a id="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
+                                                <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </k:forEach>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -100,25 +117,35 @@
                 </p>
             </div>
             <div class="col d-1of2 m-1of1">
-                <img src="<c:url value="/resources/images/mac.png"/>"/>
+                <div class="macImg">
+                    <img src="<c:url value="/resources/images/mac.png"/>"/>
+                </div>
             </div>
         </div>
     </div>
-    <div class="text-center" id="secondImg">
-        <div>
-            <div class="secondGraphImg">
-                <img src="<c:url value="/resources/images/graph.png"/>" class="graphImg">
-            </div>
-            <div class="secondImgText">
-                <h2 class="headline centered mtmb rua-p-c-white" id="imgH3text">Текст 1<br>Текст 2</h2>
-            </div>
-            <div class="secondImgButt">
-                <p class="mtmb">
-                    <a class="btn btn-primary" id="imgButt" href="">Кнопка</a>
-                </p>
+    <div class="ourBrand">
+        <div class="ourBrandHead">
+            <div class="ourBrandBody">
+                <div class="ourBrandGraphImg">
+                    <img src="<c:url value="/resources/images/graph.png"/>" class="graphImg">
+                </div>
+                <div class="ourBrandGraphText">
+                    <h3>
+                        Мы предоставляем легкий и быстрый способ рекламы ваших услуг в лучшем виде.
+                        <br>
+                        Результат не заставит вас ждать!
+                    </h3>
+                </div>
+                <div class="ourBrandButt">
+                    <p class="mtmb">
+                        <a class="btn btn-primary" id="imgButt" href="">Заказать прощадку</a>
+                    </p>
+                </div>
             </div>
         </div>
+        <div class="ourBrandFooter"></div>
     </div>
+    <%@include file="/WEB-INF/views/components/additionalMenu.jspf"%>
     <%@include file="/WEB-INF/views/components/footer.jspf"%>
 </form>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
