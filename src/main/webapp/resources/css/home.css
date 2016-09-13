@@ -399,7 +399,7 @@ html, body, .rua-l-body, .ui-widget {
     box-sizing: border-box;
     height: 30px;
     line-height: 30px;
-    padding: 1px 8px;
+    padding: 0 8px;
     text-transform: uppercase
 }
 .header-link,
@@ -413,7 +413,7 @@ html, body, .rua-l-body, .ui-widget {
     text-decoration: underline
 }
 .header-link-button {
-    border: 0 solid;
+    border: 1px solid;
     border-radius: 3px;
     box-sizing: border-box;
 }
@@ -506,7 +506,6 @@ html, body, .rua-l-body, .ui-widget {
 .header-sticky .header-link-button {
     background: #16a085;
     color: white;
-    padding-top: 1px;
 }
 
 #header_img {
@@ -706,7 +705,7 @@ hr {
     color: #da6c6c;
     margin-right: 30px;
     width: 32px;
-    text-align: right;
+    text-align: center;
 }
 .mtmb {
     margin-top: 40px;
@@ -987,8 +986,10 @@ footer.f .cr {
     margin-top: 5px;
 }
 .rptShort p a {
+    display: inline-block;
     color: #7e7e7e;
     text-decoration: none;
+    width: 359px;
 }
 .rptShort p:nth-child(5n+1) {
     clear: left;
@@ -1229,7 +1230,7 @@ p::-moz-selection {
     width: 200px;
     background: rgba(255, 255, 255, 0.84);
     position: absolute;
-    margin-left: 45px;
+    margin-left: -212px;
     margin-top: 8px;
     padding: 10px;
 }
@@ -1238,4 +1239,16 @@ p::-moz-selection {
     border-radius: 3px;
     width: 100%;
     height: 100%;
+}
+.logoImg {
+    width: 150px;
+    height: 200px;
+    background: url("../images/odessa.png");
+    background-size: 150px;
+    position: absolute;
+    top: 90px;
+}
+.logo-div {
+    width: 840px;
+    margin: auto;
 }

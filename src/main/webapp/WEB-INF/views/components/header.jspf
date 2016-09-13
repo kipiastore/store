@@ -1,9 +1,12 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ page pageEncoding="UTF-8" %>
+<div class="logo-div">
+    <div class="logoImg"></div>
+</div>
 <div class="header_img_variant_1" id="header_img">
     <h2 class="headline centered rua-p-c-white mtmb" style="margin-top: 0">
-        Справочная
-        <small>Что-то ищите? Доверьте это профессионалам!</small>
+        Справочная Одессы
+        <small>Что-то ищете? Доверьте это профессионалам!</small>
     </h2>
     <div class="preloader">
         <div class="windows8">
