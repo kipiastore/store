@@ -1,0 +1,23 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="rua-l-wrapper mtmb">
+    <div class="row middle m-text-center">
+        <div class="col d-1of2 m-1of1 m-pl-1of1">
+            <h2 class="headline mtmb" id="headlinemtmb">Присоединяйтесь к нам!</h2>
+            <div class="rua-p-c-mid">
+                <ol>
+                    <li>Мы дружный и молодой коллектив, всегда готовый поддержать друг друга.</li>
+                    <li>Предлагаем интересную и стабильную работу, где карьерный рост именно в ваших руках!</li>
+                    <li>У нас есть чай, кофе и печеньки в неограниченном количестве!</li>
+                </ol>
+            </div>
+            <p class="mtmb">
+                <a class="header-link header-link-button" id="requestButt" href="">Оставить заявку</a>
+            </p>
+        </div>
+        <div class="col d-1of2 m-1of1">
+            <div class="macImg">
+                <img src="<c:url value="/resources/images/mac.png"/>"/>
+            </div>
+        </div>
+    </div>
+</div>

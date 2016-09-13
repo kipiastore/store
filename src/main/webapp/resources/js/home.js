@@ -4,6 +4,7 @@ var additionalLeftInner = $('#additionalLeftInner');
 var additionalLeftInnerClass = $('.additionalLeftInner');
 var additionalBlock = $('.additionalBlock');
 var topHideButt = $('.topHideButt');
+var itemId;
 
 function calculateAdditionalBlockPosition() {
     if (window.pageYOffset < 333)
@@ -67,4 +68,20 @@ $(document).on('click', function (event) {
         additionalLeftInner.hide();
         isOpenAdditionalBlock = false;
     }
+    if (itemId != undefined && itemId != event.target.getAttribute('data-id')) {
+        $('#item-'+itemId).hide();
+        itemId = undefined;
+    }
+});
+
+$('.show-subsection').on('click', function(event) {
+    if (itemId != undefined && itemId != event.target.getAttribute('data-id'))
+        $('#item-'+itemId).hide();
+    if (itemId != undefined && itemId == event.target.getAttribute('data-id')) {
+        $('#item-'+itemId).hide();
+        itemId = undefined;
+        return;
+    }
+    itemId = event.target.getAttribute('data-id');
+    $('#item-'+itemId).show();
 });

@@ -1,0 +1,23 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="ourBrand">
+    <div class="ourBrandHead">
+        <div class="ourBrandBody">
+            <div class="ourBrandGraphImg">
+                <img src="<c:url value="/resources/images/graph.png"/>" class="graphImg">
+            </div>
+            <div class="ourBrandGraphText">
+                <h3>
+                    Мы предоставляем легкий и быстрый способ рекламы ваших услуг в лучшем виде.
+                    <br>
+                    Результат не заставит вас ждать!
+                </h3>
+            </div>
+            <div class="ourBrandButt">
+                <p class="mtmb">
+                    <a class="btn btn-primary" id="imgButt" href="">Заказать прощадку</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="ourBrandFooter"></div>
+</div>

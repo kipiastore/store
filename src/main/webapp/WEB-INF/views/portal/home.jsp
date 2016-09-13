@@ -51,34 +51,26 @@
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">Поиск по рубрикам</h2>
                 <div class="rptShort">
-                    <div class="rptShort-inner">
-                        <ul>
-                            <k:forEach var="item" items="${homeModel.menuItemList}">
-                                <li class="header-item header-menu">
-                                    <a data-id="${item.id}" href="partition/${item.id}">${item.title}
-                                        <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
-                                    </a>
-                                    <ul class="menu-inner">
-                                        <li class="header-menu-item">
-                                            <a id="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
-                                                <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
-                                            </a>
-                                        </li>
-                                        <li class="header-menu-item">
-                                            <a id="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
-                                                <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
-                                            </a>
-                                        </li>
-                                        <li class="header-menu-item">
-                                            <a id="item-i" data-id="${item.id}" href="partition/${item.id}">${item.title}
-                                                <span data-id="${item.id}" class="rua-p-c-red">${item.counter}</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </k:forEach>
-                        </ul>
-                    </div>
+                    <k:forEach var="item" items="${homeModel.menuItemList}">
+                        <p>
+                            <a data-id="${item.id}" href="partition/${item.id}">${item.title}Вы видите только актуальные предложения.</a>
+                            <span class="rua-p-c-red">${item.counter}</span>
+                            <span class="show-subsection" data-id="${item.id}"></span>
+                            <span class="subsection" data-id="${item.id}" id="item-${item.id}">
+                                <span class="subsection-list" data-id="${item.id}">
+                                    <a data-id="${item.id}" href="partition/${item.id}">Фото</a>
+                                    <br/>
+                                    <a data-id="${item.id}" href="partition/${item.id}">Графика</a>
+                                    <br/>
+                                    <a data-id="${item.id}" href="partition/${item.id}">Фотоаппараты</a>
+                                    <br/>
+                                    <a data-id="${item.id}" href="partition/${item.id}">Линзы</a>
+                                    <br/>
+                                    <a data-id="${item.id}" href="partition/${item.id}">Видео</a>
+                                </span>
+                            </span>
+                        </p>
+                    </k:forEach>
                 </div>
             </div>
         </div>
@@ -101,50 +93,8 @@
             </table>
         </div>
     </div>
-    <div class="rua-l-wrapper mtmb">
-        <div class="row middle m-text-center">
-            <div class="col d-1of2 m-1of1 m-pl-1of1">
-                <h2 class="headline mtmb" id="headlinemtmb">Присоединяйтесь к нам!</h2>
-                <div class="rua-p-c-mid">
-                    <ol>
-                        <li>Мы дружный и молодой коллектив, всегда готовый поддержать друг друга.</li>
-                        <li>Предлагаем интересную и стабильную работу, где карьерный рост именно в ваших руках!</li>
-                        <li>У нас есть чай, кофе и печеньки в неограниченном количестве!</li>
-                    </ol>
-                </div>
-                <p class="mtmb">
-                    <a class="header-link header-link-button" id="requestButt" href="">Оставить заявку</a>
-                </p>
-            </div>
-            <div class="col d-1of2 m-1of1">
-                <div class="macImg">
-                    <img src="<c:url value="/resources/images/mac.png"/>"/>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="ourBrand">
-        <div class="ourBrandHead">
-            <div class="ourBrandBody">
-                <div class="ourBrandGraphImg">
-                    <img src="<c:url value="/resources/images/graph.png"/>" class="graphImg">
-                </div>
-                <div class="ourBrandGraphText">
-                    <h3>
-                        Мы предоставляем легкий и быстрый способ рекламы ваших услуг в лучшем виде.
-                        <br>
-                        Результат не заставит вас ждать!
-                    </h3>
-                </div>
-                <div class="ourBrandButt">
-                    <p class="mtmb">
-                        <a class="btn btn-primary" id="imgButt" href="">Заказать прощадку</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="ourBrandFooter"></div>
-    </div>
+    <%@include file="/WEB-INF/views/components/invitation.jspf"%>
+    <%@include file="/WEB-INF/views/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/components/additionalMenu.jspf"%>
     <%@include file="/WEB-INF/views/components/footer.jspf"%>
 </form>
