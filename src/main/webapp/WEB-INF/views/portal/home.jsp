@@ -51,7 +51,7 @@
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">Поиск по рубрикам</h2>
                 <div class="rptShort">
-                    <k:forEach var="item" items="${homeModel.menuItemList}">
+                    <k:forEach var="item" items="${homeModel.partitionItemList}">
                         <p>
                             <a data-id="${item.id}" href="partition/${item.id}">${item.title}Вы видите только актуальные предложения.</a>
                             <span class="rua-p-c-red">${item.counter}</span>

@@ -4,32 +4,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.store.controllers.models.BestResourcesItem;
-import ru.store.controllers.models.HomeModel;
-import ru.store.controllers.models.MenuItem;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main(Model model) {
-
-        List<MenuItem> menuItemList = new ArrayList<>();
-        MenuItem menuItem;
+/*
+        List<PartitionItem> partitionItemList = new ArrayList<>();
+        PartitionItem partitionItem;
         for (int i = 0; i < 30; i++) {
-            menuItem = new MenuItem();
-            menuItem.setCounter((int) (Math.random() * 3000));
-            menuItem.setId(i + "");
-            menuItem.setTitle("Дизайн - Графика - Фото");
-            menuItemList.add(menuItem);
+            partitionItem = new PartitionItem();
+            partitionItem.setCounter((int) (Math.random() * 3000));
+            partitionItem.setId(i + "");
+            partitionItem.setTitle("Дизайн - Графика - Фото");
+            partitionItemList.add(partitionItem);
         }
 
+
+
         Map<String, List<BestResourcesItem>> bestResourcesItemMap = new HashMap<>();
+
         List<BestResourcesItem> bestResourcesItemList;
         BestResourcesItem resourcesItem;
         for (int k = 0; k < 3; k++) {
@@ -44,8 +39,11 @@ public class HomeController {
             bestResourcesItemMap.put(k + "", bestResourcesItemList);
         }
 
-        HomeModel homeModel = new HomeModel(menuItemList, bestResourcesItemMap);
+
+
+        HomeModel homeModel = new HomeModel(partitionItemList, bestResourcesItemMap);
         model.addAttribute("homeModel", homeModel);
+        */
         return "portal/home";
     }
 

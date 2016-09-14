@@ -1,5 +1,7 @@
 package ru.store.controllers.models;
 
+import ru.store.entities.BestResource;
+
 import java.util.List;
 import java.util.Map;
 
@@ -8,25 +10,8 @@ import java.util.Map;
  */
 public class HomeModel {
 
-    List<MenuItem> menuItemList;
-    Map<String, List<BestResourcesItem>> bestResourcesItemMap;
+    List<PartitionItem> partitionItemList;
 
-    public HomeModel(List<MenuItem> menuItemList, Map<String, List<BestResourcesItem>> bestResourcesItemMap) {
-        this.menuItemList = menuItemList;
-        this.bestResourcesItemMap = bestResourcesItemMap;
-    }
-
-    public List<MenuItem> getMenuItemList() {
-        return menuItemList;
-    }
-    public void setMenuItemList(List<MenuItem> menuItemList) {
-        this.menuItemList = menuItemList;
-    }
-    public Map<String, List<BestResourcesItem>> getBestResourcesItemMap() {
-        return bestResourcesItemMap;
-    }
-    public void setBestResourcesItemMap(Map<String, List<BestResourcesItem>> bestResourcesItemMap) {
-        this.bestResourcesItemMap = bestResourcesItemMap;
-    }
+    Map<String, List<BestResource>> bestResourcesItemMap;
 
 }
