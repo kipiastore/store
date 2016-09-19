@@ -38,14 +38,18 @@ public class CallServiceSubPartitionController {
         SubPartition subPartition = subPartitionDAO.getSubPartitionById(subPartitionId);
         List<Company> companies = companyDAO.getCompaniesBySubPartition(subPartition);
         // build the model
+        CallServiceSubPartitionModel.PartitionItem partitionItem = new CallServiceSubPartitionModel.PartitionItem();
+        partitionItem.setPartitionId(subPartition.getPartition().getId());
+        partitionItem.setPartitionName(subPartition.getPartition().getName());
         CallServiceSubPartitionModel.SubPartitionItem subPartitionItem = new CallServiceSubPartitionModel.SubPartitionItem();
         subPartitionItem.setSubPartitionId(subPartition.getId());
         subPartitionItem.setSubPartitionName(subPartition.getName());
+        subPartitionItem.setPartitionItem(partitionItem);
         List<CallServiceSubPartitionModel.CompanyItem> companyItems = new ArrayList<>();
         CallServiceSubPartitionModel.CompanyItem companyItem;
         for (Company company : companies) {
             companyItem = new CallServiceSubPartitionModel.CompanyItem();
-            companyItem.setCompanyInt(company.getId());
+            companyItem.setCompanyId(company.getId());
             companyItem.setCompanyName(company.getName());
             companyItems.add(companyItem);
         }

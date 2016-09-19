@@ -9,7 +9,19 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/callService/components/topBar.jspf"%>
-<h3 class="h3Logo">Компания: ${callServiceCompanyModel.companyName}</h3>
+<h3 class="h3Logo">
+    <a href="${prefix}">Основные разделы</a>
+    <span>&nbsp;&gt;&nbsp;</span>
+    <a href="${prefix}partition/${callServiceCompanyModel.subPartitionItem.partitionItem.partitionId}">
+        ${callServiceCompanyModel.subPartitionItem.partitionItem.partitionName}
+    </a>
+    <span>&nbsp;&gt;&nbsp;</span>
+    <a href="${prefix}subPartition/${callServiceCompanyModel.subPartitionItem.subPartitionId}">
+        ${callServiceCompanyModel.subPartitionItem.subPartitionName}
+    </a>
+    <span>&nbsp;&gt;&nbsp;</span>
+    <a href="">${callServiceCompanyModel.companyName}</a>
+</h3>
 <div class="menu">
 
 </div>

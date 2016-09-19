@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/callService/components/topBar.jspf"%>
-<h3 class="h3Logo">Основные разделы</h3>
+<h3 class="h3Logo"><a href="">Основные разделы</a></h3>
 <div class="menu">
     <k:forEach var="item" items="${callServiceHomeModel.partitionItems}">
         <div class="content">

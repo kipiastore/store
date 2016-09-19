@@ -33,12 +33,12 @@ public class SubPartitionDAOImpl implements SubPartitionDAO {
 
         // Mock
         SubPartition subPartition;
-        int count = 0;
+        int count = 4440;
         for (Partition partition : new PartitionDAOImpl().getPartitions()) {
             for (int i = 0; i < 30; i++) {
                 subPartition = new SubPartition();
-                subPartition.setId(i + count);
-                subPartition.setName("Test " + (i + count));
+                subPartition.setId(count);
+                subPartition.setName("Test " + (count));
                 subPartition.setPartition(partition);
                 subPartitions.add(subPartition);
                 count++;

@@ -25,6 +25,7 @@ public class CallServiceSubPartitionModel {
     public static class SubPartitionItem {
         private int subPartitionId;
         private String subPartitionName;
+        private PartitionItem partitionItem;
 
         public int getSubPartitionId() {
             return subPartitionId;
@@ -38,17 +39,41 @@ public class CallServiceSubPartitionModel {
         public void setSubPartitionName(String subPartitionName) {
             this.subPartitionName = subPartitionName;
         }
+        public PartitionItem getPartitionItem() {
+            return partitionItem;
+        }
+        public void setPartitionItem(PartitionItem partitionItem) {
+            this.partitionItem = partitionItem;
+        }
+    }
+
+    public static class PartitionItem {
+        private int partitionId;
+        private String partitionName;
+
+        public int getPartitionId() {
+            return partitionId;
+        }
+        public void setPartitionId(int partitionId) {
+            this.partitionId = partitionId;
+        }
+        public String getPartitionName() {
+            return partitionName;
+        }
+        public void setPartitionName(String partitionName) {
+            this.partitionName = partitionName;
+        }
     }
 
     public static class CompanyItem {
-        private int companyInt;
+        private int companyId;
         private String companyName;
 
-        public int getCompanyInt() {
-            return companyInt;
+        public int getCompanyId() {
+            return companyId;
         }
-        public void setCompanyInt(int companyInt) {
-            this.companyInt = companyInt;
+        public void setCompanyId(int companyInt) {
+            this.companyId = companyInt;
         }
         public String getCompanyName() {
             return companyName;

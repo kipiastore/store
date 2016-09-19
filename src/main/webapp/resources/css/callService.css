@@ -3,7 +3,7 @@
     height: 40px;
     background-color: #fdfbe6;
     border-bottom: 1px solid #decfbd;
-    padding-top: 6px;
+    padding-top: 8px;
     position: fixed;
     top: 0;
     z-index: 100;
@@ -19,7 +19,7 @@ body {
 
 }
 .menu {
-    padding-left: 40px;
+    padding-left: 100px;
 }
 a {
     color: #7e7e7e;
@@ -98,7 +98,6 @@ a:hover {
     }
 }
 .logout {
-    margin-left: 40px;
     border: 1px solid #dedad8;
     background-color: #ff7f7f;
 }
@@ -116,4 +115,12 @@ h3 {
     border-top: 1px solid #decfbd;
     bottom: 0;
     position: fixed;
+}
+h3 a {
+    color: black;
+    cursor: pointer;
+}
+h3 a:hover {
+    color: #16a085;
+    transition: color 0.3s ease-out;
 }

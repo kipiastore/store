@@ -69,7 +69,6 @@ public class CompanyDAOImpl implements CompanyDAO {
             if (companyItem.getSubPartitions().contains(subPartition)) {
                 companies.add(companyItem);
             }
-
         }
 
         return companies;

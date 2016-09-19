@@ -34,6 +34,7 @@ public class CallServicePartitionController {
             partitionId = Integer.valueOf(splitResult[1]);
         else
             return "redirect:/callService";
+
         Partition partition = partitionDAO.getPartitionById(partitionId);
         List<SubPartition> subPartitions = subPartitionDAO.getSubPartitionsByPartition(partition);
         // build the model

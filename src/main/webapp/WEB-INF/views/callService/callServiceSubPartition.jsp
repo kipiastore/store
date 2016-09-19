@@ -9,12 +9,19 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/callService/components/topBar.jspf"%>
-<h3 class="h3Logo">Подраздел: ${callServiceSubPartitionModel.subPartitionItem.subPartitionName}</h3>
-<h3>Компании</h3>
+<h3 class="h3Logo">
+    <a href="${prefix}">Основные разделы</a>
+    <span>&nbsp;&gt;&nbsp;</span>
+    <a href="${prefix}partition/${callServiceSubPartitionModel.subPartitionItem.partitionItem.partitionId}">
+        ${callServiceSubPartitionModel.subPartitionItem.partitionItem.partitionName}
+    </a>
+    <span>&nbsp;&gt;&nbsp;</span>
+    <a href="">${callServiceSubPartitionModel.subPartitionItem.subPartitionName}</a>
+</h3>
 <div class="menu">
     <k:forEach var="item" items="${callServiceSubPartitionModel.companyItems}">
         <div class="content">
-            <a href="${prefix}company/${item.companyInt}">${item.companyName}</a>
+            <a href="${prefix}company/${callServiceSubPartitionModel.subPartitionItem.subPartitionId}-${item.companyId}">${item.companyName}</a>
         </div>
     </k:forEach>
 </div>
