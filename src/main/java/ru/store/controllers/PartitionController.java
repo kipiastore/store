@@ -9,7 +9,7 @@ public class PartitionController {
 
     @RequestMapping(value = "/partition/*", method = RequestMethod.GET)
     public String partition() {
-        return "portal/partition";
+        return "partition";
     }
 
 }

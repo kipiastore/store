@@ -28,7 +28,7 @@ public class LoginController {
 
             model.addObject("msg", "You've been logged out successfully.");
         }
-        model.setViewName("portal/login");
+        model.setViewName("login");
         return model;
     }
 
@@ -89,7 +89,7 @@ public class LoginController {
             model.addObject("msg", "You do not have permission to access this page!");
         }
 
-        model.setViewName("portal/403");
+        model.setViewName("403");
         return model;
 
     }

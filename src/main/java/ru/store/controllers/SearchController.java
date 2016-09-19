@@ -9,22 +9,22 @@ public class SearchController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search() {
-        return "portal/search";
+        return "search";
     }
 
     @RequestMapping(value = "/search/1", method = RequestMethod.GET)
     public String search1() {
-        return "portal/search";
+        return "search";
     }
 
     @RequestMapping(value = "/search/2", method = RequestMethod.GET)
     public String search2() {
-        return "portal/search";
+        return "search";
     }
 
     @RequestMapping(value = "/search/3", method = RequestMethod.GET)
     public String search3() {
-        return "portal/search";
+        return "search";
     }
 
 }

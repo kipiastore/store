@@ -9,7 +9,7 @@ public class CallCenterController {
 
     @RequestMapping(value = "/callCenter", method = RequestMethod.GET)
     public String callCenter() {
-        return "portal/callCenter";
+        return "callCenter";
     }
 
 }

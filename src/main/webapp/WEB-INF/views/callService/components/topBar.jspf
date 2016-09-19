@@ -1,0 +1,5 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="header">
+    <span class="button logout">Выход</span>
+    <span class="button" id="headerSearchButt">Поиск</span>
+</div>

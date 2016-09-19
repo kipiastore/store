@@ -9,7 +9,7 @@ public class PersonalAreaController {
 
     @RequestMapping(value = "/personalArea", method = RequestMethod.GET)
     public String personalArea() {
-        return "portal/personalArea";
+        return "personalArea";
     }
 
 }

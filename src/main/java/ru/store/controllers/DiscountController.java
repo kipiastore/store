@@ -9,7 +9,7 @@ public class DiscountController {
 
     @RequestMapping(value = "/discount", method = RequestMethod.GET)
     public String discount() {
-        return "portal/discount";
+        return "discount";
     }
 
 }

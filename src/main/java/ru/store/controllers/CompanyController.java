@@ -9,7 +9,7 @@ public class CompanyController {
 
     @RequestMapping(value = "/company/*", method = RequestMethod.GET)
     public String company() {
-        return "portal/company";
+        return "company";
     }
 
 }
