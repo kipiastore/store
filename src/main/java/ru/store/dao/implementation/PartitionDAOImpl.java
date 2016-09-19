@@ -22,8 +22,8 @@ public class PartitionDAOImpl implements PartitionDAO {
         Partition partition;
         for (int i = 0; i < 30; i++) {
             partition = new Partition();
-            partition.setId(i);
-            partition.setName("Дизайн - Графика - Фото");
+            partition.setId(10 + i);
+            partition.setName("Дизайн - Графика - Фото " + (10 + i));
             partitions.add(partition);
         }
 

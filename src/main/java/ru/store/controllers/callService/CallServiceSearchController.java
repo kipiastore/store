@@ -19,6 +19,8 @@ public class CallServiceSearchController {
         System.out.println(request.getParameter("byCompany"));
         System.out.println(request.getParameter("byAddress"));
 
+        model.addAttribute("prefix", "");
+
         return "callService/callServiceSearch";
     }
 

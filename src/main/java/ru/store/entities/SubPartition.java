@@ -36,4 +36,30 @@ public class SubPartition {
     public void setCompanies(Collection<Company> companies) {
         this.companies = companies;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SubPartition that = (SubPartition) o;
+
+        return id == that.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "SubPartition{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", partition=" + partition +
+                ", companies=" + companies +
+                '}';
+    }
 }

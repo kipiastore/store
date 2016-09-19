@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface SubPartitionDAO {
 
+    SubPartition getSubPartitionById(int id);
     List<SubPartition> getSubPartitions();
     List<SubPartition> getSubPartitionsByPartition(Partition partition);
 

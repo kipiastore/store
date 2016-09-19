@@ -52,9 +52,8 @@ public class CallServicePartitionController {
         callServicePartitionModel.setPartitionItem(partitionItem);
         callServicePartitionModel.setSubPartitionItems(subPartitionItems);
         model.addAttribute("callServicePartitionModel", callServicePartitionModel);
+
         model.addAttribute("prefix", "../");
         return "callService/callServicePartition";
     }
-
-
 }

@@ -15,18 +15,33 @@ import java.util.List;
 public class SubPartitionDAOImpl implements SubPartitionDAO {
 
     @Override
+    public SubPartition getSubPartitionById(int id) {
+        SubPartition subPartition = null;
+
+        // mock
+        for (SubPartition subPartitionItem : getSubPartitions()) {
+            if (subPartitionItem.getId() == id)
+                subPartition = subPartitionItem;
+        }
+
+        return subPartition;
+    }
+
+    @Override
     public List<SubPartition> getSubPartitions() {
         List<SubPartition> subPartitions = new ArrayList<>();
 
         // Mock
         SubPartition subPartition;
+        int count = 0;
         for (Partition partition : new PartitionDAOImpl().getPartitions()) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 30; i++) {
                 subPartition = new SubPartition();
-                subPartition.setId(i);
-                subPartition.setName("Test " + i);
+                subPartition.setId(i + count);
+                subPartition.setName("Test " + (i + count));
                 subPartition.setPartition(partition);
                 subPartitions.add(subPartition);
+                count++;
             }
         }
 

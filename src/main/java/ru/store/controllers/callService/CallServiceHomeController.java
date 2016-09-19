@@ -9,7 +9,6 @@ import ru.store.controllers.callService.models.CallServiceHomeModel;
 import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.entities.Partition;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class CallServiceHomeController {
     private PartitionDAO partitionDAO;
 
     @RequestMapping(value = "/callService", method = RequestMethod.GET)
-    public String manager(HttpServletRequest request, Model model) {
+    public String manager(Model model) {
         List<CallServiceHomeModel.PartitionItem> partitionItems = new ArrayList<>();
         CallServiceHomeModel.PartitionItem partitionItem;
         for (Partition partition : partitionDAO.getPartitions()) {
@@ -36,10 +35,7 @@ public class CallServiceHomeController {
         callServiceHomeModel.setPartitionItems(partitionItems);
         model.addAttribute("callServiceHomeModel", callServiceHomeModel);
 
-        if (request.getRequestURL().toString().endsWith("/"))
-            model.addAttribute("prefix", "");
-        else
-            model.addAttribute("prefix", "callService/");
+        model.addAttribute("prefix", "callService/");
 
         return "callService/callServiceHome";
     }

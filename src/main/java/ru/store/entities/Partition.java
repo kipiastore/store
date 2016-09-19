@@ -36,4 +36,12 @@ public class Partition {
     public int hashCode() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Partition{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

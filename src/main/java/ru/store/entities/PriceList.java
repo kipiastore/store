@@ -48,4 +48,16 @@ public class PriceList {
     public void setSubPartition(SubPartition subPartition) {
         this.subPartition = subPartition;
     }
+
+    @Override
+    public String toString() {
+        return "PriceList{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", photo='" + photo + '\'' +
+                ", description='" + description + '\'' +
+                ", company=" + company +
+                ", subPartition=" + subPartition +
+                '}';
+    }
 }
