@@ -1,9 +1,8 @@
 package ru.store.entities;
 
 /**
- * Created by Akex on 30.08.2016.
+ *
  */
-
 public class UserRole {
 
     private Integer userRoleId;

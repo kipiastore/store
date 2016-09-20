@@ -1,0 +1,12 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="search">
+    <div class="searchMenu">
+        <form method="get" action="${prefix}search">
+            <input name="byKeyword" type="text" class="searchInput" placeholder="Поиск по слову" autocomplete="off"/>
+            <input name="byCompany" type="text" class="searchInput" placeholder="Поиск по фирме" autocomplete="off"/>
+            <input name="byAddress" type="text" class="searchInput" placeholder="Поиск по адресу" autocomplete="off"/>
+            <input type="submit" class="button searchSubmit" value="Искать"/>
+            <input name="cancel" type="button" class="button searchCancel" id="headerSearchCancelButt" value="Отмета"/>
+        </form>
+    </div>
+</div>

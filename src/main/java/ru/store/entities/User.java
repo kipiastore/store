@@ -3,6 +3,9 @@ package ru.store.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ *
+ */
 public class User{
 
     private String username;
@@ -11,6 +14,9 @@ public class User{
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
     public User() {
+    }
+    public User(String username) {
+        this.username = username;
     }
 
     public User(String username, String password, boolean enabled) {
@@ -59,3 +65,5 @@ public class User{
     }
 
 }
+
+

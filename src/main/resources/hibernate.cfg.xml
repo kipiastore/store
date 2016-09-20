@@ -9,7 +9,7 @@
       <property name="hibernate.show_sql">true</property>
 
       <mapping resource="ru/store/entities/UserRoles.hbm.xml"/>
-      <mapping resource="ru/store/entities/User.hbm.xml"/>
+      <mapping resource="ru/store/entities/Users.hbm.xml"/>
 
   </session-factory>
 </hibernate-configuration>

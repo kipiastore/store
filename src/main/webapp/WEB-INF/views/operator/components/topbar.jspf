@@ -1,0 +1,9 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="header">
+    <span class="button logout" onclick="$('#logoutForm').submit()">Выход</span>
+    <span class="button" id="headerSearchButt">Поиск</span>
+    <k:url value="/login" var="logoutUrl" />
+    <form action="${logoutUrl}" method="post" id="logoutForm">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+</div>
