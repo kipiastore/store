@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Справочная служба</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/callService.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/operator.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
 </head>
 <body>
@@ -12,10 +12,10 @@
 <h3 class="h3Logo">
     <a href="${prefix}">Основные разделы</a>
     <span>&nbsp;&gt;&nbsp;</span>
-    <a>${callServicePartitionModel.partitionItem.partitionName}</a>
+    <a>${model.partitionItem.partitionName}</a>
 </h3>
 <div class="menu">
-    <k:forEach var="item" items="${callServicePartitionModel.subPartitionItems}">
+    <k:forEach var="item" items="${model.subPartitionItems}">
         <div class="content">
             <a href="${prefix}subpartition/${item.subPartitionId}">${item.subPartitionName}</a>
         </div>
@@ -23,6 +23,6 @@
 </div>
 <%@include file="/WEB-INF/views/operator/components/searchwindow.jspf"%>
 <%@include file="/WEB-INF/views/operator/components/bottombar.jspf"%>
-<script type="text/javascript" src="<c:url value="/resources/js/callService.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/operator.js" />"></script>
 </body>
 </html>

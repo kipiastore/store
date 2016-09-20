@@ -1036,7 +1036,7 @@ footer.f .cr {
     opacity: 0;
     right: 15px;
     position: fixed;
-    top: 100px;
+    bottom: 30px;
     color: #fff;
     width: 55px;
     height: 55px;

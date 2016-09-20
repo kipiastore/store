@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Справочная служба</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/callService.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/operator.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
 </head>
 <body>
@@ -12,21 +12,21 @@
 <h3 class="h3Logo">
     <a href="${prefix}">Основные разделы</a>
     <span>&nbsp;&gt;&nbsp;</span>
-    <a href="${prefix}partition/${callServiceCompanyModel.subPartitionItem.partitionItem.partitionId}">
-        ${callServiceCompanyModel.subPartitionItem.partitionItem.partitionName}
+    <a href="${prefix}partition/${model.subPartitionItem.partitionItem.partitionId}">
+        ${model.subPartitionItem.partitionItem.partitionName}
     </a>
     <span>&nbsp;&gt;&nbsp;</span>
-    <a href="${prefix}subpartition/${callServiceCompanyModel.subPartitionItem.subPartitionId}">
-        ${callServiceCompanyModel.subPartitionItem.subPartitionName}
+    <a href="${prefix}subpartition/${model.subPartitionItem.subPartitionId}">
+        ${model.subPartitionItem.subPartitionName}
     </a>
     <span>&nbsp;&gt;&nbsp;</span>
-    <a>${callServiceCompanyModel.companyName}</a>
+    <a>${model.companyName}</a>
 </h3>
 <div class="menu">
 
 </div>
 <%@include file="/WEB-INF/views/operator/components/searchwindow.jspf"%>
 <%@include file="/WEB-INF/views/operator/components/bottombar.jspf"%>
-<script type="text/javascript" src="<c:url value="/resources/js/callService.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/operator.js" />"></script>
 </body>
 </html>

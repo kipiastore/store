@@ -48,7 +48,6 @@ public class LoginController {
 
     private String getErrorMessage(HttpServletRequest request, String key) {
         Exception exception = (Exception) request.getSession().getAttribute(key);
-        System.out.println(exception);
         String error = "";
         if (exception instanceof BadCredentialsException) {
             error = "Invalid username and password!";

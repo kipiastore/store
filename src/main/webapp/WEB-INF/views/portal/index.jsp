@@ -15,7 +15,7 @@
     <%@include file="/WEB-INF/views/portal/components/topbar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
-        <div style="padding: 40px 0;">
+        <div style="padding: 1px 0 30px 0;">
             <!--
             <div class="rua-l-wrapper" style="margin-top: 20px; margin-bottom: 40px;">
                 <div class="row text-center">
@@ -53,19 +53,20 @@
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">Поиск по рубрикам</h2>
                 <div class="rptShort">
-                    <k:forEach var="item" items="${homeModel.partitionItems}">
+                    <k:forEach var="partitionItem" items="${model.partitionItems}">
                         <p>
-                            <a data-id="${item.partitionId}" href="partition/${item.partitionId}">
-                                ${item.partitionName}
+                            <a data-id="${partitionItem.partitionId}" href="partition/${partitionItem.partitionId}">
+                                ${partitionItem.partitionName}
                             </a>
                             <span class="rua-p-c-red">
-                                ${item.companyCount}
+                                ${partitionItem.companyCount}
                             </span>
-                            <span class="show-subsection" data-id="${item.partitionId}"></span>
-                            <span class="subsection" data-id="${item.partitionId}" id="item-${item.partitionId}">
-                                <span class="subsection-list" data-id="${item.partitionId}">
-                                    <k:forEach var="subsectionItem" items="${homeModel.subPartitionItemsGroupByPartition.get(item.partitionId)}">
-                                        <a data-id="${item.partitionId}" href="subPartition/${subsectionItem.subPartitionId}">${subsectionItem.subPartitionName}</a>
+                            <span class="show-subsection" data-id="${partitionItem.partitionId}"></span>
+                            <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
+                                <span class="subsection-list" data-id="${partitionItem.partitionId}">
+                                    <k:forEach var="subPartitionItem" items="${partitionItem.subPartitionItems}">
+                                        <a data-id="${partitionItem.partitionId}"
+                                           href="subPartition/${subPartitionItem.subPartitionId}">${subPartitionItem.subPartitionName}</a>
                                         <br/>
                                     </k:forEach>
                                 </span>
@@ -81,11 +82,12 @@
         <div class="rua-l-wrapper text-center mtmb">
             <table class="logos">
                 <tbody>
-                    <k:forEach var="key" items="${homeModel.bestCompanyItems.keySet()}">
+                    <k:forEach var="key" items="${model.bestCompanyGroupByColumn.keySet()}">
                         <tr>
-                            <k:forEach var="item" items="${homeModel.bestCompanyItems.get(key)}">
+                            <k:forEach var="bestCompanyItem" items="${model.bestCompanyGroupByColumn.get(key)}">
                                 <td>
-                                    <a href="company/${item.companyId}" title="${item.companyName}" style="background-image: url(<c:url value="/resources/images/${item.companyLogoFileName}"/>);"></a>
+                                    <a href="company/${bestCompanyItem.companyId}" title="${bestCompanyItem.companyName}"
+                                       style="background-image: url(<c:url value="/resources/images/${bestCompanyItem.companyLogoFileName}"/>);"></a>
                                 </td>
                             </k:forEach>
                         </tr>

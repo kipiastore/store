@@ -1,9 +1,9 @@
 package ru.store.controllers.operator;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -15,44 +15,37 @@ import java.util.List;
 public class OperatorSearchController {
 
     @RequestMapping(value = "/operator/search", method = RequestMethod.GET)
-    public String search(Model model, HttpServletRequest request) {
+    public ModelAndView search(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
         String byKeyword = request.getParameter("byKeyword");
         String byCompany = request.getParameter("byCompany");
         String byAddress = request.getParameter("byAddress");
 
-        CallServiceSearchModel.CompanyItem companyItem;
+        Model.CompanyItem companyItem;
         //for () {}
-        CallServiceSearchModel callServiceSearchModel = new CallServiceSearchModel();
+        Model model = new Model();
 
-        model.addAttribute("prefix", "../operator/");
-        return "operator/search";
+        modelAndView.addObject("prefix", "../operator/");
+        modelAndView.setViewName("operator/search");
+        return modelAndView;
     }
 
-    public static class CallServiceSearchModel {
-        private List<CompanyItem> companyItems;
+    public static class Model {
+        public List<CompanyItem> companyItems;
 
         public List<CompanyItem> getCompanyItems() {
             return companyItems;
         }
-        public void setCompanyItems(List<CompanyItem> companyItems) {
-            this.companyItems = companyItems;
-        }
 
         public static class CompanyItem {
-            private int companyId;
-            private String companyName;
+            public int companyId;
+            public String companyName;
 
             public int getCompanyId() {
                 return companyId;
             }
-            public void setCompanyId(int companyId) {
-                this.companyId = companyId;
-            }
             public String getCompanyName() {
                 return companyName;
-            }
-            public void setCompanyName(String companyName) {
-                this.companyName = companyName;
             }
         }
     }

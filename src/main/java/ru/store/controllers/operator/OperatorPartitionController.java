@@ -2,9 +2,9 @@ package ru.store.controllers.operator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.Partition;
@@ -26,87 +26,73 @@ public class OperatorPartitionController {
     private SubPartitionDAO subPartitionDAO;
 
     @RequestMapping(value = "/operator/partition/*", method = RequestMethod.GET)
-    public String partition(HttpServletRequest request, Model model) {
+    public ModelAndView partition(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
         String[] splitResult = request.getRequestURL().toString().split("partition/");
         int partitionId;
         if (splitResult.length == 2 && splitResult[1].matches("\\d+"))
             partitionId = Integer.valueOf(splitResult[1]);
-        else
-            return "redirect:/operator";
+        else {
+            modelAndView.setViewName("redirect:/operator");
+            return modelAndView;
+        }
 
         Partition partition = partitionDAO.getPartitionById(partitionId);
         List<SubPartition> subPartitions = subPartitionDAO.getSubPartitionsByPartition(partition);
-        // build the model
-        CallServicePartitionModel.PartitionItem partitionItem = new CallServicePartitionModel.PartitionItem();
-        partitionItem.setPartitionId(partition.getId());
-        partitionItem.setPartitionName(partition.getName());
-        List<CallServicePartitionModel.SubPartitionItem> subPartitionItems = new ArrayList<>();
-        CallServicePartitionModel.SubPartitionItem subPartitionItem;
+
+        Model.PartitionItem partitionItem = new Model.PartitionItem();
+        partitionItem.partitionId = partition.getId();
+        partitionItem.partitionName = partition.getName();
+        List<Model.SubPartitionItem> subPartitionItems = new ArrayList<>();
+        Model.SubPartitionItem subPartitionItem;
         for (SubPartition subPartition : subPartitions) {
-            subPartitionItem = new CallServicePartitionModel.SubPartitionItem();
-            subPartitionItem.setSubPartitionId(subPartition.getId());
-            subPartitionItem.setSubPartitionName(subPartition.getName());
+            subPartitionItem = new Model.SubPartitionItem();
+            subPartitionItem.subPartitionId = subPartition.getId();
+            subPartitionItem.subPartitionName = subPartition.getName();
             subPartitionItems.add(subPartitionItem);
         }
-        CallServicePartitionModel callServicePartitionModel = new CallServicePartitionModel();
-        callServicePartitionModel.setPartitionItem(partitionItem);
-        callServicePartitionModel.setSubPartitionItems(subPartitionItems);
-        model.addAttribute("callServicePartitionModel", callServicePartitionModel);
+        Model model = new Model();
+        model.partitionItem = partitionItem;
+        model.subPartitionItems = subPartitionItems;
+        modelAndView.addObject("model", model);
 
-        model.addAttribute("prefix", "../");
-        return "operator/partition";
+        modelAndView.addObject("prefix", "../");
+        modelAndView.setViewName("operator/partition");
+        return modelAndView;
     }
 
-    public static class CallServicePartitionModel {
-        private PartitionItem partitionItem;
-        private List<SubPartitionItem> subPartitionItems;
+    public static class Model {
+        public PartitionItem partitionItem;
+        public List<SubPartitionItem> subPartitionItems;
 
         public PartitionItem getPartitionItem() {
             return partitionItem;
         }
-        public void setPartitionItem(PartitionItem partitionItem) {
-            this.partitionItem = partitionItem;
-        }
         public List<SubPartitionItem> getSubPartitionItems() {
             return subPartitionItems;
         }
-        public void setSubPartitionItems(List<SubPartitionItem> subPartitionItems) {
-            this.subPartitionItems = subPartitionItems;
-        }
 
         public static class PartitionItem {
-            private int partitionId;
-            private String partitionName;
+            public int partitionId;
+            public String partitionName;
 
             public int getPartitionId() {
                 return partitionId;
             }
-            public void setPartitionId(int partitionId) {
-                this.partitionId = partitionId;
-            }
             public String getPartitionName() {
                 return partitionName;
-            }
-            public void setPartitionName(String partitionName) {
-                this.partitionName = partitionName;
             }
         }
 
         public static class SubPartitionItem {
-            private int subPartitionId;
-            private String subPartitionName;
+            public int subPartitionId;
+            public String subPartitionName;
 
             public int getSubPartitionId() {
                 return subPartitionId;
             }
-            public void setSubPartitionId(int subPartitionId) {
-                this.subPartitionId = subPartitionId;
-            }
             public String getSubPartitionName() {
                 return subPartitionName;
-            }
-            public void setSubPartitionName(String subPartitionName) {
-                this.subPartitionName = subPartitionName;
             }
         }
     }

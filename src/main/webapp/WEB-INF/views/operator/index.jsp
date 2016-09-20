@@ -4,21 +4,21 @@
 <html>
 <head>
     <title>Справочная служба</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/callService.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/operator.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
 </head>
 <body>
 <%@include file="/WEB-INF/views/operator/components/topbar.jspf"%>
 <h3 class="h3Logo"><a>Основные разделы</a></h3>
 <div class="menu">
-    <k:forEach var="item" items="${callServiceHomeModel.partitionItems}">
+    <k:forEach var="partitionItem" items="${model.partitionItems}">
         <div class="content">
-            <a href="${prefix}partition/${item.partitionId}">${item.partitionName}</a>
+            <a href="${prefix}partition/${partitionItem.partitionId}">${partitionItem.partitionName}</a>
         </div>
     </k:forEach>
 </div>
 <%@include file="/WEB-INF/views/operator/components/searchwindow.jspf" %>
 <%@include file="/WEB-INF/views/operator/components/bottombar.jspf"%>
-<script type="text/javascript" src="<c:url value="/resources/js/callService.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/operator.js" />"></script>
 </body>
 </html>

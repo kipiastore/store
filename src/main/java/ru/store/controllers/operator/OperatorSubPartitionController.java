@@ -2,9 +2,9 @@ package ru.store.controllers.operator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.Company;
@@ -26,116 +26,94 @@ public class OperatorSubPartitionController {
     private CompanyDAO companyDAO;
 
     @RequestMapping(value = "/operator/subpartition/*", method = RequestMethod.GET)
-    public String subPartition(HttpServletRequest request, Model model) {
+    public ModelAndView subPartition(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
         String[] splitResult = request.getRequestURL().toString().split("subpartition/");
         int subPartitionId;
         if (splitResult.length == 2 && splitResult[1].matches("\\d+"))
             subPartitionId = Integer.valueOf(splitResult[1]);
-        else
-            return "redirect:/operator";
+        else {
+            modelAndView.setViewName("redirect:/operator");
+            return modelAndView;
+        }
 
         SubPartition subPartition = subPartitionDAO.getSubPartitionById(subPartitionId);
         List<Company> companies = companyDAO.getCompaniesBySubPartition(subPartition);
-        // build the model
-        CallServiceSubPartitionModel.PartitionItem partitionItem = new CallServiceSubPartitionModel.PartitionItem();
-        partitionItem.setPartitionId(subPartition.getPartition().getId());
-        partitionItem.setPartitionName(subPartition.getPartition().getName());
-        CallServiceSubPartitionModel.SubPartitionItem subPartitionItem = new CallServiceSubPartitionModel.SubPartitionItem();
-        subPartitionItem.setSubPartitionId(subPartition.getId());
-        subPartitionItem.setSubPartitionName(subPartition.getName());
-        subPartitionItem.setPartitionItem(partitionItem);
-        List<CallServiceSubPartitionModel.CompanyItem> companyItems = new ArrayList<>();
-        CallServiceSubPartitionModel.CompanyItem companyItem;
+
+        Model.SubPartitionItem subPartitionItem = new Model.SubPartitionItem();
+        subPartitionItem.subPartitionId = subPartition.getId();
+        subPartitionItem.subPartitionName = subPartition.getName();
+        Model.PartitionItem partitionItem = new Model.PartitionItem();
+        partitionItem.partitionId = subPartition.getPartition().getId();
+        partitionItem.partitionName = subPartition.getPartition().getName();
+        List<Model.CompanyItem> companyItems = new ArrayList<>();
+        Model.CompanyItem companyItem;
         for (Company company : companies) {
-            companyItem = new CallServiceSubPartitionModel.CompanyItem();
-            companyItem.setCompanyId(company.getId());
-            companyItem.setCompanyName(company.getName());
+            companyItem = new Model.CompanyItem();
+            companyItem.companyId = company.getId();
+            companyItem.companyName = company.getName();
             companyItems.add(companyItem);
         }
-        CallServiceSubPartitionModel callServiceSubPartitionModel = new CallServiceSubPartitionModel();
-        callServiceSubPartitionModel.setSubPartitionItem(subPartitionItem);
-        callServiceSubPartitionModel.setCompanyItems(companyItems);
-        model.addAttribute("callServiceSubPartitionModel", callServiceSubPartitionModel);
 
-        model.addAttribute("prefix", "../");
-        return "operator/subpartition";
+        Model model = new Model();
+        model.subPartitionItem = subPartitionItem;
+        model.companyItems = companyItems;
+        model.partitionItem = partitionItem;
+        modelAndView.addObject("model", model);
+
+        modelAndView.addObject("prefix", "../");
+        modelAndView.setViewName("operator/subpartition");
+        return modelAndView;
     }
 
-    public static class CallServiceSubPartitionModel {
-        private SubPartitionItem subPartitionItem;
-        private List<CompanyItem> companyItems;
+    public static class Model {
+        public SubPartitionItem subPartitionItem;
+        public List<CompanyItem> companyItems;
+        public PartitionItem partitionItem;
 
         public SubPartitionItem getSubPartitionItem() {
             return subPartitionItem;
         }
-        public void setSubPartitionItem(SubPartitionItem subPartitionItem) {
-            this.subPartitionItem = subPartitionItem;
-        }
         public List<CompanyItem> getCompanyItems() {
             return companyItems;
         }
-        public void setCompanyItems(List<CompanyItem> companyItems) {
-            this.companyItems = companyItems;
+        public PartitionItem getPartitionItem() {
+            return partitionItem;
         }
 
         public static class SubPartitionItem {
-            private int subPartitionId;
-            private String subPartitionName;
-            private PartitionItem partitionItem;
+            public int subPartitionId;
+            public String subPartitionName;
 
             public int getSubPartitionId() {
                 return subPartitionId;
             }
-            public void setSubPartitionId(int subPartitionId) {
-                this.subPartitionId = subPartitionId;
-            }
             public String getSubPartitionName() {
                 return subPartitionName;
-            }
-            public void setSubPartitionName(String subPartitionName) {
-                this.subPartitionName = subPartitionName;
-            }
-            public PartitionItem getPartitionItem() {
-                return partitionItem;
-            }
-            public void setPartitionItem(PartitionItem partitionItem) {
-                this.partitionItem = partitionItem;
             }
         }
 
         public static class PartitionItem {
-            private int partitionId;
-            private String partitionName;
+            public int partitionId;
+            public String partitionName;
 
             public int getPartitionId() {
                 return partitionId;
             }
-            public void setPartitionId(int partitionId) {
-                this.partitionId = partitionId;
-            }
             public String getPartitionName() {
                 return partitionName;
-            }
-            public void setPartitionName(String partitionName) {
-                this.partitionName = partitionName;
             }
         }
 
         public static class CompanyItem {
-            private int companyId;
-            private String companyName;
+            public int companyId;
+            public String companyName;
 
             public int getCompanyId() {
                 return companyId;
             }
-            public void setCompanyId(int companyInt) {
-                this.companyId = companyInt;
-            }
             public String getCompanyName() {
                 return companyName;
-            }
-            public void setCompanyName(String companyName) {
-                this.companyName = companyName;
             }
         }
     }

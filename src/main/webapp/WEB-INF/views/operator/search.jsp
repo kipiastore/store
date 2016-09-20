@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Справочная служба</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/callService.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/operator.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
 </head>
 <body>
@@ -17,6 +17,6 @@
 
 <%@include file="/WEB-INF/views/operator/components/searchwindow.jspf"%>
 <%@include file="/WEB-INF/views/operator/components/bottombar.jspf"%>
-<script type="text/javascript" src="<c:url value="/resources/js/callService.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/operator.js" />"></script>
 </body>
 </html>
