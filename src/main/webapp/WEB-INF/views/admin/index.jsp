@@ -12,39 +12,15 @@
         }
     </script>
 <body>
-
-    <div class="logout">
-        <c:url value="/login" var="logoutUrl" />
-        <form action="${logoutUrl}" method="post" id="logoutForm">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        </form>
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            ${pageContext.request.userPrincipal.name} | <a href="javascript:formSubmit()">Выход</a>
-        </c:if>
-    </div>
-
-    <div class="header">
-        <div class="headerMenu">
-            <div class="headerMenuContent">
-                <a class="headerMenuItem" href="">Фирмы</a>
-                <a class="headerMenuItem" href="">Позиции</a>
-                <a class="headerMenuItem" href="">Разделы</a>
-                <a class="headerMenuItem" href="">Пользователи</a>
-                <a class="headerMenuItem" href="">Менеджеры</a>
-                <a class="headerMenuItem" href="">Районы</a>
-                <a class="headerMenuItem" href="">Пакеты</a>
-                <a class="headerMenuItem" href="">Отчеты</a>
-            </div>
-        </div>
-    </div>
+<%@include file="/WEB-INF/views/admin/components/logout.jspf"%>
+<%@include file="/WEB-INF/views/admin/components/header.jspf"%>
 
     <div class="body">
         <div class="pageMenu">
-
+            <div class="pr"></div>
+            <span class="pageMenuButt">Создать</span>
         </div>
-
         <div class="menuBody">
-
             <h2>Add user</h2>
             <form:form action="${prefix}addmanager" modelAttribute="user" method="post" id="ManagerForm" >
                 <table>
@@ -100,13 +76,23 @@
             </form:form>
         </div>
     </div>
-
     <div class="menu">
         <div class="menuTitle">
-            <span class="menuTitleText">Что-то</span>
+            <span class="menuTitleText">Пользователи</span>
         </div>
         <div class="menuBody">
-
+            <form:form  action="${prefix}deletemanager"  method="post" id="DeleteManagerForm">
+                <c:forEach var="item" items="${userlist}">
+                    <div class="menuBodyItem">
+                        <div class="menuBodyItemInfo">
+                            ${item}
+                        </div>
+                        <div class="menuBodyItemButt">
+                            <div class="menuBodyItemButtDel"></div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </form:form>
         </div>
     </div>
 

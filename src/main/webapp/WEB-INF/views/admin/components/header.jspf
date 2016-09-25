@@ -1,0 +1,20 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="header">
+    <div class="headerMenu">
+        <div class="headerMenuContent">
+            <a class="headerMenuItem" href="${prefix}companies" data-id="1">Фирмы</a>
+            <a class="headerMenuItem" href="${prefix}positions" data-id="2">Позиции</a>
+            <a class="headerMenuItem" href="${prefix}partitions" data-id="3">Разделы</a>
+            <a class="headerMenuItem" href="${prefix}users" data-id="4">Пользователи</a>
+            <a class="headerMenuItem" href="${prefix}managers" data-id="5">Менеджеры</a>
+            <a class="headerMenuItem" href="${prefix}regions" data-id="6">Районы</a>
+            <a class="headerMenuItem" href="${prefix}packages" data-id="7">Пакеты</a>
+            <a class="headerMenuItem" href="${prefix}reports" data-id="8">Отчеты</a>
+        </div>
+    </div>
+    <style scoped>
+        .headerMenuContent a[data-id="${model.selectedPageNum}"] {
+            color: #16a085;
+        }
+    </style>
+</div>

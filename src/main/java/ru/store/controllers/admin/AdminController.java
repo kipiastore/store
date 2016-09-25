@@ -18,6 +18,12 @@ import java.util.List;
 @Controller
 public class AdminController {
 
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String adminPage() {
+        return "redirect:/admin/companies";
+    }
+
+    /*
     @Autowired
     private UserService userService;
     private ArrayList<String> list;
@@ -28,7 +34,7 @@ public class AdminController {
         ModelAndView model = new ModelAndView();
         list=loadList();
         model.addObject("userlist",list);
-        model.addObject("prefix","admin/");
+        model.addObject("prefix","");
         model.setViewName("admin/index");
 
         return model;
@@ -47,7 +53,6 @@ public class AdminController {
             model.addObject("prefix","");
             model.addObject("error", "This name is already used ");
             model.setViewName("admin/index");
-
         }
         return model;
     }
@@ -69,10 +74,11 @@ public class AdminController {
     }
     private ArrayList<String> loadList(){
         List<UserRole> userlist=userService.getUser();
-        ArrayList<String> list=new ArrayList<String>();
+        ArrayList<String> list=new ArrayList<>();
         for(int i=0;i<userlist.size();i++){
             list.add(i,userlist.get(i).getUser().getUsername());
         }
         return list;
     }
+    */
 }

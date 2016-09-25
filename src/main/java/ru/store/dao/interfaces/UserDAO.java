@@ -10,8 +10,14 @@ import java.util.List;
  */
 public interface UserDAO {
 
-    User createUser(User user,String role);
-    String deleteUser(String username);
-    List<UserRole> getUser();
+    void createUser(User user);
+
+    void updateUser(User user);
+
+    void deleteUser(String username);
+
+    List<User> getUsers();
+
+    User getUser(String username);
 
 }

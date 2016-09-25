@@ -6,25 +6,24 @@ import java.util.Set;
 /**
  *
  */
-public class User{
+public class User {
 
     private String username;
     private String password;
-    private boolean enabled=true;
-    private Set<UserRole> userRole = new HashSet<UserRole>(0);
+    private boolean enabled = true;
+    private Set<UserRole> userRole = new HashSet<>(0);
 
     public User() {
+
     }
     public User(String username) {
         this.username = username;
     }
-
     public User(String username, String password, boolean enabled) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
     }
-
     public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
         this.username = username;
         this.password = password;
@@ -35,35 +34,37 @@ public class User{
     public String getUsername() {
         return this.username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
-
     public String getPassword() {
         return this.password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public boolean isEnabled() {
         return this.enabled;
     }
-
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
     public Set<UserRole> getUserRole() {
         return this.userRole;
     }
-
     public void setUserRole(Set<UserRole> userRole) {
         this.userRole = userRole;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "\"username\":\"" + username + "\"," +
+                "\"password\":\"" + password + "\"," +
+                "\"enabled\":\"" + enabled + "\"," +
+                "\"userRole\":" + userRole +
+                '}';
+    }
 }
 
 

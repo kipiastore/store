@@ -1,0 +1,15 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="logout">
+    <c:url value="/login" var="logoutUrl" />
+    <form action="${logoutUrl}" method="post" id="logoutForm">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        ${pageContext.request.userPrincipal.name} | <a href="javascript:formSubmit()">Выход</a>
+    </c:if>
+</div>
+<script>
+    function formSubmit() {
+        document.getElementById("logoutForm").submit();
+    }
+</script>

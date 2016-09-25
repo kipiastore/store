@@ -989,7 +989,6 @@ footer.f .cr {
     display: inline-block;
     color: #7e7e7e;
     text-decoration: none;
-    //width: 359px;
 }
 .rptShort p:nth-child(5n+1) {
     clear: left;
