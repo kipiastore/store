@@ -13,6 +13,24 @@
         <property name="enabled" type="boolean">
             <column name="enabled" not-null="true" />
         </property>
+        <property name="fullName" type="string">
+            <column name="full_name" length="255" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="created_datetime" not-null="true" />
+        </property>
+        <property name="lastModifiedDate" type="timestamp">
+            <column name="last_modified_date" not-null="true" />
+        </property>
+        <property name="owner" type="string">
+            <column name="owner" length="45" not-null="true" />
+        </property>
+        <property name="lastModifiedBy" type="string">
+            <column name="last_modified_by" length="45" not-null="true" />
+        </property>
         <set name="userRole" table="user_roles" inverse="true" lazy="false" fetch="select" >
             <key>
                 <column name="username" length="45" not-null="true" />

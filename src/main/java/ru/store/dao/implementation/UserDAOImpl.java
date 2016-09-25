@@ -40,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     @Transactional
     public List<User> getUsers() {
-        String hql = "from User";
+        String hql = "from User order by fullName asc";
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
@@ -49,7 +49,10 @@ public class UserDAOImpl implements UserDAO {
     public User getUser(String username) {
         String hql = "from User where username =?";
         List<User> users = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, username).list();
-        return users.get(0);
+        if (users != null && users.size() > 0)
+            return users.get(0);
+        else
+            return null;
     }
 }
 

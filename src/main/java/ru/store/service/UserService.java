@@ -8,7 +8,10 @@ import ru.store.dao.interfaces.UserDAO;
 import ru.store.dao.interfaces.UserRoleDAO;
 import ru.store.entities.User;
 import ru.store.entities.UserRole;
+import ru.store.exceptions.DuplicateException;
+import ru.store.exceptions.NotFoundException;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -23,15 +26,26 @@ public class UserService {
     private UserRoleDAO userRoleDAO;
 
     public void createUser(User user, String role) {
+        if (userDAO.getUser(user.getUsername()) != null)
+            throw new DuplicateException("Логин уже используется.");
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         userDAO.createUser(user);
         userRoleDAO.createUserRole(new UserRole(user, role));
     }
+
     public void updateUser(User user, String role) {
         if (user.getPassword().isEmpty()) {
-            user.setPassword(userDAO.getUser(user.getUsername()).getPassword());
+            User oldUser = userDAO.getUser(user.getUsername());
+            if (oldUser == null) {
+                throw new NotFoundException("Пользователь не найден.");
+            }
+            user.setPassword(oldUser.getPassword());
+            user.setCreatedDate(oldUser.getCreatedDate());
+            user.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
+            user.setOwner(oldUser.getOwner());
+            userDAO.updateUser(user);
         } else {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(user.getPassword());

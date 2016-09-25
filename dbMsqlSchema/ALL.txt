@@ -1,0 +1,36 @@
+CREATE TABLE package
+(
+    name VARCHAR(120) NOT NULL,
+    created_datetime DATETIME NOT NULL,
+    owner VARCHAR(45) NOT NULL,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    priority INT NOT NULL
+);
+CREATE TABLE region
+(
+    name VARCHAR(120) NOT NULL,
+    created_datetime DATETIME NOT NULL,
+    owner VARCHAR(45) NOT NULL,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT
+);
+CREATE TABLE user_roles
+(
+    user_role_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    username VARCHAR(45) NOT NULL,
+    role VARCHAR(45) NOT NULL
+);
+CREATE TABLE users
+(
+    username VARCHAR(45) PRIMARY KEY NOT NULL,
+    password VARCHAR(60) NOT NULL,
+    enabled TINYINT DEFAULT 1 NOT NULL,
+    full_name VARCHAR(255),
+    status VARCHAR(45) NOT NULL,
+    created_datetime DATETIME NOT NULL,
+    last_modified_date DATETIME NOT NULL,
+    owner VARCHAR(45) NOT NULL,
+    last_modified_by VARCHAR(45) NOT NULL
+);
+ALTER TABLE user_roles ADD FOREIGN KEY (username) REFERENCES users (username);
+CREATE UNIQUE INDEX uni_username_role ON user_roles (role, username);
+CREATE INDEX fk_username_idx ON user_roles (username);

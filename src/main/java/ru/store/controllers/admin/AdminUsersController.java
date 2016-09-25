@@ -1,6 +1,5 @@
 package ru.store.controllers.admin;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,87 +26,84 @@ public class AdminUsersController {
     public ModelAndView users() {
         ModelAndView modelAndView = new ModelAndView();
         Model model = new Model();
-        model.selectedPageNum = 4;
-        loadUsers(model);
-        modelAndView.addObject("model", model);
-        modelAndView.addObject("prefix", "");
-        modelAndView.setViewName("admin/users");
+        loadPage(model, modelAndView);
         return modelAndView;
     }
 
     @RequestMapping(value = "/admin/adduser", method = RequestMethod.POST)
-    public ModelAndView createUser(@RequestParam("role") String role, @ModelAttribute("user") User user)  {
+    public ModelAndView createUser(@ModelAttribute("user") User user) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            userService.createUser(user, role);
-        }
-        catch(ConstraintViolationException ex){
-            modelAndView.addObject("error", "Этот логин уже используется.");
+            userService.createUser(user, "ROLE_CLIENT");
+            modelAndView.addObject("successMessage", "Пользователь успешно добавлен.");
+        } catch (Exception ex) {
+            modelAndView.addObject("addError", "Возникла ошибка. " + ex.getMessage());
         }
         Model model = new Model();
-        model.selectedPageNum = 4;
-        loadUsers(model);
-        modelAndView.addObject("model", model);
-        modelAndView.setViewName("admin/users");
-        modelAndView.addObject("prefix","");
+        model.addingUserJson = user.toString();
+        loadPage(model, modelAndView);
         return modelAndView;
     }
 
     @RequestMapping(value = "/admin/updateuser", method = RequestMethod.POST)
-    public ModelAndView updateUser(@RequestParam("role") String role, @ModelAttribute("user") User user)  {
+    public ModelAndView updateUser(@RequestParam("usernameHidden") String username, @ModelAttribute("user") User user) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            System.out.println(user);
-            userService.updateUser(user, role);
-        }
-        catch(ConstraintViolationException ex){
-            modelAndView.addObject("error", "Возникла ошибка.");
+            user.setUsername(username); // user will not contains the username because a input username is disabled
+            userService.updateUser(user, "ROLE_CLIENT");
+            modelAndView.addObject("successMessage", "Обновление проведено успешно.");
+        } catch (Exception ex) {
+            modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());
         }
         Model model = new Model();
-        model.selectedPageNum = 4;
-        loadUsers(model);
-        modelAndView.addObject("model", model);
-        modelAndView.setViewName("admin/users");
-        modelAndView.addObject("prefix","");
+        loadPage(model, modelAndView);
         return modelAndView;
     }
 
     @RequestMapping(value = "/admin/deleteuser", method = RequestMethod.POST)
-    public ModelAndView deleteUser(@RequestParam("username") String username)  {
+    public ModelAndView deleteUser(@RequestParam("username") String username) {
         ModelAndView modelAndView = new ModelAndView();
         try {
             userService.deleteUser(username);
-        }
-        catch(ConstraintViolationException ex){
-            modelAndView.addObject("error", "Этот логин уже используется.");
+            modelAndView.addObject("successMessage", "Пользователь успешно удален.");
+        } catch (Exception ex) {
+            modelAndView.addObject("deleteError", "Возникла ошибка. " + ex.getMessage());
         }
         Model model = new Model();
-        model.selectedPageNum = 4;
-        loadUsers(model);
-        modelAndView.addObject("model", model);
-        modelAndView.setViewName("admin/users");
-        modelAndView.addObject("prefix","");
+        loadPage(model, modelAndView);
         return modelAndView;
     }
 
-    private Model loadUsers(Model model) {
+    private void loadPage(Model model, ModelAndView modelAndView) {
+        model.selectedPageNum = 4;
+        loadUsers(model, userService, "ROLE_CLIENT");
+        modelAndView.addObject("model", model);
+        modelAndView.setViewName("admin/users");
+        modelAndView.addObject("prefix", "");
+    }
+
+    public static void loadUsers(Model model, UserService userService, String role) {
         List<Model.UserItem> userItems = new ArrayList<>();
         Model.UserItem userItem;
         List<User> users = userService.getUsers();
+        List<User> usersFilteredByRole = new ArrayList<>();
         for (User user : users) {
             if (user.getUserRole().isEmpty()) {
                 continue;
             }
-            if (!new ArrayList<>(user.getUserRole()).get(0).getRole().equals("ROLE_ADMIN")) {
+            if (new ArrayList<>(user.getUserRole()).get(0).getRole().equals(role)) {
                 userItem = new Model.UserItem();
-                userItem.fullName = "test";
+                if (user.getFullName() != null && user.getFullName().length() > 26)
+                    userItem.fullName = user.getFullName().substring(0, 26) + "..";
+                else
+                    userItem.fullName = user.getFullName();
                 userItem.userName = user.getUsername();
                 userItems.add(userItem);
+                usersFilteredByRole.add(user);
             }
         }
         model.userItems = userItems;
-        model.usersJson = users.toString();
-        return model;
+        model.usersJson = usersFilteredByRole.toString();
     }
 
     @RequestMapping(value = "/admin/adduser", method = RequestMethod.GET)
@@ -136,6 +132,7 @@ public class AdminUsersController {
         public int selectedPageNum;
         public List<UserItem> userItems;
         public String usersJson;
+        public String addingUserJson;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
@@ -145,6 +142,9 @@ public class AdminUsersController {
         }
         public String getUsersJson() {
             return usersJson;
+        }
+        public String getAddingUserJson() {
+            return addingUserJson;
         }
 
         public static class UserItem {
@@ -159,59 +159,5 @@ public class AdminUsersController {
             }
         }
     }
-
-
-
-
-
-/*
-    private ArrayList<String> loadList() {
-        List<UserRole> userlist = userService.getUser();
-        ArrayList<String> list=new ArrayList<>();
-        for(int i=0;i<userlist.size();i++){
-            list.add(i,userlist.get(i).getUser().getUsername());
-        }
-        return list;
-    }
-
-
-
-
-
-
-    @RequestMapping(value = "/admin/adduser", method = RequestMethod.POST)
-    public ModelAndView createUserPost(@RequestParam("role") String role,@ModelAttribute("user") User user)  {
-        ModelAndView model = new ModelAndView();
-        try {
-            userService.createUser(user,role);
-            list=loadList();
-            model.addObject("userlist",list);
-            model.addObject("prefix","");
-            model.setViewName("admin/index");
-        }
-        catch(ConstraintViolationException ex){
-            model.addObject("prefix","");
-            model.addObject("error", "This name is already used ");
-            model.setViewName("admin/index");
-        }
-        return model;
-    }
-    @RequestMapping(value = "/admin/deleteuser", method = RequestMethod.POST)
-    public ModelAndView deleteUserPost(@RequestParam("username") String username) {
-        ModelAndView model = new ModelAndView();
-        try {
-            userService.deleteUser(username);
-            list=loadList();
-            model.addObject("userlist",list);
-            model.addObject("prefix","");
-            model.setViewName("admin/index");
-        }
-        catch(ConstraintViolationException ex){
-            model.addObject("error", "Error ");
-            model.setViewName("admin/index");
-        }
-        return model;
-    }
-*/
 }
 

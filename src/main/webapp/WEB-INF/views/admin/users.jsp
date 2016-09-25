@@ -9,7 +9,6 @@
 <body>
 <%@include file="/WEB-INF/views/admin/components/logout.jspf"%>
 <%@include file="/WEB-INF/views/admin/components/header.jspf"%>
-
 <div class="body">
     <div class="pageMenu">
         <div class="pr"></div>
@@ -17,61 +16,56 @@
     </div>
     <div class="menuBody">
         <div class="generalContent">
-            <form:form action="adduser" modelAttribute="user" method="post" id="createUserForm">
+            <span class="error" id="addError">${addError}</span>
+            <span class="error">${updateError}</span>
+            <span class="error">${deleteError}</span>
+            <span class="success">${successMessage}</span>
+            <form:form action="adduser" modelAttribute="user" method="post" id="createForm">
                 <label>ФИО</label>
-                <input title="Введите ФИО." type="text" name="fullName">
-                <label>Логин</label><span class="error"><c:if test="${not empty error}">${error}</c:if></span>
+                <input title="Введите ФИО." type="text" name="fullName" id="newFullName" />
+                <label>Логин</label>
                 <input title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов."
-                       type="text" required pattern="(^[\w+]{4,20}$)" name="username">
+                       type="text" required pattern="(^[\w+]{4,20}$)" name="username" id="newUsername" />
                 <label>Пароль</label>
                 <input title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
                        type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
-                            if(this.checkValidity()) form.password2.pattern = this.value;">
+                            if(this.checkValidity()) form.password2.pattern = this.value;" >
                 <label>Подтвердите пароль</label>
                 <input title="Пожалуйста, введите тот же пароль, как указано выше." type="password" required
                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password2"
-                       onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
-                <label>Роль</label>
-                <select name="role" title="">
-                    <option value="ROLE_MANAGER">Менеджер</option>
-                    <option value="ROLE_OPERATOR">Оператор</option>
-                    <option value="ROLE_CLIENT">Клиент</option>
-                </select>
+                       onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');" />
                 <label>Доступ</label>
-                <select name="status" title="">
+                <select name="status" title="" id="newStatus">
                     <option value="opened">Открыт</option>
                     <option value="closed">Закрыт</option>
                 </select>
+                <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
+                <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="submit" value="Создать" />
             </form:form>
-            <form:form action="updateuser" modelAttribute="user" method="post" id="updateUserForm">
+            <form:form action="updateuser" modelAttribute="user" method="post" id="updateForm">
                 <label>ФИО</label>
-                <span class="updateError"><c:if test="${not empty error}">${error}</c:if></span>
                 <input id="fullName" title="Введите ФИО." type="text" name="fullName">
                 <label>Логин</label>
-                <input id="username" title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов."
-                       type="text" required pattern="(^[\w+]{4,20}$)" name="username">
+                <input id="username" type="text" disabled pattern="(^[\w+]{4,20}$)" name="username"
+                       title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов.">
                 <label>Новый пароль</label>
-                <input id="password" title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
-                       type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"
+                <input title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
+                       id="password" type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
                             if(this.checkValidity()) form.password2.pattern = this.value;">
                 <label>Подтвердите новый пароль</label>
                 <input id="password2" title="Пожалуйста, введите тот же пароль, как указано выше." type="password"
                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password2"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
-                <label>Роль</label>
-                <select id="role" name="role" title="">
-                    <option value="ROLE_MANAGER">Менеджер</option>
-                    <option value="ROLE_OPERATOR">Оператор</option>
-                    <option value="ROLE_CLIENT">Клиент</option>
-                </select>
                 <label>Доступ</label>
                 <select id="accessStatus" name="status" title="">
                     <option value="opened">Открыт</option>
                     <option value="closed">Закрыт</option>
                 </select>
+                <input type="hidden" name="usernameHidden" id="usernameHidden" />
+                <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="submit" value="Обновить" />
             </form:form>
         </div>
@@ -83,21 +77,24 @@
     </div>
     <div class="menuBody">
         <form:form action="deleteuser" method="post" id="deleteUserForm">
-            <c:forEach var="userItem" items="${model.userItems}">
+            <c:forEach var="item" items="${model.userItems}">
                 <div class="menuBodyItem">
-                    <div class="menuBodyItemInfo" id="ID-${userItem.userName}">
-                        ${userItem.userName}
+                    <div class="menuBodyItemInfo" id="ID-${item.userName}">
+                        <span id="ID-${item.userName}">${item.userName}</span><br/>
+                        <span id="ID-${item.userName}">${item.fullName}</span>
                     </div>
                     <div class="menuBodyItemButt">
-                        <div class="menuBodyItemButtDel" id="ID-${userItem.userName}"></div>
+                        <div class="menuBodyItemButtDel" id="ID-${item.userName}"></div>
                     </div>
                 </div>
             </c:forEach>
-            <input type="hidden" name="username" id="deleteUser" />
+            <input type="hidden" name="username" id="deleteKey" />
         </form:form>
     </div>
 </div>
 <span class="dataJson">${model.usersJson}</span>
-<script type="text/javascript" src="<c:url value="/resources/js/admin.js" />"></script>
+<span class="addingUserJson">${model.addingUserJson}</span>
+<input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
+<script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
 </body>
 </html>

@@ -10,6 +10,8 @@
 
       <mapping resource="ru/store/entities/UserRoles.hbm.xml"/>
       <mapping resource="ru/store/entities/Users.hbm.xml"/>
+      <mapping resource="ru/store/entities/Region.hbm.xml"/>
+      <mapping resource="ru/store/entities/Package.hbm.xml"/>
 
   </session-factory>
 </hibernate-configuration>

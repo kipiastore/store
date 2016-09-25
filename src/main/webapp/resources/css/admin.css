@@ -188,10 +188,11 @@ form {
     line-height: 23px;
     color: #7c7e82;
     text-align: left;
-    padding: 14px;
     float: left;
     cursor: pointer;
+    height: 100%;
     width: 235px;
+    padding-left: 5px;
 }
 .menuBodyItemButt {
     float: right;
@@ -208,6 +209,10 @@ form {
 .generalContent {
     text-align: left;
     padding: 30px 60px 20px;
+    min-height: 500px;
+}
+#deleteUserForm {
+    min-height: 550px;
 }
 input {
     border: 1px solid #d8dde1;
@@ -257,20 +262,34 @@ label {
     line-height: 23px;
     color: #fd2626;
 }
-#createUserForm {
+.success {
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 23px;
+    color: #16a085;
+}
+#createForm {
     display: none;
     opacity: 0;
 }
-#updateUserForm {
+#updateForm {
     display: none;
     opacity: 0;
 }
 .dataJson {
     display: none;
 }
-
-
-
+.addingUserJson {
+    display: none;
+}
+.soloTest {
+    padding-top: 14px;
+    display: block;
+    padding-left: 5px;
+}
 
 /*http://www.cssfontstack.com/Monaco
 
@@ -315,6 +334,4 @@ pre {
 	font-weight: 400;
 	line-height: 23px;
 }
-
-
 */

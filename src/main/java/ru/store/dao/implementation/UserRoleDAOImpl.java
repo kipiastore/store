@@ -42,6 +42,9 @@ public class UserRoleDAOImpl implements UserRoleDAO {
     public UserRole getUserRole(String username) {
         String hql = "from UserRole where user.username =?";
         List<UserRole> userRoles = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, username).list();
-        return userRoles.get(0);
+        if (userRoles != null && userRoles.size() > 0)
+            return userRoles.get(0);
+        else
+            return null;
     }
 }

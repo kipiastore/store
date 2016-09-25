@@ -23,7 +23,6 @@ public class LoginController {
         if (error != null) {
             model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
         }
-
         if (logout != null) {
             model.addObject("msg", "You've been logged out successfully.");
         }
@@ -34,13 +33,11 @@ public class LoginController {
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accessDenied(Principal user) {
         ModelAndView model = new ModelAndView();
-
         if (user != null) {
             model.addObject("msg", "Hi " + user.getName() + ", you do not have permission to access this page!");
         } else {
             model.addObject("msg", "You do not have permission to access this page!");
         }
-
         model.setViewName("error/403");
         return model;
 
@@ -59,11 +56,9 @@ public class LoginController {
         return error;
     }
 
-
     /*
     @RequestMapping(value = "/login/action", method = RequestMethod.POST)
     public String action(HttpServletRequest request) {
-
         String errorMsg = "Вы ввели неверные данные!"; // get string from resource bundle
         try {
             // encode string to url format. "Тест" -> %D0%A2%D0%B5%D1%81%D1%82
@@ -71,27 +66,22 @@ public class LoginController {
         } catch (Exception ex) {
             errorMsg = "Incorrect data!"; // get string from resource bundle
         }
-
         String adminPage = "redirect:/admin";
         String managerPage = "redirect:/manager";
         String portalPage = "redirect:/portal/personalArea";
         String incorrectData = "redirect:/login?msg=" + errorMsg;
-
         boolean isAdmin = false;
         boolean isManager = false;
         boolean isUser = false;
         boolean isLogged = false;
         boolean isNotRobot = false;
-
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         if (login == null || password == null || login.isEmpty() || password.isEmpty())
             return incorrectData;
-
         // check isNotRobot // TODO: 30.08.2016
         // check isLogged
         // get user type
-
         if (isNotRobot && isLogged) {
             if (isAdmin)
                 return adminPage;
@@ -101,9 +91,7 @@ public class LoginController {
                 return portalPage;
         }
         return incorrectData;
-
         return null;
-
         //request.getParameter("msg") == null ? "" : URLDecoder.decode(request.getParameter("msg"), "UTF-8")
     }
     */

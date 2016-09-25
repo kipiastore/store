@@ -1,0 +1,8 @@
+CREATE TABLE package
+(
+    name VARCHAR(120) NOT NULL,
+    created_datetime DATETIME NOT NULL,
+    owner VARCHAR(45) NOT NULL,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    priority INT NOT NULL
+);
