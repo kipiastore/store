@@ -62,7 +62,7 @@ public class PortalController {
             bestCompanyItem = new Model.BestCompanyItem();
             bestCompanyItem.companyId = bestCompany.getCompany().getId();
             bestCompanyItem.companyName = bestCompany.getCompany().getName();
-            bestCompanyItem.companyLogoFileName = bestCompany.getCompany().getLogo();
+            //bestCompanyItem.companyLogoFileName = bestCompany.getCompany().getLogo();
             bestCompanyItems.add(bestCompanyItem);
         }
         // prepare the model;

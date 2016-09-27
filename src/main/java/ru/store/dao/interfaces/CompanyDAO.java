@@ -10,9 +10,18 @@ import java.util.List;
  */
 public interface CompanyDAO {
 
-    Company getCompanyById(int id);
-    List<Company> getCompaniesByName(String name);
+    void createCompany(Company company);
+
+    void updateCompany(Company company);
+
+    void deleteCompany(int id);
+
+    Company getCompany(int id);
+
+    Company getCompany(String name);
+
     List<Company> getCompanies();
-    List<Company> getCompaniesBySubPartition(SubPartition subPartition);
+
+    List<Company> getCompanies(SubPartition subPartition);
 
 }

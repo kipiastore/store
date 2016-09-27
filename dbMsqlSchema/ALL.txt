@@ -1,3 +1,26 @@
+CREATE TABLE company
+(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(120) NOT NULL,
+    keywords VARCHAR(250),
+    date_of_contract DATE NOT NULL,
+    date_of_start_contract DATE NOT NULL,
+    date_of_end_contract DATE NOT NULL,
+    manager VARCHAR(45) NOT NULL,
+    company_package VARCHAR(120) NOT NULL,
+    cost_of INT NOT NULL,
+    legal_name VARCHAR(120),
+    inn INT,
+    legal_address VARCHAR(120),
+    phone VARCHAR(15),
+    fax VARCHAR(15),
+    director_full_name VARCHAR(120),
+    contact_person VARCHAR(120),
+    created_datetime DATETIME NOT NULL,
+    last_modified_date DATETIME NOT NULL,
+    owner VARCHAR(45) NOT NULL,
+    last_modified_by VARCHAR(45) NOT NULL
+);
 CREATE TABLE package
 (
     name VARCHAR(120) NOT NULL,

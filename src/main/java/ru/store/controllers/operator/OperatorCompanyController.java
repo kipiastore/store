@@ -38,20 +38,20 @@ public class OperatorCompanyController {
             return modelAndView;
         }
 
-        Company company = companyDAO.getCompanyById(companyId);
+        Company company = companyDAO.getCompany(companyId);
         SubPartition subPartition = subPartitionDAO.getSubPartitionById(subPartitionId);
-        Partition partition = company.getPartition();
+        //Partition partition = company.getPartition();
 
         Model.PartitionItem partitionItem = new Model.PartitionItem();
-        partitionItem.partitionId = partition.getId();
-        partitionItem.partitionName = partition.getName();
+        //partitionItem.partitionId = partition.getId();
+        //partitionItem.partitionName = partition.getName();
         Model.SubPartitionItem subPartitionItem = new Model.SubPartitionItem();
         subPartitionItem.subPartitionId = subPartition.getId();
         subPartitionItem.subPartitionName = subPartition.getName();
         subPartitionItem.partitionItem = partitionItem;
         Model model = new Model();
-        model.companyName = company.getName();
-        model.companyId = company.getId();
+        //model.companyName = company.getName();
+        //model.companyId = company.getId();
         model.subPartitionItem = subPartitionItem;
         modelAndView.addObject("model", model);
 

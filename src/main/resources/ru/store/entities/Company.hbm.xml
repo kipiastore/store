@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ru.store.entities.Company" table="company"  >
+        <id name="id" type="java.lang.Integer" >
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string" >
+            <column name="name" length="120" not-null="true" />
+        </property>
+        <property name="keywords" type="string" >
+            <column name="keywords" length="250" not-null="false" />
+        </property>
+        <property name="dateOfContract" type="java.util.Date" >
+            <column name="date_of_contract" not-null="true" />
+        </property>
+        <property name="dateOfStartContract" type="java.util.Date" >
+            <column name="date_of_start_contract" not-null="true" />
+        </property>
+        <property name="dateOfEndContract" type="java.util.Date" >
+            <column name="date_of_end_contract" not-null="true" />
+        </property>
+        <property name="manager" type="string" >
+            <column name="manager" length="45" not-null="true" />
+        </property>
+        <property name="companyPackage" type="string" >
+            <column name="company_package" length="120" not-null="true" />
+        </property>
+        <property name="costOf" type="integer" >
+            <column name="cost_of" length="10" not-null="true" />
+        </property>
+        <property name="legalName" type="string" >
+            <column name="legal_name" length="120" not-null="false" />
+        </property>
+        <property name="inn" type="integer" >
+            <column name="inn" length="10" not-null="false" />
+        </property>
+        <property name="legalAddress" type="string" >
+            <column name="legal_address" length="120" not-null="false" />
+        </property>
+        <property name="phone" type="string" >
+            <column name="phone" length="15" not-null="false" />
+        </property>
+        <property name="fax" type="string" >
+            <column name="fax" length="15" not-null="false" />
+        </property>
+        <property name="directorFullName" type="string" >
+            <column name="director_full_name" length="120" not-null="false" />
+        </property>
+        <property name="contactPerson" type="string" >
+            <column name="contact_person" length="120" not-null="false" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="created_datetime" not-null="true" />
+        </property>
+        <property name="lastModifiedDate" type="timestamp">
+            <column name="last_modified_date" not-null="true" />
+        </property>
+        <property name="owner" type="string">
+            <column name="owner" length="45" not-null="true" />
+        </property>
+        <property name="lastModifiedBy" type="string">
+            <column name="last_modified_by" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

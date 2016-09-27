@@ -26,7 +26,7 @@ public class BestCompanyDAOImpl implements BestCompanyDAO {
             company = new Company();
             company.setId(i + 10);
             company.setName("Дизайн - Графика - Фото");
-            company.setLogo("testLogo.jpg");
+            //company.setLogo("testLogo.jpg");
             bestCompany.setId(i);
             bestCompany.setCompany(company);
             bestCompanies.add(bestCompany);

@@ -38,7 +38,7 @@ public class OperatorSubPartitionController {
         }
 
         SubPartition subPartition = subPartitionDAO.getSubPartitionById(subPartitionId);
-        List<Company> companies = companyDAO.getCompaniesBySubPartition(subPartition);
+        List<Company> companies = companyDAO.getCompanies(subPartition);
 
         Model.SubPartitionItem subPartitionItem = new Model.SubPartitionItem();
         subPartitionItem.subPartitionId = subPartition.getId();
@@ -50,8 +50,8 @@ public class OperatorSubPartitionController {
         Model.CompanyItem companyItem;
         for (Company company : companies) {
             companyItem = new Model.CompanyItem();
-            companyItem.companyId = company.getId();
-            companyItem.companyName = company.getName();
+            //companyItem.companyId = company.getId();
+            //companyItem.companyName = company.getName();
             companyItems.add(companyItem);
         }
 

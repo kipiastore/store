@@ -26,6 +26,7 @@
                 <value>ru/store/entities/UserRoles.hbm.xml</value>
                 <value>ru/store/entities/Region.hbm.xml</value>
                 <value>ru/store/entities/Package.hbm.xml</value>
+                <value>ru/store/entities/Company.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
