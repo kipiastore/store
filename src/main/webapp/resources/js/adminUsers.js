@@ -2,13 +2,41 @@ var isShowCreateForm = false;
 var isShowUpdateForm = false;
 var currentItem;
 var pageMenuButtTarget;
+
+var data;
+var pageInformation;
+// user fileds
+var updateForm;
+var fullName;
+var username;
+var password;
+var password2;
+var accessStatus;
+var usernameHidden;
+// company fields
+var companyName;
+var keywords;
+var dateOfContract;
+var dateOfStartContract;
+var dateOfEndContract;
+var manager;
+var companyPackage;
+var costOf;
+var legalName;
+var inn;
+var legalAddress;
+var phone;
+var fax;
+var directorFullName;
+var contactPerson;
+var hiddenId;
+
 $(window).on("load", function () {
     if ($("#addError")[0].innerHTML != "") {
         try {
             var user = $.parseJSON($(".addingUserJson")[0].innerHTML);
             $("#newFullName").val(user.fullName);
             $("#newUsername").val(user.username);
-            $("#newRole").val(user.userRole[0].role);
             $("#newStatus").val(user.status);
         } catch(e) {
             console.log(e);
@@ -19,6 +47,7 @@ $(window).on("load", function () {
         isShowCreateForm = true;
     }
 });
+
 $(".pageMenuButt").on("click", function (event) {
     $(".error").hide();
     $(".success").hide();
@@ -38,16 +67,7 @@ $(".pageMenuButt").on("click", function (event) {
         isShowCreateForm = true;
     }, 200);
 });
-var data;
-var updateForm;
-var fullName;
-var username;
-var password;
-var password2;
-var role;
-var accessStatus;
-var usernameHidden;
-var pageInformation;
+
 $(".menuBodyItemInfo").on("click", function (event) {
     if (pageInformation == undefined)
         pageInformation = $("#pageInformation").val();
@@ -96,7 +116,6 @@ $(".menuBodyItemInfo").on("click", function (event) {
             username = $("#username");
             password = $("#password");
             password2 = $("#password2");
-            role = $("#role");
             accessStatus = $("#accessStatus");
             usernameHidden = $("#usernameHidden");
         }
@@ -107,8 +126,6 @@ $(".menuBodyItemInfo").on("click", function (event) {
                 usernameHidden.val(entry.username);
                 password.val("");
                 password2.val("");
-                if (entry.userRole.length != 0)
-                    role.val(entry.userRole[0].role);
                 accessStatus.val(entry.status);
             }
         });
@@ -116,11 +133,41 @@ $(".menuBodyItemInfo").on("click", function (event) {
     if (pageInformation == 1) {
         if (data == undefined) {
             data = $.parseJSON($(".dataJson")[0].innerHTML);
-
+            companyName = $("#name");
+            keywords = $("#keywords");
+            dateOfContract = $("#dateOfContract");
+            dateOfStartContract = $("#dateOfStartContract");
+            dateOfEndContract = $("#dateOfEndContract");
+            manager = $("#manager");
+            companyPackage = $("#companyPackage");
+            costOf = $("#costOf");
+            legalName = $("#legalName");
+            inn = $("#inn");
+            legalAddress = $("#legalAddress");
+            phone = $("#phone");
+            fax = $("#fax");
+            directorFullName = $("#directorFullName");
+            contactPerson = $("#contactPerson");
+            hiddenId = $("#hiddenId");
         }
         data.forEach(function(entry) {
-            if (entry.company == id) {
-
+            if (entry.id == id) {
+                companyName.val(entry.name);
+                keywords.val(entry.keywords);
+                dateOfContract.val(entry.dateOfContract.substring(0, 11));
+                dateOfStartContract.val(entry.dateOfStartContract.substring(0, 11));
+                dateOfEndContract.val(entry.dateOfEndContract.substring(0, 11));
+                manager.val(entry.manager);
+                companyPackage.val(entry.companyPackage);
+                costOf.val(entry.costOf);
+                legalName.val(entry.legalName);
+                inn.val(entry.inn);
+                legalAddress.val(entry.legalAddress);
+                phone.val(entry.phone);
+                fax.val(entry.fax);
+                directorFullName.val(entry.directorFullName);
+                contactPerson.val(entry.contactPerson);
+                hiddenId.val(entry.id);
             }
         });
     }
@@ -131,5 +178,17 @@ $(".menuBodyItemButtDel").on("click", function (event) {
     $("#deleteKey").val(tmp);
     if (confirm("Удалить?")) {
         $("#deleteForm").submit();
+    }
+});
+
+
+var requisitesIsOpen;
+$(".openRequisites").on("click", function () {
+    if (requisitesIsOpen) {
+        $(".requisites").hide();
+        requisitesIsOpen = false;
+    } else {
+        $(".requisites").show();
+        requisitesIsOpen = true;
     }
 });

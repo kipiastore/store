@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
 import ru.store.entities.SubPartition;
+import ru.store.exceptions.NotFoundException;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -22,6 +24,13 @@ public class CompanyService {
     }
 
     public void updateCompany(Company company) {
+        Company oldCompany = getCompany(company.getId());
+        if (oldCompany == null) {
+            throw new NotFoundException("Фирма не найдена.");
+        }
+        company.setCreatedDate(oldCompany.getCreatedDate());
+        company.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
+        company.setOwner(oldCompany.getOwner());
         companyDAO.updateCompany(company);
     }
 

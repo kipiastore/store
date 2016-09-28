@@ -16,90 +16,137 @@
     </div>
     <div class="menuBody">
         <div class="generalContent">
+
             <span class="error" id="addError">${addError}</span>
             <span class="error">${updateError}</span>
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
+
             <form:form action="addcompany" modelAttribute="company" method="post" id="createForm">
-                <label>Название</label>
-                <input title="Введите название фирмы." type="text" name="name" required />
-                <label>Ключевые слова</label>
-                <input title="Введите ключевые слова." type="text" name="keywords" />
-                <label>Дата заключения договора MM-dd-yyyy</label>
-                <input title="Введите дату." type="text" name="dateOfContract" required />
-                <label>Срок договора от MM-dd-yyyy</label>
-                <input title="Введите дату." type="text" name="dateOfStartContract" required />
-                <label>Срок договора до MM-dd-yyyy</label>
-                <input title="Введите дату." type="text" name="dateOfEndContract" required />
-                <label>Менеджер</label>
-                <select name="manager" title="" >
-                    <option value="opened">Sasha</option>
-                    <option value="closed">Vova</option>
-                </select>
-                <label>Пакет</label>
-                <select name="companyPackage" title="" >
-                    <option value="opened">bestpack</option>
-                    <option value="closed">dnopack</option>
-                </select>
-                <label>Стоимость</label>
-                <input title="Введите стоимость." type="number" name="costOf" required />
-                <label>Юридическое название</label>
-                <input title="Введите юридическое название фирмы." type="text" name="legalName" />
-                <label>ИНН</label>
-                <input title="Введите идентификационный код." type="number" name="inn" />
-                <label>Юридический адрес</label>
-                <input title="Введите юридический адрес фирмы." type="text" name="legalAddress" />
-                <label>Телефон</label>
-                <input title="Введите номер телефона." type="text" name="phone" />
-                <label>Факс</label>
-                <input title="Введите номер факса." type="text" name="fax" />
-                <label>ФИО Директора</label>
-                <input title="Введите ФИО директора." type="text" name="directorFullName"  />
-                <label>Контактное лицо</label>
-                <input title="Введите номер факса." type="text" name="contactPerson" />
+                <div class="left-body">
+                    <label>Название<span class="required">*</span></label>
+                    <input title="Введите название фирмы." type="text" name="name" id="newName" required />
+                    <label>Ключевые слова</label>
+                    <input title="Введите ключевые слова." placeholder="Через точку с запятой: авто; ремонт;" type="text" name="keywords" id="newKeywords" />
+                    <label>Дата заключения договора<span class="required">*</span></label>
+                    <input title="Введите дату." placeholder="yyyy-MM-dd" type="text" name="dateOfContract" id="newDateOfContract" required />
+                    <label>Срок договора от<span class="required">*</span></label>
+                    <input title="Введите дату." placeholder="yyyy-MM-dd" type="text" name="dateOfStartContract" id="newDateOfStartContract" required />
+                    <label>Срок договора до<span class="required">*</span></label>
+                    <input title="Введите дату." placeholder="yyyy-MM-dd" type="text" name="dateOfEndContract" id="newDateOfEndContract" required />
+                    <label>Менеджер</label>
+                    <select name="manager" title="" id="newManager">
+                        <option value="opened">Sasha</option>
+                        <option value="closed">Vova</option>
+                    </select>
+                    <label>Пакет</label>
+                    <select name="companyPackage" title="" id="newCompanyPackage">
+                        <option value="opened">bestpack</option>
+                        <option value="closed">dnopack</option>
+                    </select>
+                    <label>Стоимость<span class="required">*</span></label>
+                    <input title="Введите стоимость." type="number" name="costOf" id="newCostOf" required />
+                </div>
+                <div class="right-body">
+                    <div class="openRequisites">Реквизиты</div>
+                    <div class="requisites">
+                        <label>Юридическое название</label>
+                        <input title="Введите юридическое название фирмы." type="text" name="legalName" id="newLegalName" />
+                        <label>ИНН</label>
+                        <input title="Введите идентификационный код." type="number" name="inn" id="newInn" />
+                        <label>Юридический адрес</label>
+                        <input title="Введите юридический адрес фирмы." type="text" name="legalAddress" id="newLegalAddress" />
+                        <label>Телефон</label>
+                        <input title="Введите номер телефона." type="text" name="phone" id="newPhone" />
+                        <label>Факс</label>
+                        <input title="Введите номер факса." type="text" name="fax" id="newFax" />
+                        <label>ФИО Директора</label>
+                        <input title="Введите ФИО директора." type="text" name="directorFullName" id="newDirectorFullName" />
+                        <label>Контактное лицо</label>
+                        <input title="Введите номер факса." type="text" name="contactPerson" id="newContactPerson"/>
+                    </div>
+                </div>
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
-                <input type="submit" value="Добавить" />
+
+                <div>
+                    <div class="address-list"></div>
+                    <div class="left-body">
+                    <label>Адрес</label>
+                    <input title="Введите номер факса." type="text" name="address" />
+                    <label>Телефоны</label>
+                    <input title="Введите номера." type="text" name="phones" />
+                    <label>Район</label>
+                    <select name="region" title="" >
+                        <option value="opened">r1</option>
+                        <option value="closed">r2</option>
+                    </select>
+                    </div>
+                    <div class="left-body">
+                        <label>Адрес</label>
+                        <input title="Введите номер факса." type="text" name="address" />
+                        <label>Телефоны</label>
+                        <input title="Введите номера." type="text" name="phones" />
+                        <label>Район</label>
+                        <select name="region" title="" >
+                            <option value="opened">r1</option>
+                            <option value="closed">r2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <input type="submit" value="Создать" />
             </form:form>
+
             <form:form action="updatecompany" modelAttribute="company" method="post" id="updateForm">
-                <label>Название</label>
-                <input title="Введите название фирмы." type="text" name="name" required />
-                <label>Ключевые слова</label>
-                <input title="Введите ключевые слова." type="text" name="keywords" />
-                <label>Дата заключения договора MM-dd-yyyy</label>
-                <input title="Введите дату." type="text" name="dateOfContract" required />
-                <label>Срок договора от MM-dd-yyyy</label>
-                <input title="Введите дату." type="text" name="dateOfStartContract" required />
-                <label>Срок договора до MM-dd-yyyy</label>
-                <input title="Введите дату." type="text" name="dateOfEndContract" required />
-                <label>Менеджер</label>
-                <select name="manager" title="" >
-                    <option value="opened">Sasha</option>
-                    <option value="closed">Vova</option>
-                </select>
-                <label>Пакет</label>
-                <select name="companyPackage" title="" >
-                    <option value="opened">bestpack</option>
-                    <option value="closed">dnopack</option>
-                </select>
-                <label>Стоимость</label>
-                <input title="Введите стоимость." type="number" name="costOf" required />
-                <label>Юридическое название</label>
-                <input title="Введите юридическое название фирмы." type="text" name="legalName" />
-                <label>ИНН</label>
-                <input title="Введите идентификационный код." type="number" name="inn" />
-                <label>Юридический адрес</label>
-                <input title="Введите юридический адрес фирмы." type="text" name="legalAddress" />
-                <label>Телефон</label>
-                <input title="Введите номер телефона." type="text" name="phone" />
-                <label>Факс</label>
-                <input title="Введите номер факса." type="text" name="fax" />
-                <label>ФИО Директора</label>
-                <input title="Введите ФИО директора." type="text" name="directorFullName"  />
-                <label>Контактное лицо</label>
-                <input title="Введите номер факса." type="text" name="contactPerson" />
+                <div class="left-body">
+                    <label>Название<span class="required">*</span></label>
+                    <input title="Введите название фирмы." type="text" name="name" id="name" required />
+                    <label>Ключевые слова</label>
+                    <input title="Введите ключевые слова." placeholder="Через точку с запятой: авто; ремонт;" type="text" name="keywords" id="keywords" />
+                    <label>Дата заключения договора<span class="required">*</span></label>
+                    <input title="Введите дату." placeholder="yyyy-MM-dd" type="text" name="dateOfContract" id="dateOfContract" required />
+                    <label>Срок договора от<span class="required">*</span></label>
+                    <input title="Введите дату." placeholder="yyyy-MM-dd" type="text" name="dateOfStartContract" id="dateOfStartContract" required />
+                    <label>Срок договора до<span class="required">*</span></label>
+                    <input title="Введите дату." placeholder="yyyy-MM-dd" type="text" name="dateOfEndContract" id="dateOfEndContract" required />
+                    <label>Менеджер</label>
+                    <select name="manager" title="" id="manager">
+                        <option value="opened">Sasha</option>
+                        <option value="closed">Vova</option>
+                    </select>
+                    <label>Пакет</label>
+                    <select name="companyPackage" title="" id="companyPackage" >
+                        <option value="opened">bestpack</option>
+                        <option value="closed">dnopack</option>
+                    </select>
+                    <label>Стоимость<span class="required">*</span></label>
+                    <input title="Введите стоимость." type="number" name="costOf" id="costOf" required />
+                </div>
+                <div class="right-body">
+                    <div class="openRequisites">Реквизиты</div>
+                    <div class="requisites">
+                        <label>Юридическое название</label>
+                        <input title="Введите юридическое название фирмы." type="text" name="legalName" id="legalName" />
+                        <label>ИНН</label>
+                        <input title="Введите идентификационный код." type="number" name="inn" id="inn"/>
+                        <label>Юридический адрес</label>
+                        <input title="Введите юридический адрес фирмы." type="text" name="legalAddress" id="legalAddress"/>
+                        <label>Телефон</label>
+                        <input title="Введите номер телефона." type="text" name="phone" id="phone" />
+                        <label>Факс</label>
+                        <input title="Введите номер факса." type="text" name="fax" id="fax"/>
+                        <label>ФИО Директора</label>
+                        <input title="Введите ФИО директора." type="text" name="directorFullName" id="directorFullName" />
+                        <label>Контактное лицо</label>
+                        <input title="Введите номер факса." type="text" name="contactPerson" id="contactPerson"/>
+                    </div>
+                </div>
+
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
-                <input type="submit" value="Добавить" />
+                <input type="hidden" name="hiddenId" id="hiddenId" />
+
+                <input type="submit" value="Обновить" />
             </form:form>
         </div>
     </div>
@@ -114,7 +161,7 @@
             <c:forEach var="item" items="${model.companiesItems}">
                 <div class="menuBodyItem">
                     <div class="menuBodyItemInfo" id="ID-${item.id}">
-                        <span id="ID-${item.id}">${item.name}</span><br/>
+                        <span id="ID-${item.id}">${item.dateOfEndContract}</span><br/>
                         <span id="ID-${item.id}">${item.name}</span>
                     </div>
                     <div class="menuBodyItemButt">
@@ -126,9 +173,12 @@
         </form:form>
     </div>
 </div>
+
 <span class="dataJson">${model.companiesJson}</span>
 <span class="addingUserJson">${model.addingCompanyJson}</span>
+
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
+
 <script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
 </body>
 </html>

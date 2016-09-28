@@ -240,7 +240,7 @@ select {
     width: 100%;
     outline: none;
     border-radius: 3px;
-    padding: 12px 20px 12px 10px;
+    padding: 12px 20px 10px 10px;
     margin-bottom: 10px;
 }
 label {
@@ -289,6 +289,37 @@ label {
     padding-top: 14px;
     display: block;
     padding-left: 5px;
+}
+.requisites {
+    display: none;
+}
+.openRequisites {
+    border: 1px solid #d8dde1;
+    color: #928e8e;
+    font-family: Arial, serif;
+    font-size: 14px;
+    outline: none;
+    border-radius: 3px;
+    padding: 12px 20px 12px 10px;
+    margin-top: 23px;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: #ebedf0;
+}
+.required {
+    color: red;
+}
+.left-body {
+    width: 48%;
+    float: left;
+}
+.right-body {
+    width: 48%;
+    float: right;
+}
+.address-list {
+    display: flex;
+    width: 100%;
 }
 
 /*http://www.cssfontstack.com/Monaco

@@ -23,15 +23,15 @@
             <form:form action="addmanager" modelAttribute="user" method="post" id="createForm">
                 <label>ФИО</label>
                 <input title="Введите ФИО." type="text" name="fullName" id="newFullName" />
-                <label>Логин</label>
+                <label>Логин<span class="required">*</span></label>
                 <input title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов."
                        type="text" required pattern="(^[\w+]{4,20}$)" name="username" id="newUsername" />
-                <label>Пароль</label>
+                <label>Пароль<span class="required">*</span></label>
                 <input title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
                        type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
                             if(this.checkValidity()) form.password2.pattern = this.value;" >
-                <label>Подтвердите пароль</label>
+                <label>Подтвердите пароль<span class="required">*</span></label>
                 <input title="Пожалуйста, введите тот же пароль, как указано выше." type="password" required
                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password2"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');" />

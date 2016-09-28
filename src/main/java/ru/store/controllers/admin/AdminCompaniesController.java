@@ -25,7 +25,7 @@ public class AdminCompaniesController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
@@ -54,13 +54,15 @@ public class AdminCompaniesController {
     }
 
     @RequestMapping(value = "/admin/updatecompany", method = RequestMethod.POST)
-    public ModelAndView updateCompany(@ModelAttribute("company") Company company) {
+    public ModelAndView updateCompany(@ModelAttribute("company") Company company, @RequestParam("hiddenId") String id) {
         ModelAndView modelAndView = new ModelAndView();
         try {
+            company.setId(Integer.valueOf(id));
             companyService.updateCompany(company);
             modelAndView.addObject("successMessage", "Обновление проведено успешно.");
         } catch (Exception ex) {
             modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());
+            ex.printStackTrace();
         }
         Model model = new Model();
         loadPage(model, modelAndView);
@@ -97,6 +99,7 @@ public class AdminCompaniesController {
             companyItem = new Model.CompaniesItem();
             companyItem.id = company.getId();
             companyItem.name = company.getName();
+            companyItem.dateOfEndContract = company.getDateOfEndContract().toString().substring(0, 11);
             companyItems.add(companyItem);
         }
         model.companiesItems = companyItems;
@@ -148,12 +151,16 @@ public class AdminCompaniesController {
         public static class CompaniesItem {
             public int id;
             public String name;
+            public String dateOfEndContract;
 
             public int getId() {
                 return id;
             }
             public String getName() {
                 return name;
+            }
+            public String getDateOfEndContract() {
+                return dateOfEndContract;
             }
         }
     }

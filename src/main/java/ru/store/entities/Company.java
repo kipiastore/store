@@ -177,7 +177,7 @@ public class Company {
                 "\"phone\":\"" + phone + "\"," +
                 "\"fax\":\"" + fax + "\"," +
                 "\"directorFullName\":\"" + directorFullName + "\"," +
-                "\"contactPerson\":\"" + contactPerson + "\"," +
+                "\"contactPerson\":\"" + contactPerson + "\"" +
                 '}';
     }
 }

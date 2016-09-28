@@ -20,9 +20,9 @@
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
             <form:form action="addpackage" modelAttribute="package" method="post" id="createForm">
-                <label>Название</label>
+                <label>Название<span class="required">*</span></label>
                 <input title="Введите название пакета." type="text" name="name" required />
-                <label>Приоритет</label>
+                <label>Приоритет<span class="required">*</span></label>
                 <input title="Введите приоритет пакета." type="number" name="priority" required />
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
                 <input type="submit" value="Добавить" />

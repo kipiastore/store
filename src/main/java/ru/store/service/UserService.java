@@ -36,11 +36,11 @@ public class UserService {
     }
 
     public void updateUser(User user, String role) {
+        User oldUser = getUser(user.getUsername());
+        if (oldUser == null) {
+            throw new NotFoundException("Пользователь не найден.");
+        }
         if (user.getPassword().isEmpty()) {
-            User oldUser = userDAO.getUser(user.getUsername());
-            if (oldUser == null) {
-                throw new NotFoundException("Пользователь не найден.");
-            }
             user.setPassword(oldUser.getPassword());
             user.setCreatedDate(oldUser.getCreatedDate());
             user.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
@@ -50,6 +50,9 @@ public class UserService {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(hashedPassword);
+            user.setCreatedDate(oldUser.getCreatedDate());
+            user.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
+            user.setOwner(oldUser.getOwner());
             userDAO.updateUser(user);
         }
         UserRole userRole = userRoleDAO.getUserRole(user.getUsername());

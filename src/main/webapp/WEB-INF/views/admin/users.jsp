@@ -16,22 +16,24 @@
     </div>
     <div class="menuBody">
         <div class="generalContent">
+
             <span class="error" id="addError">${addError}</span>
             <span class="error">${updateError}</span>
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
+
             <form:form action="adduser" modelAttribute="user" method="post" id="createForm">
                 <label>ФИО</label>
                 <input title="Введите ФИО." type="text" name="fullName" id="newFullName" />
-                <label>Логин</label>
+                <label>Логин<span class="required">*</span></label>
                 <input title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов."
                        type="text" required pattern="(^[\w+]{4,20}$)" name="username" id="newUsername" />
-                <label>Пароль</label>
+                <label>Пароль<span class="required">*</span></label>
                 <input title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
                        type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
                             if(this.checkValidity()) form.password2.pattern = this.value;" >
-                <label>Подтвердите пароль</label>
+                <label>Подтвердите пароль<span class="required">*</span></label>
                 <input title="Пожалуйста, введите тот же пароль, как указано выше." type="password" required
                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password2"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');" />
@@ -40,10 +42,13 @@
                     <option value="opened">Открыт</option>
                     <option value="closed">Закрыт</option>
                 </select>
+
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
+
                 <input type="submit" value="Создать" />
             </form:form>
+
             <form:form action="updateuser" modelAttribute="user" method="post" id="updateForm">
                 <label>ФИО</label>
                 <input id="fullName" title="Введите ФИО." type="text" name="fullName">
@@ -64,10 +69,13 @@
                     <option value="opened">Открыт</option>
                     <option value="closed">Закрыт</option>
                 </select>
+
                 <input type="hidden" name="usernameHidden" id="usernameHidden" />
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
+
                 <input type="submit" value="Обновить" />
             </form:form>
+
         </div>
     </div>
 </div>
@@ -92,9 +100,12 @@
         </form:form>
     </div>
 </div>
+
 <span class="dataJson">${model.usersJson}</span>
 <span class="addingUserJson">${model.addingUserJson}</span>
+
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
+
 <script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
 </body>
 </html>
