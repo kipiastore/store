@@ -76,7 +76,7 @@
         <span class="menuTitleText">Менеджеры</span>
     </div>
     <div class="menuBody">
-        <form:form action="deletemanager" method="post" id="deleteUserForm">
+        <form:form action="deletemanager" method="post" id="deleteForm">
             <c:forEach var="item" items="${model.userItems}">
                 <div class="menuBodyItem">
                     <div class="menuBodyItemInfo" id="ID-${item.userName}">

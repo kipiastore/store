@@ -35,7 +35,7 @@
         <span class="menuTitleText">Районы</span>
     </div>
     <div class="menuBody">
-        <form:form action="deleteregion" method="post" id="deleteUserForm">
+        <form:form action="deleteregion" method="post" id="deleteForm">
             <c:forEach var="item" items="${model.regionItems}">
                 <div class="menuBodyItem">
                     <div class="menuBodyItemInfo" style="cursor: auto;" id="ID-${item.id}">

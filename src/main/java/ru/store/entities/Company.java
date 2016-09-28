@@ -34,7 +34,6 @@ public class Company {
     //private Collection<SubPartition> subPartitions;
     //private String logo;
 
-
     public Company() {
 
     }
@@ -162,27 +161,23 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", keywords='" + keywords + '\'' +
-                ", dateOfContract=" + dateOfContract +
-                ", dateOfStartContract=" + dateOfStartContract +
-                ", dateOfEndContract=" + dateOfEndContract +
-                ", manager='" + manager + '\'' +
-                ", companyPackage='" + companyPackage + '\'' +
-                ", costOf=" + costOf +
-                ", legalName='" + legalName + '\'' +
-                ", inn=" + inn +
-                ", legalAddress='" + legalAddress + '\'' +
-                ", phone='" + phone + '\'' +
-                ", fax='" + fax + '\'' +
-                ", directorFullName='" + directorFullName + '\'' +
-                ", contactPerson='" + contactPerson + '\'' +
-                ", createdDate=" + createdDate +
-                ", lastModifiedDate=" + lastModifiedDate +
-                ", owner='" + owner + '\'' +
-                ", lastModifiedBy='" + lastModifiedBy + '\'' +
+        return "{" +
+                "\"id\":\"" + id + "\"," +
+                "\"name\":\"" + name + "\"," +
+                "\"keywords\":\"" + keywords + "\"," +
+                "\"dateOfContract\":\"" + dateOfContract + "\"," +
+                "\"dateOfStartContract\":\"" + dateOfStartContract + "\"," +
+                "\"dateOfEndContract\":\"" + dateOfEndContract + "\"," +
+                "\"manager\":\"" + manager + "\"," +
+                "\"companyPackage\":\"" + companyPackage + "\"," +
+                "\"costOf\":\"" + costOf + "\"," +
+                "\"legalName\":\"" + legalName + "\"," +
+                "\"inn\":\"" + inn + "\"," +
+                "\"legalAddress\":\"" + legalAddress + "\"," +
+                "\"phone\":\"" + phone + "\"," +
+                "\"fax\":\"" + fax + "\"," +
+                "\"directorFullName\":\"" + directorFullName + "\"," +
+                "\"contactPerson\":\"" + contactPerson + "\"," +
                 '}';
     }
 }

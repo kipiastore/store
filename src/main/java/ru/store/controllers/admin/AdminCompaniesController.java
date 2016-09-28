@@ -48,6 +48,7 @@ public class AdminCompaniesController {
             modelAndView.addObject("addError", "Возникла ошибка. " + ex.getMessage());
         }
         Model model = new Model();
+        model.addingCompanyJson = company.toString();
         loadPage(model, modelAndView);
         return modelAndView;
     }
@@ -91,13 +92,15 @@ public class AdminCompaniesController {
     private void loadCompanies(Model model) {
         List<Model.CompaniesItem> companyItems = new ArrayList<>();
         Model.CompaniesItem companyItem;
-        for (Company company : companyService.getCompanies()) {
+        List<Company> companies = companyService.getCompanies();
+        for (Company company : companies) {
             companyItem = new Model.CompaniesItem();
             companyItem.id = company.getId();
             companyItem.name = company.getName();
             companyItems.add(companyItem);
         }
         model.companiesItems = companyItems;
+        model.companiesJson = companies.toString();
     }
 
     @RequestMapping(value = "/admin/addcompany", method = RequestMethod.GET)
@@ -125,6 +128,8 @@ public class AdminCompaniesController {
          * 8 = reports
          */
         public int selectedPageNum;
+        public String addingCompanyJson;
+        public String companiesJson;
         public List<CompaniesItem> companiesItems;
 
         public int getSelectedPageNum() {
@@ -132,6 +137,12 @@ public class AdminCompaniesController {
         }
         public List<CompaniesItem> getCompaniesItems() {
             return companiesItems;
+        }
+        public String getAddingCompanyJson() {
+            return addingCompanyJson;
+        }
+        public String getCompaniesJson() {
+            return companiesJson;
         }
 
         public static class CompaniesItem {

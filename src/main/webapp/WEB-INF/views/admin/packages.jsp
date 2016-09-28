@@ -36,7 +36,7 @@
         <span class="menuTitleText">Пакеты</span>
     </div>
     <div class="menuBody">
-        <form:form action="deletepackage" method="post" id="deleteUserForm">
+        <form:form action="deletepackage" method="post" id="deleteForm">
             <c:forEach var="item" items="${model.packageItems}">
                 <div class="menuBodyItem">
                     <div class="menuBodyItemInfo" style="cursor: auto;" id="ID-${item.id}">

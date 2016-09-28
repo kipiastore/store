@@ -23,20 +23,6 @@ public class User {
     public User() {
 
     }
-    public User(String username) {
-        this.username = username;
-    }
-    public User(String username, String password, boolean enabled) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-    }
-    public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.userRole = userRole;
-    }
 
     public String getUsername() {
         return this.username;

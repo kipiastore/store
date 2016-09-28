@@ -211,7 +211,7 @@ form {
     padding: 30px 60px 20px;
     min-height: 500px;
 }
-#deleteUserForm {
+#deleteForm {
     min-height: 550px;
 }
 input {

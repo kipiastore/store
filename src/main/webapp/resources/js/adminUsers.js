@@ -51,7 +51,7 @@ var pageInformation;
 $(".menuBodyItemInfo").on("click", function (event) {
     if (pageInformation == undefined)
         pageInformation = $("#pageInformation").val();
-    if (!(pageInformation == 4 || pageInformation == 5))
+    if (!(pageInformation == 4 || pageInformation == 5 || pageInformation == 1))
         return;
     $(".error").hide();
     $(".success").hide();
@@ -82,39 +82,54 @@ $(".menuBodyItemInfo").on("click", function (event) {
     isShowUpdateForm = true;
     isShowCreateForm = false;
 
-    if (data == undefined) {
-        data = $.parseJSON($(".dataJson")[0].innerHTML);
-        fullName = $("#fullName");
-        username = $("#username");
-        password = $("#password");
-        password2 = $("#password2");
-        role = $("#role");
-        accessStatus = $("#accessStatus");
-        usernameHidden = $("#usernameHidden");
-    }
     if (currentItem != undefined) {
         $("#" + currentItem).css("border-left", "0");
     }
     currentItem = event.target.getAttribute("id");
     $("#" + currentItem).css("border-left", "2px solid #d87f7f");
     var id = currentItem.replace("ID-", "");
-    data.forEach(function(entry) {
-        if (entry.username == id) {
-            fullName.val(entry.fullName);
-            username.val(entry.username);
-            usernameHidden.val(entry.username);
-            password.val("");
-            password2.val("");
-            if (entry.userRole.length != 0)
-                role.val(entry.userRole[0].role);
-            accessStatus.val(entry.status);
+
+    if (pageInformation == 4 || pageInformation == 5) {
+        if (data == undefined) {
+            data = $.parseJSON($(".dataJson")[0].innerHTML);
+            fullName = $("#fullName");
+            username = $("#username");
+            password = $("#password");
+            password2 = $("#password2");
+            role = $("#role");
+            accessStatus = $("#accessStatus");
+            usernameHidden = $("#usernameHidden");
         }
-    });
+        data.forEach(function(entry) {
+            if (entry.username == id) {
+                fullName.val(entry.fullName);
+                username.val(entry.username);
+                usernameHidden.val(entry.username);
+                password.val("");
+                password2.val("");
+                if (entry.userRole.length != 0)
+                    role.val(entry.userRole[0].role);
+                accessStatus.val(entry.status);
+            }
+        });
+    }
+    if (pageInformation == 1) {
+        if (data == undefined) {
+            data = $.parseJSON($(".dataJson")[0].innerHTML);
+
+        }
+        data.forEach(function(entry) {
+            if (entry.company == id) {
+
+            }
+        });
+    }
 });
+
 $(".menuBodyItemButtDel").on("click", function (event) {
-    var id = event.target.getAttribute('id').replace("ID-", "");
-    $("#deleteKey").val(id);
+    var tmp = event.target.getAttribute('id').replace("ID-", "");
+    $("#deleteKey").val(tmp);
     if (confirm("Удалить?")) {
-        $("#deleteUserForm").submit();
+        $("#deleteForm").submit();
     }
 });
