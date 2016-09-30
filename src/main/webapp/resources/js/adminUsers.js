@@ -20,7 +20,7 @@ var dateOfContract;
 var dateOfStartContract;
 var dateOfEndContract;
 var manager;
-var companyPackage;
+var companyPackageId;
 var costOf;
 var legalName;
 var inn;
@@ -30,6 +30,13 @@ var fax;
 var directorFullName;
 var contactPerson;
 var hiddenId;
+var description;
+var isShowForOperator;
+var isShowForSite;
+var isPaid;
+var isRedirect;
+var isOffPosition;
+var isClosed;
 
 var addressArray;
 var BreakException = {};
@@ -84,6 +91,13 @@ $(".pageMenuButt").on("click", function (event) {
         $("#regAd" + i).val("-1");
         $("#phAd" + i).val("");
         $("#infAd" + i).val("");
+        $("#UpAdd" + i).hide();
+        $("#UpAdd" + i).removeAttr('required');
+        $("#UpAdAd" + i).val("");
+        $("#UpRegAd" + i).val("-1");
+        $("#UpPhAd" + i).val("");
+        $("#UpInfAd" + i).val("");
+        $("#UpAddId" + i).val("");
     }
 });
 
@@ -158,7 +172,7 @@ $(".menuBodyItemInfo").on("click", function (event) {
             dateOfStartContract = $("#dateOfStartContract");
             dateOfEndContract = $("#dateOfEndContract");
             manager = $("#manager");
-            companyPackage = $("#companyPackage");
+            companyPackageId = $("#companyPackageId");
             costOf = $("#costOf");
             legalName = $("#legalName");
             inn = $("#inn");
@@ -168,6 +182,13 @@ $(".menuBodyItemInfo").on("click", function (event) {
             directorFullName = $("#directorFullName");
             contactPerson = $("#contactPerson");
             hiddenId = $("#hiddenId");
+            description = $("#description");
+            isShowForOperator = $("#isShowForOperator");
+            isShowForSite = $("#isShowForSite");
+            isPaid = $("#isPaid");
+            isRedirect = $("#isRedirect");
+            isOffPosition = $("#isOffPosition");
+            isClosed = $("#isClosed");
         }
         if (dataCompanyAddressJson == undefined) {
             dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
@@ -194,15 +215,27 @@ $(".menuBodyItemInfo").on("click", function (event) {
                 dateOfStartContract.val(entry.dateOfStartContract.substring(0, 11));
                 dateOfEndContract.val(entry.dateOfEndContract.substring(0, 11));
                 manager.val(entry.manager);
-                companyPackage.val(entry.companyPackage);
+                companyPackageId.val(entry.companyPackageId);
                 costOf.val(entry.costOf);
                 legalName.val(entry.legalName);
-                inn.val(entry.inn);
+                if (entry.inn != "null")
+                    inn.val(entry.inn);
+                else
+                    inn.val("");
                 legalAddress.val(entry.legalAddress);
                 phone.val(entry.phone);
                 fax.val(entry.fax);
                 directorFullName.val(entry.directorFullName);
                 contactPerson.val(entry.contactPerson);
+                description.val(entry.description);
+
+                isShowForOperator.prop('checked', newBoolean(entry.isShowForOperator));
+                isShowForSite.prop('checked', newBoolean(entry.isShowForSite));
+                isPaid.prop('checked', newBoolean(entry.isPaid));
+                isRedirect.prop('checked', newBoolean(entry.isRedirect));
+                isOffPosition.prop('checked', newBoolean(entry.isOffPosition));
+                isClosed.prop('checked', newBoolean(entry.isClosed));
+
                 hiddenId.val(entry.id);
                 for (var i = 1; i < 13; i++) {
                     item = {};
@@ -219,13 +252,11 @@ $(".menuBodyItemInfo").on("click", function (event) {
                 }
                 var count = 1;
                 dataCompanyAddressJson.forEach(function(entry2) {
-                    //console.log(entry2);
                     if (entry2.companyId == entry.id) {
                         entry2.companyAddresses.forEach(function(entry3) {
-                            //console.log(entry3);
                             addressArray[count].isOpen = true;
                             $("#UpAdd" + count).show();
-                            $("#UpAdd" + count).removeAttr('required');
+                            $("#UpAdd" + count).prop("required", true);
                             $("#UpAdAd" + count).val(entry3.address);
                             $("#UpRegAd" + count).val(entry3.regionId);
                             $("#UpPhAd" + count).val(entry3.phones);
@@ -240,6 +271,10 @@ $(".menuBodyItemInfo").on("click", function (event) {
         });
     }
 });
+
+function newBoolean(bool) {
+    return bool != "false";
+}
 
 $(".menuBodyItemButtDel").on("click", function (event) {
     var tmp = event.target.getAttribute('id').replace("ID-", "");
@@ -290,10 +325,10 @@ $(".UpCloseAdButt").on("click", function (event) {
     var addId = event.target.getAttribute('data-id');
     try {
         addressArray.forEach(function(entry) {
-            if (entry.id == addId && confirm("Удалить?")) {
+            if (entry.id == addId && confirm("Удалить?\nАдрес будет удален после того, как вы нажмете Обновить.")) {
                 entry.isOpen = false;
                 $("#UpAdd" + entry.id ).hide();
-                $("#UpAdd" + entry.id ).removeAttr('required');
+                $("#UpAdAd" + entry.id ).removeAttr('required');
                 $("#UpAdAd" + entry.id ).val("");
                 $("#UpRegAd" + entry.id ).val("-1");
                 $("#UpPhAd" + entry.id ).val("");
@@ -417,5 +452,28 @@ $("#updateForm").submit(function() {
     }
 });
 
+var itemsStatusList;
+$(".menuBodyItemHeadInfo").on("click", function (event) {
+    var itemsID = event.target.getAttribute('data-id');
+    if (itemsStatusList == undefined) {
+        itemsStatusList = [];
+        for (var i = 1; i < 17; i++){
+            itemsStatusList[i] = {};
+            itemsStatusList[i].itemsID = i;
+            itemsStatusList[i].isShow = false;
+        }
+    }
+    itemsStatusList.forEach(function(entry) {
+        if (entry.itemsID == itemsID) {
+            if (entry.isShow) {
+                $("#itemsID-"+itemsID).hide();
+                entry.isShow = false;
+            } else {
+                $("#itemsID-"+itemsID).show();
+                entry.isShow = true;
+            }
+        }
+    });
+});
 
 

@@ -10,7 +10,7 @@
         </div>
         <div class="left-body">
             <label>Адрес<span class="required">*</span></label>
-            <input title="Введите номер факса." type="text" name="address" id="UpAdAd${num}" />
+            <input title="Введите номер факса." maxlength="255" type="text" name="address" id="UpAdAd${num}" />
         </div>
         <div class="right-body">
             <label>Район</label>
@@ -23,11 +23,11 @@
         </div>
         <div class="left-body">
             <label>Телефоны</label>
-            <textarea rows="3" name="phones" id="UpPhAd${num}"></textarea>
+            <textarea rows="3" name="phones" maxlength="255" id="UpPhAd${num}"></textarea>
         </div>
         <div class="right-body">
             <label>Информация</label>
-            <textarea rows="3" name="information" id="UpInfAd${num}"></textarea>
+            <textarea rows="3" name="information" maxlength="255" id="UpInfAd${num}"></textarea>
         </div>
     </div>
     <input type="hidden" name="UpAddId${num}" value="" id="UpAddId${num}"/>

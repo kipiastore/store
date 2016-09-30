@@ -28,6 +28,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         ru.store.entities.User user = userService.getUser(username);
+        if (user.getStatus().equals("closed"))
+            throw new UsernameNotFoundException("User is closed.");
         List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
         return buildUserForAuthentication(user, authorities);
     }

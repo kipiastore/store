@@ -9,11 +9,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.RegionDAO;
+import ru.store.dao.interfaces.UserRoleDAO;
 import ru.store.entities.*;
-import ru.store.service.CompanyAddressService;
-import ru.store.service.CompanyService;
-import ru.store.service.RegionService;
+import ru.store.entities.Package;
+import ru.store.service.*;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -29,6 +30,10 @@ public class AdminCompaniesController {
     private CompanyAddressService companyAddressService;
     @Autowired
     private RegionService regionService;
+    @Autowired
+    private PackageService packageService;
+    @Autowired
+    private UserService userService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -114,27 +119,97 @@ public class AdminCompaniesController {
     }
 
     private void loadCompanies(Model model) {
-        List<Model.CompaniesItem> companyItems = new ArrayList<>();
-        Model.CompaniesItem companyItem;
         List<Company> companies = companyService.getCompanies();
         List<Model.CompanyAddressItem> companyAddressItems = new ArrayList<>();
         Model.CompanyAddressItem companyAddressItem;
         for (Company company : companies) {
-            companyItem = new Model.CompaniesItem();
-            companyItem.id = company.getId();
-            companyItem.name = company.getName();
-            companyItem.dateOfEndContract = company.getDateOfEndContract().toString().substring(0, 11);
             companyAddressItem = new Model.CompanyAddressItem();
             companyAddressItem.setCompanyId(company.getId());
             companyAddressItem.setCompanyAddresses(companyAddressService.getCompanyAddresses(company.getId()));
             companyAddressItems.add(companyAddressItem);
-            companyItems.add(companyItem);
         }
-        model.companiesItems = companyItems;
         model.companiesJson = companies.toString();
         model.companyAddressJson = companyAddressItems.toString();
         model.regions = regionService.getRegions();
+        model.packages = packageService.getPackages();
+        model.filterListMap = groupByFilter(companies);
+        List<User> usersFilteredByRole = new ArrayList<>();
+        for (User user : userService.getUsers()) {
+            if (user.getUserRole().isEmpty()) {
+                continue;
+            }
+            if (new ArrayList<>(user.getUserRole()).get(0).getRole().equals("ROLE_MANAGER")) {
+                usersFilteredByRole.add(user);
+            }
+        }
+        model.managers = usersFilteredByRole;
         model.numOfAddress = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    }
+
+    private Map<Model.Filter, List<Model.CompaniesItem>> groupByFilter(List<Company> companies) {
+        Map<Model.Filter, List<Model.CompaniesItem>> result = new TreeMap<>();
+        Model.Filter filter;
+        List<Model.CompaniesItem> companyItems;
+        List<Model.CompaniesItem> allCompanyItems = new ArrayList<>();
+
+        for (Company company : companies) {
+            if (company.getDateOfEndContract().getTime() - new Date().getTime() < 604800000 &&
+                company.getDateOfEndContract().getTime() - new Date().getTime() > 259200000) {
+                if (result.get(new Model.Filter(1)) == null) {
+                    filter = new Model.Filter(1);
+                    filter.name = "До конца договора 7 д.";
+                    companyItems = new ArrayList<>();
+                    companyItems.add(convert(company));
+                    result.put(filter, companyItems);
+                } else {
+                    result.get(new Model.Filter(1)).add(convert(company));
+                }
+            } else if (company.getDateOfEndContract().getTime() - new Date().getTime() < 259200000 &&
+                    company.getDateOfEndContract().getTime() - new Date().getTime() > 86400000) {
+                if (result.get(new Model.Filter(2)) == null) {
+                    filter = new Model.Filter(2);
+                    filter.name = "До конца договора 3 д.";
+                    companyItems = new ArrayList<>();
+                    companyItems.add(convert(company));
+                    result.put(filter, companyItems);
+                } else {
+                    result.get(new Model.Filter(2)).add(convert(company));
+                }
+            } else if (company.getDateOfEndContract().getTime() - new Date().getTime() < 86400000 &&
+                    company.getDateOfEndContract().getTime() - new Date().getTime() > 0) {
+                if (result.get(new Model.Filter(3)) == null) {
+                    filter = new Model.Filter(3);
+                    filter.name = "До конца договора 1 д.";
+                    companyItems = new ArrayList<>();
+                    companyItems.add(convert(company));
+                    result.put(filter, companyItems);
+                } else {
+                    result.get(new Model.Filter(3)).add(convert(company));
+                }
+            } else
+                allCompanyItems.add(convert(company));
+        }
+        if (allCompanyItems.size() != 0) {
+            filter = new Model.Filter(16);
+            filter.name = "Остальные";
+            result.put(filter, allCompanyItems);
+        }
+        return result;
+    }
+
+    private String getNormalName(String name) {
+        if (name != null && name.length() > 26)
+            return name.substring(0, 26) + "..";
+        else
+            return name;
+    }
+
+    private Model.CompaniesItem convert(Company company) {
+        Model.CompaniesItem companyItem = new Model.CompaniesItem();
+        companyItem.id = company.getId();
+        companyItem.name = getNormalName(company.getName());
+        companyItem.dateOfEndContract = company.getDateOfEndContract().toString().substring(0, 11);
+        return companyItem;
     }
 
     @RequestMapping(value = "/admin/addcompany", method = RequestMethod.GET)
@@ -164,16 +239,15 @@ public class AdminCompaniesController {
         public int selectedPageNum;
         public String addingCompanyJson;
         public String companiesJson;
-        public List<CompaniesItem> companiesItems;
         public List<Region> regions;
+        public List<Package> packages;
+        public List<User> managers;
         public int[] numOfAddress;
         public String companyAddressJson;
+        public Map<Filter, List<CompaniesItem>> filterListMap;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
-        }
-        public List<CompaniesItem> getCompaniesItems() {
-            return companiesItems;
         }
         public String getAddingCompanyJson() {
             return addingCompanyJson;
@@ -190,6 +264,61 @@ public class AdminCompaniesController {
         public String getCompanyAddressJson() {
             return companyAddressJson;
         }
+        public List<Package> getPackages() {
+            return packages;
+        }
+        public List<User> getManagers() {
+            return managers;
+        }
+        public Map<Filter, List<CompaniesItem>> getFilterListMap() {
+            return filterListMap;
+        }
+
+        public static class Filter implements Comparable {
+            public String name;
+            public int id;
+
+            public Filter(int id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+            public int getId() {
+                return id;
+            }
+
+            @Override
+            public int compareTo(Object o) {
+                if (((Filter) o).id == this.id)
+                    return 0;
+                if (((Filter) o).id < this.id)
+                    return 1;
+                else
+                    return -1;
+            }
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                Filter filter = (Filter) o;
+
+                return id == filter.id;
+            }
+            @Override
+            public int hashCode() {
+                return id;
+            }
+            @Override
+            public String toString() {
+                return "Filter{" +
+                        "name='" + name + '\'' +
+                        ", id=" + id +
+                        '}';
+            }
+        }
 
         public static class CompaniesItem {
             public int id;
@@ -204,6 +333,14 @@ public class AdminCompaniesController {
             }
             public String getDateOfEndContract() {
                 return dateOfEndContract;
+            }
+            @Override
+            public String toString() {
+                return "CompaniesItem{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        ", dateOfEndContract='" + dateOfEndContract + '\'' +
+                        '}';
             }
         }
 

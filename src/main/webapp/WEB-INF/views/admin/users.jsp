@@ -24,7 +24,7 @@
 
             <form:form action="adduser" modelAttribute="user" method="post" id="createForm">
                 <label>ФИО</label>
-                <input title="Введите ФИО." type="text" name="fullName" id="newFullName" />
+                <input title="Введите ФИО." type="text" maxlength="255" name="fullName" id="newFullName" />
                 <label>Логин<span class="required">*</span></label>
                 <input title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов."
                        type="text" required pattern="(^[\w+]{4,20}$)" name="username" id="newUsername" />
@@ -51,7 +51,7 @@
 
             <form:form action="updateuser" modelAttribute="user" method="post" id="updateForm">
                 <label>ФИО</label>
-                <input id="fullName" title="Введите ФИО." type="text" name="fullName">
+                <input id="fullName" title="Введите ФИО." maxlength="255" type="text" name="fullName">
                 <label>Логин</label>
                 <input id="username" type="text" disabled pattern="(^[\w+]{4,20}$)" name="username"
                        title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов.">

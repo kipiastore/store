@@ -47,4 +47,11 @@ public class UserRoleDAOImpl implements UserRoleDAO {
         else
             return null;
     }
+
+    @Override
+    @Transactional
+    public List<UserRole> getUserRoles(String role) {
+        String hql = "from UserRole where role =?";
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, role).list();
+    }
 }

@@ -25,8 +25,8 @@
         <property name="manager" type="string" >
             <column name="manager" length="45" not-null="true" />
         </property>
-        <property name="companyPackage" type="string" >
-            <column name="company_package" length="120" not-null="true" />
+        <property name="companyPackageId" type="java.lang.Integer" >
+            <column name="company_package_id" not-null="true" />
         </property>
         <property name="costOf" type="integer" >
             <column name="cost_of" length="10" not-null="true" />
@@ -63,6 +63,28 @@
         </property>
         <property name="lastModifiedBy" type="string">
             <column name="last_modified_by" length="45" not-null="true" />
+        </property>
+        <property name="description" type="string" >
+            <column name="description" length="255" not-null="false" />
+        </property>
+
+        <property name="isShowForOperator" type="java.lang.Boolean" >
+            <column name="is_show_for_operator" />
+        </property>
+        <property name="isShowForSite" type="java.lang.Boolean" >
+            <column name="is_show_for_site" />
+        </property>
+        <property name="isPaid" type="java.lang.Boolean" >
+            <column name="is_paid" />
+        </property>
+        <property name="isRedirect" type="java.lang.Boolean" >
+            <column name="is_redirect" />
+        </property>
+        <property name="isOffPosition" type="java.lang.Boolean" >
+            <column name="is_off_position" />
+        </property>
+        <property name="isClosed" type="java.lang.Boolean" >
+            <column name="is_closed" />
         </property>
     </class>
 </hibernate-mapping>

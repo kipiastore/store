@@ -21,7 +21,7 @@
             <span class="success">${successMessage}</span>
             <form:form action="addpackage" modelAttribute="package" method="post" id="createForm">
                 <label>Название<span class="required">*</span></label>
-                <input title="Введите название пакета." type="text" name="name" required />
+                <input title="Введите название пакета." type="text" maxlength="120" name="name" required />
                 <label>Приоритет<span class="required">*</span></label>
                 <input title="Введите приоритет пакета." type="number" name="priority" required />
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />

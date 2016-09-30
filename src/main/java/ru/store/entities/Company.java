@@ -15,7 +15,7 @@ public class Company {
     private Date dateOfStartContract;
     private Date dateOfEndContract;
     private String manager;
-    private String companyPackage;
+    private Integer companyPackageId;
     private Integer costOf;
     private String legalName;
     private Integer inn;
@@ -28,6 +28,13 @@ public class Company {
     private Timestamp lastModifiedDate = new Timestamp(new java.util.Date().getTime());
     private String owner;
     private String lastModifiedBy;
+    private String description;
+    private Boolean isShowForOperator = false;
+    private Boolean isShowForSite = false;
+    private Boolean isPaid = false;
+    private Boolean isRedirect = false;
+    private Boolean isOffPosition = false;
+    private Boolean isClosed = false;
     //private String email;
     //private String site;
     //private Partition partition;
@@ -104,11 +111,11 @@ public class Company {
     public void setManager(String manager) {
         this.manager = manager;
     }
-    public String getCompanyPackage() {
-        return companyPackage;
+    public Integer getCompanyPackageId() {
+        return companyPackageId;
     }
-    public void setCompanyPackage(String companyPackage) {
-        this.companyPackage = companyPackage;
+    public void setCompanyPackageId(Integer companyPackageId) {
+        this.companyPackageId = companyPackageId;
     }
     public Integer getCostOf() {
         return costOf;
@@ -158,6 +165,48 @@ public class Company {
     public void setContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
     }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public Boolean getIsShowForOperator() {
+        return isShowForOperator;
+    }
+    public void setIsShowForOperator(Boolean isShowForOperator) {
+        this.isShowForOperator = isShowForOperator;
+    }
+    public Boolean getIsShowForSite() {
+        return isShowForSite;
+    }
+    public void setIsShowForSite(Boolean isShowForSite) {
+        this.isShowForSite = isShowForSite;
+    }
+    public Boolean getIsPaid() {
+        return isPaid;
+    }
+    public void setIsPaid(Boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+    public Boolean getIsRedirect() {
+        return isRedirect;
+    }
+    public void setIsRedirect(Boolean isRedirect) {
+        this.isRedirect = isRedirect;
+    }
+    public Boolean getIsOffPosition() {
+        return isOffPosition;
+    }
+    public void setIsOffPosition(Boolean isOffPosition) {
+        this.isOffPosition = isOffPosition;
+    }
+    public Boolean getIsClosed() {
+        return isClosed;
+    }
+    public void setIsClosed(Boolean isClosed) {
+        this.isClosed = isClosed;
+    }
 
     @Override
     public String toString() {
@@ -169,7 +218,7 @@ public class Company {
                 "\"dateOfStartContract\":\"" + dateOfStartContract + "\"," +
                 "\"dateOfEndContract\":\"" + dateOfEndContract + "\"," +
                 "\"manager\":\"" + manager + "\"," +
-                "\"companyPackage\":\"" + companyPackage + "\"," +
+                "\"companyPackageId\":\"" + companyPackageId + "\"," +
                 "\"costOf\":\"" + costOf + "\"," +
                 "\"legalName\":\"" + legalName + "\"," +
                 "\"inn\":\"" + inn + "\"," +
@@ -177,7 +226,14 @@ public class Company {
                 "\"phone\":\"" + phone + "\"," +
                 "\"fax\":\"" + fax + "\"," +
                 "\"directorFullName\":\"" + directorFullName + "\"," +
-                "\"contactPerson\":\"" + contactPerson + "\"" +
+                "\"contactPerson\":\"" + contactPerson + "\"," +
+                "\"isShowForOperator\":\"" + isShowForOperator + "\"," +
+                "\"isShowForSite\":\"" + isShowForSite + "\"," +
+                "\"isPaid\":\"" + isPaid + "\"," +
+                "\"isRedirect\":\"" + isRedirect + "\"," +
+                "\"isOffPosition\":\"" + isOffPosition + "\"," +
+                "\"isClosed\":\"" + isClosed + "\"," +
+                "\"description\":\"" + description + "\"" +
                 '}';
     }
 }

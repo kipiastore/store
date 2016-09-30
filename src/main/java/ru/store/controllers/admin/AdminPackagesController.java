@@ -72,7 +72,10 @@ public class AdminPackagesController {
         for (Package aPackage : packageService.getPackages()) {
             packageItem = new Model.PackageItem();
             packageItem.id = aPackage.getId();
-            packageItem.name = aPackage.getName();
+            if (aPackage.getName() != null && aPackage.getName().length() > 26)
+                packageItem.name = aPackage.getName().substring(0, 26) + "..";
+            else
+                packageItem.name = aPackage.getName();
             packageItem.priority = aPackage.getPriority();
             packageItems.add(packageItem);
         }

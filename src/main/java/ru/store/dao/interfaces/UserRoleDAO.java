@@ -2,6 +2,8 @@ package ru.store.dao.interfaces;
 
 import ru.store.entities.UserRole;
 
+import java.util.List;
+
 /**
  *
  */
@@ -14,5 +16,7 @@ public interface UserRoleDAO {
     void deleteUserRole(String username);
 
     UserRole getUserRole(String username);
+
+    List<UserRole> getUserRoles(String role);
 
 }

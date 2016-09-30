@@ -47,12 +47,12 @@
     <table name="company" schema="" catalog="store" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
-      <column name="keywords" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="keywords" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="date_of_contract" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="date_of_start_contract" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="date_of_end_contract" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="manager" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="company_package" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="company_package_id" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
       <column name="cost_of" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="legal_name" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
       <column name="inn" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
@@ -65,6 +65,13 @@
       <column name="last_modified_date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="last_modified_by" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="is_show_for_operator" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="is_show_for_site" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="is_paid" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="is_redirect" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="is_off_position" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="is_closed" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="company_address" schema="" catalog="store" type="TABLE">
