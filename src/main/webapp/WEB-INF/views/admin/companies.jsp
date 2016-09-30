@@ -69,31 +69,7 @@
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
 
-                <div>
-                    <div class="address-list"></div>
-                    <div class="left-body">
-                    <label>Адрес</label>
-                    <input title="Введите номер факса." type="text" name="address" />
-                    <label>Телефоны</label>
-                    <input title="Введите номера." type="text" name="phones" />
-                    <label>Район</label>
-                    <select name="region" title="" >
-                        <option value="opened">r1</option>
-                        <option value="closed">r2</option>
-                    </select>
-                    </div>
-                    <div class="left-body">
-                        <label>Адрес</label>
-                        <input title="Введите номер факса." type="text" name="address" />
-                        <label>Телефоны</label>
-                        <input title="Введите номера." type="text" name="phones" />
-                        <label>Район</label>
-                        <select name="region" title="" >
-                            <option value="opened">r1</option>
-                            <option value="closed">r2</option>
-                        </select>
-                    </div>
-                </div>
+                <%@include file="/WEB-INF/views/admin/components/address.jspf"%>
 
                 <input type="submit" value="Создать" />
             </form:form>
@@ -146,6 +122,8 @@
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="hiddenId" id="hiddenId" />
 
+                <%@include file="/WEB-INF/views/admin/components/updateAddress.jspf"%>
+
                 <input type="submit" value="Обновить" />
             </form:form>
         </div>
@@ -176,7 +154,7 @@
 
 <span class="dataJson">${model.companiesJson}</span>
 <span class="addingUserJson">${model.addingCompanyJson}</span>
-
+<span class="companyAddressJson">${model.companyAddressJson}</span>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
 
 <script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>

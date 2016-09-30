@@ -305,6 +305,10 @@ label {
     margin-bottom: 10px;
     text-align: center;
     background-color: #ebedf0;
+    cursor: pointer;
+}
+.companyAddressJson {
+    display: none;
 }
 .required {
     color: red;
@@ -321,7 +325,65 @@ label {
     display: flex;
     width: 100%;
 }
-
+textarea {
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    transition: none;
+    box-shadow: none;
+    font-family: Arial, serif;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    border-radius: 3px;
+    padding: 12px 20px 12px 10px;
+    margin-bottom: 10px;
+}
+.left-address-item{
+    float: left;
+    width: 46%;
+    padding-left: 1%;
+    padding-top: 1%;
+}
+.right-address-item {
+    float: right;
+    width: 46%;
+    padding-right: 1%;
+    padding-top: 1%;
+}
+.close-address {
+    text-align: right;
+}
+.close-address img {
+    cursor: pointer;
+}
+.add-address {
+    border: 1px solid #d8dde1;
+    color: #928e8e;
+    font-family: Arial, serif;
+    font-size: 14px;
+    outline: none;
+    border-radius: 3px;
+    padding: 12px 20px 12px 10px;
+    margin-top: 23px;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: #ebedf0;
+    cursor: pointer;
+}
+.add-addressUp {
+    border: 1px solid #d8dde1;
+    color: #928e8e;
+    font-family: Arial, serif;
+    font-size: 14px;
+    outline: none;
+    border-radius: 3px;
+    padding: 12px 20px 12px 10px;
+    margin-top: 23px;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: #ebedf0;
+    cursor: pointer;
+}
 /*http://www.cssfontstack.com/Monaco
 
 CSS:

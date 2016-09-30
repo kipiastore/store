@@ -31,6 +31,11 @@ var directorFullName;
 var contactPerson;
 var hiddenId;
 
+var addressArray;
+var BreakException = {};
+
+var dataCompanyAddressJson;
+
 $(window).on("load", function () {
     if ($("#addError")[0].innerHTML != "") {
         try {
@@ -66,6 +71,20 @@ $(".pageMenuButt").on("click", function (event) {
         createForm.animate({opacity: 1}, 200);
         isShowCreateForm = true;
     }, 200);
+    addressArray = [];
+    var item;
+    for (var i = 1; i < 13; i++) {
+        item = {};
+        item.id = i;
+        item.isOpen = false;
+        addressArray[i] = item;
+        $("#add" + i).hide();
+        $("#add" + i).removeAttr('required');
+        $("#adAd" + i).val("");
+        $("#regAd" + i).val("-1");
+        $("#phAd" + i).val("");
+        $("#infAd" + i).val("");
+    }
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
@@ -150,6 +169,23 @@ $(".menuBodyItemInfo").on("click", function (event) {
             contactPerson = $("#contactPerson");
             hiddenId = $("#hiddenId");
         }
+        if (dataCompanyAddressJson == undefined) {
+            dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
+        }
+        var item;
+        addressArray = [];
+        for (var i = 1; i < 13; i++) {
+            item = {};
+            item.id = i;
+            item.isOpen = false;
+            addressArray[i] = item;
+            $("#add" + i).hide();
+            $("#add" + i).removeAttr('required');
+            $("#adAd" + i).val("");
+            $("#regAd" + i).val("-1");
+            $("#phAd" + i).val("");
+            $("#infAd" + i).val("");
+        }
         data.forEach(function(entry) {
             if (entry.id == id) {
                 companyName.val(entry.name);
@@ -168,6 +204,38 @@ $(".menuBodyItemInfo").on("click", function (event) {
                 directorFullName.val(entry.directorFullName);
                 contactPerson.val(entry.contactPerson);
                 hiddenId.val(entry.id);
+                for (var i = 1; i < 13; i++) {
+                    item = {};
+                    item.id = i;
+                    item.isOpen = false;
+                    addressArray[i] = item;
+                    $("#UpAdd" + i).hide();
+                    $("#UpAdd" + i).removeAttr('required');
+                    $("#UpAdAd" + i).val("");
+                    $("#UpRegAd" + i).val("-1");
+                    $("#UpPhAd" + i).val("");
+                    $("#UpInfAd" + i).val("");
+                    $("#UpAddId" + i).val("");
+                }
+                var count = 1;
+                dataCompanyAddressJson.forEach(function(entry2) {
+                    //console.log(entry2);
+                    if (entry2.companyId == entry.id) {
+                        entry2.companyAddresses.forEach(function(entry3) {
+                            //console.log(entry3);
+                            addressArray[count].isOpen = true;
+                            $("#UpAdd" + count).show();
+                            $("#UpAdd" + count).removeAttr('required');
+                            $("#UpAdAd" + count).val(entry3.address);
+                            $("#UpRegAd" + count).val(entry3.regionId);
+                            $("#UpPhAd" + count).val(entry3.phones);
+                            $("#UpInfAd" + count).val(entry3.information);
+                            $("#UpAddId" + count).val(entry3.id);
+                            count++;
+                        });
+                        calculatePosition(addressArray, "UpAdd");
+                    }
+                });
             }
         });
     }
@@ -181,7 +249,6 @@ $(".menuBodyItemButtDel").on("click", function (event) {
     }
 });
 
-
 var requisitesIsOpen;
 $(".openRequisites").on("click", function () {
     if (requisitesIsOpen) {
@@ -192,3 +259,163 @@ $(".openRequisites").on("click", function () {
         requisitesIsOpen = true;
     }
 });
+
+$(".add-addressUp").on("click", function () {
+    var item;
+    if (addressArray == undefined) {
+        addressArray = [];
+        for (var i = 1; i < 13; i++) {
+            item = {};
+            item.id = i;
+            item.isOpen = false;
+            addressArray[i] = item;
+        }
+    }
+    try {
+        addressArray.forEach(function(entry) {
+            if (!entry.isOpen) {
+                entry.isOpen = true;
+                $("#UpAdd" + entry.id).show();
+                $("#UpAdAd" + entry.id).prop("required", true);
+                throw BreakException;
+            }
+        });
+    } catch (e) {
+        if (e !== BreakException) throw e;
+    }
+    calculatePosition(addressArray, "UpAdd");
+});
+
+$(".UpCloseAdButt").on("click", function (event) {
+    var addId = event.target.getAttribute('data-id');
+    try {
+        addressArray.forEach(function(entry) {
+            if (entry.id == addId && confirm("Удалить?")) {
+                entry.isOpen = false;
+                $("#UpAdd" + entry.id ).hide();
+                $("#UpAdd" + entry.id ).removeAttr('required');
+                $("#UpAdAd" + entry.id ).val("");
+                $("#UpRegAd" + entry.id ).val("-1");
+                $("#UpPhAd" + entry.id ).val("");
+                $("#UpInfAd" + entry.id ).val("");
+                $("#UpDelete").val($("#UpDelete").val() + "," + $("#UpAddId" + entry.id).val());
+                $("#UpAddId" + entry.id).val("");
+                throw BreakException;
+            }
+        });
+    } catch (e) {
+        if (e !== BreakException) throw e;
+    }
+    calculatePosition(addressArray, "UpAdd");
+});
+
+$(".add-address").on("click", function () {
+    var item;
+    if (addressArray == undefined) {
+        addressArray = [];
+        for (var i = 1; i < 13; i++) {
+            item = {};
+            item.id = i;
+            item.isOpen = false;
+            addressArray[i] = item;
+        }
+    }
+    try {
+        addressArray.forEach(function(entry) {
+            if (!entry.isOpen) {
+                entry.isOpen = true;
+                $("#add" + entry.id).show();
+                $("#adAd" + entry.id).prop("required", true);
+                throw BreakException;
+            }
+        });
+    } catch (e) {
+        if (e !== BreakException) throw e;
+    }
+    calculatePosition(addressArray, "add");
+});
+$(".closeAdButt").on("click", function (event) {
+    var addId = event.target.getAttribute('data-id');
+    try {
+        addressArray.forEach(function(entry) {
+            if (entry.id == addId) {
+                entry.isOpen = false;
+                $("#add" + entry.id).hide();
+                $("#adAd" + entry.id).removeAttr('required');
+                $("#adAd" + entry.id).val("");
+                $("#phAd" + entry.id).val("");
+                $("#infAd" + entry.id).val("");
+                throw BreakException;
+            }
+        });
+    } catch (e) {
+        if (e !== BreakException) throw e;
+    }
+    calculatePosition(addressArray, "add");
+});
+function calculatePosition(items, type) {
+    var counter = 1;
+    items.forEach(function(entry) {
+        if (entry.isOpen) {
+            var tmpBlock = $("#" + type + entry.id);
+            if (counter & 1) {
+                tmpBlock.removeClass();
+                tmpBlock.addClass("left-address-item");
+            } else {
+                tmpBlock.removeClass();
+                tmpBlock.addClass("right-address-item");
+            }
+            counter++;
+        }
+    });
+}
+
+$("#createForm").submit(function() {
+    var addressArrayJson = [];
+    var companyAddress;
+    var counter = 0;
+    if (addressArray != undefined) {
+        addressArray.forEach(function(entry) {
+            if (entry.isOpen) {
+                companyAddress = {};
+                companyAddress.address = $("#adAd" + entry.id).val();
+                companyAddress.regionId = Number($("#regAd" + entry.id).val());
+                companyAddress.phones = $("#phAd" + entry.id).val();
+                companyAddress.information = $("#infAd" + entry.id).val();
+                addressArrayJson[counter] = companyAddress;
+                counter++;
+            }
+        });
+        $("#addressJson").val(JSON.stringify(addressArrayJson));
+    }
+});
+
+$("#updateForm").submit(function() {
+    var addressArrayJson = [];
+    var companyAddress;
+    var counter = 0;
+    if (addressArray != undefined) {
+        addressArray.forEach(function(entry) {
+            if (entry.isOpen) {
+                companyAddress = {};
+                companyAddress.address = $("#UpAdAd" + entry.id).val();
+                if ($("#UpAddId" + entry.id).val() != "-1")
+                    companyAddress.regionId = Number($("#UpRegAd" + entry.id).val());
+                else
+                    companyAddress.regionId = null;
+                companyAddress.phones = $("#UpPhAd" + entry.id).val();
+                companyAddress.information = $("#UpInfAd" + entry.id).val();
+                if ($("#UpAddId" + entry.id).val() != "")
+                    companyAddress.id = Number($("#UpAddId" + entry.id).val());
+                else
+                    companyAddress.id = null;
+                addressArrayJson[counter] = companyAddress;
+                counter++;
+            }
+        });
+        $("#UpAddressJson").val(JSON.stringify(addressArrayJson));
+    }
+});
+
+
+

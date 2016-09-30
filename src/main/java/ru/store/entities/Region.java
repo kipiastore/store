@@ -15,12 +15,6 @@ public class Region {
     public Region() {
 
     }
-    public Region(String name, Timestamp createdDate, String owner) {
-        this.id = id;
-        this.name = name;
-        this.createdDate = createdDate;
-        this.owner = owner;
-    }
 
     public Integer getId() {
         return id;

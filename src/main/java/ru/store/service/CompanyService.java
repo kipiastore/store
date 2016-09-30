@@ -2,6 +2,7 @@ package ru.store.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.store.dao.interfaces.CompanyAddressDAO;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
 import ru.store.entities.SubPartition;
@@ -18,6 +19,8 @@ public class CompanyService {
 
     @Autowired
     private CompanyDAO companyDAO;
+    @Autowired
+    private CompanyAddressService companyAddressService;
 
     public void createCompany(Company company) {
         companyDAO.createCompany(company);
@@ -36,6 +39,7 @@ public class CompanyService {
 
     public void deleteCompany(int id) {
         companyDAO.deleteCompany(id);
+        companyAddressService.deleteCompanyAddressByCompany(id);
     }
 
     public Company getCompany(int id) {
