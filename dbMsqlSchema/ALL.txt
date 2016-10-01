@@ -26,7 +26,8 @@ CREATE TABLE company
     is_paid TINYINT NOT NULL,
     is_redirect TINYINT NOT NULL,
     is_off_position TINYINT NOT NULL,
-    is_closed TINYINT NOT NULL
+    is_closed TINYINT NOT NULL,
+    is_priority TINYINT NOT NULL
 );
 CREATE TABLE company_address
 (

@@ -91,7 +91,7 @@ a {
 }
 .pr {
     float: left;
-    height: 40px;
+    height: 36px;
 }
 .body {
     display: -webkit-flex;
@@ -106,7 +106,6 @@ a {
     min-width: 630px;
 }
 .body .pageMenu {
-    height: 40px;
     margin-top: 70px;
     border: 1px solid #dfe0e0;
     margin-left: 10px;
@@ -162,6 +161,7 @@ a {
     padding: 4px;
     width: 65px;
     cursor: pointer;
+    margin-bottom: 4px;
 }
 .pageMenuButt:hover {
     background: #16a085;
@@ -316,7 +316,6 @@ label {
     outline: none;
     border-radius: 3px;
     padding: 11px 20px 11px 10px;
-    /*margin-top: 23px;*/
     margin-bottom: 10px;
     text-align: center;
     background-color: #ebedf0;
@@ -402,13 +401,37 @@ textarea {
 .check-box-block {
     display: flex;
     float: left;
-    /* height: 70px; */
-    /* width: 150px; */
     text-align: left;
+    width: 152px;
 }
 input[type="checkbox"] {
     margin-top: 20px;
     width: 15px;
+}
+.pr input {
+    width: 150px;
+    margin-bottom: 0;
+    padding: 7px 6px 7px 6px;
+    margin-top: 4px;
+}
+.searchButt {
+    float: right;
+    background: #738dae;
+    margin-right: 4px;
+    margin-top: 4px;
+    border: 1px solid #739ec5;
+    border-radius: 3px;
+    padding: 4px;
+    margin-left: 5px;
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+}
+.searchButt:hover {
+    background: #16a085;
+}
+.searchIcon {
+    width: 22px;
 }
 /*http://www.cssfontstack.com/Monaco
 

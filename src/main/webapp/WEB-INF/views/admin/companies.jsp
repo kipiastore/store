@@ -16,7 +16,16 @@
 <%@include file="/WEB-INF/views/admin/components/header.jspf"%>
 <div class="body">
     <div class="pageMenu">
-        <div class="pr"></div>
+        <div class="pr">
+            <form:form action="searchcompany" method="post" id="searchForm">
+                <span class="searchButt"><img class="searchIcon" src="<c:url value="/resources/images/search.png" />"/></span>
+                <input type="text" maxlength="120" name="name" placeholder="Фирма"/>
+                <input type="text" maxlength="120" name="legalName" placeholder="Юр. Назв."/>
+                <input type="text" maxlength="120" name="phone" placeholder="Тел."/>
+                <input type="text" maxlength="120" name="contractNum" placeholder="№ Дог."/>
+                <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
+            </form:form>
+        </div>
         <span class="pageMenuButt">Создать</span>
     </div>
     <div class="menuBody">
@@ -34,11 +43,11 @@
                     <label>Ключевые слова</label>
                     <input title="Введите ключевые слова." type="text" maxlength="255" placeholder="Через точку с запятой: авто; ремонт;" type="text" name="keywords" id="newKeywords" />
                     <label>Дата заключения договора<span class="required">*</span></label>
-                    <input title="Введите дату." type="text" name="dateOfContract" id="newDateOfContract" required />
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="newDateOfContract" required />
                     <label>Срок договора от<span class="required">*</span></label>
-                    <input title="Введите дату." type="text" name="dateOfStartContract" id="newDateOfStartContract" required />
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfStartContract" id="newDateOfStartContract" required />
                     <label>Срок договора до<span class="required">*</span></label>
-                    <input title="Введите дату." type="text" name="dateOfEndContract" id="newDateOfEndContract" required />
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="newDateOfEndContract" required />
                     <label>Менеджер<span class="required">*</span></label>
                     <select name="manager" title="" id="newManager" required>
                         <c:forEach var="item" items="${model.managers}">
@@ -52,9 +61,9 @@
                         </c:forEach>
                     </select>
                     <label>Стоимость<span class="required">*</span></label>
-                    <input title="Введите стоимость. Не больше 10 цифр." pattern="(^[\d+]{1,10}$)" type="text" name="costOf" id="newCostOf" required />
+                    <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="newCostOf" required />
                     <label>Информация</label>
-                    <textarea rows="3" name="description" maxlength="255" id="newDescription"></textarea>
+                    <textarea rows="4" name="description" maxlength="255" id="newDescription"></textarea>
                 </div>
                 <div class="right-body">
 
@@ -82,6 +91,10 @@
                         <input type="checkbox" name="isClosed" />
                         <label>Закрыты</label>
                     </div>
+                    <div class="check-box-block">
+                        <input type="checkbox" name="isPriority" />
+                        <label>Приоритет</label>
+                    </div>
 
                     <div class="address-list"></div>
                     <div class="openRequisites">Реквизиты</div>
@@ -89,7 +102,7 @@
                         <label>Юридическое название</label>
                         <input title="Введите юридическое название фирмы." maxlength="120" type="text" name="legalName" id="newLegalName" />
                         <label>ИНН</label>
-                        <input title="Введите идентификационный код. Не больше 10 цифр." pattern="(^[\d+]{1,10}$)" type="text" name="inn" id="newInn" />
+                        <input title="Введите идентификационный код. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="inn" id="newInn" />
                         <label>Юридический адрес</label>
                         <input title="Введите юридический адрес фирмы." maxlength="120" type="text" name="legalAddress" id="newLegalAddress" />
                         <label>Телефон</label>
@@ -117,11 +130,11 @@
                     <label>Ключевые слова</label>
                     <input title="Введите ключевые слова." maxlength="255" placeholder="Через точку с запятой: авто; ремонт;" type="text" name="keywords" id="keywords" />
                     <label>Дата заключения договора<span class="required">*</span></label>
-                    <input title="Введите дату." type="text" name="dateOfContract" id="dateOfContract" required />
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="dateOfContract" required />
                     <label>Срок договора от<span class="required">*</span></label>
-                    <input title="Введите дату." type="text" name="dateOfStartContract" id="dateOfStartContract" required />
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfStartContract" id="dateOfStartContract" required />
                     <label>Срок договора до<span class="required">*</span></label>
-                    <input title="Введите дату." type="text" name="dateOfEndContract" id="dateOfEndContract" required />
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="dateOfEndContract" required />
                     <label>Менеджер<span class="required">*</span></label>
                     <select name="manager" title="" id="manager" required>
                         <c:forEach var="item" items="${model.managers}">
@@ -135,9 +148,9 @@
                         </c:forEach>
                     </select>
                     <label>Стоимость<span class="required">*</span></label>
-                    <input title="Введите стоимость. Не больше 10 цифр." pattern="(^[\d+]{1,10}$)" type="text" name="costOf" id="costOf" required />
+                    <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="costOf" required />
                     <label>Информация</label>
-                    <textarea rows="3" name="description" maxlength="255" id="description"></textarea>
+                    <textarea rows="4" name="description" maxlength="255" id="description"></textarea>
                 </div>
                 <div class="right-body">
 
@@ -165,6 +178,10 @@
                         <input type="checkbox" name="isClosed" id="isClosed"/>
                         <label>Закрыты</label>
                     </div>
+                    <div class="check-box-block">
+                        <input type="checkbox" name="isPriority" />
+                        <label>Приоритет</label>
+                    </div>
 
                     <div class="address-list"></div>
                     <div class="openRequisites">Реквизиты</div>
@@ -172,7 +189,7 @@
                         <label>Юридическое название</label>
                         <input title="Введите юридическое название фирмы." maxlength="120" type="text" name="legalName" id="legalName" />
                         <label>ИНН</label>
-                        <input title="Введите идентификационный код." pattern="(^[\d+]{1,10}$)" type="text" name="inn" id="inn"/>
+                        <input title="Введите идентификационный код. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="inn" id="inn"/>
                         <label>Юридический адрес</label>
                         <input title="Введите юридический адрес фирмы." maxlength="120" type="text" name="legalAddress" id="legalAddress"/>
                         <label>Телефон</label>

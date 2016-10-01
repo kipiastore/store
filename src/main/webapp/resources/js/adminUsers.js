@@ -37,6 +37,7 @@ var isPaid;
 var isRedirect;
 var isOffPosition;
 var isClosed;
+var isPriority;
 
 var addressArray;
 var BreakException = {};
@@ -67,7 +68,7 @@ $(".pageMenuButt").on("click", function (event) {
         var updateForm = $("#updateForm");
         updateForm.animate({opacity: 0}, 200);
         setTimeout(function() { updateForm.hide(); }, 200);
-        $("#" + currentItem).css("border-left", "0");
+        $("div#" + currentItem).css("border-left", "0");
         isShowUpdateForm = false;
     }
     pageMenuButtTarget = event.target;
@@ -136,10 +137,11 @@ $(".menuBodyItemInfo").on("click", function (event) {
     isShowCreateForm = false;
 
     if (currentItem != undefined) {
-        $("#" + currentItem).css("border-left", "0");
+        $("div#" + currentItem).css("border-left", "0");
     }
     currentItem = event.target.getAttribute("id");
-    $("#" + currentItem).css("border-left", "2px solid #d87f7f");
+    $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
+    $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
 
     if (pageInformation == 4 || pageInformation == 5) {
@@ -189,6 +191,7 @@ $(".menuBodyItemInfo").on("click", function (event) {
             isRedirect = $("#isRedirect");
             isOffPosition = $("#isOffPosition");
             isClosed = $("#isClosed");
+            isPriority = $("#isPriority");
         }
         if (dataCompanyAddressJson == undefined) {
             dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
@@ -235,6 +238,7 @@ $(".menuBodyItemInfo").on("click", function (event) {
                 isRedirect.prop('checked', newBoolean(entry.isRedirect));
                 isOffPosition.prop('checked', newBoolean(entry.isOffPosition));
                 isClosed.prop('checked', newBoolean(entry.isClosed));
+                isPriority.prop('checked', newBoolean(entry.isPriority));
 
                 hiddenId.val(entry.id);
                 for (var i = 1; i < 13; i++) {
@@ -476,4 +480,7 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
     });
 });
 
+$(".searchButt").on("click", function () {
+    $("#searchForm").submit();
+});
 

@@ -35,6 +35,7 @@ public class Company {
     private Boolean isRedirect = false;
     private Boolean isOffPosition = false;
     private Boolean isClosed = false;
+    private Boolean isPriority = false;
     //private String email;
     //private String site;
     //private Partition partition;
@@ -207,6 +208,12 @@ public class Company {
     public void setIsClosed(Boolean isClosed) {
         this.isClosed = isClosed;
     }
+    public Boolean getIsPriority() {
+        return isPriority;
+    }
+    public void setIsPriority(Boolean isPriority) {
+        this.isPriority = isPriority;
+    }
 
     @Override
     public String toString() {
@@ -233,6 +240,7 @@ public class Company {
                 "\"isRedirect\":\"" + isRedirect + "\"," +
                 "\"isOffPosition\":\"" + isOffPosition + "\"," +
                 "\"isClosed\":\"" + isClosed + "\"," +
+                "\"isPriority\":\"" + isPriority + "\"," +
                 "\"description\":\"" + description + "\"" +
                 '}';
     }
