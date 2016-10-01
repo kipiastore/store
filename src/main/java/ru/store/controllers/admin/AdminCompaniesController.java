@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,18 +104,86 @@ public class AdminCompaniesController {
     }
 
     @RequestMapping(value = "/admin/searchcompany", method = RequestMethod.POST)
-    public ModelAndView searchCompany(@RequestParam("name") String name, @RequestParam("legalName") String legalName,
-                                      @RequestParam("phone") String phone, @RequestParam("contractNum") String contractNum,
-                                      @RequestParam("email") String email) {
+    public ModelAndView searchCompany(@RequestParam MultiValueMap<String, String> searchMap) {
         ModelAndView modelAndView = new ModelAndView();
+        List<Company> companies = new ArrayList<>();
         try {
-
+            String value;
+            for (String key : searchMap.keySet()) {
+                value = (searchMap.get(key) + "").replace("[", "").replace("]", "").trim();
+                System.out.println(value);
+                if (!key.equals("_csrf") && !value.isEmpty()) {
+                    if (key.equals("name")) {
+                        companies = companyService.findCompaniesByName(value);
+                        break;
+                    }
+                    if (key.equals("legalName")) {
+                        companies = companyService.findCompaniesByLegalName(value);
+                        break;
+                    }
+                    if (key.equals("phone")) {
+                        companies = companyService.findCompaniesByPhone(value);
+                        break;
+                    }
+                    if (key.equals("contractNum")) {
+                        //companies = companyService.getCompaniesByLastUpdate(); wtf?
+                        break;
+                    }
+                    if (key.equals("email")) {
+                        companies = companyService.findCompaniesByEmail(value);
+                        break;
+                    }
+                }
+            }
+            System.out.println(companies);
         } catch (Exception ex) {
             modelAndView.addObject("deleteError", "Возникла ошибка. " + ex.getMessage());
+            ex.printStackTrace();
         }
         Model model = new Model();
+        Map<String, String> usernameToFullName = new HashMap<>();
+        for (User user : userService.getUsers()) {
+            if (user.getUserRole().isEmpty()) {
+                continue;
+            }
+            if (new ArrayList<>(user.getUserRole()).get(0).getRole().equals("ROLE_MANAGER")) {
+                usernameToFullName.put(user.getUsername(), user.getFullName());
+            }
+        }
         loadPage(model, modelAndView);
+
+        model.message = "Результаты поиска:";
+        model.companyList = new ArrayList<>();
+        for (Company company : companies) {
+            model.companyList.add(convert(company));
+        }
+        Map<String, String> packageIdToName = new HashMap<>();
+        for (Package aPackage : model.packages) {
+            packageIdToName.put(aPackage.getId()+"", aPackage.getName());
+        }
+        for (Model.CompaniesItem item : model.companyList) {
+            item.manager = usernameToFullName.get(item.manager);
+            item.aPackage = packageIdToName.get(item.aPackage);
+        }
+
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/addcompany", method = RequestMethod.GET)
+    public String redirect1() {
+        return "redirect:/admin/companies";
+    }
+    @RequestMapping(value = "/admin/updatecompany", method = RequestMethod.GET)
+    public String redirect2() {
+        return "redirect:/admin/companies";
+    }
+    @RequestMapping(value = "/admin/deletecompany", method = RequestMethod.GET)
+    public String redirect3() {
+        return "redirect:/admin/companies";
+    }
+    @RequestMapping(value = "/admin/searchcompany", method = RequestMethod.GET)
+    public String redirect4() {
+        return "redirect:/admin/companies";
     }
 
     private List<CompanyAddress> buildCompanyAddress(Company company, String addressJson) {
@@ -149,16 +218,31 @@ public class AdminCompaniesController {
         model.packages = packageService.getPackages();
         model.filterListMap = groupByFilter(companies);
         List<User> usersFilteredByRole = new ArrayList<>();
+        Map<String, String> usernameToFullName = new HashMap<>();
         for (User user : userService.getUsers()) {
             if (user.getUserRole().isEmpty()) {
                 continue;
             }
             if (new ArrayList<>(user.getUserRole()).get(0).getRole().equals("ROLE_MANAGER")) {
                 usersFilteredByRole.add(user);
+                usernameToFullName.put(user.getUsername(), user.getFullName());
             }
         }
         model.managers = usersFilteredByRole;
         model.numOfAddress = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        model.message = "Последние редактированные фирмы:";
+        model.companyList = new ArrayList<>();
+        for (Company company : companyService.getCompaniesByLastUpdate()) {
+            model.companyList.add(convert(company));
+        }
+        Map<String, String> packageIdToName = new HashMap<>();
+        for (Package aPackage : model.packages) {
+            packageIdToName.put(aPackage.getId()+"", aPackage.getName());
+        }
+        for (Model.CompaniesItem item : model.companyList) {
+            item.manager = usernameToFullName.get(item.manager);
+            item.aPackage = packageIdToName.get(item.aPackage);
+        }
     }
 
     private Map<Model.Filter, List<Model.CompaniesItem>> groupByFilter(List<Company> companies) {
@@ -340,20 +424,9 @@ public class AdminCompaniesController {
         companyItem.id = company.getId();
         companyItem.name = getNormalName(company.getName());
         companyItem.dateOfEndContract = company.getDateOfEndContract().toString().substring(0, 11);
+        companyItem.manager = company.getManager();
+        companyItem.aPackage = company.getCompanyPackageId() + "";
         return companyItem;
-    }
-
-    @RequestMapping(value = "/admin/addcompany", method = RequestMethod.GET)
-    public String redirect1() {
-        return "redirect:/admin/companies";
-    }
-    @RequestMapping(value = "/admin/updatecompany", method = RequestMethod.GET)
-    public String redirect2() {
-        return "redirect:/admin/companies";
-    }
-    @RequestMapping(value = "/admin/deletecompany", method = RequestMethod.GET)
-    public String redirect3() {
-        return "redirect:/admin/companies";
     }
 
     public static class Model {
@@ -376,6 +449,8 @@ public class AdminCompaniesController {
         public int[] numOfAddress;
         public String companyAddressJson;
         public Map<Filter, List<CompaniesItem>> filterListMap;
+        public List<CompaniesItem> companyList;
+        public String message;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
@@ -403,6 +478,12 @@ public class AdminCompaniesController {
         }
         public Map<Filter, List<CompaniesItem>> getFilterListMap() {
             return filterListMap;
+        }
+        public List<CompaniesItem> getCompanyList() {
+            return companyList;
+        }
+        public String getMessage() {
+            return message;
         }
 
         public static class Filter implements Comparable {
@@ -455,6 +536,8 @@ public class AdminCompaniesController {
             public int id;
             public String name;
             public String dateOfEndContract;
+            public String manager;
+            public String aPackage;
 
             public int getId() {
                 return id;
@@ -465,12 +548,21 @@ public class AdminCompaniesController {
             public String getDateOfEndContract() {
                 return dateOfEndContract;
             }
+            public String getManager() {
+                return manager;
+            }
+            public String getaPackage() {
+                return aPackage;
+            }
+
             @Override
             public String toString() {
                 return "CompaniesItem{" +
                         "id=" + id +
                         ", name='" + name + '\'' +
                         ", dateOfEndContract='" + dateOfEndContract + '\'' +
+                        ", manager='" + manager + '\'' +
+                        ", aPackage='" + aPackage + '\'' +
                         '}';
             }
         }

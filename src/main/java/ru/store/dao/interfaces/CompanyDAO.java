@@ -18,10 +18,17 @@ public interface CompanyDAO {
 
     Company getCompany(int id);
 
-    Company getCompany(String name);
-
     List<Company> getCompanies();
 
     List<Company> getCompanies(SubPartition subPartition);
 
+    List<Company> findCompaniesByName(String name);
+
+    List<Company> findCompaniesByLegalName(String legalName);
+
+    List<Company> findCompaniesByPhone(String phone);
+
+    List<Company> findCompaniesByEmail(String email);
+
+    List<Company> getCompaniesByLastUpdate();
 }

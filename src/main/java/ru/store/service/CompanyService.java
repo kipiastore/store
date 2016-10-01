@@ -46,12 +46,26 @@ public class CompanyService {
         return companyDAO.getCompany(id);
     }
 
-    public Company getCompany(String name) {
-        return companyDAO.getCompany(name);
-    }
-
     public List<Company> getCompanies() {
         return companyDAO.getCompanies();
+    }
+
+    public List<Company> getCompaniesByLastUpdate() { return companyDAO.getCompaniesByLastUpdate(); }
+
+    public List<Company> findCompaniesByName(String name) {
+        return companyDAO.findCompaniesByName(name);
+    }
+
+    public List<Company> findCompaniesByLegalName(String legalName) {
+        return companyDAO.findCompaniesByLegalName(legalName);
+    }
+
+    public List<Company> findCompaniesByPhone(String phone) {
+        return companyDAO.findCompaniesByPhone(phone);
+    }
+
+    public List<Company> findCompaniesByEmail(String email) {
+        return companyDAO.findCompaniesByEmail(email);
     }
 
     public List<Company> getCompanies(SubPartition subPartition) {

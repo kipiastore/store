@@ -22,7 +22,7 @@
                 <input type="text" maxlength="120" name="name" placeholder="Фирма"/>
                 <input type="text" maxlength="120" name="legalName" placeholder="Юр. Назв."/>
                 <input type="text" maxlength="120" name="phone" placeholder="Тел."/>
-                <input type="text" maxlength="120" name="contractNum" placeholder="№ Дог."/>
+                <input type="text" maxlength="120" name="contractNum" placeholder="№ Дог.(где его взять?)"/>
                 <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
             </form:form>
         </div>
@@ -36,12 +36,36 @@
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
 
+            <div class="container">
+                <span class="message">${model.message}</span>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Менеджер</th>
+                            <th>Пакет</th>
+                            <th>Истекает</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="item" items="${model.companyList}">
+                            <tr>
+                                <td class="tableName" id="ID-${item.id}">${item.name}</td>
+                                <td>${item.manager}</td>
+                                <td>${item.aPackage}</td>
+                                <td>${item.dateOfEndContract}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
             <form:form action="addcompany" modelAttribute="company" method="post" id="createForm">
                 <div class="left-body">
                     <label>Название<span class="required">*</span></label>
-                    <input title="Введите название фирмы." type="text" maxlength="120" name="name" id="newName" required />
+                    <input title="Введите название фирмы." type="text" maxlength="255" name="name" id="newName" required />
                     <label>Ключевые слова</label>
-                    <input title="Введите ключевые слова." type="text" maxlength="255" placeholder="Через точку с запятой: авто; ремонт;" type="text" name="keywords" id="newKeywords" />
+                    <input title="Введите ключевые слова." type="text" maxlength="255" placeholder="Через точку с запятой: авто; ремонт;" name="keywords" id="newKeywords" />
                     <label>Дата заключения договора<span class="required">*</span></label>
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="newDateOfContract" required />
                     <label>Срок договора от<span class="required">*</span></label>
@@ -62,6 +86,8 @@
                     </select>
                     <label>Стоимость<span class="required">*</span></label>
                     <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="newCostOf" required />
+                    <label>E-mail</label>
+                    <input title="Введите e-mail." type="text" maxlength="120" name="email" id="newEmail" />
                     <label>Информация</label>
                     <textarea rows="4" name="description" maxlength="255" id="newDescription"></textarea>
                 </div>
@@ -100,7 +126,7 @@
                     <div class="openRequisites">Реквизиты</div>
                     <div class="requisites">
                         <label>Юридическое название</label>
-                        <input title="Введите юридическое название фирмы." maxlength="120" type="text" name="legalName" id="newLegalName" />
+                        <input title="Введите юридическое название фирмы." maxlength="255" type="text" name="legalName" id="newLegalName" />
                         <label>ИНН</label>
                         <input title="Введите идентификационный код. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="inn" id="newInn" />
                         <label>Юридический адрес</label>
@@ -149,6 +175,8 @@
                     </select>
                     <label>Стоимость<span class="required">*</span></label>
                     <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="costOf" required />
+                    <label>E-mail</label>
+                    <input title="Введите e-mail." type="text" maxlength="120" name="email" id="email" />
                     <label>Информация</label>
                     <textarea rows="4" name="description" maxlength="255" id="description"></textarea>
                 </div>

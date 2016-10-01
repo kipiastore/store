@@ -1,7 +1,7 @@
 CREATE TABLE company
 (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(120) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     keywords VARCHAR(255),
     date_of_contract DATE NOT NULL,
     date_of_start_contract DATE NOT NULL,
@@ -27,5 +27,6 @@ CREATE TABLE company
     is_redirect TINYINT NOT NULL,
     is_off_position TINYINT NOT NULL,
     is_closed TINYINT NOT NULL,
-    is_priority TINYINT NOT NULL
+    is_priority TINYINT NOT NULL,
+    email VARCHAR(120)
 );

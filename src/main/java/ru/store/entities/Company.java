@@ -24,8 +24,8 @@ public class Company {
     private String fax;
     private String directorFullName;
     private String contactPerson;
-    private Timestamp createdDate = new Timestamp(new java.util.Date().getTime());
-    private Timestamp lastModifiedDate = new Timestamp(new java.util.Date().getTime());
+    private Timestamp createdDate;
+    private Timestamp lastModifiedDate;
     private String owner;
     private String lastModifiedBy;
     private String description;
@@ -36,14 +36,17 @@ public class Company {
     private Boolean isOffPosition = false;
     private Boolean isClosed = false;
     private Boolean isPriority = false;
-    //private String email;
+    private String email;
+
     //private String site;
     //private Partition partition;
     //private Collection<SubPartition> subPartitions;
     //private String logo;
 
     public Company() {
-
+        Timestamp tmp = new Timestamp(new java.util.Date().getTime());
+        createdDate = tmp;
+        lastModifiedDate = tmp;
     }
 
     public Timestamp getCreatedDate() {
@@ -214,6 +217,12 @@ public class Company {
     public void setIsPriority(Boolean isPriority) {
         this.isPriority = isPriority;
     }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public String toString() {
@@ -241,6 +250,7 @@ public class Company {
                 "\"isOffPosition\":\"" + isOffPosition + "\"," +
                 "\"isClosed\":\"" + isClosed + "\"," +
                 "\"isPriority\":\"" + isPriority + "\"," +
+                "\"email\":\"" + email + "\"," +
                 "\"description\":\"" + description + "\"" +
                 '}';
     }

@@ -38,6 +38,7 @@ var isRedirect;
 var isOffPosition;
 var isClosed;
 var isPriority;
+var email;
 
 var addressArray;
 var BreakException = {};
@@ -45,6 +46,9 @@ var BreakException = {};
 var dataCompanyAddressJson;
 
 $(window).on("load", function () {
+    var container = $(".container");
+    container.show();
+    container.animate({opacity: 1}, 200);
     if ($("#addError")[0].innerHTML != "") {
         try {
             var user = $.parseJSON($(".addingUserJson")[0].innerHTML);
@@ -62,6 +66,10 @@ $(window).on("load", function () {
 });
 
 $(".pageMenuButt").on("click", function (event) {
+    var container = $(".container");
+    container.animate({opacity: 0}, 200);
+    setTimeout(function() { container.hide(); }, 190);
+
     $(".error").hide();
     $(".success").hide();
     if (isShowUpdateForm) {
@@ -79,6 +87,10 @@ $(".pageMenuButt").on("click", function (event) {
         createForm.animate({opacity: 1}, 200);
         isShowCreateForm = true;
     }, 200);
+    cleanAddressBlocks();
+});
+
+function cleanAddressBlocks() {
     addressArray = [];
     var item;
     for (var i = 1; i < 13; i++) {
@@ -87,22 +99,68 @@ $(".pageMenuButt").on("click", function (event) {
         item.isOpen = false;
         addressArray[i] = item;
         $("#add" + i).hide();
-        $("#add" + i).removeAttr('required');
+        $("#adAd" + i).removeAttr('required');
         $("#adAd" + i).val("");
         $("#regAd" + i).val("-1");
         $("#phAd" + i).val("");
         $("#infAd" + i).val("");
         $("#UpAdd" + i).hide();
-        $("#UpAdd" + i).removeAttr('required');
+        $("#UpAdAd" + i).removeAttr('required');
         $("#UpAdAd" + i).val("");
         $("#UpRegAd" + i).val("-1");
         $("#UpPhAd" + i).val("");
         $("#UpInfAd" + i).val("");
         $("#UpAddId" + i).val("");
     }
+}
+
+
+
+$(".menuTitleText").on("click", function () {
+    if (document.URL.indexOf("searchcompany") != -1) // временное решение
+        window.location.replace(document.URL.replace("searchcompany", "companies"));
+    cleanAddressBlocks();
+    updateForm = $("#updateForm");
+    updateForm.animate({opacity: 0}, 200);
+    setTimeout(function() { updateForm.hide(); }, 200);
+    var createForm = $("#createForm");
+    createForm.animate({opacity: 0}, 200);
+    setTimeout(function() { createForm.hide(); }, 200);
+    var container = $(".container");
+    if (pageMenuButtTarget != undefined)
+        pageMenuButtTarget.setAttribute("style", "background : #738dae;");
+    $(".menuBodyItemInfo").css("border-left", "0");
+    setTimeout(function() {
+        container.show();
+        container.animate({opacity: 1}, 200);
+    }, 200);
+
+});
+
+$(".tableName").on("click", function (event) {
+    var container = $(".container");
+    container.animate({opacity: 0}, 200);
+    setTimeout(function() { container.hide(); }, 190);
+    updateForm = $("#updateForm");
+    setTimeout(function() {
+        updateForm.show();
+        updateForm.animate({opacity: 1}, 200);
+    }, 200);
+    isShowUpdateForm = true;
+
+    currentItem = event.target.getAttribute("id");
+    $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
+    $(".menuBodyItemButtDel").css("border-left", "0");
+    var id = currentItem.replace("ID-", "");
+    loadCompany(id);
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
+    var container = $(".container");
+    container.animate({opacity: 0}, 200);
+    setTimeout(function() { container.hide(); }, 190);
+    isShowUpdateForm = true;
+
     if (pageInformation == undefined)
         pageInformation = $("#pageInformation").val();
     if (!(pageInformation == 4 || pageInformation == 5 || pageInformation == 1))
@@ -166,115 +224,110 @@ $(".menuBodyItemInfo").on("click", function (event) {
         });
     }
     if (pageInformation == 1) {
-        if (data == undefined) {
-            data = $.parseJSON($(".dataJson")[0].innerHTML);
-            companyName = $("#name");
-            keywords = $("#keywords");
-            dateOfContract = $("#dateOfContract");
-            dateOfStartContract = $("#dateOfStartContract");
-            dateOfEndContract = $("#dateOfEndContract");
-            manager = $("#manager");
-            companyPackageId = $("#companyPackageId");
-            costOf = $("#costOf");
-            legalName = $("#legalName");
-            inn = $("#inn");
-            legalAddress = $("#legalAddress");
-            phone = $("#phone");
-            fax = $("#fax");
-            directorFullName = $("#directorFullName");
-            contactPerson = $("#contactPerson");
-            hiddenId = $("#hiddenId");
-            description = $("#description");
-            isShowForOperator = $("#isShowForOperator");
-            isShowForSite = $("#isShowForSite");
-            isPaid = $("#isPaid");
-            isRedirect = $("#isRedirect");
-            isOffPosition = $("#isOffPosition");
-            isClosed = $("#isClosed");
-            isPriority = $("#isPriority");
-        }
-        if (dataCompanyAddressJson == undefined) {
-            dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
-        }
-        var item;
-        addressArray = [];
-        for (var i = 1; i < 13; i++) {
-            item = {};
-            item.id = i;
-            item.isOpen = false;
-            addressArray[i] = item;
-            $("#add" + i).hide();
-            $("#add" + i).removeAttr('required');
-            $("#adAd" + i).val("");
-            $("#regAd" + i).val("-1");
-            $("#phAd" + i).val("");
-            $("#infAd" + i).val("");
-        }
-        data.forEach(function(entry) {
-            if (entry.id == id) {
-                companyName.val(entry.name);
-                keywords.val(entry.keywords);
-                dateOfContract.val(entry.dateOfContract.substring(0, 11));
-                dateOfStartContract.val(entry.dateOfStartContract.substring(0, 11));
-                dateOfEndContract.val(entry.dateOfEndContract.substring(0, 11));
-                manager.val(entry.manager);
-                companyPackageId.val(entry.companyPackageId);
-                costOf.val(entry.costOf);
-                legalName.val(entry.legalName);
-                if (entry.inn != "null")
-                    inn.val(entry.inn);
-                else
-                    inn.val("");
-                legalAddress.val(entry.legalAddress);
-                phone.val(entry.phone);
-                fax.val(entry.fax);
-                directorFullName.val(entry.directorFullName);
-                contactPerson.val(entry.contactPerson);
-                description.val(entry.description);
-
-                isShowForOperator.prop('checked', newBoolean(entry.isShowForOperator));
-                isShowForSite.prop('checked', newBoolean(entry.isShowForSite));
-                isPaid.prop('checked', newBoolean(entry.isPaid));
-                isRedirect.prop('checked', newBoolean(entry.isRedirect));
-                isOffPosition.prop('checked', newBoolean(entry.isOffPosition));
-                isClosed.prop('checked', newBoolean(entry.isClosed));
-                isPriority.prop('checked', newBoolean(entry.isPriority));
-
-                hiddenId.val(entry.id);
-                for (var i = 1; i < 13; i++) {
-                    item = {};
-                    item.id = i;
-                    item.isOpen = false;
-                    addressArray[i] = item;
-                    $("#UpAdd" + i).hide();
-                    $("#UpAdd" + i).removeAttr('required');
-                    $("#UpAdAd" + i).val("");
-                    $("#UpRegAd" + i).val("-1");
-                    $("#UpPhAd" + i).val("");
-                    $("#UpInfAd" + i).val("");
-                    $("#UpAddId" + i).val("");
-                }
-                var count = 1;
-                dataCompanyAddressJson.forEach(function(entry2) {
-                    if (entry2.companyId == entry.id) {
-                        entry2.companyAddresses.forEach(function(entry3) {
-                            addressArray[count].isOpen = true;
-                            $("#UpAdd" + count).show();
-                            $("#UpAdd" + count).prop("required", true);
-                            $("#UpAdAd" + count).val(entry3.address);
-                            $("#UpRegAd" + count).val(entry3.regionId);
-                            $("#UpPhAd" + count).val(entry3.phones);
-                            $("#UpInfAd" + count).val(entry3.information);
-                            $("#UpAddId" + count).val(entry3.id);
-                            count++;
-                        });
-                        calculatePosition(addressArray, "UpAdd");
-                    }
-                });
-            }
-        });
+        loadCompany(id);
     }
 });
+
+function loadCompany(id) {
+    if (data == undefined) {
+        data = $.parseJSON($(".dataJson")[0].innerHTML);
+        companyName = $("#name");
+        keywords = $("#keywords");
+        dateOfContract = $("#dateOfContract");
+        dateOfStartContract = $("#dateOfStartContract");
+        dateOfEndContract = $("#dateOfEndContract");
+        manager = $("#manager");
+        companyPackageId = $("#companyPackageId");
+        costOf = $("#costOf");
+        legalName = $("#legalName");
+        inn = $("#inn");
+        legalAddress = $("#legalAddress");
+        phone = $("#phone");
+        fax = $("#fax");
+        directorFullName = $("#directorFullName");
+        contactPerson = $("#contactPerson");
+        hiddenId = $("#hiddenId");
+        description = $("#description");
+        isShowForOperator = $("#isShowForOperator");
+        isShowForSite = $("#isShowForSite");
+        isPaid = $("#isPaid");
+        isRedirect = $("#isRedirect");
+        isOffPosition = $("#isOffPosition");
+        isClosed = $("#isClosed");
+        isPriority = $("#isPriority");
+        email = $("#email");
+    }
+    if (dataCompanyAddressJson == undefined) {
+        dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
+    }
+    var item;
+    addressArray = [];
+    cleanAddressBlocks();
+    data.forEach(function(entry) {
+        if (entry.id == id) {
+            companyName.val(entry.name);
+            keywords.val(entry.keywords);
+            dateOfContract.val(entry.dateOfContract.substring(0, 11));
+            dateOfStartContract.val(entry.dateOfStartContract.substring(0, 11));
+            dateOfEndContract.val(entry.dateOfEndContract.substring(0, 11));
+            manager.val(entry.manager);
+            companyPackageId.val(entry.companyPackageId);
+            costOf.val(entry.costOf);
+            legalName.val(entry.legalName);
+            if (entry.inn != "null")
+                inn.val(entry.inn);
+            else
+                inn.val("");
+            legalAddress.val(entry.legalAddress);
+            phone.val(entry.phone);
+            fax.val(entry.fax);
+            directorFullName.val(entry.directorFullName);
+            contactPerson.val(entry.contactPerson);
+            description.val(entry.description);
+            email.val(entry.email);
+
+            isShowForOperator.prop('checked', newBoolean(entry.isShowForOperator));
+            isShowForSite.prop('checked', newBoolean(entry.isShowForSite));
+            isPaid.prop('checked', newBoolean(entry.isPaid));
+            isRedirect.prop('checked', newBoolean(entry.isRedirect));
+            isOffPosition.prop('checked', newBoolean(entry.isOffPosition));
+            isClosed.prop('checked', newBoolean(entry.isClosed));
+            isPriority.prop('checked', newBoolean(entry.isPriority));
+
+            hiddenId.val(entry.id);
+            for (var i = 1; i < 13; i++) {
+                item = {};
+                item.id = i;
+                item.isOpen = false;
+                addressArray[i] = item;
+                $("#UpAdd" + i).hide();
+                $("#UpAdAd" + i).removeAttr('required');
+                $("#UpAdAd" + i).val("");
+                $("#UpRegAd" + i).val("-1");
+                $("#UpPhAd" + i).val("");
+                $("#UpInfAd" + i).val("");
+                $("#UpAddId" + i).val("");
+            }
+            var count = 1;
+            dataCompanyAddressJson.forEach(function(entry2) {
+                if (entry2.companyId == entry.id) {
+                    entry2.companyAddresses.forEach(function(entry3) {
+                        addressArray[count].isOpen = true;
+                        $("#UpAdd" + count).show();
+                        $("#UpAdAd" + count).prop("required", true);
+                        $("#UpAdAd" + count).val(entry3.address);
+                        $("#UpRegAd" + count).val(entry3.regionId);
+                        $("#UpPhAd" + count).val(entry3.phones);
+                        $("#UpInfAd" + count).val(entry3.information);
+                        $("#UpAddId" + count).val(entry3.id);
+                        count++;
+                    });
+                    calculatePosition(addressArray, "UpAdd");
+                }
+            });
+        }
+    });
+}
 
 function newBoolean(bool) {
     return bool != "false";
@@ -329,7 +382,9 @@ $(".UpCloseAdButt").on("click", function (event) {
     var addId = event.target.getAttribute('data-id');
     try {
         addressArray.forEach(function(entry) {
-            if (entry.id == addId && confirm("Удалить?\nАдрес будет удален после того, как вы нажмете Обновить.")) {
+            if (entry.id == addId &&
+                ($("#UpAddId" + entry.id).val() == "" ||
+                confirm("Удалить?\nАдрес будет удален после того, как вы нажмете Обновить."))) {
                 entry.isOpen = false;
                 $("#UpAdd" + entry.id ).hide();
                 $("#UpAdAd" + entry.id ).removeAttr('required');
