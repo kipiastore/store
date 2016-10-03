@@ -9,7 +9,14 @@ import java.util.List;
  */
 public interface PartitionDAO {
 
+    void createPartition(Partition partition);
+
+    void updatePartition(Partition partition);
+
+    void deletePartition(int id);
+
     List<Partition> getPartitions();
+
     Partition getPartitionById(int id);
 
 }

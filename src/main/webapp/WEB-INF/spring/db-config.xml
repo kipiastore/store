@@ -28,6 +28,8 @@
                 <value>ru/store/entities/Package.hbm.xml</value>
                 <value>ru/store/entities/Company.hbm.xml</value>
                 <value>ru/store/entities/CompanyAddress.xml</value>
+                <value>ru/store/entities/Partition.hbm.xml</value>
+                <value>ru/store/entities/SubPartition.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">

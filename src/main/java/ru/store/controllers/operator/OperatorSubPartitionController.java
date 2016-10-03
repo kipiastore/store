@@ -44,8 +44,8 @@ public class OperatorSubPartitionController {
         subPartitionItem.subPartitionId = subPartition.getId();
         subPartitionItem.subPartitionName = subPartition.getName();
         Model.PartitionItem partitionItem = new Model.PartitionItem();
-        partitionItem.partitionId = subPartition.getPartition().getId();
-        partitionItem.partitionName = subPartition.getPartition().getName();
+        //partitionItem.partitionId = subPartition.getPartition().getId();
+        //partitionItem.partitionName = subPartition.getPartition().getName();
         List<Model.CompanyItem> companyItems = new ArrayList<>();
         Model.CompanyItem companyItem;
         for (Company company : companies) {

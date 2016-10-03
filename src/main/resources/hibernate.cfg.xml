@@ -14,6 +14,8 @@
       <mapping resource="ru/store/entities/Package.hbm.xml"/>
       <mapping resource="ru/store/entities/Company.hbm.xml"/>
       <mapping resource="ru/store/entities/CompanyAddress.xml"/>
+      <mapping resource="ru/store/entities/Partition.hbm.xml"/>
+      <mapping resource="ru/store/entities/SubPartition.hbm.xml"/>
 
   </session-factory>
 </hibernate-configuration>

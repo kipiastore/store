@@ -36,13 +36,14 @@ public class PortalController {
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
             subPartitionItem.subPartitionName = subPartition.getName();
+            /*
             if (subPartitionItemsGroupByPartitionId.get(subPartition.getPartition().getId()) != null) {
                 subPartitionItemsGroupByPartitionId.get(subPartition.getPartition().getId()).add(subPartitionItem);
             } else {
                 subPartitionItems = new ArrayList<>();
                 subPartitionItems.add(subPartitionItem);
                 subPartitionItemsGroupByPartitionId.put(subPartition.getPartition().getId(), subPartitionItems);
-            }
+            }*/
         }
         // prepare next part of the model;
         List<Model.PartitionItem> partitionItems = new ArrayList<>();
