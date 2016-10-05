@@ -539,3 +539,14 @@ $(".searchButt").on("click", function () {
     $("#searchForm").submit();
 });
 
+$(document).ready(function(){
+    $("#partitionLevel").click(function() {
+        var val = $("#partitionLevel").val();
+        console.log(val);
+        if (val == 2)
+            $("#show").show();
+        else
+            $("#show").hide();
+    });
+});
+

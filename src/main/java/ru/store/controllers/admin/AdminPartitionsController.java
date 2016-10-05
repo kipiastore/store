@@ -14,6 +14,7 @@ import ru.store.service.SubPartitionService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminPartitionsController {
@@ -29,14 +30,17 @@ public class AdminPartitionsController {
         return modelAndView;
     }
     @RequestMapping(value = "/admin/addpartition", method = RequestMethod.POST)
-    public ModelAndView createPartition(@RequestParam("partitionLevel") String partitionLevel,@RequestParam("namePartition") String namePartition,@RequestParam("name") String name, @ModelAttribute("partition") Partition partition) {
+    public ModelAndView createPartition(@RequestParam("partitionLevel") String partitionLevel,
+                                        @RequestParam("namePartition") String namePartition,
+                                        @RequestParam("name") String name,
+                                        @ModelAttribute("partition") Partition partition) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            if(Integer.valueOf(partitionLevel)==1) {
+            if(Integer.valueOf(partitionLevel) == 1) {
                 partitionService.createPartition(partition);
             }
             else{
-                SubPartition sb=new SubPartition();
+                SubPartition sb = new SubPartition();
                 sb.setNamePartition(namePartition);
                 sb.setName(name);
                 subPartitionService.createSubPartition(sb);
@@ -98,10 +102,10 @@ public class AdminPartitionsController {
         model.partitionItems = partitionItems;
     }
     private ArrayList<String> loadPartitionList() {
-        List<Partition> partitionP=partitionService.getPartitions();
-        ArrayList<String> partitions=new ArrayList();
-        for(int i=0;i<partitionP.size();i++){
-            partitions.add(i,partitionP.get(i).getName());
+        List<Partition> partitionP = partitionService.getPartitions();
+        ArrayList<String> partitions = new ArrayList<>();
+        for (int i = 0; i < partitionP.size(); i++) {
+            partitions.add(i, partitionP.get(i).getName());
         }
         return partitions;
     }
@@ -132,12 +136,16 @@ public class AdminPartitionsController {
          */
         public int selectedPageNum;
         public List<PartitionItem> partitionItems;
+        public Map<String, List<PartitionItem>> subPartitionsGroupedByPartition;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
         }
         public List<PartitionItem> getPartitionItems() {
             return partitionItems;
+        }
+        public Map<String, List<PartitionItem>> getSubPartitionsGroupedByPartition() {
+            return subPartitionsGroupedByPartition;
         }
 
         public static class PartitionItem {
