@@ -7,8 +7,8 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="namePartition" type="string" >
-            <column name="name_partition" length="120" not-null="true" />
+        <property name="partitionId" type="java.lang.Integer" >
+            <column name="partition_id" not-null="true" />
         </property>
         <property name="name" type="string" >
             <column name="name" length="120" not-null="true" />

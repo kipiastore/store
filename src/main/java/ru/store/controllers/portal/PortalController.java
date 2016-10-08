@@ -2,8 +2,10 @@ package ru.store.controllers.portal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.BestCompanyDAO;
 import ru.store.dao.interfaces.PartitionDAO;
@@ -36,14 +38,13 @@ public class PortalController {
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
             subPartitionItem.subPartitionName = subPartition.getName();
-            /*
-            if (subPartitionItemsGroupByPartitionId.get(subPartition.getPartition().getId()) != null) {
-                subPartitionItemsGroupByPartitionId.get(subPartition.getPartition().getId()).add(subPartitionItem);
+            if (subPartitionItemsGroupByPartitionId.get(subPartition.getPartitionId()) != null) {
+                subPartitionItemsGroupByPartitionId.get(subPartition.getPartitionId()).add(subPartitionItem);
             } else {
                 subPartitionItems = new ArrayList<>();
                 subPartitionItems.add(subPartitionItem);
-                subPartitionItemsGroupByPartitionId.put(subPartition.getPartition().getId(), subPartitionItems);
-            }*/
+                subPartitionItemsGroupByPartitionId.put(subPartition.getPartitionId(), subPartitionItems);
+            }
         }
         // prepare next part of the model;
         List<Model.PartitionItem> partitionItems = new ArrayList<>();
@@ -63,7 +64,7 @@ public class PortalController {
             bestCompanyItem = new Model.BestCompanyItem();
             bestCompanyItem.companyId = bestCompany.getCompany().getId();
             bestCompanyItem.companyName = bestCompany.getCompany().getName();
-            //bestCompanyItem.companyLogoFileName = bestCompany.getCompany().getLogo();
+            bestCompanyItem.companyLogoFileName = "testLogo.jpg";
             bestCompanyItems.add(bestCompanyItem);
         }
         // prepare the model;
@@ -82,6 +83,14 @@ public class PortalController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView home() {
         return main();
+    }
+
+    @RequestMapping(value = "/sendmail", method = RequestMethod.POST)
+    public ModelAndView sendMail(@RequestParam MultiValueMap<String, String> mailMap) {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/index");
+        return modelAndView;
     }
 
     /**

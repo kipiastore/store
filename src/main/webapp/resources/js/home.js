@@ -85,3 +85,17 @@ $('.show-subsection').on('click', function(event) {
     itemId = event.target.getAttribute('data-id');
     $('#item-'+itemId).show();
 });
+
+$('.left-container').on("click", function() {
+    var container = $('.mail-container');
+    container.animate({opacity: 0}, 200);
+    setTimeout(function() { container.hide(); }, 190);
+});
+$('.right-container').on("click", function() {
+    var container = $('.mail-container');
+    container.animate({opacity: 0}, 200);
+    setTimeout(function() {
+        container.hide();
+        $('#mailForm').submit();
+    }, 190);
+});

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="k" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -55,15 +56,11 @@
                 <div class="rptShort">
                     <k:forEach var="partitionItem" items="${model.partitionItems}">
                         <p>
-                            <a data-id="${partitionItem.partitionId}" href="partition/${partitionItem.partitionId}">
-                                ${partitionItem.partitionName}
-                            </a>
-                            <span class="rua-p-c-red">
-                                ${partitionItem.companyCount}
-                            </span>
-                            <span class="show-subsection" data-id="${partitionItem.partitionId}"></span>
                             <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
                                 <span class="subsection-list" data-id="${partitionItem.partitionId}">
+                                    <k:if test="${partitionItem.subPartitionItems == null}" >
+                                        Список пуст!
+                                    </k:if>
                                     <k:forEach var="subPartitionItem" items="${partitionItem.subPartitionItems}">
                                         <a data-id="${partitionItem.partitionId}"
                                            href="subPartition/${subPartitionItem.subPartitionId}">${subPartitionItem.subPartitionName}</a>
@@ -71,6 +68,13 @@
                                     </k:forEach>
                                 </span>
                             </span>
+                            <a data-id="${partitionItem.partitionId}" href="partition/${partitionItem.partitionId}">
+                                ${partitionItem.partitionName}
+                            </a>
+                            <span class="rua-p-c-red">
+                                ${partitionItem.companyCount}
+                            </span>
+                            <span class="show-subsection" data-id="${partitionItem.partitionId}"></span>
                         </p>
                     </k:forEach>
                 </div>
@@ -98,9 +102,29 @@
     </div>
     <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
-    <%@include file="/WEB-INF/views/portal/components/menu.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>
+<div class="mail-container">
+    <div class="left-container"></div>
+    <div class="right-container"></div>
+    <div class="top-container"></div>
+    <div class="center-container">
+        <div class="mail-body">
+
+            <div class="mail-body-container">
+                <form:form action="sendmail" method="post" id="mailForm">
+                    <label>Имя<span class="required">*</span></label>
+                    <input title="Введите имя." type="text" maxlength="40" name="name" required />
+                    <label>Email<span class="required">*</span></label>
+                    <input title="Введите email." type="text" maxlength="80" name="email" required />
+                    <label>Сообщение<span class="required">*</span></label>
+                    <textarea rows="4" name="body" maxlength="255" required ></textarea>
+                </form:form>
+
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 </body>
 </html>

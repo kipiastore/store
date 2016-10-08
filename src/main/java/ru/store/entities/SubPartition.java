@@ -6,7 +6,7 @@ package ru.store.entities;
 public class SubPartition {
 
     private int id;
-    private String namePartition;
+    private Integer partitionId;
     private String name;
 
     public SubPartition() {
@@ -19,11 +19,11 @@ public class SubPartition {
     public void setId(int id) {
         this.id = id;
     }
-    public String getNamePartition() {
-        return namePartition;
+    public Integer getPartitionId() {
+        return partitionId;
     }
-    public void setNamePartition(String namePartition) {
-        this.namePartition = namePartition;
+    public void setPartitionId(Integer partitionId) {
+        this.partitionId = partitionId;
     }
     public String getName() {
         return name;

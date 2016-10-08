@@ -30,8 +30,8 @@
                     <div id="show" style="display:none">
                         <label>Выбирите название раздела к которому будет пренадлижать создаваемый подрездел</label>
                         <select name="namePartition" title="">
-                            <c:forEach var="item" items="${partitions}">
-                                <option>${item}</option>
+                            <c:forEach var="item" items="${model.partitionItems}">
+                                <option value="${item.id}">${item.name}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -45,19 +45,7 @@
         <span class="menuTitleText">Разделы</span>
     </div>
     <div class="menuBody">
-        <form:form action="deletepartition" method="post" id="deleteUserForm">
-            <!--
-            <c:forEach var="item" items="${model.partitionItems}">
-                <div class="menuBodyItem">
-                    <div class="menuBodyItemInfo" style="cursor: auto;" id="ID-${item.id}">
-                        <span id="ID-${item.id}">${item.name}</span><br/>
-                    </div>
-                    <div class="menuBodyItemButt">
-                        <div class="menuBodyItemButtDel" id="ID-${item.id}"></div>
-                    </div>
-                </div>
-            </c:forEach>
-            -->
+        <form:form action="deletepartition" method="post" id="deleteForm">
             <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
                 <div class="menuBodyItem">
                     <div class="menuBodyItemHeadInfo" data-id="${key.id}">
@@ -67,7 +55,7 @@
                 <div style="display: none" id="itemsID-${key.id}">
                     <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
                         <div class="menuBodyItem" >
-                            <div class="menuBodyItemInfo" id="ID-${item.id}">
+                            <div class="menuBodyItemInfo" style="cursor: auto;" id="ID-${item.id}">
                                 <span class="soloTest" id="ID-${item.id}">${item.name}</span>
                             </div>
                             <div class="menuBodyItemButt">
