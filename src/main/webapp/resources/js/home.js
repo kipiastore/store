@@ -92,6 +92,27 @@ $('.left-container').on("click", function() {
     setTimeout(function() { container.hide(); }, 190);
 });
 $('.right-container').on("click", function() {
+    var nameField = $('#nameField');
+    var emailField = $('#emailField');
+    var messageField = $('#messageField');
+    if (nameField.val() == "" || emailField.val() == "" || messageField.val() == "") {
+        if (nameField.val() == "") {
+            nameField.css("border-left", "2px solid #e8b3bd");
+        } else {
+            nameField.css("border-left", "1px solid #d8dde1;");
+        }
+        if (emailField.val() == "") {
+            emailField.css("border-left", "2px solid #e8b3bd");
+        } else {
+            emailField.css("border-left", "1px solid #d8dde1;");
+        }
+        if (messageField.val() == "") {
+            messageField.css("border-left", "2px solid #e8b3bd");
+        } else {
+            messageField.css("border-left", "1px solid #d8dde1;");
+        }
+        return;
+    }
     var container = $('.mail-container');
     container.animate({opacity: 0}, 200);
     setTimeout(function() {

@@ -9,6 +9,7 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 <a name="top" id="top"></a>
@@ -105,22 +106,28 @@
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>
 <div class="mail-container">
-    <div class="left-container"></div>
-    <div class="right-container"></div>
+    <div class="left-container">
+        <div class="top-container"></div>
+        <div class="email-cancel"></div>
+    </div>
+    <div class="right-container">
+        <div class="top-container"></div>
+        <div class="email-submit"></div>
+    </div>
     <div class="top-container"></div>
     <div class="center-container">
         <div class="mail-body">
-
             <div class="mail-body-container">
                 <form:form action="sendmail" method="post" id="mailForm">
                     <label>Имя<span class="required">*</span></label>
-                    <input title="Введите имя." type="text" maxlength="40" name="name" required />
+                    <input title="Введите имя." type="text" maxlength="40" name="name" id="nameField" required />
                     <label>Email<span class="required">*</span></label>
-                    <input title="Введите email." type="text" maxlength="80" name="email" required />
+                    <input title="Введите email." type="text" maxlength="80" name="email" id="emailField" required />
                     <label>Сообщение<span class="required">*</span></label>
-                    <textarea rows="4" name="body" maxlength="255" required ></textarea>
+                    <textarea rows="4" name="body" maxlength="1000" id="messageField" required ></textarea>
+                    <div class="g-recaptcha" data-sitekey="6Ldf0AgUAAAAACdVi3u5AiWVjPXsRlQazQZUQss4"></div>
+                    <input type="hidden" name="type" id="emailType" />
                 </form:form>
-
             </div>
         </div>
     </div>
