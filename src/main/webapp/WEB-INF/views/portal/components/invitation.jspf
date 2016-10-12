@@ -11,7 +11,7 @@
                 </ol>
             </div>
             <p class="mtmb">
-                <a class="header-link header-link-button" id="requestButt" href="">Оставить заявку</a>
+                <a class="header-link header-link-button" id="requestButt" >Оставить заявку</a>
             </p>
         </div>
         <div class="col d-1of2 m-1of1">

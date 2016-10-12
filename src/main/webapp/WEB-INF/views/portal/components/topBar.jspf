@@ -1,31 +1,60 @@
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page pageEncoding="UTF-8" %>
 <header class="header header-anon header-sticky" id="Header_header">
     <div class="header-inner">
         <ul class="header-menu-ul">
-            <li class="header-item">
-                <a class="header-link" href="home">Главная страница</a>
-            </li>
+            <k:if test="${!pageContext.request.requestURL.toString().contains('portal/index.jsp')}" >
+                <li class="header-item">
+                    <a class="header-link" href="<c:url value="/index"/>">Главная страница</a>
+                </li>
+            </k:if>
             <li class="header-item header-menu">
-                <a class="header-link" href="search">Страница поиска</a>
+                <a class="header-link" href="<c:url value="/search"/>">Страница поиска</a>
                 <ul class="header-menu-inner">
                     <li class="header-menu-item">
-                        <a class="header-menu-link" href="search/1">По рубрикам</a>
+                        <a class="header-menu-link" href="<c:url value="/search/1"/>">По рубрикам</a>
                     </li>
                     <li class="header-menu-item">
-                        <a class="header-menu-link" href="search/2">По районам</a>
+                        <a class="header-menu-link" href="<c:url value="/search/2"/>">По районам</a>
                     </li>
                     <li class="header-menu-item">
-                        <a class="header-menu-link" href="search/3">По компаниям</a>
+                        <a class="header-menu-link" href="<c:url value="/search/3"/>">По компаниям</a>
                     </li>
                 </ul>
             </li>
             <li class="header-item">
-                <a class="header-link header-link-button" href="discount" id="discounts">Акции</a>
+                <a class="header-link header-link-button" href="<c:url value="/discount"/>" id="discounts">Акции</a>
             </li>
-            <li class="header-item">
-                <a class="header-link header-link-button" href="login">Вход</a>
-            </li>
+            <sec:authorize access="isAnonymous()">
+                <li class="header-item">
+                    <a class="header-link header-link-button" href="<c:url value="/login"/>">Вход</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <li class="header-item header-menu">
+                        <a class="header-link header-link-button" href="<c:url value="/admin"/>">Личный кабинет</a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ROLE_MANAGER')">
+                    <li class="header-item header-menu">
+                        <a class="header-link header-link-button" href="<c:url value="/manager"/>">Личный кабинет</a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ROLE_OPERATOR')">
+                    <li class="header-item header-menu">
+                        <a class="header-link header-link-button" href="<c:url value="/operator"/>">Личный кабинет</a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ROLE_CLIENT')">
+                    <li class="header-item header-menu">
+                        <a class="header-link header-link-button" href="<c:url value="/client"/>">Личный кабинет</a>
+                    </li>
+                </sec:authorize>
+                <li class="header-item header-menu">
+                    <a class="header-link header-link-button" href="javascript:formSubmit()">Выход</a>
+                </li>
+            </sec:authorize>
         </ul>
         <div class="logo">
             <span class="phoneSpan">
@@ -33,7 +62,7 @@
                 <span class="phoneSpanNum">111&nbsp;11&nbsp;11</span>
             </span>
             <div class="circleBorder">
-                <a href="callinfo" class="circle">
+                <a href="<c:url value="/callinfo"/>" class="circle">
                     <img class="phoneImg" src="<c:url value="/resources/images/phone.png" />">
                 </a>
             </div>

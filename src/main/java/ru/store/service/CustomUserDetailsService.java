@@ -8,13 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.store.dao.interfaces.UserDAO;
 import ru.store.entities.UserRole;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -42,8 +38,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new ArrayList<>(authoritySet);
     }
 
-    // Converts User user to org.springframework.security.core.userdetails.User
     private User buildUserForAuthentication(ru.store.entities.User user, List<GrantedAuthority> authorities) {
         return new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, authorities);
     }
+
 }

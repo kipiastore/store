@@ -1,0 +1,39 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="mail-container">
+    <div class="left-container">
+        <div class="top-container"></div>
+        <div class="email-cancel"></div>
+    </div>
+    <div class="right-container">
+        <div class="top-container"></div>
+        <div class="email-submit"></div>
+    </div>
+    <div class="top-container"></div>
+    <div class="center-container">
+        <div class="mail-body">
+            <div class="mail-body-container">
+                <form:form action="sendmail" method="post" id="mailForm">
+                    <label>Имя<span class="required">*</span></label>
+                    <input title="Введите имя." type="text" maxlength="40" name="name" id="nameField" required />
+                    <label>Email<span class="required">*</span></label>
+                    <input title="Введите email." type="text" maxlength="80" name="email" id="emailField" required />
+                    <label>Сообщение<span class="required">*</span></label>
+                    <textarea rows="4" name="body" maxlength="1000" id="messageField" required ></textarea>
+                    <div class="g-recaptcha" data-sitekey="6Ldf0AgUAAAAACdVi3u5AiWVjPXsRlQazQZUQss4"></div>
+                    <input type="hidden" name="type" id="emailType" />
+                </form:form>
+            </div>
+        </div>
+    </div>
+</div>
+<c:url value="/login" var="logoutUrl" />
+<sec:authorize access="isAuthenticated()">
+    <form action="${logoutUrl}" method="post" id="logoutForm">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+    <script>
+        function formSubmit() {
+            document.getElementById("logoutForm").submit();
+        }
+    </script>
+</sec:authorize>

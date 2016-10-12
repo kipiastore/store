@@ -9,13 +9,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.dao.interfaces.RegionDAO;
-import ru.store.dao.interfaces.UserRoleDAO;
 import ru.store.entities.*;
 import ru.store.entities.Package;
 import ru.store.service.*;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -110,7 +107,7 @@ public class AdminCompaniesController {
         try {
             String value;
             for (String key : searchMap.keySet()) {
-                value = (searchMap.get(key) + "").replace("[", "").replace("]", "").trim();
+                value = searchMap.get(key).get(0).trim();
                 System.out.println(value);
                 if (!key.equals("_csrf") && !value.isEmpty()) {
                     if (key.equals("name")) {

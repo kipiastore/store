@@ -2,7 +2,7 @@
 body {
     font: 13px/20px "Open Sans", Tahoma, Verdana, sans-serif;
     color: #a7a599;
-    background: #31302b;
+    background: #b9babb;
 }
 .logo {
     background-position: center;
@@ -15,7 +15,7 @@ body {
 }
 .form .field {
     position: relative;
-    margin: 0 50px 20px;
+    margin: 0 24px 20px;
 }
 .form .field i {
     font-size: 18px;
@@ -33,11 +33,12 @@ body {
 }
 .login {
     position: relative;
-    width: 370px;
-    height: 315px;
+    width: 352px;
+    height: 310px;
     background: white;
     border-radius: 3px;
     margin: 100px auto 50px;
+    padding-top: 1px;
 }
 .login:before {
     content: '';
@@ -66,7 +67,7 @@ body {
     text-align: center;
 }
 .login p:first-child {
-    margin-top: 30px;
+    margin-top: 22px;
 }
 .login p .remember {
     float: left;
@@ -88,29 +89,26 @@ body {
     transition: all 0.3s ease-out;
 }
 .login p .forgot a:hover {
-    color: #f2672e;
+    color: #136f27;
 }
 ::-webkit-input-placeholder {
     color: #cec7ba;
-    //font-family: 'Open Sans';
 }
 :-moz-placeholder {
     color: #cec7ba !important;
-    //font-family: 'Open Sans';
 }
 .form input[type=text], input[type=password] {
-    font-family: 'Open Sans', Calibri, Arial, sans-serif;
+
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    transition: none;
+    box-shadow: none;
+    font-family: Arial, serif;
     font-size: 14px;
-    font-weight: 400;
-    padding: 10px 15px 10px 55px;
-    position: relative;
-    //color: #676056;
-    border: none;
-    background: #f7f3eb;
-    color: #777;
-    transition: color 0.3s ease-out;
-    width: 270px;
-    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 3px;
+    padding: 12px 20px 12px 10px;
 }
 .form input[type=text]:hover ~ i,
 .form input[type=password]:hover ~ i {
@@ -126,8 +124,7 @@ body {
     outline: none;
 }
 .form input[type=submit] {
-    margin-top: 8px;
-    width: 270px;
+    margin-top: 4px;
     text-align: center;
     font-size: 14px;
     font-family: 'Open Sans',sans-serif;
@@ -142,95 +139,37 @@ body {
     border: none;
     cursor: pointer;
     position: relative;
-    margin-bottom: 20px;
-    -webkit-animation: shadowFadeOut 0.4s;
-    -moz-animation: shadowFadeOut 0.4s;
+    margin-bottom: 10px;
+    width: 304px;
+    border-radius: 3px;
 }
 .form input[type=submit]:hover, input[type=submit]:focus {
     color: #fff;
-    box-shadow: inset 0 46px 0 0 #1abc9c;
-    -webkit-animation: shadowFade 0.4s;
-    -moz-animation: shadowFade 0.4s;
-}
-@keyframes shadowFade {
-    0% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
-        color: #fff;
-    }
-    100% {
-        box-shadow: inset 0 46px 0 0 #1abc9c;
-        color: #fff;
-    }
-}
-@keyframes shadowFadeOut {
-    0% {
-        box-shadow: inset 0 46px 0 0 #1abc9c;
-        color: #fff;
-    }
-    100% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
-        color: #fff;
-    }
-}
-@-webkit-keyframes shadowFade {
-    0% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
-        color: #fff;
-    }
-    100% {
-        box-shadow: inset 0 46px 0 0 #1abc9c;
-        color: #fff;
-    }
-}
-@-webkit-keyframes shadowFadeOut {
-    0% {
-        box-shadow: inset 0 46px 0 0 #1abc9c;
-        color: #fff;
-    }
-    100% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
-        color: #fff;
-    }
-}
-@-moz-keyframes shadowFade {
-    0% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
-        color: #fff;
-    }
-    100% {
-        box-shadow: inset 0 46px 0 0 #1abc9c;
-        color: #fff;
-    }
-}
-@-moz-keyframes shadowFadeOut {
-    0% {
-        box-shadow: inset 0 44px 0 0 #1abc9c;
-        color: #fff;
-    }
-    100% {
-        box-shadow: inset 0 0 0 0 #1abc9c;
-        color: #fff;
-    }
 }
 .form input[type="checkbox"] {
     display: none;
 }
 .copyright {
-    margin-top: 30px;
+    margin-top: -30px;
     text-align: center;
 }
 .copyright p, .copyright a {
-    color: #828078;
+    color: #fffefc;
     font-size: 12px;
     text-decoration: none;
-    transition: color 0.3s ease-out;
-}
-.copyright p a:hover, .copyright a a:hover {
-    color: #f2672e;
+    display: block;
+    width: 200px;
+    margin: auto;
+    border-radius: 3px;
+    background-color: rgba(22, 160, 133, 0.1);
 }
 .err {
     text-align: center;
     display: block;
-    color: #f36767;
-    margin-top: -18px;
+    color: #ef7878;
+    margin-top: -20px;
+}
+.g-recaptcha {
+    margin: auto;
+    width: 304px;
 }

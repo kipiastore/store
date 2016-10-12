@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Справочная</title>
+    <title>Справочная Одессы | Что-то ищете? Доверьте это профессионалам!</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
@@ -13,7 +13,7 @@
 </head>
 <body>
 <a name="top" id="top"></a>
-<form method="get" action="search" id="mainForm">
+<form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topbar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
@@ -105,33 +105,7 @@
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>
-<div class="mail-container">
-    <div class="left-container">
-        <div class="top-container"></div>
-        <div class="email-cancel"></div>
-    </div>
-    <div class="right-container">
-        <div class="top-container"></div>
-        <div class="email-submit"></div>
-    </div>
-    <div class="top-container"></div>
-    <div class="center-container">
-        <div class="mail-body">
-            <div class="mail-body-container">
-                <form:form action="sendmail" method="post" id="mailForm">
-                    <label>Имя<span class="required">*</span></label>
-                    <input title="Введите имя." type="text" maxlength="40" name="name" id="nameField" required />
-                    <label>Email<span class="required">*</span></label>
-                    <input title="Введите email." type="text" maxlength="80" name="email" id="emailField" required />
-                    <label>Сообщение<span class="required">*</span></label>
-                    <textarea rows="4" name="body" maxlength="1000" id="messageField" required ></textarea>
-                    <div class="g-recaptcha" data-sitekey="6Ldf0AgUAAAAACdVi3u5AiWVjPXsRlQazQZUQss4"></div>
-                    <input type="hidden" name="type" id="emailType" />
-                </form:form>
-            </div>
-        </div>
-    </div>
-</div>
+<%@include file="/WEB-INF/views/portal/components/emailWindow.jspf"%>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 </body>
 </html>

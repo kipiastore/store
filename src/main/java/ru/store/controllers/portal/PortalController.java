@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ru.store.beans.EmailSender;
+import ru.store.beans.GoogleCaptcha;
 import ru.store.dao.interfaces.BestCompanyDAO;
 import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.dao.interfaces.SubPartitionDAO;
@@ -27,6 +29,10 @@ public class PortalController {
     private BestCompanyDAO bestCompanyDAO;
     @Autowired
     private SubPartitionDAO subPartitionDAO;
+    @Autowired
+    private GoogleCaptcha googleCaptcha;
+    @Autowired
+    EmailSender emailSender;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
@@ -87,7 +93,14 @@ public class PortalController {
 
     @RequestMapping(value = "/sendmail", method = RequestMethod.POST)
     public ModelAndView sendMail(@RequestParam MultiValueMap<String, String> mailMap) {
-
+        GoogleCaptcha.CaptchaResponse captchaResponse = googleCaptcha.check(mailMap.get("g-recaptcha-response").get(0));
+        if (captchaResponse.success) {
+            String name = mailMap.get("name").get(0);
+            String email = mailMap.get("email").get(0);
+            String body = mailMap.get("body").get(0);
+            int type = Integer.valueOf(mailMap.get("type").get(0));
+            emailSender.send(name, email, body, type);
+        }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/index");
         return modelAndView;

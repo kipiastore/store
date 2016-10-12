@@ -12,14 +12,16 @@ function calculateAdditionalBlockPosition() {
     else if (additionalBlock.css('top') != '100px')
         additionalBlock.css('top', 100);
 }
+var header = $('#Header_header');
+header.show();
+header.animate({opacity: 1}, 500);
 
 $(window).on('load', function() {
     var preloader = $('.preloader');
-    var header = $('#Header_header');
+
     preloader.animate({opacity: 0}, 300);
     setTimeout(function() { preloader.hide(); }, 300);
-    header.show();
-    header.animate({opacity: 1}, 500);
+
     calculateAdditionalBlockPosition();
     additionalBlock.animate({left: 0}, 500);
 });
@@ -99,17 +101,17 @@ $('.right-container').on("click", function() {
         if (nameField.val() == "") {
             nameField.css("border-left", "2px solid #e8b3bd");
         } else {
-            nameField.css("border-left", "1px solid #d8dde1;");
+            nameField.css("border-left", "");
         }
         if (emailField.val() == "") {
             emailField.css("border-left", "2px solid #e8b3bd");
         } else {
-            emailField.css("border-left", "1px solid #d8dde1;");
+            emailField.css("border-left", "");
         }
         if (messageField.val() == "") {
             messageField.css("border-left", "2px solid #e8b3bd");
         } else {
-            messageField.css("border-left", "1px solid #d8dde1;");
+            messageField.css("border-left", "");
         }
         return;
     }
@@ -119,4 +121,22 @@ $('.right-container').on("click", function() {
         container.hide();
         $('#mailForm').submit();
     }, 190);
+});
+$('#requestButt').on("click", function() {
+    var container = $('.mail-container');
+    container.show();
+    container.animate({opacity: 1}, 200);
+    $('#emailType').val(1);
+});
+$('#imgButt').on("click", function() {
+    var container = $('.mail-container');
+    container.show();
+    container.animate({opacity: 1}, 200);
+    $('#emailType').val(2);
+});
+$('.b').on("click", function() {
+    var container = $('.mail-container');
+    container.show();
+    container.animate({opacity: 1}, 200);
+    $('#emailType').val(3);
 });

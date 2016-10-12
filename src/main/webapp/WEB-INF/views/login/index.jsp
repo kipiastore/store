@@ -7,19 +7,18 @@
     <title>Вход</title>
     <meta charset="UTF-8"/>
     <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet"/>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
     <div class="login">
-        <h1>Вход</h1>
         <form class="form" method="post" action="<k:url value='/j_spring_security_check' />">
             <p class="field">
                 <input type="text" name="username" placeholder="Логин" required/>
-                <i class="fa fa-user"></i>
             </p>
             <p class="field">
                 <input type="password" name="password" placeholder="Пароль" required/>
-                <i class="fa fa-lock"></i>
             </p>
+            <div class="g-recaptcha" data-sitekey="6Ldf0AgUAAAAACdVi3u5AiWVjPXsRlQazQZUQss4"></div>
             <p class="submit">
                 <input type="submit" name="sent" value="Войти">
             </p>
@@ -34,7 +33,6 @@
     </div>
     <div class="copyright">
         <p><a href="index">Главная страница</a></p>
-        <p>Copyright &copy; 2016. Created by <a href="">MyFrameTeam</a></p>
     </div>
 </body>
 </html>

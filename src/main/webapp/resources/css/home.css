@@ -891,7 +891,7 @@ footer.f .cr {
     max-width: 80%;
 }
 #header_img.header_img_variant_1 {
-    background-image: url("https://fierce-plateau-53854.herokuapp.com/resources/images/header.jpg");
+    background-image: url("../images/header.jpg");
 }
 #header_img .headline > small {
     display: block;
@@ -1214,6 +1214,7 @@ p::-moz-selection {
     text-align: center;
     color: #fff;
     border: 1px solid #b9dcd5;
+    cursor: pointer;
 }
 .graphImg {
     width: 160px;
@@ -1268,6 +1269,8 @@ p::-moz-selection {
     z-index: 1000;
     min-width: 1040px;
     min-height: 570px;
+    display: none;
+    opacity: 0;
 }
 .left-container {
     float: left;
@@ -1369,7 +1372,7 @@ p::-moz-selection {
     width: 128px;
     height: 128px;
     position: absolute;
-    right: 40px;
+    right: 35%;
     margin-top: 130px;
 }
 .email-submit {
@@ -1377,6 +1380,9 @@ p::-moz-selection {
     width: 128px;
     height: 128px;
     position: absolute;
-    left: 40px;
+    left: 35%;
     margin-top: 130px;
+}
+.b {
+    cursor: pointer;
 }
