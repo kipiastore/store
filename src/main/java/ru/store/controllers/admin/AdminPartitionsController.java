@@ -32,12 +32,8 @@ public class AdminPartitionsController {
         return modelAndView;
     }
     @RequestMapping(value = "/admin/addpartition", method = RequestMethod.POST)
-    public ModelAndView createPartition(
-            /*@RequestParam("partitionLevel") String partitionLevel,
-                                        @RequestParam("namePartition") String namePartition,
-                                        @RequestParam("name") String name,*/
-                                        @ModelAttribute("partition") Partition partition,
-            @RequestParam MultiValueMap<String, String> partitionRequestMap) {
+    public ModelAndView createPartition(@ModelAttribute("partition") Partition partition,
+                                        @RequestParam MultiValueMap<String, String> partitionRequestMap) {
         ModelAndView modelAndView = new ModelAndView();
         try {
             if(Integer.valueOf(partitionRequestMap.get("partitionLevel").toString().replace("[", "").replace("]", "")) == 1) {
@@ -102,7 +98,7 @@ public class AdminPartitionsController {
         for (Partition partition : partitionService.getPartitions()) {
             partitionItem = new Model.PartitionItem();
             partitionItem.id = partition.getId();
-            partitionItem.name = partition.getName();
+            partitionItem.name = getNormalName(partition.getName());
             partitionIdToPartitionItem.put(partition.getId(), partitionItem);
             partitionItems.add(partitionItem);
             subPartitionsGroupedByPartition.put(partitionItem, null);
@@ -112,21 +108,28 @@ public class AdminPartitionsController {
             if (subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())) != null) {
                 partitionItem = new Model.PartitionItem();
                 partitionItem.id = subPartition.getId();
-                partitionItem.name = subPartition.getName();
+                partitionItem.name = getNormalName(subPartition.getName());
                 subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())).add(partitionItem);
             } else {
                 mainPartitionItem = new Model.PartitionItem();
                 mainPartitionItem.id = partitionIdToPartitionItem.get(subPartition.getPartitionId()).getId();
-                mainPartitionItem.name = partitionIdToPartitionItem.get(subPartition.getPartitionId()).getName();
+                mainPartitionItem.name = getNormalName(partitionIdToPartitionItem.get(subPartition.getPartitionId()).getName());
                 partitionItems = new ArrayList<>();
                 partitionItem = new Model.PartitionItem();
                 partitionItem.id = subPartition.getId();
-                partitionItem.name = subPartition.getName();
+                partitionItem.name = getNormalName(subPartition.getName());
                 partitionItems.add(partitionItem);
                 subPartitionsGroupedByPartition.put(mainPartitionItem, partitionItems);
             }
         }
         model.subPartitionsGroupedByPartition = subPartitionsGroupedByPartition;
+    }
+
+    private String getNormalName(String name) {
+        if (name != null && name.length() > 26)
+            return name.substring(0, 26) + "..";
+        else
+            return name;
     }
 
     @RequestMapping(value = "/admin/addpartition", method = RequestMethod.GET)

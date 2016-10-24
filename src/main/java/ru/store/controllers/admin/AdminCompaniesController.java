@@ -67,7 +67,8 @@ public class AdminCompaniesController {
     }
 
     @RequestMapping(value = "/admin/updatecompany", method = RequestMethod.POST)
-    public ModelAndView updateCompany(@ModelAttribute("company") Company company, @RequestParam("hiddenId") String id,
+    public ModelAndView updateCompany(@ModelAttribute("company") Company company,
+                                      @RequestParam("hiddenId") String id,
                                       @RequestParam("UpAddressJson") String UpAddressJson,
                                       @RequestParam("UpDelete") String UpDelete) {
         ModelAndView modelAndView = new ModelAndView();
@@ -209,7 +210,6 @@ public class AdminCompaniesController {
             companyAddressItem.setCompanyAddresses(companyAddressService.getCompanyAddresses(company.getId()));
             companyAddressItems.add(companyAddressItem);
         }
-        model.companiesJson = companies.toString();
         model.companyAddressJson = companyAddressItems.toString();
         model.regions = regionService.getRegions();
         model.packages = packageService.getPackages();

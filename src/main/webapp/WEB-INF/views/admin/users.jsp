@@ -100,12 +100,9 @@
         </form:form>
     </div>
 </div>
-
 <span class="dataJson">${model.usersJson}</span>
 <span class="addingUserJson">${model.addingUserJson}</span>
-
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
-
 <script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
 </body>
 </html>

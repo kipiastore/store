@@ -663,6 +663,12 @@ tbody {
 .tableName:hover {
     color: #16b297;
 }
+.logout .homeLink {
+    color: #738dae;
+}
+.logout .homeLink:hover {
+    color: #16a085;
+}
 /*http://www.cssfontstack.com/Monaco
 
 CSS:

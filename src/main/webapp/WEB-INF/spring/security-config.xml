@@ -33,6 +33,7 @@
     <http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint">
         <access-denied-handler error-page="/403" />
         <intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/api/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/operator/**"  access="hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/client/**"  access="hasRole('ROLE_CLIENT')or hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />

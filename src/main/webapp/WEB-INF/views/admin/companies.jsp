@@ -273,11 +273,11 @@
     </div>
 </div>
 
-<span class="dataJson">${model.companiesJson}</span>
 <span class="addingUserJson">${model.addingCompanyJson}</span>
 <span class="companyAddressJson">${model.companyAddressJson}</span>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
 
 <script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
+
 </body>
 </html>
