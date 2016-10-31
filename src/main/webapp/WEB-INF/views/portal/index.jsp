@@ -14,7 +14,7 @@
 <body>
 <a name="top" id="top"></a>
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
-    <%@include file="/WEB-INF/views/portal/components/topbar.jspf"%>
+    <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 30px 0;">
