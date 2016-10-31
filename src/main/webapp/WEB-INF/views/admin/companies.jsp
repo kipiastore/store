@@ -22,7 +22,7 @@
                 <input type="text" maxlength="120" name="name" placeholder="Фирма"/>
                 <input type="text" maxlength="120" name="legalName" placeholder="Юр. Назв."/>
                 <input type="text" maxlength="120" name="phone" placeholder="Тел."/>
-                <input type="text" maxlength="120" name="contractNum" placeholder="№ Дог.(где его взять?)"/>
+                <input type="text" maxlength="120" name="contractNum" placeholder="№ Дог."/>
                 <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
             </form:form>
         </div>
@@ -230,12 +230,9 @@
                         <input title="Введите контактное лицо." maxlength="120" type="text" name="contactPerson" id="contactPerson"/>
                     </div>
                 </div>
-
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="hiddenId" id="hiddenId" />
-
                 <%@include file="/WEB-INF/views/admin/components/updateAddress.jspf"%>
-
                 <input type="submit" value="Обновить" />
             </form:form>
         </div>
@@ -256,7 +253,7 @@
                 </div>
                 <div style="display: none" id="itemsID-${key.id}">
                     <c:forEach var="item" items="${model.filterListMap.get(key)}">
-                        <div class="menuBodyItem"  >
+                        <div class="menuBodyItem" >
                             <div class="menuBodyItemInfo" id="ID-${item.id}">
                                 <span id="ID-${item.id}">${item.dateOfEndContract}</span><br/>
                                 <span id="ID-${item.id}">${item.name}</span>
