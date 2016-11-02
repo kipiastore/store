@@ -3,6 +3,7 @@ package ru.store.controllers.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,25 @@ public class AdminPositionsController {
     @RequestMapping(value = "/admin/positions", method = RequestMethod.GET)
     public ModelAndView positions() {
         ModelAndView modelAndView = new ModelAndView();
+        Model model = new Model();
+        loadPage(model, modelAndView);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/addsubpartitions", method = RequestMethod.POST)
+    public ModelAndView updateCompany(@ModelAttribute("company") Company company,
+                                      @RequestParam("hiddenId") String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            System.out.println(company);
+            System.out.println(id);
+            company.setId(Integer.valueOf(id));
+            companyService.updatePartitionCompany(company);
+            modelAndView.addObject("successMessage", "Обновление проведено успешно.");
+        } catch (Exception ex) {
+            modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());
+            ex.printStackTrace();
+        }
         Model model = new Model();
         loadPage(model, modelAndView);
         return modelAndView;
@@ -110,8 +130,12 @@ public class AdminPositionsController {
             return name;
     }
 
+    @RequestMapping(value = "/admin/addsubpartitions", method = RequestMethod.GET)
+    public String redirect1() {
+        return "redirect:/admin/positions";
+    }
     @RequestMapping(value = "/admin/positionsearchcompany", method = RequestMethod.GET)
-    public String redirect4() {
+    public String redirect2() {
         return "redirect:/admin/positions";
     }
 

@@ -13,6 +13,12 @@
         <property name="priority" type="java.lang.Integer" >
             <column name="priority" not-null="true" />
         </property>
+        <property name="cost" type="java.lang.Integer" >
+            <column name="cost" not-null="true" />
+        </property>
+        <property name="numOfPositions" type="java.lang.Integer" >
+            <column name="num_of_positions" not-null="true" />
+        </property>
         <property name="owner" type="string" >
             <column name="owner" length="45" not-null="true" />
         </property>

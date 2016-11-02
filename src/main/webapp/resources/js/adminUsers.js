@@ -150,7 +150,14 @@ $(".tableName").on("click", function (event) {
     $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
     $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
-    loadCompany(id);
+    if (pageInformation == undefined)
+        pageInformation = $("#pageInformation").val();
+    if (pageInformation == 1) {
+        loadCompany(id);
+    }
+    if (pageInformation == 2) {
+        $("#hiddenId").val(id);
+    }
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
@@ -543,7 +550,8 @@ $(document).ready(function(){
     });
 });
 
-
+//http://loudev.com/
+$('#optgroup').multiSelect({ selectableOptgroup: true });
 
 Date.prototype.customFormat = function(formatString){
     var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhhh,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;

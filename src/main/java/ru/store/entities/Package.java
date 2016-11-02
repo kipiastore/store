@@ -10,6 +10,8 @@ public class Package {
     private Integer id;
     private String name;
     private Integer priority;
+    private Integer cost;
+    private Integer numOfPositions;
     private Timestamp createdDate = new Timestamp(new java.util.Date().getTime());
     private String owner;
 
@@ -54,6 +56,18 @@ public class Package {
     public void setOwner(String owner) {
         this.owner = owner;
     }
+    public Integer getCost() {
+        return cost;
+    }
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
+    public Integer getNumOfPositions() {
+        return numOfPositions;
+    }
+    public void setNumOfPositions(Integer numOfPositions) {
+        this.numOfPositions = numOfPositions;
+    }
 
     @Override
     public String toString() {
@@ -61,6 +75,8 @@ public class Package {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", priority=" + priority +
+                ", cost=" + cost +
+                ", numOfPositions=" + numOfPositions +
                 ", createdDate=" + createdDate +
                 ", owner='" + owner + '\'' +
                 '}';

@@ -74,6 +74,7 @@
       <column name="is_closed" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="is_priority" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="email" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
+      <column name="positions" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="company_address" schema="" catalog="store" type="TABLE">
@@ -91,6 +92,8 @@
       <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="priority" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="num_of_positions" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cost" sqlType="DECIMAL" precision="10" scale="0" nullable="false" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="partitions" schema="" catalog="store" type="TABLE">

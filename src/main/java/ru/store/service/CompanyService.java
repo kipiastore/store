@@ -34,7 +34,18 @@ public class CompanyService {
         company.setCreatedDate(oldCompany.getCreatedDate());
         company.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
         company.setOwner(oldCompany.getOwner());
+        company.setPositions(oldCompany.getPositions());
         companyDAO.updateCompany(company);
+    }
+
+    public void updatePartitionCompany(Company company) {
+        Company oldCompany = getCompany(company.getId());
+        if (oldCompany == null) {
+            throw new NotFoundException("Фирма не найдена.");
+        }
+        oldCompany.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
+        oldCompany.setPositions(company.getPositions());
+        companyDAO.updateCompany(oldCompany);
     }
 
     public void deleteCompany(int id) {

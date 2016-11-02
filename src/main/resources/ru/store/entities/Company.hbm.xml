@@ -67,7 +67,9 @@
         <property name="description" type="string" >
             <column name="description" length="255" not-null="false" />
         </property>
-
+        <property name="positions" type="string" >
+            <column name="positions" length="255" not-null="false" />
+        </property>
         <property name="isShowForOperator" type="java.lang.Boolean" >
             <column name="is_show_for_operator" />
         </property>

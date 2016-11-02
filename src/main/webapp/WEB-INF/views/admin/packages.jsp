@@ -24,6 +24,10 @@
                 <input title="Введите название пакета." type="text" maxlength="120" name="name" required />
                 <label>Приоритет<span class="required">*</span></label>
                 <input title="Введите приоритет пакета." type="number" name="priority" required />
+                <label>Стоимость<span class="required">*</span></label>
+                <input title="Введите приоритет пакета." type="number" name="cost" required />
+                <label>Кол. Позиций<span class="required">*</span></label>
+                <input title="Введите приоритет пакета." type="number" name="numOfPositions" required />
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
                 <input type="submit" value="Добавить" />
             </form:form>

@@ -37,6 +37,7 @@ public class Company {
     private Boolean isClosed = false;
     private Boolean isPriority = false;
     private String email;
+    private String positions;
 
     //private String site;
     //private Partition partition;
@@ -223,6 +224,12 @@ public class Company {
     public void setEmail(String email) {
         this.email = email;
     }
+    public String getPositions() {
+        return positions;
+    }
+    public void setPositions(String positions) {
+        this.positions = positions;
+    }
 
     @Override
     public String toString() {
@@ -251,6 +258,7 @@ public class Company {
                 "\"isClosed\":\"" + isClosed + "\"," +
                 "\"isPriority\":\"" + isPriority + "\"," +
                 "\"email\":\"" + email + "\"," +
+                "\"positions\":\"" + positions + "\"," +
                 "\"description\":\"" + description + "\"" +
                 '}';
     }

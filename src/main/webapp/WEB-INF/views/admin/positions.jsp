@@ -5,6 +5,7 @@
 <html>
 <title>Позиции</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/admin.css" />"/>
+<link rel="stylesheet" href="<c:url value="/resources/css/multi-select.css" />" >
 <link rel="stylesheet" href="<c:url value="/resources/css/datepicker/jquery-ui.css" />"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/datepicker/jquery-ui.structure.css" />"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/datepicker/jquery-ui.theme.css" />"/>
@@ -54,6 +55,21 @@
                 </table>
             </div>
 
+            <form:form action="addsubpartitions" modelAttribute="company" method="post" id="updateForm">
+                <select id='optgroup' name="positions" multiple='multiple'>
+                    <optgroup label='Friends'>
+                        <option value='1'>Yoda</option>
+                        <option value='2'>Obiwan</option>
+                    </optgroup>
+                    <optgroup label='Enemies'>
+                        <option value='3'>Palpatine</option>
+                        <option value='4'>Darth Vader</option>
+                    </optgroup>
+                </select>
+                <input type="hidden" name="hiddenId" id="hiddenId" />
+                <input type="submit" value="Обновить" />
+            </form:form>
+
         </div>
     </div>
 </div>
@@ -67,6 +83,22 @@
     </div>
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.multi-select.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
+<style>
+    .pr {
+        float: left;
+        height: 40px;
+    }
+    .ms-container {
+        background: transparent url(<c:url value="/resources/images/switch.png" />) no-repeat 50% 50%;
+        width: auto;
+    }
+    @media screen and (max-width: 1235px) {
+        .body .pageMenu {
+            height: 182px;
+        }
+    }
+</style>
 </body>
 </html>
