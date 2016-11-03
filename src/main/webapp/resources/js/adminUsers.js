@@ -551,7 +551,10 @@ $(document).ready(function(){
 });
 
 //http://loudev.com/
-$('#optgroup').multiSelect({ selectableOptgroup: true });
+if (pageInformation == undefined)
+    pageInformation = $("#pageInformation").val();
+if (pageInformation == 2)
+    $('#optgroup').multiSelect({ selectableOptgroup: true });
 
 Date.prototype.customFormat = function(formatString){
     var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhhh,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;

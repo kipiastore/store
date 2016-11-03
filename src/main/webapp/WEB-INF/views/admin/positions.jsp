@@ -57,14 +57,13 @@
 
             <form:form action="addsubpartitions" modelAttribute="company" method="post" id="updateForm">
                 <select id='optgroup' name="positions" multiple='multiple'>
-                    <optgroup label='Friends'>
-                        <option value='1'>Yoda</option>
-                        <option value='2'>Obiwan</option>
-                    </optgroup>
-                    <optgroup label='Enemies'>
-                        <option value='3'>Palpatine</option>
-                        <option value='4'>Darth Vader</option>
-                    </optgroup>
+                    <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
+                        <optgroup label='${key.name}'>
+                            <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
+                                <option value="${item.id}">${item.name}</option>
+                            </c:forEach>
+                        </optgroup>
+                    </c:forEach>
                 </select>
                 <input type="hidden" name="hiddenId" id="hiddenId" />
                 <input type="submit" value="Обновить" />
@@ -79,7 +78,28 @@
         <span class="menuTitleText">Выбрать по разделу</span>
     </div>
     <div class="menuBody">
-
+        <form:form action="deletepartition" method="post" id="deleteForm">
+            <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
+                <div class="menuBodyItem">
+                    <div class="menuBodyItemHeadInfo" data-id="${key.id}">
+                        <span class="soloTest" data-id="${key.id}">${key.name}</span>
+                    </div>
+                </div>
+                <div style="display: none" id="itemsID-${key.id}">
+                    <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
+                        <div class="menuBodyItem" >
+                            <div class="menuBodyItemInfo" style="cursor: auto;" id="ID-${item.id}">
+                                <span class="soloTest" id="ID-${item.id}">${item.name}</span>
+                            </div>
+                            <div class="menuBodyItemButt">
+                                <div class="menuBodyItemButtDel" id="ID-${item.id}"></div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:forEach>
+            <input type="hidden" name="partitionId" id="deleteKey" />
+        </form:form>
     </div>
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>

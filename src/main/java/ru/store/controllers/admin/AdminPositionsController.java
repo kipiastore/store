@@ -25,6 +25,10 @@ public class AdminPositionsController {
 
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private SubPartitionService subPartitionService;
+    @Autowired
+    private PartitionService partitionService;
 
     @RequestMapping(value = "/admin/positions", method = RequestMethod.GET)
     public ModelAndView positions() {
@@ -113,7 +117,38 @@ public class AdminPositionsController {
         for (Company company : companyService.getCompaniesByLastUpdate()) {
             model.companyList.add(convert(company));
         }
-
+        List<Model.PartitionItem> partitionItems = new ArrayList<>();
+        Model.PartitionItem partitionItem;
+        Model.PartitionItem mainPartitionItem;
+        Map<Integer, Model.PartitionItem> partitionIdToPartitionItem = new HashMap<>();
+        Map<Model.PartitionItem, List<Model.PartitionItem>> subPartitionsGroupedByPartition = new HashMap<>();
+        for (Partition partition : partitionService.getPartitions()) {
+            partitionItem = new Model.PartitionItem();
+            partitionItem.id = partition.getId();
+            partitionItem.name = getNormalName(partition.getName());
+            partitionIdToPartitionItem.put(partition.getId(), partitionItem);
+            partitionItems.add(partitionItem);
+            subPartitionsGroupedByPartition.put(partitionItem, null);
+        }
+        for (SubPartition subPartition : subPartitionService.getSubPartitions()) {
+            if (subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())) != null) {
+                partitionItem = new Model.PartitionItem();
+                partitionItem.id = subPartition.getId();
+                partitionItem.name = getNormalName(subPartition.getName());
+                subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())).add(partitionItem);
+            } else {
+                mainPartitionItem = new Model.PartitionItem();
+                mainPartitionItem.id = partitionIdToPartitionItem.get(subPartition.getPartitionId()).getId();
+                mainPartitionItem.name = getNormalName(partitionIdToPartitionItem.get(subPartition.getPartitionId()).getName());
+                partitionItems = new ArrayList<>();
+                partitionItem = new Model.PartitionItem();
+                partitionItem.id = subPartition.getId();
+                partitionItem.name = getNormalName(subPartition.getName());
+                partitionItems.add(partitionItem);
+                subPartitionsGroupedByPartition.put(mainPartitionItem, partitionItems);
+            }
+        }
+        model.subPartitionsGroupedByPartition = subPartitionsGroupedByPartition;
     }
 
     private Model.CompaniesItem convert(Company company) {
@@ -153,6 +188,7 @@ public class AdminPositionsController {
         public int selectedPageNum;
         public List<CompaniesItem> companyList;
         public String message;
+        public Map<PartitionItem, List<PartitionItem>> subPartitionsGroupedByPartition;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
@@ -162,6 +198,9 @@ public class AdminPositionsController {
         }
         public String getMessage() {
             return message;
+        }
+        public Map<PartitionItem, List<PartitionItem>> getSubPartitionsGroupedByPartition() {
+            return subPartitionsGroupedByPartition;
         }
 
         public static class CompaniesItem {
@@ -179,6 +218,38 @@ public class AdminPositionsController {
                 return manager;
             }
 
+        }
+
+        public static class PartitionItem {
+            public int id;
+            public String name;
+
+            public PartitionItem() {
+            }
+
+            public PartitionItem(int id) {
+                this.id = id;
+            }
+
+            public int getId() {
+                return id;
+            }
+            public String getName() {
+                return name;
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                PartitionItem that = (PartitionItem) o;
+                return id == that.id;
+
+            }
+            @Override
+            public int hashCode() {
+                return id;
+            }
         }
     }
 }
