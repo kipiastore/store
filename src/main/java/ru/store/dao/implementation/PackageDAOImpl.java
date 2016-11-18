@@ -26,6 +26,12 @@ public class PackageDAOImpl implements PackageDAO {
 
     @Override
     @Transactional
+    public void updatePackage(Package aPackage) {
+        sessionFactory.getCurrentSession().update(aPackage);
+    }
+
+    @Override
+    @Transactional
     public void deletePackage(Integer id) {
         String hql = "delete from Package where id =:id";
         sessionFactory.getCurrentSession().createQuery(hql).setInteger("id", id).executeUpdate();
@@ -40,9 +46,9 @@ public class PackageDAOImpl implements PackageDAO {
 
     @Override
     @Transactional
-    public Package getPackage(String name) {
-        String hql = "from Region where name =?";
-        List<Package> packages = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, name).list();
+    public Package getPackage(Integer id) {
+        String hql = "from Package where id =?";
+        List<Package> packages = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, id).list();
         if (packages != null && packages.size() > 0)
             return packages.get(0);
         else

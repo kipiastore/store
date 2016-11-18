@@ -60,12 +60,13 @@
                     <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
                         <optgroup label='${key.name}'>
                             <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
-                                <option value="${item.id}">${item.name}</option>
+                                <option class="pickListItem" data="ID-${item.id}" value="${item.id}">${item.name}</option>
                             </c:forEach>
                         </optgroup>
                     </c:forEach>
                 </select>
                 <input type="hidden" name="hiddenId" id="hiddenId" />
+                <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="submit" value="Обновить" />
             </form:form>
 
@@ -78,7 +79,7 @@
         <span class="menuTitleText">Выбрать по разделу</span>
     </div>
     <div class="menuBody">
-        <form:form action="deletepartition" method="post" id="deleteForm">
+        <form:form action="" method="post" id="deleteForm">
             <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
                 <div class="menuBodyItem">
                     <div class="menuBodyItemHeadInfo" data-id="${key.id}">
@@ -88,11 +89,8 @@
                 <div style="display: none" id="itemsID-${key.id}">
                     <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
                         <div class="menuBodyItem" >
-                            <div class="menuBodyItemInfo" style="cursor: auto;" id="ID-${item.id}">
+                            <div class="menuBodyItemInfo" id="ID-${item.id}">
                                 <span class="soloTest" id="ID-${item.id}">${item.name}</span>
-                            </div>
-                            <div class="menuBodyItemButt">
-                                <div class="menuBodyItemButtDel" id="ID-${item.id}"></div>
                             </div>
                         </div>
                     </c:forEach>
@@ -104,7 +102,7 @@
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.multi-select.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/admin/adminPosition.js" />"></script>
 <style>
     .pr {
         float: left;
@@ -114,9 +112,9 @@
         background: transparent url(<c:url value="/resources/images/switch.png" />) no-repeat 50% 50%;
         width: auto;
     }
-    @media screen and (max-width: 1235px) {
+    @media screen and (max-width: 1136px) {
         .body .pageMenu {
-            height: 182px;
+            height: 108px;
         }
     }
 </style>

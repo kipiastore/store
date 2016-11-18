@@ -45,6 +45,7 @@ public class CompanyService {
         }
         oldCompany.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
         oldCompany.setPositions(company.getPositions());
+        oldCompany.setLastModifiedBy(company.getLastModifiedBy());
         companyDAO.updateCompany(oldCompany);
     }
 

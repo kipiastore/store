@@ -255,7 +255,7 @@
                     <c:forEach var="item" items="${model.filterListMap.get(key)}">
                         <div class="menuBodyItem" >
                             <div class="menuBodyItemInfo" id="ID-${item.id}">
-                                <span id="ID-${item.id}">${item.dateOfEndContract}</span><br/>
+                                <span id="ID-${item.id}">Договор до: ${item.dateOfEndContract}</span><br/>
                                 <span id="ID-${item.id}">${item.name}</span>
                             </div>
                             <div class="menuBodyItemButt">
@@ -275,6 +275,10 @@
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
 
 <script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
-
+<style>
+    @media screen and (max-width : 1215px) {
+        .body .pageMenu { height: 76px; }
+    }
+</style>
 </body>
 </html>

@@ -93,8 +93,8 @@ public class AdminUsersController {
             }
             if (new ArrayList<>(user.getUserRole()).get(0).getRole().equals(role)) {
                 userItem = new Model.UserItem();
-                if (user.getFullName() != null && user.getFullName().length() > 26)
-                    userItem.fullName = user.getFullName().substring(0, 26) + "..";
+                if (user.getFullName() != null && user.getFullName().length() > 24)
+                    userItem.fullName = user.getFullName().substring(0, 24) + "..";
                 else
                     userItem.fullName = user.getFullName();
                 userItem.userName = user.getUsername();

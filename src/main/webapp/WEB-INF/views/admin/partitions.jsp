@@ -21,7 +21,7 @@
             <span class="success">${successMessage}</span>
             <form:form action="addpartition" modelAttribute="partition"  method="post" id="createForm">
                 <label>Название раздела/подраздела<span class="required">*</span></label>
-                <input title="Введите название раздела." type="text" name="name" required />
+                <input title="Введите название раздела." maxlength="120" type="text" name="name" required />
                 <label>Тип раздел/подраздел</label>
                 <select name="partitionLevel" id="partitionLevel" title="">
                     <option value="1">Раздел</option>
@@ -70,6 +70,6 @@
     </div>
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
-<script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/admin/adminPartition.js" />"></script>
 </body>
 </html>

@@ -11,10 +11,12 @@ public interface PackageDAO {
 
     void createPackage(Package aPackage);
 
+    void updatePackage(Package aPackage);
+
     void deletePackage(Integer id);
 
     List<Package> getPackages();
 
-    Package getPackage(String name);
+    Package getPackage(Integer id);
 
 }

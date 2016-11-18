@@ -74,8 +74,8 @@ public class AdminRegionsController {
         for (Region region : regionService.getRegions()) {
             regionItem = new Model.RegionItem();
             regionItem.id = region.getId();
-            if (region.getName() != null && region.getName().length() > 26)
-                regionItem.name = region.getName().substring(0, 26) + "..";
+            if (region.getName() != null && region.getName().length() > 24)
+                regionItem.name = region.getName().substring(0, 24) + "..";
             else
                 regionItem.name = region.getName();
             regionItems.add(regionItem);

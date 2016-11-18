@@ -12,18 +12,16 @@ public class Package {
     private Integer priority;
     private Integer cost;
     private Integer numOfPositions;
-    private Timestamp createdDate = new Timestamp(new java.util.Date().getTime());
+    private Timestamp createdDate;
+    private Timestamp lastModifiedDate;
+    private String lastModifiedBy;
+
     private String owner;
 
     public Package() {
-
-    }
-    public Package(Integer id, String name, Integer priority, Timestamp createdDate, String owner) {
-        this.id = id;
-        this.name = name;
-        this.priority = priority;
-        this.createdDate = createdDate;
-        this.owner = owner;
+        Timestamp tmp = new Timestamp(new java.util.Date().getTime());
+        createdDate = tmp;
+        lastModifiedDate = tmp;
     }
 
     public Integer getId() {
@@ -68,17 +66,16 @@ public class Package {
     public void setNumOfPositions(Integer numOfPositions) {
         this.numOfPositions = numOfPositions;
     }
-
-    @Override
-    public String toString() {
-        return "Package{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", priority=" + priority +
-                ", cost=" + cost +
-                ", numOfPositions=" + numOfPositions +
-                ", createdDate=" + createdDate +
-                ", owner='" + owner + '\'' +
-                '}';
+    public Timestamp getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+    public void setLastModifiedDate(Timestamp lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 }

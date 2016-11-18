@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.store.dao.interfaces.CompanyAddressDAO;
 import ru.store.entities.CompanyAddress;
+import sun.tools.tree.ShiftRightExpression;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class CompanyAddressDAOImpl implements CompanyAddressDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
-
+    
     @Override
     @Transactional
     public void createCompanyAddress(CompanyAddress companyAddress) {

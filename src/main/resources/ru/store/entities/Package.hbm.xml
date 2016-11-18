@@ -25,5 +25,11 @@
         <property name="createdDate" type="timestamp" >
             <column name="created_datetime" not-null="true" />
         </property>
+        <property name="lastModifiedDate" type="timestamp">
+            <column name="last_modified_date" not-null="true" />
+        </property>
+        <property name="lastModifiedBy" type="string">
+            <column name="last_modified_by" length="45" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -410,8 +410,8 @@ public class AdminCompaniesController {
     }
 
     private String getNormalName(String name) {
-        if (name != null && name.length() > 26)
-            return name.substring(0, 26) + "..";
+        if (name != null && name.length() > 24)
+            return name.substring(0, 24) + "..";
         else
             return name;
     }

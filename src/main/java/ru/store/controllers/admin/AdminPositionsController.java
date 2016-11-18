@@ -43,8 +43,6 @@ public class AdminPositionsController {
                                       @RequestParam("hiddenId") String id) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            System.out.println(company);
-            System.out.println(id);
             company.setId(Integer.valueOf(id));
             companyService.updatePartitionCompany(company);
             modelAndView.addObject("successMessage", "Обновление проведено успешно.");
@@ -159,8 +157,8 @@ public class AdminPositionsController {
     }
 
     private String getNormalName(String name) {
-        if (name != null && name.length() > 26)
-            return name.substring(0, 26) + "..";
+        if (name != null && name.length() > 24)
+            return name.substring(0, 24) + "..";
         else
             return name;
     }

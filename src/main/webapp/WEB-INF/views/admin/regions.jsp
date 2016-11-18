@@ -21,7 +21,7 @@
             <span class="success">${successMessage}</span>
             <form:form action="addregion" modelAttribute="region" method="post" id="createForm">
                 <label>Район<span class="required">*</span></label>
-                <input title="Введите название района." maxlength="120" type="text" style="text-transform : uppercase;"
+                <input autofocus title="Введите название района." maxlength="120" type="text" style="text-transform : uppercase;"
                        name="name" required />
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
                 <input type="submit" value="Добавить" />
@@ -51,6 +51,6 @@
     </div>
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
-<script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/admin/adminRegions.js" />"></script>
 </body>
 </html>

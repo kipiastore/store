@@ -44,6 +44,23 @@ public class AdminPackagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/admin/updatepackage", method = RequestMethod.POST)
+    public ModelAndView updatePackage(@ModelAttribute("package") Package aPackage,
+                                      @RequestParam("hiddenId") String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            aPackage.setId(Integer.valueOf(id));
+            packageService.updatePackage(aPackage);
+            modelAndView.addObject("successMessage", "Обновление проведено успешно.");
+        } catch (Exception ex) {
+            modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        Model model = new Model();
+        loadPage(modelAndView, model);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/admin/deletepackage", method = RequestMethod.POST)
     public ModelAndView deletePackage(@RequestParam("packageId") String packageId) {
         ModelAndView modelAndView = new ModelAndView();
@@ -72,8 +89,8 @@ public class AdminPackagesController {
         for (Package aPackage : packageService.getPackages()) {
             packageItem = new Model.PackageItem();
             packageItem.id = aPackage.getId();
-            if (aPackage.getName() != null && aPackage.getName().length() > 26)
-                packageItem.name = aPackage.getName().substring(0, 26) + "..";
+            if (aPackage.getName() != null && aPackage.getName().length() > 24)
+                packageItem.name = aPackage.getName().substring(0, 24) + "..";
             else
                 packageItem.name = aPackage.getName();
             packageItem.priority = aPackage.getPriority();
@@ -88,6 +105,10 @@ public class AdminPackagesController {
     }
     @RequestMapping(value = "/admin/deletepackage", method = RequestMethod.GET)
     public String redirect2() {
+        return "redirect:/admin/packages";
+    }
+    @RequestMapping(value = "/admin/updatepackage", method = RequestMethod.GET)
+    public String redirect3() {
         return "redirect:/admin/packages";
     }
 

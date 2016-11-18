@@ -14,9 +14,9 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/store" />
+        <property name="url" value="jdbc:mysql://localhost:3306/store?UseUnicode=true&amp;characterEncoding=utf8" />
         <property name="username" value="root" />
-        <property name="password" value="Asura3412453" />
+        <property name="password" value="123456789" />
     </bean>
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -30,6 +30,7 @@
                 <value>ru/store/entities/CompanyAddress.xml</value>
                 <value>ru/store/entities/Partition.hbm.xml</value>
                 <value>ru/store/entities/SubPartition.hbm.xml</value>
+                <value>ru/store/entities/Report.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">

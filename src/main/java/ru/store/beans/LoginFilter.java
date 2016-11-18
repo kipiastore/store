@@ -26,7 +26,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String reCaptchaResponse = request.getParameter("g-recaptcha-response");
         GoogleCaptcha.CaptchaResponse captchaResponse = googleCaptcha.check(reCaptchaResponse);
-        if (!captchaResponse.success) {
+        if (captchaResponse == null || !captchaResponse.success) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("JSESSIONID")) {

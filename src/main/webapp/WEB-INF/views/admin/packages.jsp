@@ -21,15 +21,29 @@
             <span class="success">${successMessage}</span>
             <form:form action="addpackage" modelAttribute="package" method="post" id="createForm">
                 <label>Название<span class="required">*</span></label>
-                <input title="Введите название пакета." type="text" maxlength="120" name="name" required />
+                <input autofocus title="Введите название пакета." type="text" maxlength="120" name="name" required />
                 <label>Приоритет<span class="required">*</span></label>
-                <input title="Введите приоритет пакета." type="number" name="priority" required />
+                <input title="Введите приоритет пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="priority" required />
                 <label>Стоимость<span class="required">*</span></label>
-                <input title="Введите приоритет пакета." type="number" name="cost" required />
+                <input title="Введите стоимость пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="cost" required />
                 <label>Кол. Позиций<span class="required">*</span></label>
-                <input title="Введите приоритет пакета." type="number" name="numOfPositions" required />
+                <input title="Введите кол. позиций пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="numOfPositions" required />
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
+                <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="submit" value="Добавить" />
+            </form:form>
+            <form:form action="updatepackage" modelAttribute="package" method="post" id="updateForm">
+                <label>Название<span class="required">*</span></label>
+                <input autofocus title="Введите название пакета." type="text" maxlength="120" name="name" id="name" required />
+                <label>Приоритет<span class="required">*</span></label>
+                <input title="Введите приоритет пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="priority" id="priority" required />
+                <label>Стоимость<span class="required">*</span></label>
+                <input title="Введите стоимость пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="cost" id="cost" required />
+                <label>Кол. Позиций<span class="required">*</span></label>
+                <input title="Введите кол. позиций пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="numOfPositions" id="numOfPositions" required />
+                <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
+                <input type="hidden" name="hiddenId" id="hiddenId" />
+                <input type="submit" value="Обновить" />
             </form:form>
         </div>
     </div>
@@ -43,7 +57,7 @@
         <form:form action="deletepackage" method="post" id="deleteForm">
             <c:forEach var="item" items="${model.packageItems}">
                 <div class="menuBodyItem">
-                    <div class="menuBodyItemInfo" style="cursor: auto;" id="ID-${item.id}">
+                    <div class="menuBodyItemInfo" id="ID-${item.id}">
                         <span id="ID-${item.id}">Приоритет: ${item.priority}</span><br/>
                         <span id="ID-${item.id}">${item.name}</span>
                     </div>
@@ -57,6 +71,6 @@
     </div>
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
-<script type="text/javascript" src="<c:url value="/resources/js/adminUsers.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/admin/adminPackages.js" />"></script>
 </body>
 </html>

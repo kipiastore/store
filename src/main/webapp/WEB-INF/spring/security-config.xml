@@ -33,7 +33,7 @@
     <http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint">
         <access-denied-handler error-page="/403" />
         <intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/api/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/api/admin/**"  access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/operator/**"  access="hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/client/**"  access="hasRole('ROLE_CLIENT')or hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
@@ -41,21 +41,7 @@
                 logout-success-url="/"
                 delete-cookies="JSESSIONID"
                 invalidate-session="true" />
-<!--
-        <form-login login-page="/login"
-                    default-target-url="/"
-                    always-use-default-target="true"
-                    login-processing-url="/j_spring_security_check"
-                    authentication-failure-url="/login?error"
-                    username-parameter="username"
-                    password-parameter="password"/>
-        <session-management session-fixation-protection="newSession">
-            <concurrency-control max-sessions="1" />
-        </session-management>
--->
-
         <custom-filter position="FORM_LOGIN_FILTER" ref="customUsernamePasswordAuthenticationFilter" />
-
         <!-- enable csrf protection -->
         <csrf/>
     </http>

@@ -268,7 +268,8 @@ function loadCompany(id) {
     addressArray = [];
     cleanAddressBlocks();
 
-    $.get('../api/resource/v1/company/'+id, function(entry) {
+    $.get('../api/admin/resource/v1/company/'+id, function(entry) {
+        console.log('sd');
         companyName.val(entry.name);
         keywords.val(entry.keywords);
         dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
