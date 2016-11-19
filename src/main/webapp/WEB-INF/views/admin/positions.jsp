@@ -28,6 +28,7 @@
                 <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
             </form:form>
         </div>
+        <span class="pageMenuButt" style="opacity: 0; cursor: default;">Создать</span>
     </div>
     <div class="menuBody">
         <div class="generalContent">
@@ -35,28 +36,41 @@
             <span class="error">${updateError}</span>
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
+            <span class="localMessage"></span>
             <div class="container">
                 <span class="message">${model.message}</span>
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Название</th>
-                        <th>Позиции</th>
+                        <th>Название компании</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="item" items="${model.companyList}">
                         <tr>
                             <td class="tableName" id="ID-${item.id}">${item.name}</td>
-                            <td>test</td>
                         </tr>
                     </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="containerBySubpartition">
+                <span class="messageSubpartition"></span>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Название компании</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tSubBody">
+
                     </tbody>
                 </table>
             </div>
 
             <form:form action="addsubpartitions" method="post" id="updateForm">
                 <select id='optgroup' name="positions" multiple='multiple'>
+                    <option style="display: none" value="-1"></option>
                     <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
                         <optgroup label='${key.name}'>
                             <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
@@ -75,9 +89,10 @@
 
 <div class="menu">
     <div class="menuTitle">
-        <span class="menuTitleText">Выбрать по разделу</span>
+        <span class="menuTitleText">Позиции</span>
     </div>
     <div class="menuBody">
+        <!--
         <form:form action="" method="post" id="deleteForm">
             <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
                 <div class="menuBodyItem">
@@ -96,6 +111,7 @@
                 </div>
             </c:forEach>
         </form:form>
+        -->
     </div>
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
@@ -103,17 +119,15 @@
 <script type="text/javascript" src="<c:url value="/resources/js/admin/adminPosition.js" />"></script>
 <style>
     .pr {
-        float: left;
-        height: 40px;
+        //float: left;
+        //height: 40px;
     }
     .ms-container {
         background: transparent url(<c:url value="/resources/images/switch.png" />) no-repeat 50% 50%;
         width: auto;
     }
-    @media screen and (max-width: 1136px) {
-        .body .pageMenu {
-            height: 108px;
-        }
+    @media screen and (max-width : 1215px) {
+        .body .pageMenu { height: 76px; }
     }
 </style>
 </body>

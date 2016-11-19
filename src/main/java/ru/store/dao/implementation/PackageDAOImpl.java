@@ -54,4 +54,15 @@ public class PackageDAOImpl implements PackageDAO {
         else
             return null;
     }
+
+    @Override
+    @Transactional
+    public Package getPackage(String name) {
+        String hql = "from Package where name =?";
+        List<Package> packages = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, name).list();
+        if (packages != null && packages.size() > 0)
+            return packages.get(0);
+        else
+            return null;
+    }
 }

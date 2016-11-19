@@ -2,11 +2,15 @@ var isShowCreateForm = false;
 var isShowUpdateForm = false;
 var currentItem;
 var pageMenuButtTarget;
+var containerBySubpartition;
+var tSubBody;
+var messageSubpartition;
 
 var data;
 var pageInformation;
 var hiddenId;
 var numOfMaxSelected = 0;
+var numOfSelectedItems = 0;
 
 $(window).on("load", function () {
     var container = $(".container");
@@ -26,8 +30,12 @@ $(window).on("load", function () {
         createForm.animate({opacity: 1}, 200);
         isShowCreateForm = true;
     }
+    updateForm = $("#updateForm");
+    containerBySubpartition = $(".containerBySubpartition");
+    tSubBody = $(".tSubBody");
+    messageSubpartition = $(".messageSubpartition");
 });
-
+/*
 $(".pageMenuButt").on("click", function (event) {
     var container = $(".container");
     container.animate({opacity: 0}, 200);
@@ -51,7 +59,7 @@ $(".pageMenuButt").on("click", function (event) {
         isShowCreateForm = true;
     }, 200);
 });
-
+*/
 
 $(".menuTitleText").on("click", function () {
     if (document.URL.indexOf("searchcompany") != -1) // временное решение
@@ -74,6 +82,8 @@ $(".menuTitleText").on("click", function () {
 });
 
 $(".tableName").on("click", function (event) {
+    $(".error").hide();
+    $(".success").hide();
     var container = $(".container");
     container.animate({opacity: 0}, 200);
     setTimeout(function() { container.hide(); }, 190);
@@ -90,9 +100,6 @@ $(".tableName").on("click", function (event) {
     var id = currentItem.replace("ID-", "");
     if (pageInformation == undefined)
         pageInformation = $("#pageInformation").val();
-    if (pageInformation == 1) {
-        loadCompany(id);
-    }
     if (pageInformation == 2) {
         if (hiddenId == undefined) {
             hiddenId = $("#hiddenId");
@@ -101,51 +108,38 @@ $(".tableName").on("click", function (event) {
             hiddenId.val(id);
             $.get('../api/admin/resource/v1/package/'+entry1.companyPackageId, function(entry2) {
                 numOfMaxSelected = entry2.numOfPositions;
-//                if (entry1.positions != null)
-//                    $('#optgroup').multiSelect('select', entry1.positions.split(','));
+                numOfSelectedItems = 0;
+                $('#optgroup').multiSelect('deselect_all');
+                $.get('../api/admin/resource/v1/companySubpartition/company/'+id, function(entry3) {
+                    if (entry3.length > 0) {
+                        var tmpArray = [];
+                        var tmpCounter = 0;
+                        entry3.forEach(function (entry4) {
+                            tmpArray[tmpCounter] = entry4.subPartitionId + '';
+                            tmpCounter++;
+                        });
+                        $('#optgroup').multiSelect('select', tmpArray);
+                    }
+                });
             });
         });
     }
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
-    var container = $(".container");
-    container.animate({opacity: 0}, 200);
-    setTimeout(function() { container.hide(); }, 190);
-    isShowUpdateForm = true;
-
-    if (pageInformation == undefined)
-        pageInformation = $("#pageInformation").val();
-    if (!(pageInformation == 4 || pageInformation == 5 || pageInformation == 1))
-        return;
     $(".error").hide();
     $(".success").hide();
-    updateForm = $("#updateForm");
-    if (isShowCreateForm) {
-        var createForm = $("#createForm");
-        if (pageMenuButtTarget != undefined)
-            pageMenuButtTarget.setAttribute("style", "background : #738dae;");
-        createForm.animate({opacity: 0}, 200);
-        setTimeout(function() { createForm.hide(); }, 200);
-    }
-    if (isShowCreateForm && !isShowUpdateForm) {
-        setTimeout(function() {
-            updateForm.show();
-            updateForm.animate({opacity: 1}, 200);
-        }, 200);
-    } else if (isShowUpdateForm) {
-        updateForm.animate({opacity: 0}, 200);
-        setTimeout(function() {
-            updateForm.hide();
-            updateForm.show();
-            updateForm.animate({opacity: 1}, 200);
-        }, 200);
-    } else {
-        updateForm.show();
-        updateForm.animate({opacity: 1}, 200);
-    }
-    isShowUpdateForm = true;
-    isShowCreateForm = false;
+    var container = $(".container");
+    container.animate({opacity: 0}, 200);
+    setTimeout(function() {
+        container.hide();
+        updateForm.hide();
+        containerBySubpartition.show();
+        containerBySubpartition.animate({opacity: 1}, 200);
+    }, 190);
+    isShowUpdateForm = false;
+
+    tSubBody.html('<tr><td class="tableName" id="ID-2">name</td></tr>');
 
     if (currentItem != undefined) {
         $("div#" + currentItem).css("border-left", "0");
@@ -214,19 +208,21 @@ $(document).ready(function(){
             $("#show").hide();
     });
 });
-var numOfSelectedItems = 0;
+
 //http://loudev.com/
 if (pageInformation == undefined)
     pageInformation = $("#pageInformation").val();
+var localMessage;
 if (pageInformation == 2) {
+    localMessage = $(".localMessage");
+    localMessage.show();
     $('#optgroup').multiSelect({
         selectableOptgroup: true,
         afterSelect: function (values) {
             numOfSelectedItems += values.length;
-            console.log('aa2 '+numOfMaxSelected);
             if (numOfSelectedItems > numOfMaxSelected) {
                 $('#optgroup').multiSelect('deselect', values);
-                // show error
+                localMessage.html("Вы можете выбрать только " + numOfMaxSelected + " позиций.");
             }
         },
         afterDeselect: function(values){
@@ -234,4 +230,8 @@ if (pageInformation == 2) {
         }
     });
 }
+$('#updateForm').submit(function() {
+    if (numOfSelectedItems == 0)
+        $("#optgroup").val(["-1"]);
+});
 

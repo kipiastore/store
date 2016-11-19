@@ -20,7 +20,7 @@ public class CompanyResource {
     private CompanyDAO companyDAO;
 
     @RequestMapping(value = "/api/admin/resource/v1/company/{id}", method = RequestMethod.GET)
-    public Company company(@PathVariable String id) {
+    public Company getCompany(@PathVariable String id) {
         return companyDAO.getCompany(Integer.valueOf(id));
     }
 

@@ -18,7 +18,7 @@ public class PackageResource {
     private PackageDAO packageDAO;
 
     @RequestMapping(value = "/api/admin/resource/v1/package/{id}", method = RequestMethod.GET)
-    public Package company(@PathVariable String id) {
+    public Package getPackage(@PathVariable String id) {
         return packageDAO.getPackage(Integer.valueOf(id));
     }
 

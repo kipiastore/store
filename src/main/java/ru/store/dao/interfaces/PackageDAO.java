@@ -19,4 +19,6 @@ public interface PackageDAO {
 
     Package getPackage(Integer id);
 
+    Package getPackage(String name);
+
 }

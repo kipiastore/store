@@ -19,4 +19,6 @@ public interface PartitionDAO {
 
     Partition getPartitionById(int id);
 
+    Partition getPartitionByName(String name);
+
 }

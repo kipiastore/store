@@ -21,4 +21,6 @@ public interface SubPartitionDAO {
     void updateSubPartition(SubPartition subPartition);
 
     void deleteSubPartition(int id);
+
+    SubPartition getSubPartition(String name);
 }

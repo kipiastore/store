@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.entities.Partition;
+import ru.store.exceptions.DuplicateException;
 
 import java.util.List;
 
@@ -17,7 +18,10 @@ public class PartitionService {
     private PartitionDAO partitionDAO;
 
     public void createPartition(Partition partition) {
-        partitionDAO.createPartition(partition);
+        if (getPartitionByName(partition.getName()) == null)
+            partitionDAO.createPartition(partition);
+        else
+            throw new DuplicateException("Раздел с тиким именем уже существует!");
     }
 
     public void updatePartition(Partition partition) {
@@ -34,6 +38,10 @@ public class PartitionService {
 
     public Partition PartitionById(int id) {
         return partitionDAO.getPartitionById(id);
+    }
+
+    public Partition getPartitionByName(String name) {
+        return partitionDAO.getPartitionByName(name);
     }
 
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.store.dao.interfaces.PackageDAO;
 import ru.store.entities.Package;
+import ru.store.exceptions.DuplicateException;
 import ru.store.exceptions.NotFoundException;
 
 import java.sql.Timestamp;
@@ -19,7 +20,10 @@ public class PackageService {
     private PackageDAO packageDAO;
 
     public void createPackage(Package aPackage) {
-        packageDAO.createPackage(aPackage);
+        if (getPackage(aPackage.getName()) == null)
+            packageDAO.createPackage(aPackage);
+        else
+            throw new DuplicateException("Пакет с тиким именем уже существует!");
     }
 
     public void updatePackage(Package aPackage) {
@@ -45,4 +49,7 @@ public class PackageService {
         return packageDAO.getPackage(id);
     }
 
+    public Package getPackage(String name) {
+        return packageDAO.getPackage(name);
+    }
 }

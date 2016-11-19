@@ -45,14 +45,24 @@ public class PartitionDAOImpl implements PartitionDAO {
     }
 
     @Override
-    //@Transactional
+    @Transactional
     public Partition getPartitionById(int id) {
-        Partition partition = null;
-        // mock
-        for (Partition partitionItem : getPartitions()) {
-            if (partitionItem.getId() == id)
-                partition = partitionItem;
-        }
-        return partition;
+        String hql = "from Partition where id =?";
+        List<Partition> partitions = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, id).list();
+        if (partitions != null && partitions.size() > 0)
+            return partitions.get(0);
+        else
+            return null;
+    }
+
+    @Override
+    @Transactional
+    public Partition getPartitionByName(String name) {
+        String hql = "from Partition where name =?";
+        List<Partition> partitions = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, name).list();
+        if (partitions != null && partitions.size() > 0)
+            return partitions.get(0);
+        else
+            return null;
     }
 }

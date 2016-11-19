@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.store.dao.interfaces.RegionDAO;
 import ru.store.entities.Region;
+import ru.store.exceptions.DuplicateException;
 
 import java.util.List;
 
@@ -17,8 +18,11 @@ public class RegionService {
     private RegionDAO regionDAO;
 
     public void createRegion(Region region) {
-        region.setName(region.getName().toUpperCase());
-        regionDAO.createRegion(region);
+        if (getRegion(region.getName()) == null) {
+            region.setName(region.getName().toUpperCase());
+            regionDAO.createRegion(region);
+        } else
+            throw new DuplicateException("Район с тиким именем уже существует!");
     }
 
     public void deleteRegion(Integer id) {

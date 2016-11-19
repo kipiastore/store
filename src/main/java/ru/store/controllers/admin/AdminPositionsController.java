@@ -48,6 +48,8 @@ public class AdminPositionsController {
             CompanySubPartition companySubPartition;
             companySubPartitionDAO.deleteCompanySubpartitionByCompanyId(Integer.valueOf(companyId));
             for (String id : positions.split(",")) {
+                if (id.equals("-1"))
+                    continue;
                 companySubPartition = new CompanySubPartition();
                 companySubPartition.setCompanyId(Integer.valueOf(companyId));
                 companySubPartition.setSubPartitionId(Integer.valueOf(id));
