@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ru.store.dao.interfaces.CompanySubPartitionDAO;
 import ru.store.entities.*;
-import ru.store.entities.Package;
 import ru.store.service.*;
 
 import java.util.ArrayList;
@@ -29,6 +29,8 @@ public class AdminPositionsController {
     private SubPartitionService subPartitionService;
     @Autowired
     private PartitionService partitionService;
+    @Autowired
+    private CompanySubPartitionDAO companySubPartitionDAO;
 
     @RequestMapping(value = "/admin/positions", method = RequestMethod.GET)
     public ModelAndView positions() {
@@ -39,12 +41,18 @@ public class AdminPositionsController {
     }
 
     @RequestMapping(value = "/admin/addsubpartitions", method = RequestMethod.POST)
-    public ModelAndView updateCompany(@ModelAttribute("company") Company company,
-                                      @RequestParam("hiddenId") String id) {
+    public ModelAndView updateCompany(@RequestParam("positions") String positions,
+                                      @RequestParam("companyId") String companyId) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            company.setId(Integer.valueOf(id));
-            companyService.updatePartitionCompany(company);
+            CompanySubPartition companySubPartition;
+            companySubPartitionDAO.deleteCompanySubpartitionByCompanyId(Integer.valueOf(companyId));
+            for (String id : positions.split(",")) {
+                companySubPartition = new CompanySubPartition();
+                companySubPartition.setCompanyId(Integer.valueOf(companyId));
+                companySubPartition.setSubPartitionId(Integer.valueOf(id));
+                companySubPartitionDAO.createCompanySubPartition(companySubPartition);
+            }
             modelAndView.addObject("successMessage", "Обновление проведено успешно.");
         } catch (Exception ex) {
             modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());

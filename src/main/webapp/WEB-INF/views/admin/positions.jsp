@@ -55,7 +55,7 @@
                 </table>
             </div>
 
-            <form:form action="addsubpartitions" modelAttribute="company" method="post" id="updateForm">
+            <form:form action="addsubpartitions" method="post" id="updateForm">
                 <select id='optgroup' name="positions" multiple='multiple'>
                     <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
                         <optgroup label='${key.name}'>
@@ -65,8 +65,7 @@
                         </optgroup>
                     </c:forEach>
                 </select>
-                <input type="hidden" name="hiddenId" id="hiddenId" />
-                <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
+                <input type="hidden" name="companyId" id="hiddenId" />
                 <input type="submit" value="Обновить" />
             </form:form>
 
@@ -96,7 +95,6 @@
                     </c:forEach>
                 </div>
             </c:forEach>
-            <input type="hidden" name="partitionId" id="deleteKey" />
         </form:form>
     </div>
 </div>

@@ -101,8 +101,8 @@ $(".tableName").on("click", function (event) {
             hiddenId.val(id);
             $.get('../api/admin/resource/v1/package/'+entry1.companyPackageId, function(entry2) {
                 numOfMaxSelected = entry2.numOfPositions;
-                if (entry1.positions != null)
-                    $('#optgroup').multiSelect('select', entry1.positions.split(','));
+//                if (entry1.positions != null)
+//                    $('#optgroup').multiSelect('select', entry1.positions.split(','));
             });
         });
     }
