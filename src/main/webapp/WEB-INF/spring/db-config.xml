@@ -32,6 +32,7 @@
                 <value>ru/store/entities/SubPartition.hbm.xml</value>
                 <value>ru/store/entities/Report.hbm.xml</value>
                 <value>ru/store/entities/CompanySubpartition.hbm.xml</value>
+                <value>ru/store/entities/File.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">

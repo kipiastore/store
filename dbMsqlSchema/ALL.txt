@@ -77,7 +77,8 @@ CREATE TABLE reports
     created_date DATETIME NOT NULL,
     last_modified_date DATETIME NOT NULL,
     owner VARCHAR(45) NOT NULL,
-    description VARCHAR(255)
+    description VARCHAR(255),
+    file_id INT(11) NOT NULL
 );
 CREATE TABLE users
 (
@@ -102,6 +103,12 @@ CREATE TABLE company_subpartition
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     company_id INT(11) NOT NULL,
     subpartition_id INT(11) NOT NULL
+);
+CREATE TABLE files
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    file LONGBLOB NOT NULL
 );
 ALTER TABLE user_roles ADD FOREIGN KEY (username) REFERENCES users (username);
 CREATE INDEX fk_username_idx ON user_roles (username);

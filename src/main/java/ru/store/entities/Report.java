@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  */
 
 public class Report {
+
     private Integer Id;
     private String name;
     private Integer companyId;
@@ -15,6 +16,7 @@ public class Report {
     private String lastModifiedBy;
     private String owner;
     private String description;
+    private String fileId;
 
     public Report() {
 
@@ -67,5 +69,11 @@ public class Report {
     }
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+    public String getFileId() {
+        return fileId;
+    }
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 }

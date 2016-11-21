@@ -25,5 +25,8 @@
         <property name="createdDate" type="timestamp" >
             <column name="created_datetime" not-null="true" />
         </property>
+        <property name="fileId" type="java.lang.Integer">
+            <column name="file_id" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>
