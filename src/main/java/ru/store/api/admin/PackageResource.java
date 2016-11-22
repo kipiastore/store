@@ -1,4 +1,4 @@
-package ru.store.controllers.api.admin;
+package ru.store.api.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
