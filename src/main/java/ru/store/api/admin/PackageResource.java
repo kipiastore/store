@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.store.dao.interfaces.PackageDAO;
 import ru.store.entities.Package;
+import ru.store.service.PackageService;
 
 /**
  *
@@ -15,11 +16,11 @@ import ru.store.entities.Package;
 public class PackageResource {
 
     @Autowired
-    private PackageDAO packageDAO;
+    private PackageService packageService;
 
     @RequestMapping(value = "/api/admin/resource/v1/package/{id}", method = RequestMethod.GET)
     public Package getPackage(@PathVariable String id) {
-        return packageDAO.getPackage(Integer.valueOf(id));
+        return packageService.getPackage(Integer.valueOf(id));
     }
 
 }

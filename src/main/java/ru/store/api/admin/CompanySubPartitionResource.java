@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.store.dao.interfaces.CompanySubPartitionDAO;
 import ru.store.entities.CompanySubPartition;
+import ru.store.service.CompanySubPartitionService;
 
 import java.util.List;
 
@@ -17,11 +18,11 @@ import java.util.List;
 public class CompanySubPartitionResource {
 
     @Autowired
-    private CompanySubPartitionDAO companySubPartitionDAO;
+    private CompanySubPartitionService companySubPartitionService;
 
     @RequestMapping(value = "/api/admin/resource/v1/companySubpartition/company/{companyId}", method = RequestMethod.GET)
     public List<CompanySubPartition> company(@PathVariable String companyId) {
-        return companySubPartitionDAO.findCompanySubpartitionByCompanyId(Integer.valueOf(companyId));
+        return companySubPartitionService.findCompanySubpartitionByCompanyId(Integer.valueOf(companyId));
     }
 
 }

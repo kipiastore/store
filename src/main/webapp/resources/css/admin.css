@@ -25,6 +25,10 @@ body {
     height: 100%;
     margin-right: 300px;
 }
+.containerReports {
+    display: none;
+    opacity: 0;
+}
 .headerMenuContent {
     width: 80%;
     margin: auto;
@@ -317,6 +321,18 @@ label {
     opacity: 0;
 }
 #updateForm {
+    display: none;
+    opacity: 0;
+}
+#hiddenCreateForm {
+    display: none;
+    opacity: 0;
+}
+#hiddenDeleteForm {
+    display: none;
+    opacity: 0;
+}
+#hiddenUpdateForm {
     display: none;
     opacity: 0;
 }

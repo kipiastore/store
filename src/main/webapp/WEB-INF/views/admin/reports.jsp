@@ -54,7 +54,38 @@
                     </tbody>
                 </table>
             </div>
-            <form:form action="addreport" modelAttribute="report" method="post" id="updateForm">
+
+            <div id="updateForm">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Создан</th>
+                        <th>Владелец</th>
+                        <th>Описание</th>
+                        <th>Ссылка</th>
+                        <th>Обновить</th>
+                        <th>Удалить</th>
+                    </tr>
+                    </thead>
+                    <tbody id="bodyReports">
+
+                    </tbody>
+                </table>
+            </div>
+            <form:form action="addreport" modelAttribute="report" method="post" id="hiddenCreateForm">
+                <label>Название</label>
+                <input autofocus title="Введите название отчета." type="text" maxlength="120" name="name" placeholder="Оставьте поле пустым, если хотите чтобы использовать имя файла." />
+
+                <input type="hidden" name="companyId" value="" />
+                <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
+                <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
+                <input type="submit" value="Добавить" />
+            </form:form>
+            <form:form action="deletereport" modelAttribute="report" method="post" id="hiddenUpdateForm">
+
+            </form:form>
+            <form:form action="deletereport" method="post" id="hiddenDeleteForm">
 
             </form:form>
         </div>
@@ -71,7 +102,7 @@
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.multi-select.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/admin/adminPosition.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/admin/adminReports.js" />"></script>
 <style>
     .pr {
     //float: left;

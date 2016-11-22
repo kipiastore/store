@@ -16,10 +16,12 @@ public class Report {
     private String lastModifiedBy;
     private String owner;
     private String description;
-    private String fileId;
+    private Integer fileId;
 
     public Report() {
-
+        Timestamp tmp = new Timestamp(new java.util.Date().getTime());
+        createdDate = tmp;
+        lastModifiedDate = tmp;
     }
 
     public Integer getId() {
@@ -70,10 +72,10 @@ public class Report {
     public void setOwner(String owner) {
         this.owner = owner;
     }
-    public String getFileId() {
+    public Integer getFileId() {
         return fileId;
     }
-    public void setFileId(String fileId) {
+    public void setFileId(Integer fileId) {
         this.fileId = fileId;
     }
 }

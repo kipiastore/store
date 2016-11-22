@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.entities.Company;
 import ru.store.entities.Partition;
+import ru.store.entities.Report;
 import ru.store.entities.SubPartition;
 import ru.store.service.CompanyService;
 import ru.store.service.PartitionService;
@@ -42,7 +43,7 @@ public class AdminReportsController {
     }
 
     @RequestMapping(value = "/admin/addreport", method = RequestMethod.POST)
-    public ModelAndView updateCompany(@ModelAttribute("report") Partition partition) {
+    public ModelAndView updateCompany(@ModelAttribute("report") Report report) {
         ModelAndView modelAndView = new ModelAndView();
         try {
 

@@ -16,27 +16,27 @@ public class ReportService {
     @Autowired
     private ReportDAO reportDAO;
 
-    void createReport(Report report) {
+    public void createReport(Report report) {
         reportDAO.createReport(report);
     }
 
-    void updateReport(Report report) {
+    public void updateReport(Report report) {
         reportDAO.updateReport(report);
     }
 
-    void deleteReport(Integer id) {
+    public void deleteReport(Integer id) {
         reportDAO.deleteReport(id);
     }
 
-    List<Report> getReports() {
+    public List<Report> getReports() {
         return reportDAO.getReports();
     }
 
-    Report getReport(Integer id) {
+    public Report getReport(Integer id) {
         return reportDAO.getReport(id);
     }
 
-    List<Report> getReportsByCompanyId(Integer companyId) {
+    public List<Report> getReportsByCompanyId(Integer companyId) {
         return reportDAO.getReportsByCompanyId(companyId);
     }
 
