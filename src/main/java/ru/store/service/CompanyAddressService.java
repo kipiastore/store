@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.store.dao.interfaces.CompanyAddressDAO;
 import ru.store.entities.CompanyAddress;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +43,15 @@ public class CompanyAddressService {
 
     public void deleteCompanyAddressByCompany(Integer companyId) {
         companyAddressDAO.deleteCompanyAddressByCompany(companyId);
+    }
+
+    public List<String> getCompanyAddressString(Integer id) {
+        List<CompanyAddress> companyAddresses=companyAddressDAO.getCompanyAddresses(id);
+        List<String> list=new ArrayList<>();
+        for(CompanyAddress companyAddress:companyAddresses){
+            list.add(companyAddress.getAddress());
+        }
+        return list ;
     }
 
     public CompanyAddress getCompanyAddress(Integer id) {

@@ -1,9 +1,9 @@
 CREATE TABLE company_address
 (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     address VARCHAR(255) NOT NULL,
-    region_id INT,
+    region_id INT(11),
     phones VARCHAR(255),
     information VARCHAR(255),
-    company_id INT NOT NULL
+    company_id INT(11) NOT NULL
 );

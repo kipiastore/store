@@ -1,0 +1,16 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="header">
+    <div class="headerMenu">
+        <div class="headerMenuContent">
+            <a class="headerMenuItem" href="${prefix}companies" data-id="1">Компании</a>
+            <a class="headerMenuItem" href="${prefix}acts" data-id="2">Акты</a>
+            <a class="headerMenuItem" href="${prefix}debtors" data-id="3">Должники</a>
+            <a class="headerMenuItem" href="${prefix}notes" data-id="4">Заметки</a>
+        </div>
+    </div>
+    <style>
+        .headerMenuContent a[data-id="${model.selectedPageNum}"] {
+            color: #16a085;
+        }
+    </style>
+</div>

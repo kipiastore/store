@@ -3,6 +3,10 @@ CREATE TABLE package
     name VARCHAR(120) NOT NULL,
     created_datetime DATETIME NOT NULL,
     owner VARCHAR(45) NOT NULL,
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    priority INT NOT NULL
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    priority INT(11) NOT NULL,
+    num_of_positions INT(11) NOT NULL,
+    cost INT(11) NOT NULL,
+    last_modified_date DATETIME NOT NULL,
+    last_modified_by VARCHAR(45) NOT NULL
 );

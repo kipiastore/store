@@ -1,9 +1,9 @@
 CREATE TABLE user_roles
 (
-    user_role_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    user_role_id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     username VARCHAR(45) NOT NULL,
     role VARCHAR(45) NOT NULL,
-    FOREIGN KEY (username) REFERENCES users (username)
+    CONSTRAINT user_roles_ibfk_1 FOREIGN KEY (username) REFERENCES users (username)
 );
-CREATE UNIQUE INDEX uni_username_role ON user_roles (role, username);
 CREATE INDEX fk_username_idx ON user_roles (username);
+CREATE UNIQUE INDEX uni_username_role ON user_roles (role, username);

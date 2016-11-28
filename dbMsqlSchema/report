@@ -1,0 +1,11 @@
+CREATE TABLE reports
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(120) NOT NULL,
+    company_id INT(11) NOT NULL,
+    created_datetime DATETIME NOT NULL,
+    last_modified_date DATETIME NOT NULL,
+    owner VARCHAR(45) NOT NULL,
+    description VARCHAR(255),
+    file_id INT(11) NOT NULL
+);

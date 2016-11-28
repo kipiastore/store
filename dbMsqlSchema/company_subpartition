@@ -1,0 +1,6 @@
+CREATE TABLE company_subpartition
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    company_id INT(11) NOT NULL,
+    subpartition_id INT(11) NOT NULL
+);

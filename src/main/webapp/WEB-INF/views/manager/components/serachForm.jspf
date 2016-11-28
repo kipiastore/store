@@ -1,0 +1,18 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<div class="pr">
+    <form:form action="searchcompany" method="post" id="searchForm">
+        <input type="text" maxlength="120" name="name" placeholder="Название"/>
+        <input type="text" maxlength="120" name="phone" placeholder="Тел."/>
+        <input type="text" maxlength="120" name="contractNum" placeholder="№ Дог.(где его взять?)"/>
+        <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
+        <select name="allComment" id="allComment">
+            <option selected >Все</option>
+            <option value="1">С замечаниями</option>
+            <option value="1">Без замечаний</option>
+        </select>
+        <label>По всем фирмам</label>
+        <input type="checkbox" maxlength="120" name="isAll" id="isAllCompany"/>
+        <span class="searchButt"><img class="searchIcon" src="<c:url value="/resources/images/search.png" />"/></span>
+    </form:form>
+</div>

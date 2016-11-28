@@ -37,6 +37,24 @@ public class CompanyService {
         companyDAO.updateCompany(company);
     }
 
+    public void updateCompanyByManager(Company company) {
+        Company oldCompany = getCompany(company.getId());
+        if (oldCompany == null) {
+            throw new NotFoundException("Фирма не найдена.");
+        }
+        company.setName(oldCompany.getName());
+        company.setManager(oldCompany.getManager());
+        company.setDateOfContract(oldCompany.getDateOfContract());
+        company.setDateOfEndContract(oldCompany.getDateOfEndContract());
+        company.setDateOfStartContract(oldCompany.getDateOfStartContract());
+        company.setCreatedDate(oldCompany.getCreatedDate());
+        company.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
+        company.setOwner(oldCompany.getOwner());
+        company.setCompanyPackageId(oldCompany.getCompanyPackageId());
+        company.setCostOf(oldCompany.getCostOf());
+        companyDAO.updateCompany(company);
+    }
+
     public void deleteCompany(int id) {
         companyDAO.deleteCompany(id);
         companyAddressService.deleteCompanyAddressByCompany(id);

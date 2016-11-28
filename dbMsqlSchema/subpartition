@@ -1,6 +1,6 @@
 CREATE TABLE subpartition
 (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name_partition VARCHAR(120) NOT NULL,
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    partition_id INT(11) NOT NULL,
     name VARCHAR(120) NOT NULL
 );
