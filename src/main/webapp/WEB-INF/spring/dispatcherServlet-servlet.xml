@@ -17,6 +17,10 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+
+    </bean>
+
     <!-- locales -->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="/WEB-INF/locales/messages" />

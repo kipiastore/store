@@ -697,6 +697,19 @@ tbody {
 .logout .homeLink:hover {
     color: #16a085;
 }
+.tdButton {
+    cursor: pointer;
+    color: #738dae;
+}
+.tdButton:hover {
+    color: #a06963;
+}
+.tdButton a {
+    color: #738dae;
+}
+.tdButton a:hover {
+    color: #a06963;
+}
 textarea {
     resize: none;
 }

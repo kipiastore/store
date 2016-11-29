@@ -19,23 +19,23 @@ import java.util.Map;
 @Component
 public class DownloadServlet implements HttpRequestHandler {
 
-    public static final Map<String, String> fileTypeToContentType;
+    public static final Map<String, String> FILE_TYPE_TO_CONTENT_TYPE;
 
     static {
-        fileTypeToContentType = new HashMap<>();
-        fileTypeToContentType.put("txt", "text/plain");
-        fileTypeToContentType.put("pdf", "application/pdf");
-        fileTypeToContentType.put("doc", "application/msword");
-        fileTypeToContentType.put("xls", "application/vnd.ms-excel");
-        fileTypeToContentType.put("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        fileTypeToContentType.put("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "docx");
-        fileTypeToContentType.put("rar", "application/x-rar-compressed");
-        fileTypeToContentType.put("7z", "application/x-7z-compressed");
-        fileTypeToContentType.put("gif", "image/gif");
-        fileTypeToContentType.put("jpeg", "image/jpeg");
-        fileTypeToContentType.put("jpg", "image/jpeg");
-        fileTypeToContentType.put("png", "image/png");
-        fileTypeToContentType.put("bmp", "image/bmp");
+        FILE_TYPE_TO_CONTENT_TYPE = new HashMap<>();
+        FILE_TYPE_TO_CONTENT_TYPE.put("txt", "text/plain");
+        FILE_TYPE_TO_CONTENT_TYPE.put("pdf", "application/pdf");
+        FILE_TYPE_TO_CONTENT_TYPE.put("doc", "application/msword");
+        FILE_TYPE_TO_CONTENT_TYPE.put("xls", "application/vnd.ms-excel");
+        FILE_TYPE_TO_CONTENT_TYPE.put("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        FILE_TYPE_TO_CONTENT_TYPE.put("docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+        FILE_TYPE_TO_CONTENT_TYPE.put("rar", "application/x-rar-compressed");
+        FILE_TYPE_TO_CONTENT_TYPE.put("7z", "application/x-7z-compressed");
+        FILE_TYPE_TO_CONTENT_TYPE.put("gif", "image/gif");
+        FILE_TYPE_TO_CONTENT_TYPE.put("jpeg", "image/jpeg");
+        FILE_TYPE_TO_CONTENT_TYPE.put("jpg", "image/jpeg");
+        FILE_TYPE_TO_CONTENT_TYPE.put("png", "image/png");
+        FILE_TYPE_TO_CONTENT_TYPE.put("bmp", "image/bmp");
     }
 
     @Autowired
@@ -47,8 +47,8 @@ public class DownloadServlet implements HttpRequestHandler {
         String id = httpServletRequest.getParameter("id");
         File file = fileDAO.getFile(Integer.valueOf(id));
         String[] tmp = file.getName().split("\\.");
-        if (tmp.length > 1 && fileTypeToContentType.get(tmp[tmp.length-1]) != null)
-            httpServletResponse.setContentType(fileTypeToContentType.get(tmp[tmp.length-1]));
+        if (tmp.length > 1 && FILE_TYPE_TO_CONTENT_TYPE.get(tmp[tmp.length-1]) != null)
+            httpServletResponse.setContentType(FILE_TYPE_TO_CONTENT_TYPE.get(tmp[tmp.length-1]));
         httpServletResponse.setHeader("Content-disposition","attachment; filename=" + file.getName());
 
         OutputStream out = httpServletResponse.getOutputStream();

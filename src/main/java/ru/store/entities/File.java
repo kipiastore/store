@@ -31,4 +31,12 @@ public class File {
     public void setFile(byte[] file) {
         this.file = file;
     }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

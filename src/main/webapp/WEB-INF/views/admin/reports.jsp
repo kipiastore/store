@@ -28,7 +28,7 @@
                 <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
             </form:form>
         </div>
-        <span class="pageMenuButt" style="opacity: 0; cursor: default;">Создать</span>
+        <span class="pageMenuButt" style="opacity: 0; cursor: default;">Добавить</span>
     </div>
     <div class="menuBody">
         <div class="generalContent">
@@ -63,9 +63,8 @@
                         <th>Создан</th>
                         <th>Владелец</th>
                         <th>Описание</th>
-                        <th>Ссылка</th>
-                        <th>Обновить</th>
-                        <th>Удалить</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody id="bodyReports">
@@ -73,20 +72,16 @@
                     </tbody>
                 </table>
             </div>
-            <form:form action="addreport" modelAttribute="report" method="post" id="hiddenCreateForm">
+            <form:form action="addreport" enctype="multipart/form-data" modelAttribute="report" method="post" id="hiddenCreateForm">
                 <label>Название</label>
                 <input autofocus title="Введите название отчета." type="text" maxlength="120" name="name" placeholder="Оставьте поле пустым, если хотите чтобы использовать имя файла." />
-
-                <input type="hidden" name="companyId" value="" />
+                <label>Файл<span class="required">*</span></label>
+                <input type="file" name="file" required title="txt pdf doc docx xls xlsx rar 7z gif jpeg jpg png bmp"/>
+                <textarea rows="4" name="description" maxlength="255" ></textarea>
+                <input type="hidden" id="companyIdAdd" name="companyId" value="" />
                 <input type="hidden" name="owner" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="submit" value="Добавить" />
-            </form:form>
-            <form:form action="deletereport" modelAttribute="report" method="post" id="hiddenUpdateForm">
-
-            </form:form>
-            <form:form action="deletereport" method="post" id="hiddenDeleteForm">
-
             </form:form>
         </div>
     </div>

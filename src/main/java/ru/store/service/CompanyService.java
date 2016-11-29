@@ -42,6 +42,7 @@ public class CompanyService {
         if (oldCompany == null) {
             throw new NotFoundException("Фирма не найдена.");
         }
+        /*
         company.setName(oldCompany.getName());
         company.setManager(oldCompany.getManager());
         company.setDateOfContract(oldCompany.getDateOfContract());
@@ -53,6 +54,24 @@ public class CompanyService {
         company.setCompanyPackageId(oldCompany.getCompanyPackageId());
         company.setCostOf(oldCompany.getCostOf());
         companyDAO.updateCompany(company);
+        */
+        //oldCompany.setName(company.getName());
+        //oldCompany.setManager(company.getManager());
+        //oldCompany.setDateOfContract(company.getDateOfContract());
+        //oldCompany.setDateOfEndContract(company.getDateOfEndContract());
+        //oldCompany.setDateOfStartContract(company.getDateOfStartContract());
+        oldCompany.setDirectorFullName(company.getDirectorFullName());
+        oldCompany.setContactPerson(company.getContactPerson());
+        oldCompany.setEmail(company.getEmail());
+        oldCompany.setSite(company.getSite());
+        oldCompany.setInn(company.getInn());
+        oldCompany.setLegalName(company.getLegalName());
+        oldCompany.setLegalAddress(company.getLegalAddress());
+        oldCompany.setPhone(company.getPhone());
+        oldCompany.setFax(company.getFax());
+        oldCompany.setLastModifiedBy(company.getLastModifiedBy());
+        oldCompany.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
+        companyDAO.updateCompany(oldCompany);
     }
 
     public void deleteCompany(int id) {

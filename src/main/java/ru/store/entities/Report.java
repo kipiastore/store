@@ -78,4 +78,19 @@ public class Report {
     public void setFileId(Integer fileId) {
         this.fileId = fileId;
     }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "Id=" + Id +
+                ", name='" + name + '\'' +
+                ", companyId=" + companyId +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                ", lastModifiedBy='" + lastModifiedBy + '\'' +
+                ", owner='" + owner + '\'' +
+                ", description='" + description + '\'' +
+                ", fileId=" + fileId +
+                '}';
+    }
 }

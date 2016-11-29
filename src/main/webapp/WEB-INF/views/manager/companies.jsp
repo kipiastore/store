@@ -75,16 +75,16 @@
             </div>
             <form:form action="updatecompany" modelAttribute="company" method="post" id="updateForm">
                 <div class="left-body">
-                    <label>Название<span class="required">*</span></label>
-                    <input disabled pattern="(^[\w+]{4,20}$)" maxlength="120" type="text" name="name" id="name" required />
-                    <label>Менеджер<span class="required">*</span></label>
-                    <input disabled pattern="(^[\w+]{4,20}$)" maxlength="120" type="text" name="manager" id="manager" required />
-                    <label>Дата заключения договора<span class="required">*</span></label>
-                    <input pattern="\d\d\d\d-\d\d-\d\d\s?"  disabled pattern="(^[\w+]{4,20}$)" type="text" name="dateOfContract" id="dateOfContract" required />
-                    <label>Срок договора от<span class="required">*</span></label>
-                    <input pattern="\d\d\d\d-\d\d-\d\d\s?"  disabled pattern="(^[\w+]{4,20}$)"type="text" name="dateOfStartContract" id="dateOfStartContract" required />
-                    <label>Срок договора до<span class="required">*</span></label>
-                    <input pattern="\d\d\d\d-\d\d-\d\d\s?"  disabled pattern="(^[\w+]{4,20}$)" type="text" name="dateOfEndContract" id="dateOfEndContract" required />
+                    <label>Название</label>
+                    <input disabled type="text" name="name" id="name" />
+                    <label>Менеджер</label>
+                    <input disabled type="text" name="manager" id="manager" />
+                    <label>Дата заключения договора</label>
+                    <input disabled type="text" name="dateOfContract" id="dateOfContract"  />
+                    <label>Срок договора от</label>
+                    <input disabled type="text" name="dateOfStartContract" id="dateOfStartContract" />
+                    <label>Срок договора до</label>
+                    <input disabled type="text" name="dateOfEndContract" id="dateOfEndContract" />
                     <label>ФИО Директора</label>
                     <input title="Введите ФИО директора" type="text" maxlength="120" name="directorFullName" id="directorFullName" />
                     <label>Контактоне лицо</label>

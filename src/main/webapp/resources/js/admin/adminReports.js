@@ -36,8 +36,9 @@ $(window).on("load", function () {
 
 
 $(".menuTitleText").on("click", function () {
+    $(".pageMenuButt").animate({opacity: 0}, 200);
     if (document.URL.indexOf("searchcompany") != -1) // временное решение
-        window.location.replace(document.URL.replace("searchcompany", "s"));
+        window.location.replace(document.URL.replace("searchcompany", ""));
     updateForm = $("#updateForm");
     updateForm.animate({opacity: 0}, 200);
     setTimeout(function() { updateForm.hide(); }, 200);
@@ -53,6 +54,10 @@ $(".menuTitleText").on("click", function () {
         container.animate({opacity: 1}, 200);
     }, 200);
 
+    var hiddenCreateForm = $("#hiddenCreateForm");
+    hiddenCreateForm.animate({opacity: 0}, 200);
+    setTimeout(function() { hiddenCreateForm.hide(); }, 200);
+    $("#companyIdAdd").val('');
 });
 
 $(".tableName").on("click", function (event) {
@@ -77,16 +82,35 @@ $(".tableName").on("click", function (event) {
     $.get('../api/admin/resource/v1/report/company/'+id, function(entry1) {
         var htmlCode = '';
         entry1.forEach(function(entry2) {
-            htmlCode += '<tr>';
+            htmlCode += '<tr id="' + entry2.id + '">';
             htmlCode += '<td>' + entry2.name + '</td>';
             htmlCode += '<td>' + new Date(entry2.createdDate).customFormat("#YYYY#-#MM#-#DD#") + '</td>';
             htmlCode += '<td>' + entry2.owner + '</td>';
             htmlCode += '<td>' + entry2.description + '</td>';
-            htmlCode += '<td><a href="../admin/download?id=' + entry2.fileId + '">Скачать</a></td>';
+            htmlCode += '<td class="tdButton"><a href="../admin/download?id=' + entry2.fileId + '">Скачать</a></td>';
+            htmlCode += '<td><span data-id="' + entry2.id + '" id="deleteRep" class="tdButton">Удалить</span></td>';
             htmlCode += '</tr>';
         });
+        $("#companyIdAdd").val(id);
+        $(".pageMenuButt").animate({opacity: 1}, 200);
         $("#bodyReports").html(htmlCode);
+
+        $("#deleteRep").on("click", function (event) {
+            var recordId = event.target.getAttribute("data-id");
+            $.get('../api/admin/resource/v1/report/erase/' + recordId, function(entry0) {
+                console.log(entry0);
+            });
+            $("#"+recordId).remove();
+        });
     });
+});
+
+$(".pageMenuButt").on("click", function () {
+    if ($("#companyIdAdd").val() == '')
+        return;
+    var hiddenCreateForm = $("#hiddenCreateForm");
+    hiddenCreateForm.show();
+    hiddenCreateForm.animate({opacity: 1}, 200);
 });
 
 var requisitesIsOpen;

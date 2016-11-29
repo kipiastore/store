@@ -28,7 +28,8 @@ CREATE TABLE company
     is_off_position TINYINT(4) NOT NULL,
     is_closed TINYINT(4) NOT NULL,
     is_priority TINYINT(4) NOT NULL,
-    email VARCHAR(120)
+    email VARCHAR(120),
+    site VARCHAR(120)
 );
 CREATE TABLE company_address
 (

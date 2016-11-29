@@ -7,19 +7,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.entities.Company;
-import ru.store.entities.Partition;
-import ru.store.entities.Report;
-import ru.store.entities.SubPartition;
+import ru.store.dao.interfaces.FileDAO;
+import ru.store.dao.interfaces.ReportDAO;
+import ru.store.entities.*;
+import ru.store.exceptions.NotSupportedFormat;
 import ru.store.service.CompanyService;
 import ru.store.service.PartitionService;
 import ru.store.service.SubPartitionService;
+import ru.store.servlets.DownloadServlet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -33,6 +32,10 @@ public class AdminReportsController {
     private SubPartitionService subPartitionService;
     @Autowired
     private PartitionService partitionService;
+    @Autowired
+    private FileDAO fileDAO;
+    @Autowired
+    private ReportDAO reportDAO;
 
     @RequestMapping(value = "/admin/reports", method = RequestMethod.GET)
     public ModelAndView reports() {
@@ -43,13 +46,29 @@ public class AdminReportsController {
     }
 
     @RequestMapping(value = "/admin/addreport", method = RequestMethod.POST)
-    public ModelAndView updateCompany(@ModelAttribute("report") Report report) {
+    public ModelAndView updateReport(@ModelAttribute("report") Report report,
+                                      @RequestParam("file") MultipartFile multipartFile) {
         ModelAndView modelAndView = new ModelAndView();
         try {
+            String[] tmp = multipartFile.getOriginalFilename().split("\\.");
+            System.out.println(Arrays.toString(tmp));
+            if (tmp.length < 2 || DownloadServlet.FILE_TYPE_TO_CONTENT_TYPE.get(tmp[tmp.length-1]) == null) {
+                throw new NotSupportedFormat("Этот формат не поддерживается.");
+            }
+            File file = new File();
+            file.setFile(multipartFile.getBytes());
+            file.setName(multipartFile.getOriginalFilename());
+            fileDAO.createFile(file);
+            System.out.println(file);
 
-            modelAndView.addObject("successMessage", "Обновление проведено успешно.");
+            if (report.getName().isEmpty()) {
+                report.setName(file.getName());
+            }
+            report.setFileId(file.getId());
+            reportDAO.createReport(report);
+            modelAndView.addObject("successMessage", "Отчет успешно добавлен.");
         } catch (Exception ex) {
-            modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());
+            modelAndView.addObject("addError", "Возникла ошибка. " + ex.getMessage());
             ex.printStackTrace();
         }
         AdminPositionsController.Model model = new AdminPositionsController.Model();

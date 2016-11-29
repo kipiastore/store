@@ -91,5 +91,8 @@
         <property name="email" type="string" >
             <column name="email" length="120" not-null="false" />
         </property>
+        <property name="site" type="string" >
+            <column name="site" length="120" not-null="false" />
+        </property>
     </class>
 </hibernate-mapping>

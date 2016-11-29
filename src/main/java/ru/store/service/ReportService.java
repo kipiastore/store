@@ -2,6 +2,7 @@ package ru.store.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.store.dao.interfaces.FileDAO;
 import ru.store.dao.interfaces.ReportDAO;
 import ru.store.entities.Report;
 
@@ -15,6 +16,8 @@ public class ReportService {
 
     @Autowired
     private ReportDAO reportDAO;
+    @Autowired
+    private FileDAO fileDAO;
 
     public void createReport(Report report) {
         reportDAO.createReport(report);
@@ -25,6 +28,7 @@ public class ReportService {
     }
 
     public void deleteReport(Integer id) {
+        fileDAO.deleteFile(reportDAO.getReport(id).getFileId());
         reportDAO.deleteReport(id);
     }
 

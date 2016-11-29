@@ -24,4 +24,9 @@ public class ReportResource {
         return reportService.getReportsByCompanyId(Integer.valueOf(id));
     }
 
+    @RequestMapping(value = "/api/admin/resource/v1/report/erase/{id}", method = RequestMethod.GET)
+    public void eraseReport(@PathVariable String id) {
+        reportService.deleteReport(Integer.valueOf(id));
+    }
+
 }
