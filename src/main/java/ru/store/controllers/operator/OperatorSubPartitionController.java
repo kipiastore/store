@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.CompanyDAO;
+import ru.store.dao.interfaces.CompanySubPartitionDAO;
+import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.Company;
+import ru.store.entities.CompanySubPartition;
 import ru.store.entities.SubPartition;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,10 @@ public class OperatorSubPartitionController {
     private SubPartitionDAO subPartitionDAO;
     @Autowired
     private CompanyDAO companyDAO;
+    @Autowired
+    private PartitionDAO partitionDAO;
+    @Autowired
+    private CompanySubPartitionDAO companySubPartitionDAO;
 
     @RequestMapping(value = "/operator/subpartition/*", method = RequestMethod.GET)
     public ModelAndView subPartition(HttpServletRequest request) {
@@ -38,20 +45,29 @@ public class OperatorSubPartitionController {
         }
 
         SubPartition subPartition = subPartitionDAO.getSubPartitionById(subPartitionId);
-        List<Company> companies = companyDAO.getCompanies(subPartition);
+        if (subPartition == null) {
+            modelAndView.setViewName("redirect:/operator");
+            return modelAndView;
+        }
+        List<CompanySubPartition> companySubPartitions = companySubPartitionDAO.findCompanySubpartitionBySubPartitionId(subPartitionId);
+        List<Integer> companyIds = new ArrayList<>();
+        for (CompanySubPartition companySubPartition : companySubPartitions) {
+            companyIds.add(companySubPartition.getCompanyId());
+        }
+        List<Company> companies = companyDAO.getCompanies(companyIds);
 
         Model.SubPartitionItem subPartitionItem = new Model.SubPartitionItem();
         subPartitionItem.subPartitionId = subPartition.getId();
         subPartitionItem.subPartitionName = subPartition.getName();
         Model.PartitionItem partitionItem = new Model.PartitionItem();
-        //partitionItem.partitionId = subPartition.getPartition().getId();
-        //partitionItem.partitionName = subPartition.getPartition().getName();
+        partitionItem.partitionId = subPartition.getPartitionId();
+        partitionItem.partitionName = partitionDAO.getPartitionById(subPartition.getPartitionId()).getName();
         List<Model.CompanyItem> companyItems = new ArrayList<>();
         Model.CompanyItem companyItem;
         for (Company company : companies) {
             companyItem = new Model.CompanyItem();
-            //companyItem.companyId = company.getId();
-            //companyItem.companyName = company.getName();
+            companyItem.companyId = company.getId();
+            companyItem.companyName = company.getName();
             companyItems.add(companyItem);
         }
 

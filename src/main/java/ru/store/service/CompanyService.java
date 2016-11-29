@@ -105,8 +105,8 @@ public class CompanyService {
         return companyDAO.findCompaniesByEmail(email);
     }
 
-    public List<Company> getCompanies(SubPartition subPartition) {
-        return companyDAO.getCompanies(subPartition);
+    public List<Company> getCompanies(List<Integer> companyIds) {
+        return companyDAO.getCompanies(companyIds);
     }
 
 }

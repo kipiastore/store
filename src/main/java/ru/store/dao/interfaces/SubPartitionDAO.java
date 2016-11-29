@@ -23,4 +23,6 @@ public interface SubPartitionDAO {
     void deleteSubPartition(int id);
 
     SubPartition getSubPartition(String name);
+
+    List<SubPartition> getSubPartitions(List<Integer> subPartitionIds);
 }

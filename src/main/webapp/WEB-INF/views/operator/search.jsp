@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="k" %>
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Справочная служба</title>
@@ -14,7 +14,26 @@
     <span>&nbsp;&gt;&nbsp;</span>
     <a>Результаты поиска</a>
 </h3>
-
+<div class="menu">
+    <div class="empDiv2"><h3>Поиск по слову:</h3></div>
+    <k:forEach var="item" items="${model.companyItemsByKeyword}">
+        <div class="content">
+            <a href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
+        </div>
+    </k:forEach>
+    <div class="empDiv2"><h3>Поиск по фирме:</h3></div>
+    <k:forEach var="item" items="${model.companyItemsByCompany}">
+        <div class="content">
+            <a href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
+        </div>
+    </k:forEach>
+    <div class="empDiv2"><h3>Поиск по адресу:</h3></div>
+    <k:forEach var="item" items="${model.companyItemsByAddress}">
+        <div class="content">
+            <a href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
+        </div>
+    </k:forEach>
+</div>
 <%@include file="/WEB-INF/views/operator/components/searchwindow.jspf"%>
 <%@include file="/WEB-INF/views/operator/components/bottombar.jspf"%>
 <script type="text/javascript" src="<c:url value="/resources/js/operator.js" />"></script>

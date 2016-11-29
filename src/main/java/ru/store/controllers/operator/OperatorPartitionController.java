@@ -38,6 +38,10 @@ public class OperatorPartitionController {
         }
 
         Partition partition = partitionDAO.getPartitionById(partitionId);
+        if (partition == null) {
+            modelAndView.setViewName("redirect:/operator");
+            return modelAndView;
+        }
         List<SubPartition> subPartitions = subPartitionDAO.getSubPartitionsByPartition(partition);
 
         Model.PartitionItem partitionItem = new Model.PartitionItem();

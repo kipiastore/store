@@ -93,8 +93,9 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Override
     @Transactional
-    public List<Company> getCompanies(SubPartition subPartition) {
-        return null;
+    public List<Company> getCompanies(List<Integer> companyIds) {
+        String hql = "from Company where id IN (:companyIds) and isShowForOperator = true";
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("companyIds", companyIds).list();
     }
 
 }

@@ -20,7 +20,7 @@ public interface CompanyDAO {
 
     List<Company> getCompanies();
 
-    List<Company> getCompanies(SubPartition subPartition);
+    List<Company> getCompanies(List<Integer> companyIds);
 
     List<Company> findCompaniesByName(String name);
 
