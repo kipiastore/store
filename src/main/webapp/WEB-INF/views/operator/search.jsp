@@ -18,19 +18,19 @@
     <div class="empDiv2"><h3>Поиск по слову:</h3></div>
     <k:forEach var="item" items="${model.companyItemsByKeyword}">
         <div class="content">
-            <a href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
+            <a style="color: hsla(0,${item.colorPoint}%,66%,1);" href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
         </div>
     </k:forEach>
     <div class="empDiv2"><h3>Поиск по фирме:</h3></div>
     <k:forEach var="item" items="${model.companyItemsByCompany}">
         <div class="content">
-            <a href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
+            <a style="color: hsla(0,${item.colorPoint}%,66%,1);" href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
         </div>
     </k:forEach>
     <div class="empDiv2"><h3>Поиск по адресу:</h3></div>
     <k:forEach var="item" items="${model.companyItemsByAddress}">
         <div class="content">
-            <a href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
+            <a style="color: hsla(0,${item.colorPoint}%,66%,1);" href="${prefix}company/A-${item.companyId}">${item.companyName}</a>
         </div>
     </k:forEach>
 </div>

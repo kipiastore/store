@@ -36,12 +36,6 @@
         <span>E-mail: ${model.company.email}</span>
     </div>
     <div class="content">
-        <span>Юридическое название: ${model.company.legalName}</span>
-    </div>
-    <div class="content">
-        <span>Юридический адрес: ${model.company.legalAddress}</span>
-    </div>
-    <div class="content">
         <span>Телефон: ${model.company.phone}</span>
     </div>
     <div class="content">

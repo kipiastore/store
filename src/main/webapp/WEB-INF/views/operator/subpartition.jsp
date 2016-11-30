@@ -21,7 +21,7 @@
 <div class="menu">
     <k:forEach var="item" items="${model.companyItems}">
         <div class="content">
-            <a href="${prefix}company/${model.subPartitionItem.subPartitionId}-${item.companyId}">${item.companyName}</a>
+            <a style="color: hsla(0,${item.colorPoint}%,66%,1);" href="${prefix}company/${model.subPartitionItem.subPartitionId}-${item.companyId}">${item.companyName}</a>
         </div>
     </k:forEach>
 </div>

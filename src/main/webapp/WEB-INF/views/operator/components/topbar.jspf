@@ -3,6 +3,7 @@
     <span class="button logout" onclick="$('#logoutForm').submit()">Выход</span>
     <span class="button" id="headerSearchButt">Поиск</span>
     <k:url value="/login" var="logoutUrl" />
+    <span class="button"><a href="<c:url value="/"/>">Портал</a></span>
     <form action="${logoutUrl}" method="post" id="logoutForm">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     </form>

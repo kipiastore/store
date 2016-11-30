@@ -21,6 +21,8 @@ public interface CompanyAddressDAO {
 
     void deleteCompanyAddress(String[] idList);
 
+    List<CompanyAddress> findCompanyAddressByAddress(String address);
+
     void deleteCompanyAddressByCompany(Integer companyId);
 
     CompanyAddress getCompanyAddress(Integer id);

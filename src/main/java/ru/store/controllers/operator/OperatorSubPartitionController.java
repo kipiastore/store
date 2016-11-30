@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.dao.interfaces.CompanyDAO;
-import ru.store.dao.interfaces.CompanySubPartitionDAO;
-import ru.store.dao.interfaces.PartitionDAO;
-import ru.store.dao.interfaces.SubPartitionDAO;
+import ru.store.dao.interfaces.*;
 import ru.store.entities.Company;
 import ru.store.entities.CompanySubPartition;
 import ru.store.entities.SubPartition;
@@ -16,6 +13,7 @@ import ru.store.entities.SubPartition;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -31,6 +29,8 @@ public class OperatorSubPartitionController {
     private PartitionDAO partitionDAO;
     @Autowired
     private CompanySubPartitionDAO companySubPartitionDAO;
+    @Autowired
+    private PackageDAO packageDAO;
 
     @RequestMapping(value = "/operator/subpartition/*", method = RequestMethod.GET)
     public ModelAndView subPartition(HttpServletRequest request) {
@@ -55,6 +55,7 @@ public class OperatorSubPartitionController {
             companyIds.add(companySubPartition.getCompanyId());
         }
         List<Company> companies = companyDAO.getCompanies(companyIds);
+        Map<Integer, Integer> packageIdToPriority = OperatorSearchController.priorityHandler(packageDAO.getPackages());
 
         Model.SubPartitionItem subPartitionItem = new Model.SubPartitionItem();
         subPartitionItem.subPartitionId = subPartition.getId();
@@ -68,6 +69,9 @@ public class OperatorSubPartitionController {
             companyItem = new Model.CompanyItem();
             companyItem.companyId = company.getId();
             companyItem.companyName = company.getName();
+            companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());
+            if (company.getIsPriority())
+                companyItem.colorPoint = 100;
             companyItems.add(companyItem);
         }
 
@@ -124,12 +128,16 @@ public class OperatorSubPartitionController {
         public static class CompanyItem {
             public int companyId;
             public String companyName;
+            public Integer colorPoint;
 
             public int getCompanyId() {
                 return companyId;
             }
             public String getCompanyName() {
                 return companyName;
+            }
+            public Integer getColorPoint() {
+                return colorPoint;
             }
         }
     }

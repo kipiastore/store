@@ -86,6 +86,13 @@ public class CompanyAddressDAOImpl implements CompanyAddressDAO {
 
     @Override
     @Transactional
+    public List<CompanyAddress> findCompanyAddressByAddress(String address) {
+        String hql = "from CompanyAddress where lower(address) LIKE lower(:address) order by address desc";
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("address", "%" + address + "%").list();
+    }
+
+    @Override
+    @Transactional
     public List<CompanyAddress> getCompanyAddresses() {
         String hql = "from CompanyAddress";
         return sessionFactory.getCurrentSession().createQuery(hql).list();

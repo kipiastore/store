@@ -72,6 +72,13 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Override
     @Transactional
+    public List<Company> findCompaniesByKeyword(String keywords) {
+        String hql = "from Company where lower(keywords) LIKE lower(:keywords) order by name desc";
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("keywords", "%" + keywords + "%").list();
+    }
+
+    @Override
+    @Transactional
     public List<Company> findCompaniesByLegalName(String legalName) {
         String hql = "from Company where lower(legalName) LIKE lower(:legalName) order by name desc";
         return sessionFactory.getCurrentSession().createQuery(hql).setString("legalName", "%" + legalName + "%").list();

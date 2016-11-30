@@ -30,5 +30,7 @@ public interface CompanyDAO {
 
     List<Company> findCompaniesByEmail(String email);
 
+    List<Company> findCompaniesByKeyword(String keywords);
+
     List<Company> getCompaniesByLastUpdate();
 }
