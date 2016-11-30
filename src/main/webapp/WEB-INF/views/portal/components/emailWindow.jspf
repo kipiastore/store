@@ -14,11 +14,11 @@
             <div class="mail-body-container">
                 <form:form action="sendmail" method="post" id="mailForm">
                     <label>Имя<span class="required">*</span></label>
-                    <input title="Введите имя." type="text" maxlength="40" name="name" id="nameField" required />
+                    <input title="Введите имя." type="text" maxlength="80" name="name" id="nameField" required />
                     <label>Email<span class="required">*</span></label>
                     <input title="Введите email." type="text" maxlength="80" name="email" id="emailField" required />
                     <label>Сообщение<span class="required">*</span></label>
-                    <textarea rows="4" name="body" maxlength="1000" id="messageField" required ></textarea>
+                    <textarea rows="4" name="body" maxlength="2000" id="messageField" required ></textarea>
                     <div class="g-recaptcha" data-sitekey="6Ldf0AgUAAAAACdVi3u5AiWVjPXsRlQazQZUQss4"></div>
                     <input type="hidden" name="type" id="emailType" />
                 </form:form>

@@ -46,13 +46,13 @@ public class OperatorPartitionController {
 
         Model.PartitionItem partitionItem = new Model.PartitionItem();
         partitionItem.partitionId = partition.getId();
-        partitionItem.partitionName = partition.getName();
+        partitionItem.partitionName = getNormalName(partition.getName(), 36);
         List<Model.SubPartitionItem> subPartitionItems = new ArrayList<>();
         Model.SubPartitionItem subPartitionItem;
         for (SubPartition subPartition : subPartitions) {
             subPartitionItem = new Model.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
-            subPartitionItem.subPartitionName = subPartition.getName();
+            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 36);
             subPartitionItems.add(subPartitionItem);
         }
         Model model = new Model();
@@ -64,6 +64,14 @@ public class OperatorPartitionController {
         modelAndView.setViewName("operator/partition");
         return modelAndView;
     }
+
+    private String getNormalName(String name, int length) {
+        if (name != null && name.length() > length)
+            return name.substring(0, length) + "..";
+        else
+            return name;
+    }
+
 
     public static class Model {
         public PartitionItem partitionItem;

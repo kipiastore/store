@@ -63,8 +63,8 @@ public class GoogleCaptcha {
         public String toString() {
             return "CaptchaResponse{" +
                     "success=" + success +
-                    ", challenge_ts='" + challenge_ts + '\'' +
-                    ", hostname='" + hostname + '\'' +
+                    ", challenge_ts=\"" + challenge_ts + "\"" +
+                    ", hostname=\"" + hostname + "\"" +
                     ", errorCodes=" + Arrays.toString(errorCodes) +
                     '}';
         }

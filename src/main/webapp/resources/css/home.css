@@ -707,6 +707,12 @@ hr {
     width: 32px;
     text-align: center;
 }
+.rua-p-c-red2 {
+    color: #da6c6c;
+    //margin-right: 30px;
+    //width: 32px;
+    text-align: center;
+}
 .mtmb {
     margin-top: 40px;
     margin-bottom: 40px;
@@ -1231,12 +1237,12 @@ p::-moz-selection {
 .subsection {
     border: 1px solid #e7e7e7;
     border-radius: 3px;
-    width: 200px;
+    width: 250px;
     background: rgba(255, 255, 255, 0.84);
     position: absolute;
     margin-top: 10px;
     padding: 10px;
-    margin-left: 135px;
+    margin-left: 85px;
 }
 .subsection-list {
     background-color: #fff;

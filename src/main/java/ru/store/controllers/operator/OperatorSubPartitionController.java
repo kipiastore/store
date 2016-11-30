@@ -59,16 +59,16 @@ public class OperatorSubPartitionController {
 
         Model.SubPartitionItem subPartitionItem = new Model.SubPartitionItem();
         subPartitionItem.subPartitionId = subPartition.getId();
-        subPartitionItem.subPartitionName = subPartition.getName();
+        subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 36);
         Model.PartitionItem partitionItem = new Model.PartitionItem();
         partitionItem.partitionId = subPartition.getPartitionId();
-        partitionItem.partitionName = partitionDAO.getPartitionById(subPartition.getPartitionId()).getName();
+        partitionItem.partitionName = getNormalName(partitionDAO.getPartitionById(subPartition.getPartitionId()).getName(), 36);
         List<Model.CompanyItem> companyItems = new ArrayList<>();
         Model.CompanyItem companyItem;
         for (Company company : companies) {
             companyItem = new Model.CompanyItem();
             companyItem.companyId = company.getId();
-            companyItem.companyName = company.getName();
+            companyItem.companyName = getNormalName(company.getName(), 36);
             companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());
             if (company.getIsPriority())
                 companyItem.colorPoint = 100;
@@ -84,6 +84,13 @@ public class OperatorSubPartitionController {
         modelAndView.addObject("prefix", "../");
         modelAndView.setViewName("operator/subpartition");
         return modelAndView;
+    }
+
+    private String getNormalName(String name, int length) {
+        if (name != null && name.length() > length)
+            return name.substring(0, length) + "..";
+        else
+            return name;
     }
 
     public static class Model {

@@ -63,6 +63,7 @@
                                         Список пуст!
                                     </k:if>
                                     <k:forEach var="subPartitionItem" items="${partitionItem.subPartitionItems}">
+                                        <span class="rua-p-c-red2">${subPartitionItem.companyCount}</span>
                                         <a data-id="${partitionItem.partitionId}"
                                            href="subPartition/${subPartitionItem.subPartitionId}">${subPartitionItem.subPartitionName}</a>
                                         <br/>
@@ -83,6 +84,8 @@
         </div>
     </div>
     <div class="bestResources">
+        <div style="opacity: 0; width: 100%; height: 100px;"></div>
+        <!--
         <h2 class="headline centered mtmb">Лучшие ресурсы</h2>
         <div class="rua-l-wrapper text-center mtmb">
             <table class="logos">
@@ -100,6 +103,7 @@
                 </tbody>
             </table>
         </div>
+        -->
     </div>
     <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>

@@ -8,6 +8,7 @@ import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
 import ru.store.entities.SubPartition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -101,6 +102,8 @@ public class CompanyDAOImpl implements CompanyDAO {
     @Override
     @Transactional
     public List<Company> getCompanies(List<Integer> companyIds) {
+        if (companyIds.size() == 0)
+            return new ArrayList<>();
         String hql = "from Company where id IN (:companyIds) and isShowForOperator = true";
         return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("companyIds", companyIds).list();
     }

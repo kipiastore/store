@@ -29,7 +29,7 @@ public class OperatorController {
         for (Partition partition : partitionDAO.getPartitions()) {
             partitionItem = new Model.PartitionItem();
             partitionItem.partitionId = partition.getId();
-            partitionItem.partitionName = partition.getName();
+            partitionItem.partitionName = getNormalName(partition.getName(), 36);
             partitionItems.add(partitionItem);
         }
         Model model = new Model();
@@ -45,6 +45,13 @@ public class OperatorController {
 
         modelAndView.setViewName("operator/index");
         return modelAndView;
+    }
+
+    private String getNormalName(String name, int length) {
+        if (name != null && name.length() > length)
+            return name.substring(0, length) + "..";
+        else
+            return name;
     }
 
     public static class Model {

@@ -97,22 +97,32 @@ $('.right-container').on("click", function() {
     var nameField = $('#nameField');
     var emailField = $('#emailField');
     var messageField = $('#messageField');
-    if (nameField.val() == "" || emailField.val() == "" || messageField.val() == "") {
+    var regEx = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+    if (nameField.val() == "" || emailField.val() == "" || messageField.val() == "" || !regEx.test(emailField.val())) {
         if (nameField.val() == "") {
             nameField.css("border-left", "2px solid #e8b3bd");
         } else {
             nameField.css("border-left", "");
         }
+
         if (emailField.val() == "") {
             emailField.css("border-left", "2px solid #e8b3bd");
         } else {
             emailField.css("border-left", "");
         }
+
+        if (!regEx.test(emailField.val())) {
+            emailField.css("border-left", "2px solid #e8b3bd");
+        } else {
+            emailField.css("border-left", "");
+        }
+
         if (messageField.val() == "") {
             messageField.css("border-left", "2px solid #e8b3bd");
         } else {
             messageField.css("border-left", "");
         }
+
         return;
     }
     var container = $('.mail-container');

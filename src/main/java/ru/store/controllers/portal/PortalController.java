@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.store.beans.EmailSender;
 import ru.store.beans.GoogleCaptcha;
 import ru.store.dao.interfaces.BestCompanyDAO;
+import ru.store.dao.interfaces.CompanySubPartitionDAO;
 import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.*;
@@ -32,10 +33,25 @@ public class PortalController {
     @Autowired
     private GoogleCaptcha googleCaptcha;
     @Autowired
-    EmailSender emailSender;
+    private EmailSender emailSender;
+    @Autowired
+    private CompanySubPartitionDAO companySubPartitionDAO;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
+        Map<Integer, Integer> subPartitionIdToCount = new HashMap<>();
+
+        List<CompanySubPartition> companySubPartitions = companySubPartitionDAO.getCompanySubPartitions();
+        for (CompanySubPartition companySubPartition : companySubPartitions) {
+            if (subPartitionIdToCount.get(companySubPartition.getSubPartitionId()) == null) {
+                subPartitionIdToCount.put(companySubPartition.getSubPartitionId(), 1);
+            } else {
+                subPartitionIdToCount.put(
+                        companySubPartition.getSubPartitionId(),
+                        subPartitionIdToCount.get(companySubPartition.getSubPartitionId()) + 1);
+            }
+        }
+
         // prepare part of the model;
         Map<Integer, List<Model.PartitionItem.SubPartitionItem>> subPartitionItemsGroupByPartitionId = new HashMap<>();
         List<Model.PartitionItem.SubPartitionItem> subPartitionItems;
@@ -43,7 +59,9 @@ public class PortalController {
         for (SubPartition subPartition : subPartitionDAO.getSubPartitions()) {
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
-            subPartitionItem.subPartitionName = subPartition.getName();
+            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 32);
+            if (subPartitionIdToCount.get(subPartition.getId()) != null)
+            subPartitionItem.companyCount = subPartitionIdToCount.get(subPartition.getId());
             if (subPartitionItemsGroupByPartitionId.get(subPartition.getPartitionId()) != null) {
                 subPartitionItemsGroupByPartitionId.get(subPartition.getPartitionId()).add(subPartitionItem);
             } else {
@@ -52,14 +70,30 @@ public class PortalController {
                 subPartitionItemsGroupByPartitionId.put(subPartition.getPartitionId(), subPartitionItems);
             }
         }
+
+
+        List<SubPartition> subPartitions = subPartitionDAO.getSubPartitions();
+        Map<Integer, Integer> partitionIdToCount = new HashMap<>();
+        for (SubPartition subPartition : subPartitions) {
+            if (subPartitionIdToCount.get(subPartition.getId()) != null) {
+                if (partitionIdToCount.get(subPartition.getPartitionId()) == null) {
+                    partitionIdToCount.put(subPartition.getPartitionId(), subPartitionIdToCount.get(subPartition.getId()));
+                } else {
+                    partitionIdToCount.put(subPartition.getPartitionId(),
+                            partitionIdToCount.get(subPartition.getPartitionId()) + subPartitionIdToCount.get(subPartition.getId()));
+                }
+            }
+        }
+
         // prepare next part of the model;
         List<Model.PartitionItem> partitionItems = new ArrayList<>();
         Model.PartitionItem partitionItem;
         for (Partition partition : partitionDAO.getPartitions()) {
             partitionItem = new Model.PartitionItem();
-            partitionItem.companyCount = (int) (Math.random() * 4000); // todo get company count from bd
+            if (partitionIdToCount.get(partition.getId()) != null)
+                partitionItem.companyCount = partitionIdToCount.get(partition.getId());
             partitionItem.partitionId = partition.getId();
-            partitionItem.partitionName = partition.getName();
+            partitionItem.partitionName = getNormalName(partition.getName(), 50);
             partitionItem.subPartitionItems = subPartitionItemsGroupByPartitionId.get(partition.getId());
             partitionItems.add(partitionItem);
         }
@@ -86,6 +120,13 @@ public class PortalController {
         return modelAndView;
     }
 
+    private String getNormalName(String name, int length) {
+        if (name != null && name.length() > length)
+            return name.substring(0, length) + "..";
+        else
+            return name;
+    }
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView home() {
         return main();
@@ -98,8 +139,19 @@ public class PortalController {
             String name = mailMap.get("name").get(0);
             String email = mailMap.get("email").get(0);
             String body = mailMap.get("body").get(0);
-            int type = Integer.valueOf(mailMap.get("type").get(0));
-            emailSender.send(name, email, body, type);
+            String type = mailMap.get("type").get(0);
+            if (!name.isEmpty() &&
+                !email.isEmpty() &&
+                !body.isEmpty() &&
+                !type.isEmpty() &&
+                type.matches("\\d") &&
+                email.matches(EmailSender.EMAIL_REGX) &&
+                email.length() < 81 &&
+                body.length() < 2001 &&
+                name.length() < 81)
+            {
+                emailSender.send(name, email, body, Integer.valueOf(type));
+            }
         }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/index");
@@ -142,12 +194,16 @@ public class PortalController {
             public static class SubPartitionItem {
                 public int subPartitionId;
                 public String subPartitionName;
+                public int companyCount;
 
                 public int getSubPartitionId() {
                     return subPartitionId;
                 }
                 public String getSubPartitionName() {
                     return subPartitionName;
+                }
+                public int getCompanyCount() {
+                    return companyCount;
                 }
             }
         }

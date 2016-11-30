@@ -67,10 +67,10 @@ public class OperatorCompanyController {
 
         Model.PartitionItem partitionItem = new Model.PartitionItem();
         partitionItem.partitionId = partition.getId();
-        partitionItem.partitionName = partition.getName();
+        partitionItem.partitionName = getNormalName(partition.getName(), 36);
         Model.SubPartitionItem subPartitionItem = new Model.SubPartitionItem();
         subPartitionItem.subPartitionId = subPartition.getId();
-        subPartitionItem.subPartitionName = subPartition.getName();
+        subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 36);
         subPartitionItem.partitionItem = partitionItem;
         Model model = new Model();
         model.companyName = company.getName();
@@ -87,6 +87,9 @@ public class OperatorCompanyController {
             subPartitionIds.add(companySubPartition.getSubPartitionId());
         }
         model.subPartitions = subPartitionDAO.getSubPartitions(subPartitionIds);
+        for (SubPartition subPartition1 : model.subPartitions) {
+            subPartition1.setName(getNormalName(subPartition1.getName(),36));
+        }
 
         List<Region> regions = regionDAO.getRegions();
         Map<Integer, String> idToRegionName = new HashMap<>();
@@ -104,6 +107,13 @@ public class OperatorCompanyController {
         modelAndView.addObject("prefix", "../");
         modelAndView.setViewName("operator/company");
         return modelAndView;
+    }
+
+    private String getNormalName(String name, int length) {
+        if (name != null && name.length() > length)
+            return name.substring(0, length) + "..";
+        else
+            return name;
     }
 
     public static class Model {

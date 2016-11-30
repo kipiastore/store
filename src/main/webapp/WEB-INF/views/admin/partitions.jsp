@@ -21,7 +21,7 @@
             <span class="success">${successMessage}</span>
             <form:form action="addpartition" modelAttribute="partition"  method="post" id="createForm">
                 <label>Название раздела/подраздела<span class="required">*</span></label>
-                <input title="Введите название раздела." maxlength="120" type="text" name="name" required />
+                <input title="Введите название раздела." maxlength="120" autofocus type="text" name="name" required />
                 <label>Тип раздел/подраздел</label>
                 <select name="partitionLevel" id="partitionLevel" title="">
                     <option value="1">Раздел</option>

@@ -78,6 +78,8 @@ public class SubPartitionDAOImpl implements SubPartitionDAO {
     @Override
     @Transactional
     public List<SubPartition> getSubPartitions(List<Integer> subPartitionIds) {
+        if (subPartitionIds.size() == 0)
+            return new ArrayList<>();
         String hql = "from SubPartition where id IN (:subPartitionIds)";
         return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("subPartitionIds", subPartitionIds).list();
     }

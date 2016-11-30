@@ -63,7 +63,7 @@
             <form:form action="addcompany" modelAttribute="company" method="post" id="createForm">
                 <div class="left-body">
                     <label>Название<span class="required">*</span></label>
-                    <input title="Введите название фирмы." type="text" maxlength="255" name="name" id="newName" required />
+                    <input title="Введите название фирмы." autofocus type="text" maxlength="255" name="name" id="newName" required />
                     <label>Ключевые слова</label>
                     <input title="Введите ключевые слова." type="text" maxlength="255" placeholder="Через точку с запятой: авто; ремонт;" name="keywords" id="newKeywords" />
                     <label>Дата заключения договора<span class="required">*</span></label>

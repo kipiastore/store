@@ -28,7 +28,7 @@
                 <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
             </form:form>
         </div>
-        <span class="pageMenuButt" style="opacity: 0; cursor: default;">Создать</span>
+        <span class="pageMenuButt" style="opacity: 0; cursor: default; width: 0px">С</span>
     </div>
     <div class="menuBody">
         <div class="generalContent">
@@ -126,7 +126,7 @@
         background: transparent url(<c:url value="/resources/images/switch.png" />) no-repeat 50% 50%;
         width: auto;
     }
-    @media screen and (max-width : 1215px) {
+    @media screen and (max-width : 1136px) {
         .body .pageMenu { height: 76px; }
     }
 </style>

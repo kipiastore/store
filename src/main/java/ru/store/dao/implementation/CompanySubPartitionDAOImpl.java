@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.store.dao.interfaces.CompanySubPartitionDAO;
 import ru.store.entities.CompanySubPartition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +29,8 @@ public class CompanySubPartitionDAOImpl implements CompanySubPartitionDAO {
     @Override
     @Transactional
     public List<CompanySubPartition> findCompanySubpartitionByCompanyId(List<Integer> companyIds) {
+        if (companyIds.size() == 0)
+            return new ArrayList<>();
         String hql = "from CompanySubPartition where companyId in (:companyIds)";
         return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("companyIds", companyIds).list();
     }
@@ -43,6 +46,13 @@ public class CompanySubPartitionDAOImpl implements CompanySubPartitionDAO {
     @Transactional
     public void createCompanySubPartition(CompanySubPartition companySubPartition) {
         sessionFactory.getCurrentSession().save(companySubPartition);
+    }
+
+    @Override
+    @Transactional
+    public List<CompanySubPartition> getCompanySubPartitions() {
+        String hql = "from CompanySubPartition";
+        return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
     @Override
