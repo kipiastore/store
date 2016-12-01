@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.beans.EmailSender;
 import ru.store.beans.GoogleCaptcha;
-import ru.store.dao.interfaces.BestCompanyDAO;
-import ru.store.dao.interfaces.CompanySubPartitionDAO;
-import ru.store.dao.interfaces.PartitionDAO;
-import ru.store.dao.interfaces.SubPartitionDAO;
+import ru.store.dao.interfaces.*;
 import ru.store.entities.*;
 import ru.store.utility.Util;
 
@@ -36,13 +33,22 @@ public class PortalController {
     private EmailSender emailSender;
     @Autowired
     private CompanySubPartitionDAO companySubPartitionDAO;
+    @Autowired
+    private CompanyDAO companyDAO;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
         Map<Integer, Integer> subPartitionIdToCount = new HashMap<>();
 
+        List<Integer> companies = companyDAO.getOptimizationCompanies();
+        Set<Integer> availableCompany = new TreeSet<>();
+        for (Integer companyId : companies) {
+            availableCompany.add(companyId);
+        }
         List<CompanySubPartition> companySubPartitions = companySubPartitionDAO.getCompanySubPartitions();
         for (CompanySubPartition companySubPartition : companySubPartitions) {
+            if (!availableCompany.contains(companySubPartition.getCompanyId()))
+                continue;
             if (subPartitionIdToCount.get(companySubPartition.getSubPartitionId()) == null) {
                 subPartitionIdToCount.put(companySubPartition.getSubPartitionId(), 1);
             } else {
@@ -61,7 +67,7 @@ public class PortalController {
             subPartitionItem.subPartitionId = subPartition.getId();
             subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 32);
             if (subPartitionIdToCount.get(subPartition.getId()) != null)
-            subPartitionItem.companyCount = subPartitionIdToCount.get(subPartition.getId());
+                subPartitionItem.companyCount = subPartitionIdToCount.get(subPartition.getId());
             if (subPartitionItemsGroupByPartitionId.get(subPartition.getPartitionId()) != null) {
                 subPartitionItemsGroupByPartitionId.get(subPartition.getPartitionId()).add(subPartitionItem);
             } else {

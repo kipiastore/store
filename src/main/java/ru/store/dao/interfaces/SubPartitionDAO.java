@@ -25,4 +25,6 @@ public interface SubPartitionDAO {
     SubPartition getSubPartition(String name);
 
     List<SubPartition> getSubPartitions(List<Integer> subPartitionIds);
+
+    List<SubPartition> getSubPartitionsByPartitionId(Integer partitionId);
 }

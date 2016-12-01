@@ -33,4 +33,7 @@ public interface CompanyDAO {
     List<Company> findCompaniesByKeyword(String keywords);
 
     List<Company> getCompaniesByLastUpdate();
+
+    List<Integer> getOptimizationCompanies();
+
 }

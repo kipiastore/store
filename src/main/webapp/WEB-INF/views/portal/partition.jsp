@@ -21,10 +21,18 @@
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">test</h2>
                 <div class="rptShort">
-                    <div style="height: 500px; background-color: ivory"></div>
+                    <k:forEach var="item" items="${model.partitionItem.subPartitionItems}">
+                        <p>
+                            <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                            <span class="rua-p-c-red">${item.companyCount}</span>
+                        </p>
+                    </k:forEach>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="bestResources">
+        <div style="opacity: 0; width: 100%; height: 100px;"></div>
     </div>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>

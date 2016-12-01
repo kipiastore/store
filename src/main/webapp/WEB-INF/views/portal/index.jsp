@@ -53,7 +53,7 @@
             <hr style="width: 300px; margin: 110px auto 35px auto;"/>
             -->
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">Поиск по рубрикам</h2>
+                <h2 class="headline centered mtmb">Разделы</h2>
                 <div class="rptShort">
                     <k:forEach var="partitionItem" items="${model.partitionItems}">
                         <p>

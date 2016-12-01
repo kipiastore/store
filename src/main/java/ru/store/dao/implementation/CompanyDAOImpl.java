@@ -59,6 +59,13 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Override
     @Transactional
+    public List<Integer> getOptimizationCompanies() {
+        String hql = "select id from Company where isShowForSite = true and isOffPosition = false";
+        return sessionFactory.getCurrentSession().createQuery(hql).list();
+    }
+
+    @Override
+    @Transactional
     public List<Company> getCompaniesByLastUpdate() {
         String hql = "from Company where lastModifiedDate != createdDate order by lastModifiedDate desc";
         return sessionFactory.getCurrentSession().createQuery(hql).setMaxResults(15).list();
