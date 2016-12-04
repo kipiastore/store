@@ -12,7 +12,7 @@
     <div class="center-container">
         <div class="mail-body">
             <div class="mail-body-container">
-                <form:form action="sendmail" method="post" id="mailForm">
+                <form:form action="${prefix}sendmail" method="post" id="mailForm">
                     <label>Имя<span class="required">*</span></label>
                     <input title="Введите имя." type="text" maxlength="80" name="name" id="nameField" required />
                     <label>Email<span class="required">*</span></label>

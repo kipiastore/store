@@ -69,7 +69,8 @@ public class OperatorSubPartitionController {
             companyItem = new Model.CompanyItem();
             companyItem.companyId = company.getId();
             companyItem.companyName = getNormalName(company.getName(), 36);
-            companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());
+            if (packageIdToPriority.get(company.getCompanyPackageId()) != null)
+                companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());
             if (company.getIsPriority())
                 companyItem.colorPoint = 100;
             companyItems.add(companyItem);

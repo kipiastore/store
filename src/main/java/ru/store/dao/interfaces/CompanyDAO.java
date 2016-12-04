@@ -22,6 +22,8 @@ public interface CompanyDAO {
 
     List<Company> getCompanies(List<Integer> companyIds);
 
+    List<Company> getPortalCompanies(List<Integer> companyIds);
+
     List<Company> findCompaniesByName(String name);
 
     List<Company> findCompaniesByLegalName(String legalName);

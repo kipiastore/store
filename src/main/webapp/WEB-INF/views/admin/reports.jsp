@@ -74,7 +74,7 @@
             </div>
             <form:form action="addreport" enctype="multipart/form-data" modelAttribute="report" method="post" id="hiddenCreateForm">
                 <label>Название</label>
-                <input autofocus title="Введите название отчета." type="text" maxlength="120" name="name" placeholder="Оставьте поле пустым, если хотите чтобы использовать имя файла." />
+                <input autofocus title="Введите название отчета." type="text" maxlength="120" name="name" placeholder="Оставьте поле пустым если хотите чтобы использовать имя файла." />
                 <label>Файл<span class="required">*</span></label>
                 <input type="file" name="file" required title="txt pdf doc docx xls xlsx rar 7z gif jpeg jpg png bmp"/>
                 <textarea rows="4" name="description" maxlength="255" ></textarea>

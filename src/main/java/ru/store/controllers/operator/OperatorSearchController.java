@@ -87,7 +87,8 @@ public class OperatorSearchController {
             companyItem = new Model.CompanyItem();
             companyItem.companyId = company.getId();
             companyItem.companyName = company.getName();
-            companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());
+            if (packageIdToPriority.get(company.getCompanyPackageId()) != null)
+                companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());
             if (company.getIsPriority())
                 companyItem.colorPoint = 100;
             if (company.getIsShowForOperator() &&

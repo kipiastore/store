@@ -23,4 +23,8 @@ public interface CompanySubPartitionDAO {
 
     List<CompanySubPartition> getCompanySubPartitions();
 
-}
+
+    List<CompanySubPartition> findCompanySubpartitionBySubPartitionsId(List<Integer> subPartitionId);
+
+
+    }

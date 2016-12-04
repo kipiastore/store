@@ -34,6 +34,15 @@
     <div class="bestResources">
         <div style="opacity: 0; width: 100%; height: 100px;"></div>
     </div>
+    <div style="opacity: 0; width: 100%; height: 20px;"></div>
+    <k:forEach var="item" items="${model.companyHiPrior}">
+        <div class="rua-l-wrapper2" style="border-color: hsla(0,${item.colorPoint}%,66%,1)">
+            <a data-id="${item.companyId}" href="../company/${item.companyId}">
+                <h3>${item.companyName}</h3>
+            </a>
+            <span>${item.companyInformation}</span>
+        </div>
+    </k:forEach>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>

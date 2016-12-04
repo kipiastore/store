@@ -135,7 +135,9 @@ public class PortalController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView home() {
-        return main();
+        ModelAndView model = main();
+        model.addObject("prefix", "");
+        return model;
     }
 
     @RequestMapping(value = "/sendmail", method = RequestMethod.POST)
@@ -160,6 +162,7 @@ public class PortalController {
             }
         }
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("prefix", "");
         modelAndView.setViewName("redirect:/index");
         return modelAndView;
     }

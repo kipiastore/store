@@ -650,8 +650,27 @@ input[type="color"], .uneditable-input, select {
     max-width: 960px;
     margin: 0 auto;
 }
+.rua-l-wrapper2 {
+    max-width: 960px;
+    margin: 0 auto;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    //border-right: 1px solid #fff;;
+    border-radius: 5px;
+    padding-left: 22px;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+}
 .rua-g-clearfix {
     overflow: hidden;
+}
+.rua-l-wrapper2 a {
+    color: #7e7e7e;
+    text-decoration: none;
+}
+.rua-l-wrapper2 a:hover {
+    color: #16a085;
+    transition: color 0.3s ease-out;
 }
 .btn {
     display: inline-block;

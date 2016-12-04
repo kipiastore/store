@@ -37,6 +37,15 @@ public class CompanySubPartitionDAOImpl implements CompanySubPartitionDAO {
 
     @Override
     @Transactional
+    public List<CompanySubPartition> findCompanySubpartitionBySubPartitionsId(List<Integer> subPartitionId) {
+        if (subPartitionId.size() == 0)
+            return new ArrayList<>();
+        String hql = "from CompanySubPartition where subPartitionId in (:subPartitionId)";
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("subPartitionId", subPartitionId).list();
+    }
+
+    @Override
+    @Transactional
     public List<CompanySubPartition> findCompanySubpartitionBySubPartitionId(Integer subPartitionId) {
         String hql = "from CompanySubPartition where subPartitionId =:subPartitionId";
         return sessionFactory.getCurrentSession().createQuery(hql).setInteger("subPartitionId", subPartitionId).list();
