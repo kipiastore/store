@@ -19,17 +19,24 @@
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 30px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">test</h2>
+                <h2 class="headline centered mtmb">Name</h2>
                 <div class="rptShort">
-                    <div style="height: 500px; background-color: ivory"></div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="container">
+
+    </div>
+
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>
+<span class="subPartitionId">${subPartitionId}</span>
 <%@include file="/WEB-INF/views/portal/components/emailWindow.jspf"%>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/portal/portalSubPartition.js" />"></script>
+
 </body>
 </html>

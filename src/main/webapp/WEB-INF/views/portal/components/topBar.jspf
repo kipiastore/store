@@ -62,7 +62,7 @@
                 <span class="phoneSpanNum">111&nbsp;11&nbsp;11</span>
             </span>
             <div class="circleBorder">
-                <a href="<c:url value="/callinfo"/>" class="circle">
+                <a href="" class="circle">
                     <img class="phoneImg" src="<c:url value="/resources/images/phone.png" />">
                 </a>
             </div>
