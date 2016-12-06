@@ -32,7 +32,9 @@
         </div>
     </div>
     <div class="bestResources">
-        <div style="opacity: 0; width: 100%; height: 100px;"></div>
+        <div style="opacity: 1; width: 100%; text-align:center; margin-top: 30px; margin-bottom: 30px;">
+            <h3>Редакция рекомендует</h3>
+        </div>
     </div>
     <div style="opacity: 0; width: 100%; height: 20px;"></div>
     <k:forEach var="item" items="${model.companyHiPrior}">
