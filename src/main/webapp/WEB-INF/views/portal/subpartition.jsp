@@ -19,7 +19,7 @@
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 30px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">Name</h2>
+                <h2 class="headline centered mtmb"></h2>
                 <div class="rptShort">
                 </div>
             </div>

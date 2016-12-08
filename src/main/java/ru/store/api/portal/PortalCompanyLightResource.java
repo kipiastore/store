@@ -37,11 +37,17 @@ public class PortalCompanyLightResource {
 
         int positionCounter = Integer.valueOf(position);
         int maxPosition = positionCounter + 10;
+        int minPosition = positionCounter;
+        int counter = 0;
         List<Company> tmpCompanies = new ArrayList<>();
         List<Company> companies = companyDAO.getPortalCompanies(companyId);
         for (Company company : companies) {
-            tmpCompanies.add(company);
-            positionCounter++;
+            if (counter == minPosition) {
+                tmpCompanies.add(company);
+                positionCounter++;
+            } else {
+                counter++;
+            }
             if (positionCounter == maxPosition)
                 break;
         }
