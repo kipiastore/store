@@ -39,10 +39,13 @@
     <div style="opacity: 0; width: 100%; height: 20px;"></div>
     <k:forEach var="item" items="${model.companyHiPrior}">
         <div class="rua-l-wrapper2" style="border-color: hsla(0,${item.colorPoint}%,66%,1)">
-            <a data-id="${item.companyId}" href="../company/${item.companyId}">
-                <h3>${item.companyName}</h3>
-            </a>
-            <span>${item.companyInformation}</span>
+            <div class="companyMainInfo">
+                <a data-id="${item.companyId}" href="../company/${item.companyId}">
+                    <h3>${item.companyName}</h3>
+                </a>
+                <span>${item.companyInformation}</span>
+            </div>
+            <div class="AddressList">test</div>
         </div>
     </k:forEach>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.store.dao.interfaces.CompanyAddressDAO;
 import ru.store.entities.CompanyAddress;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,6 +103,15 @@ public class CompanyAddressDAOImpl implements CompanyAddressDAO {
     public List<CompanyAddress> getCompanyAddresses(Integer companyId) {
         String hql = "from CompanyAddress where companyId =?";
         return sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId).list();
+    }
+
+    @Override
+    @Transactional
+    public List<CompanyAddress> getCompanyAddresses(List<Integer> companyIds) {
+        if (companyIds.size() == 0)
+            return new ArrayList<>();
+        String hql = "from CompanyAddress where id IN (:companyIds)";
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("companyIds", companyIds).list();
     }
 
 }
