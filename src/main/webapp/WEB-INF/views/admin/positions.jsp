@@ -31,6 +31,11 @@
         <span class="pageMenuButt" style="opacity: 0; cursor: default; width: 0px">С</span>
     </div>
     <div class="menuBody">
+        <div class="pre-loading">
+            <div class="loading">
+
+            </div>
+        </div>
         <div class="generalContent">
             <span class="error" id="addError">${addError}</span>
             <span class="error">${updateError}</span>

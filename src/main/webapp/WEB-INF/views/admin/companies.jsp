@@ -88,8 +88,10 @@
                     <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="newCostOf" required />
                     <label>E-mail</label>
                     <input title="Введите e-mail." type="text" maxlength="120" name="email" id="newEmail" />
+                    <label>Сайт</label>
+                    <input title="Введите название сайта" type="text" maxlength="90" name="site" id="newSite" />
                     <label>Информация</label>
-                    <textarea rows="4" name="description" maxlength="255" id="newDescription"></textarea>
+                    <textarea rows="4" name="description" maxlength="1024" id="newDescription"></textarea>
                 </div>
                 <div class="right-body">
 
@@ -177,8 +179,10 @@
                     <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="costOf" required />
                     <label>E-mail</label>
                     <input title="Введите e-mail." type="text" maxlength="120" name="email" id="email" />
+                    <label>Сайт</label>
+                    <input title="Введите название сайта" type="text" maxlength="90" name="site" id="site" />
                     <label>Информация</label>
-                    <textarea rows="4" name="description" maxlength="255" id="description"></textarea>
+                    <textarea rows="4" name="description" maxlength="1024" id="description"></textarea>
                 </div>
                 <div class="right-body">
 

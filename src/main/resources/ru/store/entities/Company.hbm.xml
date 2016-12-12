@@ -65,7 +65,7 @@
             <column name="last_modified_by" length="45" not-null="true" />
         </property>
         <property name="description" type="string" >
-            <column name="description" length="255" not-null="false" />
+            <column name="description" length="1024" not-null="false" />
         </property>
         <property name="isShowForOperator" type="java.lang.Boolean" >
             <column name="is_show_for_operator" />

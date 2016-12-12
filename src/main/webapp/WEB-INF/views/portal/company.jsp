@@ -19,13 +19,31 @@
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 30px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">test</h2>
-                <div class="rptShort">
-                    <div style="height: 500px; background-color: ivory"></div>
-                </div>
+                <h2 class="headline centered mtmb">${company.name}</h2>
             </div>
         </div>
     </div>
+    <div class="rua-l-wrapper2" style="border-color: hsla(0,30%,66%,1)">
+        <div class="companyMainInfo">
+            <h3>${company.name}</h3>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;${company.description}</span>
+            <span class="companyAmount">
+                <k:if test="${not empty company.costOf}">
+                    Стоимость: <b>${company.costOf}</b>
+                </k:if>
+            </span>
+        </div>
+        <div class="AddressList">
+            <k:forEach var="addresItem" items="${addresses}">
+                <div class="address">
+                    <span class="addressInfo">${addresItem.address}</span>&nbsp;
+                    <span>${addresItem.phones}</span>&nbsp;
+                    <span>${addresItem.information}</span>
+                </div>
+            </k:forEach>
+        </div>
+    </div>
+
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>

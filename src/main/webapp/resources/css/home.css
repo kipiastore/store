@@ -1415,20 +1415,64 @@ p::-moz-selection {
     display: none;
 }
 .AddressList {
-    border: 1px solid rgba(120, 120, 120, 0.28);
+    border: 1px solid rgba(120, 120, 120, 0.12);
     border-left: none;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background: rgba(22, 160, 133, 0.22);
-    background: linear-gradient(#0f0f0f);
+    background: linear-gradient( to right top, rgba(22, 160, 133, 0.04), rgb(255, 255, 255));
     padding: 10px;
     border-top: none;
     border-right: none;
 }
-.companyMainInfo {
+.address {
     padding: 10px;
-    padding-top: 0px;
+}
+.companyMainInfo {
+    padding: 0px 10px 10px;
+    text-align: justify;
 }
 .companyMainInfo a h3 {
-    padding-left: 10px;
+    text-align: center;
+    padding: 10px;
+}
+.companyMainInfo h3 {
+    text-align: center;
+    padding: 10px;
+}
+.addressInfo {
+    font-weight: bolder;
+    color: rgba(0, 0, 0, 0.68);
+}
+.companyAmount {
+    float: right;
+    padding: 10px;
+    color: #d67b7b;
+}
+
+.loading {
+    margin: auto;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    border: 0.25rem solid rgb(182, 182, 182);
+    border-top-color: #16a085;
+    -webkit-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+.pre-loading {
+    display: none;
+    width: 100%;
+    padding-top: 180px;
+    padding-bottom: 280px;
 }

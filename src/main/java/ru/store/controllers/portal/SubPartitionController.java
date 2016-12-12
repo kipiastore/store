@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.SubPartitionDAO;
+import ru.store.entities.SubPartition;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,7 +36,8 @@ public class SubPartitionController {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
         }
-
+        SubPartition subPartition = subPartitionDAO.getSubPartitionById(subPartitionId);
+        modelAndView.addObject("subPartitionName", subPartition.getName());
         modelAndView.addObject("subPartitionId", subPartitionId);
 
         modelAndView.addObject("prefix", "../");

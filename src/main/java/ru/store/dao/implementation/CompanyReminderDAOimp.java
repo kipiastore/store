@@ -96,7 +96,6 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
             return defaultValue;
         }
     }
-
     @Override
     @Transactional
     public  String  getLastCompanyReminderType(Integer companyId) {
@@ -114,7 +113,9 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
         if (maxId != null) {
             hql = "select typeReminder from CompanyReminder where id =:maxId";
             List<String> typeReminder = sessionFactory.getCurrentSession().createQuery(hql).setInteger("maxId", maxId).list();
-            return typeReminder.get(0) +" "+ countId;
+
+            /*12.12.2016*/
+            return typeReminder.get(0) +" / "+ countId;
         }
         else {
             return defaultValue;

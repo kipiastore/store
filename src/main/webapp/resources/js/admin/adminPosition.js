@@ -84,13 +84,15 @@ $(".menuTitleText").on("click", function () {
 $(".tableName").on("click", function (event) {
     $(".error").hide();
     $(".success").hide();
+    var prLoader = $(".pre-loading");
     var container = $(".container");
     container.animate({opacity: 0}, 200);
     setTimeout(function() { container.hide(); }, 190);
     updateForm = $("#updateForm");
     setTimeout(function() {
         updateForm.show();
-        updateForm.animate({opacity: 1}, 200);
+        //updateForm.animate({opacity: 1}, 200);
+        prLoader.show();
     }, 200);
     isShowUpdateForm = true;
 
@@ -120,6 +122,8 @@ $(".tableName").on("click", function (event) {
                         });
                         $('#optgroup').multiSelect('select', tmpArray);
                     }
+                    prLoader.hide();
+                    updateForm.animate({opacity: 1}, 200);
                 });
             });
         });

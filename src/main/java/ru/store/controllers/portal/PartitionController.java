@@ -29,6 +29,8 @@ public class PartitionController {
     private CompanyDAO companyDAO;
     @Autowired
     private PackageDAO packageDAO;
+    @Autowired
+    private CompanyAddressDAO companyAddressDAO;
 
     @RequestMapping(value = "/partition/*", method = RequestMethod.GET)
     public ModelAndView partition(HttpServletRequest request) {
@@ -96,7 +98,11 @@ public class PartitionController {
         List<Company> companies = companyDAO.getPortalCompanies(new ArrayList<>(companyIds));
         List<Model.CompanyItem> companyItems = new ArrayList<>();
         Model.CompanyItem companyItem;
+        List<Integer> companyId = new ArrayList<>();
+        Map<Integer, List<CompanyAddress>> companyToCompanyAddress = new HashMap<>();
         for (Company company : companies) {
+            companyToCompanyAddress.put(company.getId(), new ArrayList<CompanyAddress>());
+            companyId.add(company.getId());
             companyItem = new Model.CompanyItem();
             if (packageIdToPriority.get(company.getCompanyPackageId()) != null)
                 companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());
@@ -105,6 +111,7 @@ public class PartitionController {
             companyItem.companyId = company.getId();
             companyItem.companyInformation = company.getDescription();
             companyItem.companyName = company.getName();
+            companyItem.costOf = company.getCostOf();
             companyItems.add(companyItem);
         }
         model.companyHiPrior = new ArrayList<>();
@@ -112,9 +119,15 @@ public class PartitionController {
         for (Model.CompanyItem companyItem1 : companyItems) {
             model.companyHiPrior.add(companyItem1);
             counter++;
-            if (counter > 10)
+            if (counter == 10)
                 break;
         }
+        List<CompanyAddress> companyAddresses =
+                companyAddressDAO.getCompanyAddresses(new ArrayList<>(companyToCompanyAddress.keySet()));
+        for (CompanyAddress companyAddress : companyAddresses) {
+            companyToCompanyAddress.get(companyAddress.getCompanyId()).add(companyAddress);
+        }
+        model.companyToCompanyAddress = companyToCompanyAddress;
 
         modelAndView.addObject("prefix", "../");
         modelAndView.addObject("model", model);
@@ -131,12 +144,17 @@ public class PartitionController {
 
     public static class Model {
         public PartitionItem partitionItem;
+        public List<CompanyItem> companyHiPrior;
+        public Map<Integer, List<CompanyAddress>> companyToCompanyAddress;
+
         public PartitionItem getPartitionItem() {
             return partitionItem;
         }
-        public List<CompanyItem> companyHiPrior;
         public List<CompanyItem> getCompanyHiPrior() {
             return companyHiPrior;
+        }
+        public Map<Integer, List<CompanyAddress>> getCompanyToCompanyAddress() {
+            return companyToCompanyAddress;
         }
 
         public static class PartitionItem {
@@ -176,6 +194,7 @@ public class PartitionController {
             public String companyName;
             public String companyInformation;
             public Integer colorPoint;
+            public Integer costOf;
 
             public int getCompanyId() {
                 return companyId;
@@ -188,6 +207,9 @@ public class PartitionController {
             }
             public Integer getColorPoint() {
                 return colorPoint;
+            }
+            public Integer getCostOf() {
+                return costOf;
             }
 
             @Override

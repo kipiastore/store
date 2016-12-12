@@ -625,7 +625,7 @@ label {
 .notes{
 	width:100%;
 	margin-top: 40px;
-	
+
 	margin-left: 1px;
 	overflow: auto;
 	height: 430px;
@@ -854,6 +854,23 @@ input[type="checkbox"] {
 #thActs{
 	width:80px;
 }
+/*12.12.2016*/
+#thCompanyName{
+    width:120px;
+}
+#thCompanyDirectorName{
+    width:100px;
+}
+#thCompanyAddress{
+    width:120px;
+}
+#thCompanyTelephone{
+    width:60px;
+}
+#thNoteCompany{
+    width:60px;
+}
+/*12.12.2016*/
 .table-bordered td,
 .table-bordered th {
     border: 1px solid #ddd!important
@@ -1054,7 +1071,7 @@ tbody {
     opacity: 1;
 }
 .notesFilter{
-	
+
 }
 .tableName {
     cursor: pointer;

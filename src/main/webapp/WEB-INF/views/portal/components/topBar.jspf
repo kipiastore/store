@@ -22,9 +22,11 @@
                     </li>
                 </ul>
             </li>
+            <!--
             <li class="header-item">
                 <a class="header-link header-link-button" href="<c:url value="/discount"/>" id="discounts">Акции</a>
             </li>
+            -->
             <sec:authorize access="isAnonymous()">
                 <li class="header-item">
                     <a class="header-link header-link-button" href="<c:url value="/login"/>">Вход</a>

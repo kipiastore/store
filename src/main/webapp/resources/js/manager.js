@@ -1,6 +1,6 @@
 var isShowCreateForm = false;
 var isShowUpdateForm = false;
- var isShowAddCompanyReminderForm = false;
+var isShowAddCompanyReminderForm = false;
 var currentItem;
 var pageMenuButtTarget;
 
@@ -238,7 +238,7 @@ function loadCompany(id) {
                             $ ("#trColorFill-"+countReminder).css("background-color", "#fff79a");
                         }
                         countReminder++;
-                });
+                    });
                 }
             });
             jQuery(document).ready(    //отпрвка джисоном данных с формы в фоновом режиме
@@ -279,15 +279,15 @@ function loadCompany(id) {
                 countReminder = 0;
                 dataCompanyReminderJsonAnswer = data ;
                 dataCompanyReminderJsonAnswer.forEach(function (entry6) {     //создание напоминаний из ответа сервера(data)
-                        $("#tbodyShowReminders").html(
-                            $("#tbodyShowReminders").html() + ' <tr id="trColorFill-'+countReminder+'">' +
-                            '<td ><span  id="dateReminder-' + countReminder + '"></span> </td>' +
-                            '<td ><span id="hourReminder-' + countReminder + '"></span></td>' +
-                            '<td ><span id="typeReminder-' + countReminder + '"></span></td>' +
-                            '<td ><span id="commentReminder-' + countReminder + '"></span></td>' +
-                            '<td hidden="true"><span id="hiddenReminder-' + countReminder + '"></span></td>' +
-                            '<td ><div class="reminderDeleteClass" id="buttonReminder-' + countReminder + '">Удалить</div></td>' +
-                            '</tr>');
+                    $("#tbodyShowReminders").html(
+                        $("#tbodyShowReminders").html() + ' <tr id="trColorFill-'+countReminder+'">' +
+                        '<td ><span  id="dateReminder-' + countReminder + '"></span> </td>' +
+                        '<td ><span id="hourReminder-' + countReminder + '"></span></td>' +
+                        '<td ><span id="typeReminder-' + countReminder + '"></span></td>' +
+                        '<td ><span id="commentReminder-' + countReminder + '"></span></td>' +
+                        '<td hidden="true"><span id="hiddenReminder-' + countReminder + '"></span></td>' +
+                        '<td ><div class="reminderDeleteClass" id="buttonReminder-' + countReminder + '">Удалить</div></td>' +
+                        '</tr>');
                     countReminder++;
                 });
                 countReminder=0;

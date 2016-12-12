@@ -110,7 +110,7 @@ public class CompanyAddressDAOImpl implements CompanyAddressDAO {
     public List<CompanyAddress> getCompanyAddresses(List<Integer> companyIds) {
         if (companyIds.size() == 0)
             return new ArrayList<>();
-        String hql = "from CompanyAddress where id IN (:companyIds)";
+        String hql = "from CompanyAddress where companyId IN (:companyIds)";
         return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("companyIds", companyIds).list();
     }
 

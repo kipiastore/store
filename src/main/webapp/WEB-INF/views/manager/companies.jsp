@@ -50,28 +50,30 @@
             <span class="success">${successMessage}</span>
             <div class="container">
                 <span class="message">${model.message}</span>
-                   <table class="table table-striped">
-                       <thead>
-                          <tr>
-                          <th>Название</th>
-                          <th>Директор</th>
-                           <th>Адрес</th>
-                              <th>Телефон</th>
-                             <th> Заметка</th>
-                           </tr>
-                       </thead>
-                   <tbody>
-                    <c:forEach var="item" items="${model.companyList}">
+                <table class="table table-striped">
+                    <thead>
                     <tr>
-                        <td class="tableName" id="ID-${item.id}">${item.name}</td>
-                        <td>${item.directorFullName}</td>
-                        <td>${item.legalAddress}</td>
-                        <td>${item.phone}</td>
-                        <td id="tdSelectShowTypeReminder">${item.typeOfNote}</td>
+                        <!--12.12.2016-->
+                        <th id="thCompanyName">Название</th>
+                        <th id="thCompanyDirectorName">Директор</th>
+                        <th id="thCompanyAddress">Адрес</th>
+                        <th id="thCompanyTelephone">Телефон</th>
+                        <th id="thNoteCompany"> Посл.Заметка/Общ.колич.</th>
+                        <!--12.12.2016-->
                     </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="item" items="${model.companyList}">
+                        <tr>
+                            <td class="tableName" id="ID-${item.id}">${item.name}</td>
+                            <td>${item.directorFullName}</td>
+                            <td>${item.legalAddress}</td>
+                            <td>${item.phone}</td>
+                            <td id="tdSelectShowTypeReminder">${item.typeOfNote}</td>
+                        </tr>
                     </c:forEach>
                     </tbody>
-                    </table>
+                </table>
             </div>
             <form:form action="updatecompany" modelAttribute="company" method="post" id="updateForm">
                 <div class="left-body">
@@ -108,17 +110,17 @@
                     </div>
                     <div class="openAddress">Адресса</div>
                     <div class="address">
-                    <%@include file="/WEB-INF/views/manager/components/updateAddress.jspf"%>
-                        </div>
+                        <%@include file="/WEB-INF/views/manager/components/updateAddress.jspf"%>
+                    </div>
                     <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                     <input type="hidden" name="hiddenId" id="hiddenId" />
                     <input type="submit" value="Обновить" id="submitManagerFormUpdate" />
                 </div>
-                </form:form>
+            </form:form>
 
-                <div class="right-body">
-                   <div class="reminder">
-                        <form:form id="addReminderForm" name="addReminderForm">
+            <div class="right-body">
+                <div class="reminder">
+                    <form:form id="addReminderForm" name="addReminderForm">
                         <table id="tableReminder">
                             <tr>
                                 <td colspan="2"align="center" id="trReminder">Напоминание</td>
@@ -127,54 +129,54 @@
                                 <td colspan="2"align="center">назначить на:</td>
                             </tr>
                             <tr>
-                            <br>
-                        <tr>
-                            <td>
-                                <select title="Введите часы" name="hourReminder" id="selectReminderHours">
-                                <option value="1:00">1:00</option>
-                                <option value="2:00">2:00</option>
-                                <option value="3:00">3:00</option>
-                                <option value="4:00">4:00</option>
-                                <option value="5:00">5:00</option>
-                                <option value="6:00">6:00</option>
-                                <option value="7:00">7:00</option>
-                                <option value="8:00">8:00</option>
-                                <option value="9:00">9:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="15:00">15:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="17:00">17:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="20:00">20:00</option>
-                                <option value="21:00">21:00</option>
-                                <option value="22:00">22:00</option>
-                                <option value="23:00">23:00</option>
-                                <option value="00:00">00:00</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input title="Введите дату." pattern="\d{1,2}.\d{1,2}.\d{4}"type="text" name="dateReminder" id="reminderDate" placeholder="Дата" required  />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                            <select title="Введите тип напоминания" name="typeReminder" id="selectReminderType">
-                                <option selected value="Перезвонить">Перезвонить</option>
-                                <option value="Отказ">Отказ</option>
-                                <option value="Встреча">Встреча</option>
-                                <option value="Закрылись">Закрылись</option>
-                                <option value="Другое">Другое</option>
-                            </select>
-                            </td>
-                        </tr>
+                                <br>
+                            <tr>
+                                <td>
+                                    <select title="Введите часы" name="hourReminder" id="selectReminderHours">
+                                        <option value="1:00">1:00</option>
+                                        <option value="2:00">2:00</option>
+                                        <option value="3:00">3:00</option>
+                                        <option value="4:00">4:00</option>
+                                        <option value="5:00">5:00</option>
+                                        <option value="6:00">6:00</option>
+                                        <option value="7:00">7:00</option>
+                                        <option value="8:00">8:00</option>
+                                        <option value="9:00">9:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="23:00">23:00</option>
+                                        <option value="00:00">00:00</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input title="Введите дату." pattern="\d{1,2}.\d{1,2}.\d{4}"type="text" name="dateReminder" id="reminderDate" placeholder="Дата" required  />
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan="2">
-                               <textarea name="commentReminder" id="reminderComment"></textarea>
+                                    <select title="Введите тип напоминания" name="typeReminder" id="selectReminderType">
+                                        <option selected value="Перезвонить">Перезвонить</option>
+                                        <option value="Отказ">Отказ</option>
+                                        <option value="Встреча">Встреча</option>
+                                        <option value="Закрылись">Закрылись</option>
+                                        <option value="Другое">Другое</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <textarea name="commentReminder" id="reminderComment"></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -183,29 +185,29 @@
                                 </td>
                             </tr>
                         </table>
-                        </form:form>
-                   </div>
-                        <div class="notes">
-                        <form:form id ="deleteReminderForm">
+                    </form:form>
+                </div>
+                <div class="notes">
+                    <form:form id ="deleteReminderForm">
                         <table class="tableNotes">
                             <tbody>
                             <tr>
                                 <td colspan="5"align="center" id="trNotes">Заметки</td>
                             </tr>
-                                <tr>
-                                    <td>Дата </td>
-                                    <td>Время</td>
-                                    <td>Статус</td>
-                                    <td>Заметки</td>
-                                    <td>Удалить</td>
-                                </tr>
+                            <tr>
+                                <td>Дата </td>
+                                <td>Время</td>
+                                <td>Статус</td>
+                                <td>Заметки</td>
+                                <td>Удалить</td>
+                            </tr>
                             </tbody>
                             <tbody id="tbodyShowReminders">
                             </tbody>
-                            </table>
-                            </form:form>
-                        </div>
+                        </table>
+                    </form:form>
                 </div>
+            </div>
         </div>
     </div>
     <input type="hidden" name="hiddenIdCompanyReminder" id="hiddenIdCompanyReminder" />

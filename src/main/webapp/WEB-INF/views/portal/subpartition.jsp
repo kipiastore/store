@@ -17,19 +17,23 @@
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
-        <div style="padding: 1px 0 30px 0;">
+        <div style="padding: 1px 0 0px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb"></h2>
+                <h2 class="headline centered mtmb">${subPartitionName}</h2>
                 <div class="rptShort">
                 </div>
             </div>
         </div>
     </div>
-
     <div class="container">
-
     </div>
+    <div class="container2">
+        <div class="pre-loading">
+            <div class="loading">
 
+            </div>
+        </div>
+    </div>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>

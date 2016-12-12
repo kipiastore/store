@@ -39,6 +39,7 @@ var isOffPosition;
 var isClosed;
 var isPriority;
 var email;
+var site;
 
 var addressArray;
 var BreakException = {};
@@ -260,6 +261,7 @@ function loadCompany(id) {
         isClosed = $("#isClosed");
         isPriority = $("#isPriority");
         email = $("#email");
+        site = $("#site");
     }
     if (dataCompanyAddressJson == undefined) {
         dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
@@ -290,6 +292,7 @@ function loadCompany(id) {
         contactPerson.val(entry.contactPerson);
         description.val(entry.description);
         email.val(entry.email);
+        site.val(entry.site);
 
         isShowForOperator.prop('checked', entry.isShowForOperator);
         isShowForSite.prop('checked', entry.isShowForSite);

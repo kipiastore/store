@@ -17,9 +17,9 @@
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
-        <div style="padding: 1px 0 30px 0;">
+        <div style="padding: 1px 0 0 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">test</h2>
+                <h2 class="headline centered mtmb">Подразделы</h2>
                 <div class="rptShort">
                     <k:forEach var="item" items="${model.partitionItem.subPartitionItems}">
                         <p>
@@ -33,7 +33,7 @@
     </div>
     <div class="bestResources">
         <div style="opacity: 1; width: 100%; text-align:center; margin-top: 30px; margin-bottom: 30px;">
-            <h3>Редакция рекомендует</h3>
+            <h2 class="headline centered mtmb">Редакция рекомендует</h2>
         </div>
     </div>
     <div style="opacity: 0; width: 100%; height: 20px;"></div>
@@ -43,9 +43,22 @@
                 <a data-id="${item.companyId}" href="../company/${item.companyId}">
                     <h3>${item.companyName}</h3>
                 </a>
-                <span>${item.companyInformation}</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;${item.companyInformation}</span>
+                <span class="companyAmount">
+                    <k:if test="${not empty item.costOf}">
+                        Стоимость: <b>${item.costOf}</b>
+                    </k:if>
+                </span>
             </div>
-            <div class="AddressList">test</div>
+            <div class="AddressList">
+                <k:forEach var="addresItem" items="${model.companyToCompanyAddress.get(item.companyId)}">
+                    <div class="address">
+                        <span class="addressInfo">${addresItem.address}</span>&nbsp;
+                        <span>${addresItem.phones}</span>&nbsp;
+                        <span>${addresItem.information}</span>
+                    </div>
+                </k:forEach>
+            </div>
         </div>
     </k:forEach>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
