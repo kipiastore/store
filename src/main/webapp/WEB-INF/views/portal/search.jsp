@@ -17,15 +17,38 @@
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
-        <div style="padding: 1px 0 30px 0;">
+        <div style="padding: 1px 0 0px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">test</h2>
+                <h2 class="headline centered mtmb">Поиск</h2>
                 <div class="rptShort">
-                    <div style="height: 500px; background-color: ivory"></div>
                 </div>
             </div>
         </div>
     </div>
+    <k:forEach var="item" items="${companies}">
+        <div class="rua-l-wrapper2" style="border-color: hsla(0,${ packageToColor.get(item.companyPackageId) }%,66%,1)">
+            <div class="companyMainInfo">
+                <a data-id="${item.id}" href="../company/${item.id}">
+                    <h3>${item.name}</h3>
+                </a>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;${item.description}</span>
+                <span class="companyAmount">
+                    <k:if test="${not empty item.costOf}">
+                        Стоимость: <b>${item.costOf}</b>
+                    </k:if>
+                </span>
+            </div>
+            <div class="AddressList">
+                <k:forEach var="addresItem" items="${companyToCompanyAddress.get(item.id)}">
+                    <div class="address">
+                        <span class="addressInfo">${addresItem.address}</span>&nbsp;
+                        <span>${addresItem.phones}</span>&nbsp;
+                        <span>${addresItem.information}</span>
+                    </div>
+                </k:forEach>
+            </div>
+        </div>
+    </k:forEach>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>

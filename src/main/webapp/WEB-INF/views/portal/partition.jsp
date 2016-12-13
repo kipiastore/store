@@ -17,7 +17,7 @@
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
-        <div style="padding: 1px 0 0 0;">
+        <div style="padding: 1px 0 30px 0;">
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">Подразделы</h2>
                 <div class="rptShort">

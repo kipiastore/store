@@ -38,4 +38,8 @@ public interface CompanyDAO {
 
     List<Integer> getOptimizationCompanies();
 
+    List<Company> findPortalCompaniesByName(String name);
+
+    List<Company> findPortalCompaniesByKeyword(String keywords);
+
 }

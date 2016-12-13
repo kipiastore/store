@@ -5,11 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ru.store.api.portal.PriorityResource;
 import ru.store.dao.interfaces.CompanyAddressDAO;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 @Controller
 public class CompanyController {
@@ -18,6 +20,8 @@ public class CompanyController {
     private CompanyDAO companyDAO;
     @Autowired
     private CompanyAddressDAO companyAddressDAO;
+    @Autowired
+    private PriorityResource priorityResource;
 
     @RequestMapping(value = "/company/*", method = RequestMethod.GET)
     public ModelAndView company(HttpServletRequest request) {
@@ -34,6 +38,10 @@ public class CompanyController {
         if (company == null) {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
+        }
+        for (PriorityResource.PriorityModel priorityModel : priorityResource.priorityHandler()) {
+            if (Objects.equals(priorityModel.getPackageId(), company.getCompanyPackageId()))
+                modelAndView.addObject("color", priorityModel.getPriority());
         }
         modelAndView.addObject("company", company);
         modelAndView.addObject("addresses", companyAddressDAO.getCompanyAddresses(companyId));

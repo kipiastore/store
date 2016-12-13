@@ -120,17 +120,14 @@ public class ManagerCompaniesController {
         List<Company> companies = companyService.getCompanies();
         List<Model.CompanyAddressItem> companyAddressItems = new ArrayList<>();
         Model.CompanyAddressItem companyAddressItem;
+        List<Model.CompanyReminderItem> companyReminderItems = new ArrayList<>();
+        Model.CompanyReminderItem companyReminderItem;
         for (Company company : companies) {
             companyAddressItem = new Model.CompanyAddressItem();
             companyAddressItem.setCompanyId(company.getId());
             // запросы в цыкле - это плохо
             companyAddressItem.setCompanyAddresses(companyAddressService.getCompanyAddresses(company.getId()));
             companyAddressItems.add(companyAddressItem);
-        }
-        List<Model.CompanyReminderItem> companyReminderItems = new ArrayList<>();
-
-        Model.CompanyReminderItem companyReminderItem;
-        for (Company company : companies) {
             companyReminderItem = new Model.CompanyReminderItem();
             companyReminderItem.setCompanyId(company.getId());
             // запросы в цыкле - это плохо
@@ -181,7 +178,8 @@ public class ManagerCompaniesController {
         companyItem.directorFullName = company.getDirectorFullName();
         companyItem.legalAddress = company.getLegalAddress();
         companyItem.phone = company.getPhone();
-        companyItem.typeOfNote= companyReminderService.getLastCompanyReminderType(company.getId());
+        // запросы в цыкле - это плохо
+        companyItem.typeOfNote = companyReminderService.getLastCompanyReminderType(company.getId());
         return companyItem;
     }
     @RequestMapping(value = "/manager/updatecompany", method = RequestMethod.GET)

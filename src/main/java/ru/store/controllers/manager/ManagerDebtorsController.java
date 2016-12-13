@@ -116,12 +116,14 @@ public class ManagerDebtorsController {
     private List<Model.CompaniesItem> convert(Company company) {
         List<Model.CompaniesItem> companyItems = new ArrayList<>();
         Model.CompaniesItem companyItem;
-            companyItem=new Model.CompaniesItem();
-            companyItem.name=company.getName();
-            companyItem.companyPackage=packageService.getPackage(company.getCompanyPackageId()).getName();
-            companyItem.debt=checkIsDebt(company);
-            companyItem.directorFullName=company.getDirectorFullName();
-            companyItem.companyAddresses=companyAddressService.getCompanyAddressString(company.getId());
+        companyItem=new Model.CompaniesItem();
+        companyItem.name=company.getName();
+         // запросы в цыкле - это плохо
+        companyItem.companyPackage=packageService.getPackage(company.getCompanyPackageId()).getName();
+        companyItem.debt=checkIsDebt(company);
+        companyItem.directorFullName=company.getDirectorFullName();
+        // запросы в цыкле - это плохо
+        companyItem.companyAddresses=companyAddressService.getCompanyAddressString(company.getId());
         if(!companyReminderService.getCompanyReminderDateHourType(company.getId()).equals("")) {
             companyItem.note=companyReminderService.getCompanyReminderDateHourType(company.getId());
         }

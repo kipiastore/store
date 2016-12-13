@@ -17,13 +17,13 @@
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
-        <div style="padding: 1px 0 30px 0;">
+        <div style="padding: 1px 0 0px 0;">
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">${company.name}</h2>
             </div>
         </div>
     </div>
-    <div class="rua-l-wrapper2" style="border-color: hsla(0,30%,66%,1)">
+    <div class="rua-l-wrapper2" style="border-color: hsla(0,${color}%,66%,1)">
         <div class="companyMainInfo">
             <h3>${company.name}</h3>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;${company.description}</span>

@@ -8,6 +8,7 @@
                     <a class="header-link" href="<c:url value="/index"/>">Главная страница</a>
                 </li>
             </k:if>
+            <!--
             <li class="header-item header-menu">
                 <a class="header-link" href="<c:url value="/search"/>">Страница поиска</a>
                 <ul class="header-menu-inner">
@@ -22,7 +23,7 @@
                     </li>
                 </ul>
             </li>
-            <!--
+
             <li class="header-item">
                 <a class="header-link header-link-button" href="<c:url value="/discount"/>" id="discounts">Акции</a>
             </li>

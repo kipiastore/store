@@ -92,16 +92,14 @@ public class ManagerNotesController {
         List<Model.CompaniesItem> companiesItems=new ArrayList<>();
         Model.CompaniesItem companiesItem;
         for(Company company:tempList ) {
-                for (CompanyReminder companyReminder : companyReminders) {
-                    if(company.getName().equals(companyReminder.getCompanyName())) {
-                        if(companyReminder!=null) {
-                            companiesItem = new Model.CompaniesItem();
-                            companiesItem.name = company.getName();
-                            companiesItem.dateOfNote = companyReminder.getDateReminder();
-                            companiesItem.commentOfNote = companyReminder.getCommentReminder();
-                            companiesItem.typeOfNote = companyReminder.getTypeReminder();
-                            companiesItems.add(companiesItem);
-                        }
+            for (CompanyReminder companyReminder : companyReminders) {
+                if(company.getName().equals(companyReminder.getCompanyName())) {
+                    companiesItem = new Model.CompaniesItem();
+                    companiesItem.name = company.getName();
+                    companiesItem.dateOfNote = companyReminder.getDateReminder();
+                    companiesItem.commentOfNote = companyReminder.getCommentReminder();
+                    companiesItem.typeOfNote = companyReminder.getTypeReminder();
+                    companiesItems.add(companiesItem);
                 }
             }
         }
@@ -159,6 +157,7 @@ public class ManagerNotesController {
         List<Model.CompaniesItem> companyItems = new ArrayList<>();
         Model.CompaniesItem companyItem;
         List<CompanyReminder> companyReminders;
+        // запросы в цыкле - это плохо
         companyReminders= companyReminderService.getCompanyReminders(company.getId());
         if(companyReminders.isEmpty()){
             companyItem=new Model.CompaniesItem();
