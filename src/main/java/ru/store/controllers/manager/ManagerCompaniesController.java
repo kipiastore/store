@@ -123,6 +123,7 @@ public class ManagerCompaniesController {
         for (Company company : companies) {
             companyAddressItem = new Model.CompanyAddressItem();
             companyAddressItem.setCompanyId(company.getId());
+            // запросы в цыкле - это плохо
             companyAddressItem.setCompanyAddresses(companyAddressService.getCompanyAddresses(company.getId()));
             companyAddressItems.add(companyAddressItem);
         }
@@ -132,11 +133,12 @@ public class ManagerCompaniesController {
         for (Company company : companies) {
             companyReminderItem = new Model.CompanyReminderItem();
             companyReminderItem.setCompanyId(company.getId());
+            // запросы в цыкле - это плохо
             companyReminderItem.setCompanyReminders(companyReminderService.getCompanyReminders(company.getId()));
             companyReminderItems.add(companyReminderItem);
         }
 
-        model.companiesJson = companies.toString();
+        //model.companiesJson = companies.toString();
         model.companyAddressJson = companyAddressItems.toString();
         model.companyReminderJson = companyReminderItems.toString();
         model.regions = regionService.getRegions();

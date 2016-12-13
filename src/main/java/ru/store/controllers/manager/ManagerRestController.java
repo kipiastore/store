@@ -17,6 +17,7 @@ public class ManagerRestController {
     private CompanyReminderService companyReminderService;
     @RequestMapping(value = "/manager/addreminder", method = RequestMethod.POST)
     public String addReminder (@RequestBody CompanyReminder companyReminder) {
+        System.out.println(companyReminder);
         try {
             companyReminderService.createCompanyReminder(companyReminder);
         } catch (Exception ex) {

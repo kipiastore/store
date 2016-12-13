@@ -216,7 +216,7 @@
     <input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 </div>
 <%@include file="/WEB-INF/views/manager/components/menu.jspf"%>
-<span class="dataJson">${model.companiesJson}</span>
+<!--<span class="dataJson">${model.companiesJson}</span>-->
 <span class="addingUserJson">${model.addingCompanyJson}</span>
 <span class="companyAddressJson">${model.companyAddressJson}</span>
 <span class="companyReminderJson">${model.companyReminderJson}</span>
