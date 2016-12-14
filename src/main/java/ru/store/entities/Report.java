@@ -11,8 +11,8 @@ public class Report {
     private Integer Id;
     private String name;
     private Integer companyId;
-    private Timestamp createdDate = new Timestamp(new java.util.Date().getTime());
-    private Timestamp lastModifiedDate = new Timestamp(new java.util.Date().getTime());
+    private Timestamp createdDate;
+    private Timestamp lastModifiedDate;
     private String lastModifiedBy;
     private String owner;
     private String description;

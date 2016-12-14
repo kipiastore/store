@@ -13,9 +13,7 @@ import ru.store.dao.interfaces.FileDAO;
 import ru.store.dao.interfaces.ReportDAO;
 import ru.store.entities.*;
 import ru.store.exceptions.NotSupportedFormat;
-import ru.store.service.CompanyService;
-import ru.store.service.PartitionService;
-import ru.store.service.SubPartitionService;
+import ru.store.service.*;
 import ru.store.servlets.DownloadServlet;
 
 import java.util.*;
@@ -33,9 +31,9 @@ public class AdminReportsController {
     @Autowired
     private PartitionService partitionService;
     @Autowired
-    private FileDAO fileDAO;
+    private FileService fileService;
     @Autowired
-    private ReportDAO reportDAO;
+    private ReportService reportService;
 
     @RequestMapping(value = "/admin/reports", method = RequestMethod.GET)
     public ModelAndView reports() {
@@ -46,7 +44,7 @@ public class AdminReportsController {
     }
 
     @RequestMapping(value = "/admin/addreport", method = RequestMethod.POST)
-    public ModelAndView updateReport(@ModelAttribute("report") Report report,
+    public ModelAndView addReport(@ModelAttribute("report") Report report,
                                       @RequestParam("file") MultipartFile multipartFile) {
         ModelAndView modelAndView = new ModelAndView();
         try {
@@ -58,14 +56,14 @@ public class AdminReportsController {
             File file = new File();
             file.setFile(multipartFile.getBytes());
             file.setName(multipartFile.getOriginalFilename());
-            fileDAO.createFile(file);
+            fileService.createFile(file);
             System.out.println(file);
 
             if (report.getName().isEmpty()) {
                 report.setName(file.getName());
             }
             report.setFileId(file.getId());
-            reportDAO.createReport(report);
+            reportService.createReport(report);
             modelAndView.addObject("successMessage", "Отчет успешно добавлен.");
         } catch (Exception ex) {
             modelAndView.addObject("addError", "Возникла ошибка. " + ex.getMessage());
