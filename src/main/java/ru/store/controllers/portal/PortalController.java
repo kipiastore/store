@@ -153,11 +153,10 @@ public class PortalController {
                 !body.isEmpty() &&
                 !type.isEmpty() &&
                 type.matches("\\d") &&
-                email.matches(EmailSender.EMAIL_REGX) &&
+                email.matches(EmailSender.EMAIL_REGEX) &&
                 email.length() < 81 &&
                 body.length() < 2001 &&
-                name.length() < 81)
-            {
+                name.length() < 81) {
                 emailSender.send(name, email, body, Integer.valueOf(type));
             }
         }
