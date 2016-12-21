@@ -3,6 +3,7 @@ package ru.store.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.store.dao.interfaces.PartitionDAO;
+import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.Partition;
 import ru.store.exceptions.DuplicateException;
 
@@ -16,6 +17,8 @@ public class PartitionService {
 
     @Autowired
     private PartitionDAO partitionDAO;
+    @Autowired
+    private SubPartitionDAO subPartitionDAO;
 
     public void createPartition(Partition partition) {
         if (getPartitionByName(partition.getName()) == null)
@@ -29,6 +32,7 @@ public class PartitionService {
     }
 
     public void deletePartition(int id) {
+        subPartitionDAO.deleteSubPartitionByPartition(id);
         partitionDAO.deletePartition(id);
     }
 

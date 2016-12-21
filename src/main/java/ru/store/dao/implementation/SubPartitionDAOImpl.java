@@ -41,9 +41,27 @@ public class SubPartitionDAOImpl implements SubPartitionDAO {
 
     @Override
     @Transactional
+    public void deleteSubPartitionByPartition(int partitionId) {
+        String hql = "delete from SubPartition where partitionId =:partitionId";
+        sessionFactory.getCurrentSession().createQuery(hql).setInteger("partitionId", partitionId).executeUpdate();
+    }
+
+    @Override
+    @Transactional
     public SubPartition getSubPartition(String name) {
         String hql = "from SubPartition where name =?";
         List<SubPartition> subPartitions = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, name).list();
+        if (subPartitions != null && subPartitions.size() > 0)
+            return subPartitions.get(0);
+        else
+            return null;
+    }
+
+    @Override
+    @Transactional
+    public SubPartition getSubPartition(int id) {
+        String hql = "from SubPartition where id =?";
+        List<SubPartition> subPartitions = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, id).list();
         if (subPartitions != null && subPartitions.size() > 0)
             return subPartitions.get(0);
         else

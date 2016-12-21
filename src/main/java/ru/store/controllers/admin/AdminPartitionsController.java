@@ -55,10 +55,17 @@ public class AdminPartitionsController {
     }
 
     @RequestMapping(value = "/admin/updatepartition", method = RequestMethod.POST)
-    public ModelAndView updateCompany(@ModelAttribute("partition") Partition partition) {
+    public ModelAndView updateCompany(@ModelAttribute("partition") Partition partition,
+                                      @RequestParam("type") String type) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            partitionService.updatePartition(partition);
+            if (type.equals("subPartition")) {
+                SubPartition tmp = subPartitionService.getSubPartition(partition.getId());
+                tmp.setName(partition.getName());
+                subPartitionService.updateSubPartition(tmp);
+            } else {
+                partitionService.updatePartition(partition);
+            }
             modelAndView.addObject("successMessage", "Обновление проведено успешно.");
         } catch (Exception ex) {
             modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());
@@ -69,10 +76,15 @@ public class AdminPartitionsController {
     }
 
     @RequestMapping(value = "/admin/deletepartition", method = RequestMethod.POST)
-    public ModelAndView deleteCompany(@RequestParam("partitionId") String partitionId) {
+    public ModelAndView deleteCompany(@RequestParam("deleteId") String deleteId,
+                                      @RequestParam("type") String type) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            subPartitionService.deleteSubPartition(Integer.valueOf(partitionId));
+            if (type.equals("partition")) {
+                partitionService.deletePartition(Integer.valueOf(deleteId));
+            } else {
+                subPartitionService.deleteSubPartition(Integer.valueOf(deleteId));
+            }
             modelAndView.addObject("successMessage", "Раздел успешно удален.");
         } catch (Exception ex) {
             modelAndView.addObject("deleteError", "Возникла ошибка. " + ex.getMessage());

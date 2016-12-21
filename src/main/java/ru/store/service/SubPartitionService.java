@@ -50,4 +50,8 @@ public class SubPartitionService {
     public SubPartition getSubPartition(String name) {
         return subPartitionDAO.getSubPartition(name);
     }
+
+    public SubPartition getSubPartition(int id) {
+        return subPartitionDAO.getSubPartition(id);
+    }
 }

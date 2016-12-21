@@ -37,6 +37,13 @@
                     </div>
                 <input type="submit" value="Добавить" />
             </form:form>
+            <form:form action="updatepartition" modelAttribute="partition" method="post" id="updateForm">
+                <label>Название раздела/подраздела<span class="required">*</span></label>
+                <input title="Введите название раздела." maxlength="120" autofocus type="text" name="name" required id="keyName"/>
+                <input type="hidden" name="id" id="updateKey" />
+                <input type="hidden" name="type" id="updateType" />
+                <input type="submit" value="Обновить" />
+            </form:form>
         </div>
     </div>
 </div>
@@ -48,27 +55,37 @@
         <form:form action="deletepartition" method="post" id="deleteForm">
             <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
                 <div class="menuBodyItem">
-                    <div class="menuBodyItemHeadInfo" data-id="${key.id}">
-                        <span class="soloTest" data-id="${key.id}">${key.name}</span>
+                    <div class="menuBodyItemHeadInfo" id="ID-${key.id}" data-name="${key.name}" data-id="${key.id}">
+                        <span class="soloTest" id="ID-${key.id}" data-name="${key.name}" data-id="${key.id}">${key.name}</span>
+                    </div>
+                    <div class="menuBodyItemButt">
+                        <div class="menuBodyItemButtDel" data-type="partition" id="ID-${key.id}"></div>
                     </div>
                 </div>
                 <div style="display: none" id="itemsID-${key.id}">
                     <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
                         <div class="menuBodyItem" >
-                            <div class="menuBodyItemInfo" style="cursor: auto;" id="ID-${item.id}">
-                                <span class="soloTest" id="ID-${item.id}">${item.name}</span>
+                            <div class="menuBodyItemInfo" id="ID-${item.id}">
+                                <span class="soloTest" data-type="subPartition" data-name="${item.name}" id="ID-${item.id}">${item.name}</span>
                             </div>
-                            <div class="menuBodyItemButt">
-                                <div class="menuBodyItemButtDel" id="ID-${item.id}"></div>
+                            <div class="menuBodyItemButt" id="menuBodyItemButtId">
+                                <div class="menuBodyItemButtDel" data-type="subPartition" id="ID-${item.id}"></div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
             </c:forEach>
-            <input type="hidden" name="partitionId" id="deleteKey" />
+            <input type="hidden" name="deleteId" id="deleteKey" />
+            <input type="hidden" name="type" id="deleteType" />
         </form:form>
     </div>
 </div>
+<style>
+    .menuBodyItemHeadInfo {
+        //float: right;
+        width: 245px;
+    }
+</style>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
 <script type="text/javascript" src="<c:url value="/resources/js/admin/adminPartition.js" />"></script>
 </body>

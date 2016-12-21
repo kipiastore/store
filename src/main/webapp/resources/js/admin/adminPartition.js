@@ -162,15 +162,12 @@ $(".tableName").on("click", function (event) {
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
+    console.log('sad');
     var container = $(".container");
     container.animate({opacity: 0}, 200);
     setTimeout(function() { container.hide(); }, 190);
     isShowUpdateForm = true;
 
-    if (pageInformation == undefined)
-        pageInformation = $("#pageInformation").val();
-    if (!(pageInformation == 4 || pageInformation == 5 || pageInformation == 1))
-        return;
     $(".error").hide();
     $(".success").hide();
     updateForm = $("#updateForm");
@@ -208,30 +205,80 @@ $(".menuBodyItemInfo").on("click", function (event) {
     $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
 
-    if (pageInformation == 4 || pageInformation == 5) {
-        if (data == undefined) {
-            data = $.parseJSON($(".dataJson")[0].innerHTML);
-            fullName = $("#fullName");
-            username = $("#username");
-            password = $("#password");
-            password2 = $("#password2");
-            accessStatus = $("#accessStatus");
-            usernameHidden = $("#usernameHidden");
+    $('#updateKey').val(id);
+    $('#keyName').val(event.target.getAttribute("data-name"));
+    $('#updateType').val(event.target.getAttribute("data-type"));
+
+});
+var itemsStatusList;
+$(".menuBodyItemHeadInfo").on("click", function (event) {
+    var itemsID = event.target.getAttribute('data-id');
+    if (itemsStatusList == undefined) {
+        itemsStatusList = [];
+        for (var i = 1; i < 17; i++){
+            itemsStatusList[i] = {};
+            itemsStatusList[i].itemsID = i;
+            itemsStatusList[i].isShow = false;
         }
-        data.forEach(function(entry) {
-            if (entry.username == id) {
-                fullName.val(entry.fullName);
-                username.val(entry.username);
-                usernameHidden.val(entry.username);
-                password.val("");
-                password2.val("");
-                accessStatus.val(entry.status);
+    }
+    itemsStatusList.forEach(function(entry) {
+        if (entry.itemsID == itemsID) {
+            if (entry.isShow) {
+                $("#itemsID-"+itemsID).hide();
+                entry.isShow = false;
+            } else {
+                $("#itemsID-"+itemsID).show();
+                entry.isShow = true;
             }
-        });
+        }
+    });
+    console.log('sad');
+    var container = $(".container");
+    container.animate({opacity: 0}, 200);
+    setTimeout(function() { container.hide(); }, 190);
+    isShowUpdateForm = true;
+
+    $(".error").hide();
+    $(".success").hide();
+    updateForm = $("#updateForm");
+    if (isShowCreateForm) {
+        var createForm = $("#createForm");
+        if (pageMenuButtTarget != undefined)
+            pageMenuButtTarget.setAttribute("style", "background : #738dae;");
+        createForm.animate({opacity: 0}, 200);
+        setTimeout(function() { createForm.hide(); }, 200);
     }
-    if (pageInformation == 1) {
-        loadCompany(id);
+    if (isShowCreateForm && !isShowUpdateForm) {
+        setTimeout(function() {
+            updateForm.show();
+            updateForm.animate({opacity: 1}, 200);
+        }, 200);
+    } else if (isShowUpdateForm) {
+        updateForm.animate({opacity: 0}, 200);
+        setTimeout(function() {
+            updateForm.hide();
+            updateForm.show();
+            updateForm.animate({opacity: 1}, 200);
+        }, 200);
+    } else {
+        updateForm.show();
+        updateForm.animate({opacity: 1}, 200);
     }
+    isShowUpdateForm = true;
+    isShowCreateForm = false;
+
+    if (currentItem != undefined) {
+        $("div#" + currentItem).css("border-left", "0");
+    }
+    currentItem = event.target.getAttribute("id");
+    $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
+    $(".menuBodyItemButtDel").css("border-left", "0");
+    var id = currentItem.replace("ID-", "");
+
+    $('#updateKey').val(id);
+    $('#keyName').val(event.target.getAttribute("data-name"));
+    $('#updateType').val(event.target.getAttribute("data-type"));
+
 });
 
 function loadCompany(id) {
@@ -335,8 +382,13 @@ function loadCompany(id) {
 
 
 $(".menuBodyItemButtDel").on("click", function (event) {
-    var tmp = event.target.getAttribute('id').replace("ID-", "");
-    $("#deleteKey").val(tmp);
+    if (event.target.getAttribute('data-type') == 'partition') {
+        $("#deleteKey").val(event.target.getAttribute('id').replace("ID-", ""));
+        $("#deleteType").val('partition');
+    } else {
+        $("#deleteKey").val(event.target.getAttribute('id').replace("ID-", ""));
+        $("#deleteType").val('subPartition');
+    }
     if (confirm("Удалить?")) {
         $("#deleteForm").submit();
     }
@@ -512,28 +564,8 @@ $("#updateForm").submit(function() {
     }
 });
 
-var itemsStatusList;
 $(".menuBodyItemHeadInfo").on("click", function (event) {
-    var itemsID = event.target.getAttribute('data-id');
-    if (itemsStatusList == undefined) {
-        itemsStatusList = [];
-        for (var i = 1; i < 17; i++){
-            itemsStatusList[i] = {};
-            itemsStatusList[i].itemsID = i;
-            itemsStatusList[i].isShow = false;
-        }
-    }
-    itemsStatusList.forEach(function(entry) {
-        if (entry.itemsID == itemsID) {
-            if (entry.isShow) {
-                $("#itemsID-"+itemsID).hide();
-                entry.isShow = false;
-            } else {
-                $("#itemsID-"+itemsID).show();
-                entry.isShow = true;
-            }
-        }
-    });
+
 });
 
 $(".searchButt").on("click", function () {

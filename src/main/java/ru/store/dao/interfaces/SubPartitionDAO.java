@@ -27,4 +27,8 @@ public interface SubPartitionDAO {
     List<SubPartition> getSubPartitions(List<Integer> subPartitionIds);
 
     List<SubPartition> getSubPartitionsByPartitionId(Integer partitionId);
+
+    void deleteSubPartitionByPartition(int partitionId);
+
+    SubPartition getSubPartition(int id);
 }
