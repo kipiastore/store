@@ -84,7 +84,7 @@
         </div>
     </div>
     <div class="bestResources">
-        <div style="opacity: 0; width: 100%; height: 100px;"></div>
+        <div style="opacity: 1; width: 100%; height: 100px;z-index: 0;"></div>
         <!--
         <h2 class="headline centered mtmb">Лучшие ресурсы</h2>
         <div class="rua-l-wrapper text-center mtmb">

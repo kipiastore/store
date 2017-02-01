@@ -162,7 +162,7 @@ $(".tableName").on("click", function (event) {
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
-    console.log('sad');
+    console.log('sad2');
     var container = $(".container");
     container.animate({opacity: 0}, 200);
     setTimeout(function() { container.hide(); }, 190);
@@ -274,11 +274,12 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
     $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
     $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
-
+    console.log(id);
     $('#updateKey').val(id);
     $('#keyName').val(event.target.getAttribute("data-name"));
     $('#updateType').val(event.target.getAttribute("data-type"));
-
+    $(".subItemsList").hide();
+    $("#itemsID-"+id).show();
 });
 
 function loadCompany(id) {
@@ -564,9 +565,9 @@ $("#updateForm").submit(function() {
     }
 });
 
-$(".menuBodyItemHeadInfo").on("click", function (event) {
+//$(".menuBodyItemHeadInfo").on("click", function (event) {
 
-});
+//});
 
 $(".searchButt").on("click", function () {
     $("#searchForm").submit();

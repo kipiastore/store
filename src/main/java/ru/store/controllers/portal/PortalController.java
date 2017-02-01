@@ -65,7 +65,7 @@ public class PortalController {
         for (SubPartition subPartition : subPartitionDAO.getSubPartitions()) {
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
-            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 32);
+            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 25);
             if (subPartitionIdToCount.get(subPartition.getId()) != null)
                 subPartitionItem.companyCount = subPartitionIdToCount.get(subPartition.getId());
             if (subPartitionItemsGroupByPartitionId.get(subPartition.getPartitionId()) != null) {
