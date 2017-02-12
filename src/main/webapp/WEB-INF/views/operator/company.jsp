@@ -45,9 +45,9 @@
         <span>Контактное лицо: ${model.company.contactPerson}</span>
     </div>
     <div class="content">
-        <span>Сайт: ${model.company.site}</span>
+        <span>Сайт: <a href="${model.company.site}" target="_blank">${model.company.site}</a></span>
     </div>
-    <div class="content">
+    <div class="infoContent">
         <span>Информация: ${model.company.description}</span>
     </div>
     <div class="empDiv"></div>

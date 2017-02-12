@@ -9,147 +9,509 @@
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
-    <schema name="" catalog="store"/>
-    <table name="acts" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
-      <column name="company_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="limitation" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
-      <column name="total" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="payment" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="created_datetime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="last_modified_date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="file_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="company" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="keywords" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="date_of_contract" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
-      <column name="date_of_start_contract" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
-      <column name="date_of_end_contract" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
-      <column name="manager" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="company_package_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="cost_of" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="legal_name" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
-      <column name="inn" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="legal_address" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
-      <column name="phone" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="fax" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="director_full_name" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
-      <column name="contact_person" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
-      <column name="created_datetime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="last_modified_date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="last_modified_by" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="description" sqlType="VARCHAR" precision="1024" scale="0" nullable="true" jdbcType="12"/>
-      <column name="is_show_for_operator" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="is_show_for_site" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="is_paid" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="is_redirect" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="is_off_position" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="is_closed" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="is_priority" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="email" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
-      <column name="site" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="company_address" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="region_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="phones" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="information" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="company_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="company_reminder" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="hour" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
-      <column name="date" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="type" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="comment" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
-      <column name="company_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="company_name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="company_subpartition" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="company_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="subpartition_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="files" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="file" sqlType="LONGBLOB" precision="2147483647" scale="0" nullable="false" jdbcType="-4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="package" schema="" catalog="store" type="TABLE">
-      <column name="name" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
-      <column name="created_datetime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="priority" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="num_of_positions" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="cost" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="last_modified_date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="last_modified_by" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="partitions" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="region" schema="" catalog="store" type="TABLE">
-      <column name="name" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
-      <column name="created_datetime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="reports" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
-      <column name="company_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="created_datetime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="last_modified_date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="file_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="subpartition" schema="" catalog="store" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="partition_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="name" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="user_roles" schema="" catalog="store" type="TABLE">
-      <column name="user_role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="username" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="role" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="user_role_id"/>
-      <foreign-key name="user_roles_ibfk_1" columns="username" ref-table="users" ref-schema="" ref-catalog="store" ref-columns="username" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="uni_username_role" unique="true" columns="role,username"/>
-      <index name="fk_username_idx" unique="false" columns="username"/>
-    </table>
-    <table name="users" schema="" catalog="store" type="TABLE">
-      <column name="username" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
-      <column name="enabled" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
-      <column name="full_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="status" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="created_datetime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="last_modified_date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="last_modified_by" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="username"/>
-      <exported-key name="user_roles_ibfk_1" table="user_roles" schema="" catalog="store" columns="username"/>
-    </table>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="store"/>
+      <table id="2" parent="1" name="acts"/>
+      <table id="3" parent="1" name="company"/>
+      <table id="4" parent="1" name="company_address"/>
+      <table id="5" parent="1" name="company_reminder"/>
+      <table id="6" parent="1" name="company_subpartition"/>
+      <table id="7" parent="1" name="company_subpartition_content"/>
+      <table id="8" parent="1" name="files"/>
+      <table id="9" parent="1" name="package"/>
+      <table id="10" parent="1" name="partitions"/>
+      <table id="11" parent="1" name="region"/>
+      <table id="12" parent="1" name="reports"/>
+      <table id="13" parent="1" name="subpartition"/>
+      <table id="14" parent="1" name="user_roles"/>
+      <table id="15" parent="1" name="users"/>
+      <table id="16" parent="1" name="images"/>
+      <column id="17" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="18" parent="2" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="19" parent="2" name="company_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="20" parent="2" name="limitation">
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="21" parent="2" name="total">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="22" parent="2" name="payment">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="23" parent="2" name="created_datetime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="24" parent="2" name="last_modified_date">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="25" parent="2" name="owner">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="26" parent="2" name="description">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="27" parent="2" name="file_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="28" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="29" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="30" parent="3" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="31" parent="3" name="keywords">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="32" parent="3" name="date_of_contract">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="33" parent="3" name="date_of_start_contract">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="34" parent="3" name="date_of_end_contract">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="35" parent="3" name="manager">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="36" parent="3" name="company_package_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="37" parent="3" name="cost_of">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="38" parent="3" name="legal_name">
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="39" parent="3" name="inn">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="40" parent="3" name="legal_address">
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="41" parent="3" name="phone">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="42" parent="3" name="fax">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="43" parent="3" name="director_full_name">
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="44" parent="3" name="contact_person">
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="45" parent="3" name="created_datetime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="46" parent="3" name="last_modified_date">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="47" parent="3" name="owner">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="48" parent="3" name="last_modified_by">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="49" parent="3" name="description">
+        <data-type>varchar(1024)</data-type>
+      </column>
+      <column id="50" parent="3" name="is_show_for_operator">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="51" parent="3" name="is_show_for_site">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="52" parent="3" name="is_paid">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="53" parent="3" name="is_redirect">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="54" parent="3" name="is_off_position">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="55" parent="3" name="is_closed">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="56" parent="3" name="is_priority">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="57" parent="3" name="email">
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="58" parent="3" name="site">
+        <data-type>varchar(120)</data-type>
+      </column>
+      <key id="59" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="60" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="61" parent="4" name="address">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="62" parent="4" name="region_id">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="63" parent="4" name="phones">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="64" parent="4" name="information">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="65" parent="4" name="company_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="66" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="67" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="68" parent="5" name="hour">
+        <data-type>varchar(5)</data-type>
+      </column>
+      <column id="69" parent="5" name="date">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="70" parent="5" name="type">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="71" parent="5" name="comment">
+        <data-type>varchar(250)</data-type>
+      </column>
+      <column id="72" parent="5" name="company_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="73" parent="5" name="company_name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="74" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="75" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="76" parent="6" name="company_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="77" parent="6" name="subpartition_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="78" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="79" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="80" parent="7" name="image_id">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="81" parent="7" name="info">
+        <data-type>longtext</data-type>
+      </column>
+      <key id="82" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="83" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="84" parent="8" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="85" parent="8" name="file">
+        <mandatory>1</mandatory>
+        <data-type>longblob</data-type>
+      </column>
+      <key id="86" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="87" parent="9" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="88" parent="9" name="created_datetime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="89" parent="9" name="owner">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="90" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="91" parent="9" name="priority">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="92" parent="9" name="num_of_positions">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="93" parent="9" name="cost">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="94" parent="9" name="last_modified_date">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="95" parent="9" name="last_modified_by">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <key id="96" parent="9" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="97" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="98" parent="10" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(120)</data-type>
+      </column>
+      <key id="99" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="100" parent="11" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="101" parent="11" name="created_datetime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="102" parent="11" name="owner">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="103" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <key id="104" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="105" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="106" parent="12" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(120)</data-type>
+      </column>
+      <column id="107" parent="12" name="company_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="108" parent="12" name="created_datetime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="109" parent="12" name="last_modified_date">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="110" parent="12" name="owner">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="111" parent="12" name="description">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="112" parent="12" name="file_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="113" parent="12" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="114" parent="13" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="115" parent="13" name="partition_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="116" parent="13" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(120)</data-type>
+      </column>
+      <key id="117" parent="13" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="118" parent="14" name="user_role_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="119" parent="14" name="username">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="120" parent="14" name="role">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <index id="121" parent="14" name="fk_username_idx">
+        <columns>username</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="122" parent="14" name="uni_username_role">
+        <columns>role
+username</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="123" parent="14" name="PRIMARY">
+        <columns>user_role_id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="124" parent="14" name="uni_username_role">
+        <columns>role
+username</columns>
+        <underlying-index>uni_username_role</underlying-index>
+      </key>
+      <foreign-key id="125" parent="14" name="user_roles_ibfk_1">
+        <columns>username</columns>
+        <ref-key>~.users.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="126" parent="15" name="username">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="127" parent="15" name="password">
+        <mandatory>1</mandatory>
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="128" parent="15" name="enabled">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="129" parent="15" name="full_name">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="130" parent="15" name="status">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="131" parent="15" name="created_datetime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="132" parent="15" name="last_modified_date">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="133" parent="15" name="owner">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="134" parent="15" name="last_modified_by">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <key id="135" parent="15" name="PRIMARY">
+        <columns>username</columns>
+        <primary>1</primary>
+      </key>
+      <column id="136" parent="16" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="137" parent="16" name="file">
+        <mandatory>1</mandatory>
+        <data-type>mediumblob</data-type>
+      </column>
+      <column id="138" parent="16" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="139" parent="16" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
   </data-source>
 </component>

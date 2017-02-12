@@ -11,8 +11,15 @@
 .content {
     float: left;
     width: 300px;
+    height: 50px;
+    padding: 10px;
+}
+.infoContent {
+    float: left;
+    width: 94%;
     //height: 30px;
     padding: 10px;
+    text-align: justify;
 }
 .empDiv {
     width: 90%;
@@ -78,7 +85,7 @@ a:hover {
 .button {
     display: block;
     border: 1px solid #a8cb98;
-    width: 60px;
+    width: 90px;
     text-align: center;
     padding: 6px;
     background-color: #16a085;
@@ -91,7 +98,7 @@ a:hover {
 .searchSubmit {
     float: right;
     margin-left: 10px;
-    margin-right: 84px;
+    margin-right: 56px;
     height: 32px;
     padding: 0;
 }

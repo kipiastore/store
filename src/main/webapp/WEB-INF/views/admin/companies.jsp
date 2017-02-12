@@ -64,8 +64,8 @@
                 <div class="left-body">
                     <label>Название<span class="required">*</span></label>
                     <input title="Введите название фирмы." autofocus type="text" maxlength="255" name="name" id="newName" required />
-                    <label>Ключевые слова</label>
-                    <input title="Введите ключевые слова." type="text" maxlength="255" placeholder="Через точку с запятой: авто; ремонт;" name="keywords" id="newKeywords" />
+                    <label>Keywords</label>
+                    <input title="Введите keywords." type="text" maxlength="255" placeholder="" name="Keywords" id="newKeywords" />
                     <label>Дата заключения договора<span class="required">*</span></label>
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="newDateOfContract" required />
                     <label>Срок договора от<span class="required">*</span></label>
@@ -155,8 +155,8 @@
                 <div class="left-body">
                     <label>Название<span class="required">*</span></label>
                     <input title="Введите название фирмы." maxlength="120" type="text" name="name" id="name" required />
-                    <label>Ключевые слова</label>
-                    <input title="Введите ключевые слова." maxlength="255" placeholder="Через точку с запятой: авто; ремонт;" type="text" name="keywords" id="keywords" />
+                    <label>Keywords</label>
+                    <input title="Введите keywords." maxlength="255" placeholder="Keywords" type="text" name="keywords" id="keywords" />
                     <label>Дата заключения договора<span class="required">*</span></label>
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="dateOfContract" required />
                     <label>Срок договора от<span class="required">*</span></label>
