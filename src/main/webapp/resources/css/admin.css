@@ -232,7 +232,7 @@ form {
 }
 .generalContent {
     text-align: left;
-    padding: 30px 60px 20px;
+    padding: 16px 20px 10px;
     min-height: 500px;
 }
 #deleteForm {
@@ -248,7 +248,7 @@ input {
     width: 100%;
     outline: none;
     border-radius: 3px;
-    padding: 12px 20px 12px 10px;
+    padding: 3px 8px 3px 5px;
     margin-bottom: 9px;
 }
 input[type="submit"] {
@@ -266,12 +266,12 @@ select {
     width: 100%;
     outline: none;
     border-radius: 3px;
-    padding: 12px 20px 12px 10px;
+    padding: 3px 8px 3px 5px;
     margin-bottom: 9px;
 }
 label {
     font-family: monaco, Consolas, "Lucida Console", monospace;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     font-variant: normal;
     font-weight: 400;
@@ -357,7 +357,7 @@ label {
     font-size: 14px;
     outline: none;
     border-radius: 3px;
-    padding: 11px 20px 11px 10px;
+    padding: 3px 8px 3px 5px;
     margin-bottom: 10px;
     text-align: center;
     background-color: #ebedf0;
@@ -391,7 +391,7 @@ textarea {
     width: 100%;
     outline: none;
     border-radius: 3px;
-    padding: 12px 20px 12px 10px;
+    padding: 3px 8px 3px 5px;
     margin-bottom: 10px;
 }
 .left-address-item{
@@ -433,7 +433,7 @@ textarea {
     font-size: 14px;
     outline: none;
     border-radius: 3px;
-    padding: 12px 20px 12px 10px;
+    padding: 3px 8px 3px 5px;
     margin-top: 23px;
     margin-bottom: 10px;
     text-align: center;
