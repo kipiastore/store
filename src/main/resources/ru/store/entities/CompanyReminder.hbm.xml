@@ -8,7 +8,7 @@
             <generator class="identity" />
         </id>
         <property name="dateReminder" type="java.util.Date" >
-            <column name="date" length="50" not-null="false" />
+            <column name="date" not-null="false" />
         </property>
         <property name="hourReminder" type="string" >
             <column name="hour" length="6" not-null="false" />

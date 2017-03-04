@@ -195,10 +195,10 @@
                                 <td colspan="5"align="center" id="trNotes">Заметки</td>
                             </tr>
                             <tr>
-                                <td>Дата </td>
-                                <td>Время</td>
-                                <td>Статус</td>
-                                <td>Заметки</td>
+                                <td style="width: 77px;">Дата </td>
+                                <td style="width: 50px;">Время</td>
+                                <td style="width: 80px;">Статус</td>
+                                <td style="width: 200px;">Заметки</td>
                                 <td>Редактировать</td>
                             </tr>
                             </thead>

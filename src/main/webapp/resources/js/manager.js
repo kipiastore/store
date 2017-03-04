@@ -459,9 +459,9 @@ function loadCompany(id) {
                 for(var i=0;i<entry4.companyReminders.length;i++){   $(".tbodyShowReminders").html(
                     $(".tbodyShowReminders").html()+' <tr id="trColorFill-'+i+'">'+
                     '<td ><span  id="dateReminder-'+i+'"></span> </td>'+
-                    '<td ><span id="hourReminder-'+i+'"></span></td>'+
+                    '<td style="width: 50px;"><span id="hourReminder-'+i+'"></span></td>'+
                     '<td ><span id="typeReminder-'+i+'"></span></td>'+
-                    '<td ><span id="commentReminder-'+i+'"></span></td>'+
+                    '<td style="width: 200px;"><span id="commentReminder-'+i+'"></span></td>'+
                     '<td hidden="true" ><span id="hiddenReminder-'+i+'"></span></td>'+
                     '<td ><div class="reminderEditClass" id="buttonReminder-'+i+'" >Редактировать</div></td>'+
                     '</tr>');
