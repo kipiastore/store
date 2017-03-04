@@ -101,12 +101,12 @@ public class ManagerDebtorsController {
             companyItems = convert(company);
             for(Model.CompaniesItem companyItem:companyItems) {
                 if (choice == 1) {
-                    if (!companyItem.getNote().get(0).equals("")) {
+                    if (!companyItem.getNote().equals("")) {
                         model.companyList.add(companyItem);
                     }
                 }
                 if (choice == 2) {
-                    if (companyItem.getNote().get(0).equals("")) {
+                    if (companyItem.getNote().equals("")) {
                         model.companyList.add(companyItem);
                     }
                 }
@@ -124,14 +124,8 @@ public class ManagerDebtorsController {
         companyItem.directorFullName=company.getDirectorFullName();
         // запросы в цыкле - это плохо
         companyItem.companyAddresses=companyAddressService.getCompanyAddressString(company.getId());
-        if(!companyReminderService.getCompanyReminderDateHourType(company.getId()).equals("")) {
-            companyItem.note=companyReminderService.getCompanyReminderDateHourType(company.getId());
-        }
-        else{
-            companyItem.note= new ArrayList<>();
-            companyItem.note.add("");
-        }
-            companyItems.add(companyItem);
+        companyItem.note=companyReminderService.getLastCompanyReminderDateHourType(company.getId());
+        companyItems.add(companyItem);
         return companyItems;
     }
     private String checkIsDebt(Company company) {

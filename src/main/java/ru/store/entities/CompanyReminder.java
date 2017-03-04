@@ -2,10 +2,12 @@ package ru.store.entities;
 
 import com.google.gson.Gson;
 
+import java.util.Date;
+
 public class CompanyReminder {
     private Integer id;
     private String hourReminder;
-    private String dateReminder;
+    private Date dateReminder;
     private String typeReminder;
     private String commentReminder;
     private Integer companyId;
@@ -17,10 +19,10 @@ public class CompanyReminder {
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getDateReminder() {
+    public Date getDateReminder() {
         return dateReminder;
     }
-    public void setDateReminder(String dateReminder) {
+    public void setDateReminder(Date dateReminder) {
         this.dateReminder = dateReminder;
     }
     public String getTypeReminder() {

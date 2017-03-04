@@ -15,6 +15,7 @@ public  class Model {
     public int[] numOfAddress;
     public String companyAddressJson;
     public String companyReminderJson;
+    public List<CompaniesItem> reminderList;
     public List<CompaniesItem> companyList;
     public String message;
     public int getSelectedPageNum() {
@@ -44,6 +45,9 @@ public  class Model {
     public List<CompaniesItem> getCompanyList() {
         return companyList;
     }
+    public List<CompaniesItem> getReminderList() {
+        return reminderList;
+    }
     public String getMessage() {
         return message;
     }
@@ -52,16 +56,24 @@ public  class Model {
     public static class CompaniesItem {
         public int id;
         public String name;
+        public String nameForNotes;
         public String directorFullName;
         public String legalAddress;
         public  List<String>companyAddresses;
         public String phone;
         public String companyPackage;
         public String debt;
-        public List<String>  note;
+        public String  note;
         public String  typeOfNote;
+        public String  historyOfNote;
         public String dateOfNote;
+        public String hourOfNote;
+        public String  noteMain;
+        public String periodOfContract;
         public String commentOfNote;
+        public String getHourOfNote() {
+            return hourOfNote;
+        }
         public String manager;
         public String timeOfContract;
         public Integer costOf;
@@ -96,7 +108,7 @@ public  class Model {
         public String getDebt() {
             return debt;
         }
-        public List<String>  getNote() {
+        public String  getNote() {
             return note;
         }
         public List<String> getCompanyAddresses() {
@@ -120,6 +132,21 @@ public  class Model {
         public String getAct() {
             return act;
         }
+        public String getNoteMain() {
+            return noteMain;
+        }
+        public String getPeriodOfContract() {
+            return periodOfContract;
+        }
+        public String getLastTypeOfNote() {
+            return historyOfNote;
+        }
+        public String getNameForNotes() {
+            return nameForNotes;
+        }
+        public String getHistoryOfNote() {
+            return historyOfNote;
+        }
 
         @Override
         public String toString() {
@@ -142,6 +169,11 @@ public  class Model {
                     ", noteOfActs='" + noteOfActs + '\'' +
                     ", dateOfPaid='" + dateOfPaid + '\'' +
                     ", act='" + act + '\'' +
+                    ", noteMain='" + noteMain + '\'' +
+                    ", periodOfContract='" + periodOfContract + '\'' +
+                    ", hourOfNote='" + hourOfNote + '\'' +
+                    ", historyOfNote='" + historyOfNote + '\'' +
+                    ", nameForNotes='" + nameForNotes + '\'' +
                     '}';
         }
     }

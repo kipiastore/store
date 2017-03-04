@@ -1,8 +1,8 @@
 package ru.store.dao.interfaces;
 
-import ru.store.entities.Company;
 import ru.store.entities.CompanyReminder;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,28 +12,28 @@ public interface CompanyReminderDAO {
 
     void createCompanyReminder(CompanyReminder reminder);
 
-    void deleteCompanyReminder(Integer id);
+    void updateCompanyReminder(CompanyReminder reminder);
 
     CompanyReminder getCompanyReminder(Integer id);
-
-
-    List<Company> getCompaniesByComments(String type);
 
     List<CompanyReminder> getCompanyReminders();
 
     List<CompanyReminder> getCompanyReminders(Integer companyId);
 
-    List<CompanyReminder> getCompanyRemindersByFilter(String dateFrom, String dateTo);
+    List<CompanyReminder> getCompanyRemindersByFilter(Date dateFrom, Date dateTo);
 
-    List<CompanyReminder> getCompanyRemindersByFilterFromDate(String dateFrom);
+    List<CompanyReminder> getCompanyRemindersByFilterByDate(Date date);
 
-    List<CompanyReminder> getCompanyRemindersByFilterToDate(String dateFrom);
+    List<CompanyReminder> getCompanyRemindersByFilterFromDate(Date dateFrom);
+
+    List<CompanyReminder> getCompanyRemindersByFilterToDate(Date dateFrom);
 
     String  getLastCompanyReminderComment(Integer companyId);
 
-    String  getLastCompanyReminderDate(Integer companyId);
+    String  getLastCompanyReminderDateHourType(Integer companyId);
 
-    String  getLastCompanyReminderType(Integer companyId);
+    String  getLastCompanyReminderTypeAndAmount(Integer companyId);
 
-    List<String> getLastCompanyReminderDateHourType(Integer companyId);
+    String  getCompanyReminderAmount(Integer companyId);
+
 }

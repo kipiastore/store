@@ -68,14 +68,6 @@ public class ManagerCompaniesController {
         loadPage(model, modelAndView);
         return modelAndView;
     }
-    @RequestMapping(value = "/manager/searchdate", method = RequestMethod.POST)
-    public ModelAndView searchCalendarDate (@RequestParam("hiddenSearchDate") String date) {
-        ModelAndView modelAndView = new ModelAndView();
-        System.out.println("ДАТА"+date);
-        Model model = new Model();
-        loadPage(model, modelAndView);
-        return modelAndView;
-    }
     @RequestMapping(value = "/manager/searchcompany", method = RequestMethod.POST)
     public ModelAndView searchCompany(@RequestParam MultiValueMap<String, String> searchMap, @RequestParam("selectSearchCompany")String selectSearchType) {
         ModelAndView modelAndView = new ModelAndView();
@@ -179,15 +171,11 @@ public class ManagerCompaniesController {
         companyItem.legalAddress = company.getLegalAddress();
         companyItem.phone = company.getPhone();
         // запросы в цыкле - это плохо
-        companyItem.typeOfNote = companyReminderService.getLastCompanyReminderType(company.getId());
+        companyItem.typeOfNote = companyReminderService.getLastCompanyReminderTypeAndAmount(company.getId());
         return companyItem;
     }
     @RequestMapping(value = "/manager/updatecompany", method = RequestMethod.GET)
     public String redirect1() {
-        return "redirect:/manager/companies";
-    }
-    @RequestMapping(value = "/manager/searchdate", method = RequestMethod.GET)
-    public String redirect3() {
         return "redirect:/manager/companies";
     }
     @RequestMapping(value = "/manager/searchcompany", method = RequestMethod.GET)

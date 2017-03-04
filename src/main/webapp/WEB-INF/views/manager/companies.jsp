@@ -98,7 +98,7 @@
                     <div class="openRequisites">Реквизиты</div>
                     <div class="requisites">
                         <label>ИНН</label>
-                        <input title="Введите идентификационный код. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="inn" id="inn"/>
+                        <input disabled type="text" name="inn" id="inn"/>
                         <label>Юридическое название</label>
                         <input title="Введите юридическое название" type="text" maxlength="120" name="legalName" id="legalName" />
                         <label>Юридический адрес</label>
@@ -160,7 +160,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input title="Введите дату." pattern="\d{1,2}.\d{1,2}.\d{4}"type="text" name="dateReminder" id="reminderDate" placeholder="Дата" required  />
+                                    <input title="Введите дату." pattern="\d{4}-\d{1,2}-\d{1,2}"type="text" name="dateReminder" id="reminderDate" placeholder="Дата" required  />
                                 </td>
                             </tr>
                             <tr>
@@ -190,7 +190,7 @@
                 <div class="notes">
                     <form:form id ="deleteReminderForm">
                         <table class="tableNotes">
-                            <tbody>
+                            <thead class="theadShowReminders">
                             <tr>
                                 <td colspan="5"align="center" id="trNotes">Заметки</td>
                             </tr>
@@ -199,10 +199,10 @@
                                 <td>Время</td>
                                 <td>Статус</td>
                                 <td>Заметки</td>
-                                <td>Удалить</td>
+                                <td>Редактировать</td>
                             </tr>
-                            </tbody>
-                            <tbody id="tbodyShowReminders">
+                            </thead>
+                            <tbody  class="tbodyShowReminders">
                             </tbody>
                         </table>
                     </form:form>

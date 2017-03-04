@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.store.dao.interfaces.CompanyReminderDAO;
-import ru.store.entities.Company;
 import ru.store.entities.CompanyReminder;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,16 +29,10 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
 
     @Override
     @Transactional
-    public void deleteCompanyReminder(Integer id) {
-        String hql = "delete from CompanyReminder where id =:id";
-        sessionFactory.getCurrentSession().createQuery(hql).setInteger("id", id).executeUpdate();
+    public void updateCompanyReminder(CompanyReminder reminder) {
+            sessionFactory.getCurrentSession().update(reminder);
     }
-    @Override
-    @Transactional
-    public List<Company> getCompaniesByComments(String type) {
-        String hql = "from CompanyReminder where typeReminder =?";
-        return  sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, type).list();
-    }
+
     @Override
     @Transactional
     public CompanyReminder getCompanyReminder(Integer id) {
@@ -53,7 +47,7 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
     @Override
     @Transactional
     public List<CompanyReminder> getCompanyReminders(Integer companyId) {
-        String hql = "from CompanyReminder where companyId =? ";
+        String hql = "from CompanyReminder where companyId =? order by dateReminder desc,id desc";
         return sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId).list();
     }
     @Override
@@ -78,27 +72,29 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
     }
     @Override
     @Transactional
-    public  String  getLastCompanyReminderDate(Integer companyId) {
-        String hql = "select MAX(id),count(id)from CompanyReminder where companyId =?";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId);
-        List<Object[]> listResult = query.list();
-        String defaultValue="";
-        Integer maxId = 0;
-        for (Object[] aRow : listResult) {
-            maxId = (Integer) aRow[0];
-        }
-        if (maxId != null) {
-            hql = "select dateReminder from CompanyReminder where id =:maxId";
-            List<String> dateReminder = sessionFactory.getCurrentSession().createQuery(hql).setInteger("maxId", maxId).list();
-            return dateReminder.get(0);
-        }
-        else {
-            return defaultValue;
+    public  String  getLastCompanyReminderDateHourType(Integer companyId) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+        String hql = "select MAX(dateReminder)from CompanyReminder where companyId =?";
+        List<Date> date = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId).list();
+        Date tempDate = date.get(0);
+        String hour = "";
+        String type = "";
+        if (tempDate != null) {
+            hql = "select hourReminder,typeReminder from CompanyReminder where dateReminder =:tempDate";
+            List<Object[]> dateHourType = sessionFactory.getCurrentSession().createQuery(hql).setParameter("tempDate", tempDate).list();
+            for (Object[] aRow : dateHourType) {
+                hour = (String) aRow[0];
+                type = (String) aRow[1];
+            }
+
+            return sdf.format(tempDate) + " " + hour + " " + type;
+        } else {
+          return "";
         }
     }
     @Override
     @Transactional
-    public  String  getLastCompanyReminderType(Integer companyId) {
+    public  String  getLastCompanyReminderTypeAndAmount(Integer companyId) {
         String hql = "select MAX(id),count(companyId) from CompanyReminder where companyId =?";
         Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId);
         List<Object[]> listResult = query.list();
@@ -123,64 +119,44 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
     }
     @Override
     @Transactional
-    public  List<String> getLastCompanyReminderDateHourType(Integer companyId) {
-        String hql = "select MAX(id),count(companyId) from CompanyReminder where companyId =?";
+    public  String  getCompanyReminderAmount(Integer companyId) {
+        String hql = "select count(companyId) from CompanyReminder where companyId =?";
         Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId);
-        List<Object[]> listResult = query.list();
-        List<String>  defaultValue=new ArrayList<>();
-        defaultValue.add("");
-        Integer maxId = 0;
-        Long countId;
-        countId = Long.valueOf(0);
-        for (Object[] aRow : listResult) {
-            maxId = (Integer) aRow[0];
-            countId = (Long) aRow[1];
+        List<Long> value=query.list();
+        if(value.get(0).toString()!="") {
+            return value.get(0).toString();
         }
-        if (maxId != null) {
-            hql = "select dateReminder,hourReminder,typeReminder from CompanyReminder where id =:maxId";
-            query = sessionFactory.getCurrentSession().createQuery(hql).setInteger("maxId", maxId);
-            List<Object[]> reminderDateHourType = query.list();
-            String dateReminder ="";
-            String hourReminder ="";
-            String typeReminder ="";
-            for (Object[] aRow : reminderDateHourType) {
-                dateReminder = (String) aRow[0];
-                hourReminder = (String) aRow[1];
-                typeReminder = (String) aRow[2];
-            }
-            List<String> strings=new ArrayList<>();
-            strings.add(dateReminder);
-            strings.add(hourReminder);
-            strings.add(typeReminder);
-            return  strings;
-        }
-        else {
-            return defaultValue;
-        }
+        return "";
     }
     @Override
     @Transactional
     public List<CompanyReminder> getCompanyReminders() {
-        String hql = "from CompanyReminder order by companyName,id";
+        String hql = "from CompanyReminder order by companyName desc ,dateReminder desc ";
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
     @Override
     @Transactional
-    public List<CompanyReminder> getCompanyRemindersByFilter(String dateFrom,String dateTo) {
-        String hql = "from CompanyReminder where dateReminder between :dateFrom and :dateTo order by dateReminder";
+    public List<CompanyReminder> getCompanyRemindersByFilter(Date dateFrom, Date dateTo) {
+        String hql = "from CompanyReminder where dateReminder between :dateFrom and :dateTo order by dateReminder desc ";
         return (List<CompanyReminder>) sessionFactory.getCurrentSession().createQuery(hql).setParameter("dateFrom",dateFrom).setParameter("dateTo",dateTo).list();
     }
     @Override
     @Transactional
-    public List<CompanyReminder> getCompanyRemindersByFilterFromDate(String dateFrom) {
-        String hql = "from CompanyReminder where dateReminder >=:dateFrom order by dateReminder";
+    public List<CompanyReminder> getCompanyRemindersByFilterFromDate(Date dateFrom) {
+        String hql = "from CompanyReminder where dateReminder >=:dateFrom order by dateReminder desc ";
         return (List<CompanyReminder>) sessionFactory.getCurrentSession().createQuery(hql).setParameter("dateFrom",dateFrom).list();
     }
     @Override
     @Transactional
-    public List<CompanyReminder> getCompanyRemindersByFilterToDate(String dateTo) {
-        String hql = "from CompanyReminder where dateReminder <=:dateTo order by dateReminder";
+    public List<CompanyReminder> getCompanyRemindersByFilterByDate(Date date) {
+        String hql = "from CompanyReminder where dateReminder =:date order by dateReminder desc ";
+        return (List<CompanyReminder>) sessionFactory.getCurrentSession().createQuery(hql).setParameter("date",date).list();
+    }
+    @Override
+    @Transactional
+    public List<CompanyReminder> getCompanyRemindersByFilterToDate(Date dateTo) {
+        String hql = "from CompanyReminder where dateReminder <=:dateTo order by dateReminder desc ";
         return (List<CompanyReminder>) sessionFactory.getCurrentSession().createQuery(hql).setParameter("dateTo",dateTo).list();
     }
 }

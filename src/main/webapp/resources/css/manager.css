@@ -97,8 +97,8 @@ a {
     height: 41px;
 }
 .menu .menuTitle {
-    //width: 300px;
-    //height: 77px;
+//width: 300px;
+//height: 77px;
     margin-top: 70px;
     border-radius: 5px;
     background: #ebedf0;
@@ -116,17 +116,17 @@ a {
     background: #fff;
 }
 .menu .menuBody .menuCalendar{
-	margin-top: 7px;
-	border-radius: 5px;
-	margin-left: 10px;
+    margin-top: 7px;
+    border-radius: 5px;
+    margin-left: 10px;
 }
 #submitSearchDatepicker {
     margin-top: 10px;
 }
 .pr {
     float: left;
-    //height: 40px;
-    //width: 100%;
+//height: 40px;
+//width: 100%;
 }
 .pr input[type="submit"] {
     margin-top: 0;
@@ -142,7 +142,7 @@ a {
 .prDatepicker {
     border-top: 1px solid #dfe0e0;
     float: left;
-    //margin-top: 4px;
+//margin-top: 4px;
     height: 40px;
     width: 100%;
     text-align:left;
@@ -165,7 +165,7 @@ a {
     margin-left: 10px;
     border-left: 0;
     border-right: 0;
-    //height: 40px;
+//height: 40px;
     width: 100%;
 }
 .body .pageMenuNotes {
@@ -330,51 +330,52 @@ input {
     width: 100%;
     outline: none;
     border-radius: 3px;
-    padding: 12px 20px 12px 10px;
-    //margin-bottom: 9px;
+    padding: 3px 8px 3px 5px;
+    margin-bottom: 9px;
 }
 .generalContent input {
     margin-bottom: 10px;
 }
 .generalContent select {
     margin-bottom: 10px;
+    background: #ebebe4;
 }
 #reminderNoteNew{
-	font-size: 14px;
+    font-size: 14px;
 }
 input[type="submit"] {
-    margin-top: 20px;
 }
 #submitManagerFormUpdate{
-	width: 100%;
-	border: 1px solid #d8dde1;
-	color: #5B5B5B;
-	font-family: Arial, serif;
-	font-size: 14px;
-	outline: none;
-	border-radius: 3px;
-	padding: 11px 20px 11px 10px;
-	margin-bottom: 11px;
-	text-align: center;
-	cursor: pointer;
-	margin-top: 23px;
+    width: 100%;
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    font-family: Arial, serif;
+    font-size: 14px;
+    outline: none;
+    border-radius: 3px;
+    padding: 4px 20px 4px 10px;
+    margin-bottom: 11px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 16px;
 }
 #submitManagerFormReminder{
-	width: 100%;
-	border: 1px solid #d8dde1;
-	color: #5B5B5B;
-	font-family: Arial, serif;
-	font-size: 14px;
-	outline: none;
-	border-radius: 3px;
-	padding: 11px 20px 11px 10px;
-	margin-bottom: 11px;
-	text-align: center;
-	cursor: pointer;
-	margin-top: 23px;
+    width: 100%;
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    font-family: Arial, serif;
+    font-size: 14px;
+    outline: none;
+    border-radius: 3px;
+    padding: 4px 20px 4px 10px;
+    margin-bottom: 11px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 16px;
 }
 select {
     -webkit-appearance: none;
+    background-color: #fff;
     border: 1px solid #d8dde1;
     color: #5B5B5B;
     transition: none;
@@ -384,8 +385,8 @@ select {
     width: 100%;
     outline: none;
     border-radius: 3px;
-    padding: 14px 20px 10px 10px;
-    //margin-bottom: 10px;
+    padding: 3px 8px 3px 5px;
+    margin-bottom: 9px;
 }
 #allNotesId {
     border: 1px solid #d8dde1;
@@ -400,19 +401,19 @@ select {
     margin-bottom: 0;
 }
 #allComment{
-	border: 1px solid #d8dde1;
-	color: #5B5B5B;
-	transition: none;
-	box-shadow: none;
-	font-family: Arial, serif;
-	font-size: 14px;
-	width: 138px;
-	outline: none;
-	border-radius: 3px;
-	padding: 7px 5px 7px 5px;
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    transition: none;
+    box-shadow: none;
+    font-family: Arial, serif;
+    font-size: 14px;
+    width: 138px;
+    outline: none;
+    border-radius: 3px;
+    padding: 7px 5px 7px 5px;
     height: 32px;
-	//margin-bottom: 0;
-	margin-bottom: 4px;
+//margin-bottom: 0;
+    margin-bottom: 4px;
 }
 .logout .homeLink {
     color: #738dae;
@@ -421,36 +422,36 @@ select {
     color: #16a085;
 }
 #selectPaymentStatus{
-	border: 1px solid #d8dde1;
-	color: #5B5B5B;
-	transition: none;
-	box-shadow: none;
-	font-family: Arial, serif;
-	font-size: 14px;
-	width: 138px;
-	outline: none;
-	border-radius: 3px;
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    transition: none;
+    box-shadow: none;
+    font-family: Arial, serif;
+    font-size: 14px;
+    width: 138px;
+    outline: none;
+    border-radius: 3px;
     height: 32px;
-	padding: 7px 5px 7px 5px;
-	//margin-bottom: 0;
-	margin-bottom: 4px;
+    padding: 7px 5px 7px 5px;
+//margin-bottom: 0;
+    margin-bottom: 4px;
 }
 #selectMonth{
     -webkit-appearance: none;
-	border: 1px solid #d8dde1;
-	color: #5B5B5B;
-	transition: none;
-	box-shadow: none;
-	font-family: Arial, serif;
-	font-size: 14px;
-	width: 100%;
-	//height:22px;
-	outline: none;
-	border-radius: 3px;
-	padding: 1px 8px 0px 2px;
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    transition: none;
+    box-shadow: none;
+    font-family: Arial, serif;
+    font-size: 14px;
+    width: 100%;
+//height:22px;
+    outline: none;
+    border-radius: 3px;
+    padding: 1px 8px 0px 2px;
     padding: 6px 5px 7px 5px;
-	//margin-bottom: 4px;
-	//margin-top: 4px;
+//margin-bottom: 4px;
+//margin-top: 4px;
 }
 #selectMonthContract{
     -webkit-appearance: none;
@@ -461,43 +462,43 @@ select {
     font-family: Arial, serif;
     font-size: 14px;
     width: 100%;
-    //height:22px;
+//height:22px;
     outline: none;
     border-radius: 3px;
     padding: 1px 8px 0px 2px;
     padding: 6px 5px 7px 5px;
-    //margin-bottom: 4px;
-    //margin-top: 4px;
+//margin-bottom: 4px;
+//margin-top: 4px;
 }
 #selectReminderHours{
     -webkit-appearance: none;
-	border: 1px solid #d8dde1;
-	/* font-family: monaco, Consolas, "Lucida Console", monospace; */
-	color: #5B5B5B;
-	transition: none;
-	box-shadow: none;
-	font-family: Arial, serif;
-	font-size: 14px;
-	width: 100%;
-	//height: 42px;
-
-	outline: none;
-	border-radius: 3px;
-	padding: 1px 44px 0px 10px;
-    padding: 12px 20px 12px 10px;
+    background-color: #fff;
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    transition: none;
+    box-shadow: none;
+    font-family: Arial, serif;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    border-radius: 3px;
+    padding: 3px 8px 3px 5px;
+    margin-bottom: 9px;
 }
 #selectReminderType{
-	border: 1px solid #d8dde1;
-	color: #5B5B5B;
-	transition: none;
-	box-shadow: none;
-	font-family: Arial, serif;
-	font-size: 14px;
-	width: 100%;
-	height:41px;
-	outline: none;
-	border-radius: 3px;
-	padding: 1px 1px 1px 10px;
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    transition: none;
+    box-shadow: none;
+    font-family: Arial, serif;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    border-radius: 3px;
+    padding: 3px 8px 3px 5px;
+    margin-bottom: 9px;
 }
 label {
     font-family: monaco, Consolas, "Lucida Console", monospace;
@@ -510,30 +511,30 @@ label {
     padding: 14px 14px 12px;
 }
 #labelReminder{
-	font-family: monaco, Consolas, "Lucida Console", monospace;
-	font-size: 20px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 23px;
-	color: #7c7e82;
-	padding: 1px 14px 12px;
-	position: relative;
-	left: 22%;
-	top: 30px;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 23px;
+    color: #7c7e82;
+    padding: 1px 14px 12px;
+    position: relative;
+    left: 22%;
+    top: 30px;
 }
 #labelNotes{
-	font-family: monaco, Consolas, "Lucida Console", monospace;
-	font-size: 19px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 23px;
-	color: #7c7e82;
-	/* margin-left: 290px; */
-	position: relative;
-	left: 40%;
-	top: 20px;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    font-size: 19px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 23px;
+    color: #7c7e82;
+    /* margin-left: 290px; */
+    position: relative;
+    left: 40%;
+    top: 20px;
 }
 .error {
     font-family: monaco, Consolas, "Lucida Console", monospace;
@@ -588,22 +589,23 @@ label {
 .requisites {
     display: none;
 }
-.address{
-    display: none;
-}
 .openRequisites {
     border: 1px solid #d8dde1;
     color: #928e8e;
     font-family: Arial, serif;
+    height:14px;
     font-size: 14px;
     outline: none;
     border-radius: 3px;
-    padding: 11px 20px 11px 10px;
+    padding: 4px 20px 4px 10px;
     margin-bottom: 11px;
     text-align: center;
     background-color: #ebedf0;
     cursor: pointer;
     margin-top: 23px;
+}
+.address{
+    display: none;
 }
 .openAddress{ border: 1px solid #d8dde1;
     color: #928e8e;
@@ -611,7 +613,7 @@ label {
     font-size: 14px;
     outline: none;
     border-radius: 3px;
-    padding: 11px 20px 11px 10px;
+    padding: 4px 20px 4px 10px;
     margin-bottom: 11px;
     text-align: center;
     background-color: #ebedf0;
@@ -635,45 +637,55 @@ label {
     float: right;
 }
 .reminder{
-	text-align:center;
-	//width: 40%;
-	//margin-left: 28%;
+    text-align:center;
+//width: 40%;
+//margin-left: 28%;
 }
 .notes{
-	width:100%;
-	margin-top: 40px;
+    width:100%;
+    margin-top: 40px;
+    margin-left: 1px;
+    height: 285px;
+}
 
-	margin-left: 1px;
-	overflow: auto;
-	height: 430px;
-}
 .right-body .notes .tableNotes{
-	width: 100%;
-	text-align:center;
-	border-collapse:collapse;
+    width: 100%;
+    text-align:center;
+    border-collapse:collapse;
 }
-#tbodyShowReminders{
-	color:black;
+.tbodyShowReminders{
+    color:black;
+    overflow: auto;
+}
+table .tableNotes, .theadShowReminders, .tbodyShowReminders
+{
+    display:block;
+}
+.tbodyShowReminders
+{
+    overflow: auto;
+    height: 215px;
 }
 #trNotes{
-	height:50px;
-	font-size: 16px;
-	font-family: monaco, Consolas, "Lucida Console", monospace;
-	font-weight: 400;
+    height:50px;
+    font-size: 16px;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    font-weight: 400;
+    width: 100%;
 }
 #tableReminder{width: 100%;}
 #tableActs{
-	width:100%;
-	max-width: 100%;
-	text-align: left;
-	border-color: grey;
+    width:100%;
+    max-width: 100%;
+    text-align: left;
+    border-color: grey;
 }
 #trReminder{
-	height: 50px;
-	font-size: 16px;
-	font-family: monaco, Consolas, "Lucida Console", monospace;
-	font-weight: 400;
-	color: #7c7e82;
+    height: 50px;
+    font-size: 16px;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    font-weight: 400;
+    color: #7c7e82;
 }
 
 .address-list {
@@ -755,9 +767,9 @@ input[type="checkbox"] {
 }
 .pr input {
     width: 150px;
-    //margin-bottom: 0;
+//margin-bottom: 0;
     padding: 7px 6px 7px 6px;
-    //margin-top: 4px;
+//margin-top: 4px;
     margin-bottom: 4px;
 }
 .prFilter input {
@@ -768,24 +780,24 @@ input[type="checkbox"] {
 }
 .prDatepicker input {
     width: 150px;
-    //margin-bottom: 0;
+//margin-bottom: 0;
     padding: 7px 6px 7px 6px;
     margin-top: 4px;
     margin-bottom: 4px;
 }
 #selectNotes{
-		border: 1px solid #d8dde1;
-	color: #5B5B5B;
-	transition: none;
-	box-shadow: none;
-	font-family: Arial, serif;
-	font-size: 14px;
-	width: 138px;
-	outline: none;
-	border-radius: 3px;
-	padding: 6px 5px 7px 5px;
-	margin-bottom: 0;
-	margin-top: 5px;
+    border: 1px solid #d8dde1;
+    color: #5B5B5B;
+    transition: none;
+    box-shadow: none;
+    font-family: Arial, serif;
+    font-size: 14px;
+    width: 138px;
+    outline: none;
+    border-radius: 3px;
+    padding: 6px 5px 7px 5px;
+    margin-bottom: 0;
+    margin-top: 5px;
 }
 #searchForm {
     margin-top: 4px;
@@ -818,58 +830,58 @@ input[type="checkbox"] {
 
 }
 #thCompanyNote{
-	width:300px;
+    width:300px;
 }
 #thDateCallNote{
-	width:110px;
+    width:110px;
 }
 #thDateNote{
-	width:120px;
+    width:120px;
 }
 #thNote{
-	width:360px;
+    width:360px;
 }
 #thTypeNote{
-	width:100px;
+    width:100px;
 }
 #thCompanyDebtor{
-	width:200px;
+    width:200px;
 }
 #thPackageDebtor{
-	width:60px;
+    width:60px;
 }
 #thDebtor{
-	width:60px;
+    width:60px;
 }
 #thDirectorNameDebtor{
-	width:160px;
+    width:160px;
 }
 #thAdressDebtor{
-	width:240px;
+    width:240px;
 }
 #thNoteDebtor{
-	width:100px;
+    width:100px;
 }
 #thCompanyActs{
-	width:200px;
+    width:200px;
 }
 #thManagerActs{
-	width:100px;
+    width:100px;
 }
 #thTermOfContractActs{
-	width:120px;
+    width:120px;
 }
 #thsumActs{
-	width:100px;
+    width:100px;
 }
 #thNotesActs{
-	width:160px;
+    width:160px;
 }
 #thDateOgPaymentActs{
-	width:80px;
+    width:80px;
 }
 #thActs{
-	width:80px;
+    width:80px;
 }
 /*12.12.2016*/
 #thCompanyName{
@@ -1077,15 +1089,23 @@ table th[class*=col-] {
     overflow-x: auto
 }
 table thead {
-    /* text-align: left; */
 }
 tbody {
     color: #676767;
     font-size: 13px;
 }
+
 .container {
     display: block;
     opacity: 1;
+}
+#lineBetweenTables{
+    width: 100%;
+    background-color:red;
+    margin: auto;
+    position: relative;
+    top: 1px;
+    padding:2px;
 }
 .notesFilter{
 

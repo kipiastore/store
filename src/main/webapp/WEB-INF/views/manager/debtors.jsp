@@ -51,7 +51,7 @@
                         <th id="thDebtor">Долг</th>
                         <th id="thDirectorNameDebtor">Директор</th>
                         <th id="thAdressDebtor">Адрес</th>
-                        <th id="thNoteDebtor">Заметка</th>
+                        <th id="thNoteDebtor">Последняя заметка</th>
                     </tr>
                     </thead>
                     <tbody>

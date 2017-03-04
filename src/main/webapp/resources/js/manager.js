@@ -54,7 +54,7 @@ var typeReminder;
 var commentReminder;
 var hiddenIdCompanyReminder;
 var hiddenNameCompanyReminder;
-
+var idReminder;
 $(window).on("load", function () {
     var container = $(".container");
     container.show();
@@ -106,279 +106,279 @@ $(".tableName").on("click", function (event) {
 });
 
 /*
-function loadCompany(id) {
-    if (data == undefined) {
-        data = $.parseJSON($(".dataJson")[0].innerHTML);
-        companyName = $("#name");
-        keywords = $("#keywords");
-        dateOfContract = $("#dateOfContract");
-        dateOfStartContract = $("#dateOfStartContract");
-        dateOfEndContract = $("#dateOfEndContract");
-        manager = $("#manager");
-        companyPackageId = $("#companyPackageId");
-        costOf = $("#costOf");
-        legalName = $("#legalName");
-        inn = $("#inn");
-        legalAddress = $("#legalAddress");
-        phone = $("#phone");
-        fax = $("#fax");
-        directorFullName = $("#directorFullName");
-        contactPerson = $("#contactPerson");
-        hiddenId = $("#hiddenId");
-        description = $("#description");
-        isShowForOperator = $("#isShowForOperator");
-        isShowForSite = $("#isShowForSite");
-        isPaid = $("#isPaid");
-        isRedirect = $("#isRedirect");
-        isOffPosition = $("#isOffPosition");
-        isClosed = $("#isClosed");
-        isPriority = $("#isPriority");
-        email = $("#email");
-        site = $("#site");
-        hiddenIdCompanyReminder=$("#hiddenIdCompanyReminder");
-        hiddenNameCompanyReminder=$("#hiddenNameCompanyReminder");
-    }
-    if (dataCompanyAddressJson == undefined) {
-        dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
-    }
-    if (dataCompanyReminderJson == undefined) {
-        dataCompanyReminderJson = $.parseJSON($(".companyReminderJson")[0].innerHTML);
-    }
-    var item;
-    addressArray = [];
-    cleanAddressBlocks();
-    data.forEach(function(entry) {
-        if (entry.id == id) {
-            companyName.val(entry.name);
-            keywords.val(entry.keywords);
-            dateOfContract.val(entry.dateOfContract.substring(0, 11));
-            dateOfStartContract.val(entry.dateOfStartContract.substring(0, 11));
-            dateOfEndContract.val(entry.dateOfEndContract.substring(0, 11));
-            manager.val(entry.manager);
-            companyPackageId.val(entry.companyPackageId);
-            costOf.val(entry.costOf);
-            legalName.val(entry.legalName);
-            if (entry.inn != "null")
-                inn.val(entry.inn);
-            else
-                inn.val("");
-            legalAddress.val(entry.legalAddress);
-            phone.val(entry.phone);
-            fax.val(entry.fax);
-            directorFullName.val(entry.directorFullName);
-            contactPerson.val(entry.contactPerson);
-            description.val(entry.description);
-            email.val(entry.email);
-            site.val(entry.site);
-            isShowForOperator.prop('checked', newBoolean(entry.isShowForOperator));
-            isShowForSite.prop('checked', newBoolean(entry.isShowForSite));
-            isPaid.prop('checked', newBoolean(entry.isPaid));
-            isRedirect.prop('checked', newBoolean(entry.isRedirect));
-            isOffPosition.prop('checked', newBoolean(entry.isOffPosition));
-            isClosed.prop('checked', newBoolean(entry.isClosed));
-            isPriority.prop('checked', newBoolean(entry.isPriority));
-            hiddenIdCompanyReminder.val(entry.id);
-            hiddenNameCompanyReminder.val(entry.name);
+ function loadCompany(id) {
+ if (data == undefined) {
+ data = $.parseJSON($(".dataJson")[0].innerHTML);
+ companyName = $("#name");
+ keywords = $("#keywords");
+ dateOfContract = $("#dateOfContract");
+ dateOfStartContract = $("#dateOfStartContract");
+ dateOfEndContract = $("#dateOfEndContract");
+ manager = $("#manager");
+ companyPackageId = $("#companyPackageId");
+ costOf = $("#costOf");
+ legalName = $("#legalName");
+ inn = $("#inn");
+ legalAddress = $("#legalAddress");
+ phone = $("#phone");
+ fax = $("#fax");
+ directorFullName = $("#directorFullName");
+ contactPerson = $("#contactPerson");
+ hiddenId = $("#hiddenId");
+ description = $("#description");
+ isShowForOperator = $("#isShowForOperator");
+ isShowForSite = $("#isShowForSite");
+ isPaid = $("#isPaid");
+ isRedirect = $("#isRedirect");
+ isOffPosition = $("#isOffPosition");
+ isClosed = $("#isClosed");
+ isPriority = $("#isPriority");
+ email = $("#email");
+ site = $("#site");
+ hiddenIdCompanyReminder=$("#hiddenIdCompanyReminder");
+ hiddenNameCompanyReminder=$("#hiddenNameCompanyReminder");
+ }
+ if (dataCompanyAddressJson == undefined) {
+ dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
+ }
+ if (dataCompanyReminderJson == undefined) {
+ dataCompanyReminderJson = $.parseJSON($(".companyReminderJson")[0].innerHTML);
+ }
+ var item;
+ addressArray = [];
+ cleanAddressBlocks();
+ data.forEach(function(entry) {
+ if (entry.id == id) {
+ companyName.val(entry.name);
+ keywords.val(entry.keywords);
+ dateOfContract.val(entry.dateOfContract.substring(0, 11));
+ dateOfStartContract.val(entry.dateOfStartContract.substring(0, 11));
+ dateOfEndContract.val(entry.dateOfEndContract.substring(0, 11));
+ manager.val(entry.manager);
+ companyPackageId.val(entry.companyPackageId);
+ costOf.val(entry.costOf);
+ legalName.val(entry.legalName);
+ if (entry.inn != "null")
+ inn.val(entry.inn);
+ else
+ inn.val("");
+ legalAddress.val(entry.legalAddress);
+ phone.val(entry.phone);
+ fax.val(entry.fax);
+ directorFullName.val(entry.directorFullName);
+ contactPerson.val(entry.contactPerson);
+ description.val(entry.description);
+ email.val(entry.email);
+ site.val(entry.site);
+ isShowForOperator.prop('checked', newBoolean(entry.isShowForOperator));
+ isShowForSite.prop('checked', newBoolean(entry.isShowForSite));
+ isPaid.prop('checked', newBoolean(entry.isPaid));
+ isRedirect.prop('checked', newBoolean(entry.isRedirect));
+ isOffPosition.prop('checked', newBoolean(entry.isOffPosition));
+ isClosed.prop('checked', newBoolean(entry.isClosed));
+ isPriority.prop('checked', newBoolean(entry.isPriority));
+ hiddenIdCompanyReminder.val(entry.id);
+ hiddenNameCompanyReminder.val(entry.name);
 
-            var countReminder=0;
-            dataCompanyReminderJson.forEach(function(entry4) {     //создание дива для отображения  напоминаний
-                if (entry4.companyId == entry.id) {
-                    for(var i=0;i<entry4.companyReminders.length;i++){   $("#tbodyShowReminders").html(
-                        $("#tbodyShowReminders").html()+' <tr id="trColorFill-'+i+'">'+
-                        '<td ><span  id="dateReminder-'+i+'"></span> </td>'+
-                        '<td ><span id="hourReminder-'+i+'"></span></td>'+
-                        '<td ><span id="typeReminder-'+i+'"></span></td>'+
-                        '<td ><span id="commentReminder-'+i+'"></span></td>'+
-                        '<td hidden="true" ><span id="hiddenReminder-'+i+'"></span></td>'+
-                        '<td ><div class="reminderDeleteClass" id="buttonReminder-'+i+'">Удалить</div></td>'+
-                        '</tr>');
-                    }
-                    $(".reminderDeleteClass").on("click", function (event) {
-                        var reminderId = event.target.getAttribute('id');
-                        var reminderHiddenId = $("#hiddenReminder-" + reminderId.replace("buttonReminder-", "")).html();
-                        var data = {};
-                        data["id"] = reminderHiddenId;
-                        data["companyId"] = $("#hiddenIdCompanyReminder").val();
-                        var token = $('#csrfToken').val();
-                        var header = $('#csrfHeader').val();
-                        $.ajax({
-                            type: "POST",
-                            url: "deletereminder",
-                            data: JSON.stringify(data),
-                            dataType: 'json',
-                            timeout: 600000,
-                            async : false,
-                            success: function (data) {        //получение ответа с rest сервера
-                                display(data);               //вызов йункции для отображения полученных с сервера данных
-                            },
-                            beforeSend: function(xhr) {
-                                xhr.setRequestHeader("Accept", "application/json");
-                                xhr.setRequestHeader("Content-Type", "application/json");
-                                xhr.setRequestHeader(header, token);
-                            },
-                        });
-                        return false;
-                    });
-                    entry4.companyReminders.forEach(function(entry5) {
-                        $( "#hourReminder-"+countReminder).html(entry5.hourReminder);
-                        $ ("#dateReminder-"+countReminder).html(entry5.dateReminder);
-                        $ ("#typeReminder-"+countReminder).html(entry5.typeReminder);
-                        $ ("#commentReminder-"+countReminder).html(entry5.commentReminder);
-                        $( "#hiddenReminder-"+countReminder).html(entry5.id);
-                        var typeReminder= entry5.typeReminder;
-                        if(typeReminder=="Перезвонить"){
-                            $ ("#trColorFill-"+countReminder).css("background-color", "#7dc573");
-                        }
-                        if(typeReminder=="Отказ"){
-                            $ ("#trColorFill-"+countReminder).css("background-color", "#f16c4d");
-                        }
-                        if(typeReminder=="Встреча"){
-                            $ ("#trColorFill-"+countReminder).css("background-color", "#4c89c1");
-                        }
-                        if(typeReminder=="Другое"){
-                            $ ("#trColorFill-"+countReminder).css("background-color", "#fff79a");
-                        }
-                        countReminder++;
-                    });
-                }
-            });
-            jQuery(document).ready(    //отпрвка джисоном данных с формы в фоновом режиме
-                function($) {
-                    $("#addReminderForm").submit(function(event) {
-                        var data = {};
-                        data["dateReminder"] =$("#reminderDate").val().toString();
-                        data["typeReminder"] = $("#selectReminderType").val();
-                        data["commentReminder"] = $("#reminderComment").val();
-                        data["companyId"] = $("#hiddenIdCompanyReminder").val();
-                        data["companyName"] = $("#hiddenNameCompanyReminder").val();
-                        data["hourReminder"] = $("#selectReminderHours").val();
-                        var token = $('#csrfToken').val();
-                        var header = $('#csrfHeader').val();
-                        console.log(JSON.stringify(data));
-                        $.ajax({
-                            type: "POST",
-                            url: "addreminder",
-                            data: JSON.stringify(data),
-                            dataType: 'json',
-                            timeout: 600000,
-                            async : false,
-                            success: function (data) {      //получение ответа с rest сервера
-                                display(data);               //вызов йункции для отображения полученных с сервера данных
-                            },
-                            beforeSend: function(xhr) {
-                                xhr.setRequestHeader("Accept", "application/json");
-                                xhr.setRequestHeader("Content-Type", "application/json");
-                                xhr.setRequestHeader(header, token);
-                            },
-                        });
-                        return false;
-                    });
-                });
+ var countReminder=0;
+ dataCompanyReminderJson.forEach(function(entry4) {     //создание дива для отображения  напоминаний
+ if (entry4.companyId == entry.id) {
+ for(var i=0;i<entry4.companyReminders.length;i++){   $("#tbodyShowReminders").html(
+ $("#tbodyShowReminders").html()+' <tr id="trColorFill-'+i+'">'+
+ '<td ><span  id="dateReminder-'+i+'"></span> </td>'+
+ '<td ><span id="hourReminder-'+i+'"></span></td>'+
+ '<td ><span id="typeReminder-'+i+'"></span></td>'+
+ '<td ><span id="commentReminder-'+i+'"></span></td>'+
+ '<td hidden="true" ><span id="hiddenReminder-'+i+'"></span></td>'+
+ '<td ><div class="reminderDeleteClass" id="buttonReminder-'+i+'">Удалить</div></td>'+
+ '</tr>');
+ }
+ $(".reminderDeleteClass").on("click", function (event) {
+ var reminderId = event.target.getAttribute('id');
+ var reminderHiddenId = $("#hiddenReminder-" + reminderId.replace("buttonReminder-", "")).html();
+ var data = {};
+ data["id"] = reminderHiddenId;
+ data["companyId"] = $("#hiddenIdCompanyReminder").val();
+ var token = $('#csrfToken').val();
+ var header = $('#csrfHeader').val();
+ $.ajax({
+ type: "POST",
+ url: "deletereminder",
+ data: JSON.stringify(data),
+ dataType: 'json',
+ timeout: 600000,
+ async : false,
+ success: function (data) {        //получение ответа с rest сервера
+ display(data);               //вызов йункции для отображения полученных с сервера данных
+ },
+ beforeSend: function(xhr) {
+ xhr.setRequestHeader("Accept", "application/json");
+ xhr.setRequestHeader("Content-Type", "application/json");
+ xhr.setRequestHeader(header, token);
+ },
+ });
+ return false;
+ });
+ entry4.companyReminders.forEach(function(entry5) {
+ $( "#hourReminder-"+countReminder).html(entry5.hourReminder);
+ $ ("#dateReminder-"+countReminder).html(entry5.dateReminder);
+ $ ("#typeReminder-"+countReminder).html(entry5.typeReminder);
+ $ ("#commentReminder-"+countReminder).html(entry5.commentReminder);
+ $( "#hiddenReminder-"+countReminder).html(entry5.id);
+ var typeReminder= entry5.typeReminder;
+ if(typeReminder=="Перезвонить"){
+ $ ("#trColorFill-"+countReminder).css("background-color", "#7dc573");
+ }
+ if(typeReminder=="Отказ"){
+ $ ("#trColorFill-"+countReminder).css("background-color", "#f16c4d");
+ }
+ if(typeReminder=="Встреча"){
+ $ ("#trColorFill-"+countReminder).css("background-color", "#4c89c1");
+ }
+ if(typeReminder=="Другое"){
+ $ ("#trColorFill-"+countReminder).css("background-color", "#fff79a");
+ }
+ countReminder++;
+ });
+ }
+ });
+ jQuery(document).ready(    //отпрвка джисоном данных с формы в фоновом режиме
+ function($) {
+ $("#addReminderForm").submit(function(event) {
+ var data = {};
+ data["dateReminder"] =$("#reminderDate").val().toString();
+ data["typeReminder"] = $("#selectReminderType").val();
+ data["commentReminder"] = $("#reminderComment").val();
+ data["companyId"] = $("#hiddenIdCompanyReminder").val();
+ data["companyName"] = $("#hiddenNameCompanyReminder").val();
+ data["hourReminder"] = $("#selectReminderHours").val();
+ var token = $('#csrfToken').val();
+ var header = $('#csrfHeader').val();
+ console.log(JSON.stringify(data));
+ $.ajax({
+ type: "POST",
+ url: "addreminder",
+ data: JSON.stringify(data),
+ dataType: 'json',
+ timeout: 600000,
+ async : false,
+ success: function (data) {      //получение ответа с rest сервера
+ display(data);               //вызов йункции для отображения полученных с сервера данных
+ },
+ beforeSend: function(xhr) {
+ xhr.setRequestHeader("Accept", "application/json");
+ xhr.setRequestHeader("Content-Type", "application/json");
+ xhr.setRequestHeader(header, token);
+ },
+ });
+ return false;
+ });
+ });
 
-            function display(data) {
-                $("#addReminderForm").trigger('reset');//reset  формы
-                $("#tbodyShowReminders").html(""); //очистка дива
-                countReminder = 0;
-                dataCompanyReminderJsonAnswer = data ;
-                dataCompanyReminderJsonAnswer.forEach(function (entry6) {     //создание напоминаний из ответа сервера(data)
-                    $("#tbodyShowReminders").html(
-                        $("#tbodyShowReminders").html() + ' <tr id="trColorFill-'+countReminder+'">' +
-                        '<td ><span  id="dateReminder-' + countReminder + '"></span> </td>' +
-                        '<td ><span id="hourReminder-' + countReminder + '"></span></td>' +
-                        '<td ><span id="typeReminder-' + countReminder + '"></span></td>' +
-                        '<td ><span id="commentReminder-' + countReminder + '"></span></td>' +
-                        '<td hidden="true"><span id="hiddenReminder-' + countReminder + '"></span></td>' +
-                        '<td ><div class="reminderDeleteClass" id="buttonReminder-' + countReminder + '">Удалить</div></td>' +
-                        '</tr>');
-                    countReminder++;
-                });
-                countReminder=0;
-                dataCompanyReminderJsonAnswer.forEach(function (entry6) {     //создание напоминаний из ответа сервера(data)
-                    data.forEach(function (entry7) {
-                        $("#hourReminder-" + countReminder).html(entry7.hourReminder);
-                        $("#dateReminder-" + countReminder).html(entry7.dateReminder);
-                        $("#typeReminder-" + countReminder).html(entry7.typeReminder);
-                        $("#commentReminder-" + countReminder).html(entry7.commentReminder);
-                        $("#hiddenReminder-" + countReminder).html(entry7.id);
-                        var typeReminder= entry7.typeReminder;
-                        if(typeReminder=="Перезвонить"){
-                            $ ("#trColorFill-"+countReminder).css("background-color", "#7dc573");
-                        }
-                        if(typeReminder=="Отказ"){
-                            $ ("#trColorFill-"+countReminder).css("background-color", "#f16c4d");
-                        }
-                        if(typeReminder=="Встреча"){
-                            $ ("#trColorFill-"+countReminder).css("background-color", "#4c89c1");
-                        }
-                        if(typeReminder=="Другое"){
-                            $ ("#trColorFill-"+countReminder).css("background-color", "#fff79a");
-                        }
-                        countReminder++;
-                    });
-                });
-                $(".reminderDeleteClass").on("click", function (event) {
-                    var reminderId = event.target.getAttribute('id');
-                    var reminderHiddenId = $("#hiddenReminder-" + reminderId.replace("buttonReminder-", "")).html();
-                    var data = {};
-                    data["id"] = reminderHiddenId;
-                    data["companyId"] = $("#hiddenIdCompanyReminder").val();
-                    var token = $('#csrfToken').val();
-                    var header = $('#csrfHeader').val();
-                    $.ajax({
-                        type: "POST",
-                        url: "deletereminder",
-                        data: JSON.stringify(data),
-                        dataType: 'json',
-                        timeout: 600000,
-                        async : false,
-                        success: function (data) {      //получение ответа с rest сервера
-                            display(data);               //вызов йункции для отображения полученных с сервера данных
-                        },
-                        beforeSend: function(xhr) {
-                            xhr.setRequestHeader("Accept", "application/json");
-                            xhr.setRequestHeader("Content-Type", "application/json");
-                            xhr.setRequestHeader(header, token);
-                        },
-                    });
-                    return false;
-                });
-            }
-            hiddenId.val(entry.id);
-            for (var i = 1; i < 13; i++) {
-                item = {};
-                item.id = i;
-                item.isOpen = false;
-                addressArray[i] = item;
-                $("#UpAdd" + i).hide();
-                $("#UpAdAd" + i).removeAttr('required');
-                $("#UpAdAd" + i).val("");
-                $("#UpRegAd" + i).val("-1");
-                $("#UpPhAd" + i).val("");
-                $("#UpInfAd" + i).val("");
-                $("#UpAddId" + i).val("");
-            }
+ function display(data) {
+ $("#addReminderForm").trigger('reset');//reset  формы
+ $("#tbodyShowReminders").html(""); //очистка дива
+ countReminder = 0;
+ dataCompanyReminderJsonAnswer = data ;
+ dataCompanyReminderJsonAnswer.forEach(function (entry6) {     //создание напоминаний из ответа сервера(data)
+ $("#tbodyShowReminders").html(
+ $("#tbodyShowReminders").html() + ' <tr id="trColorFill-'+countReminder+'">' +
+ '<td ><span  id="dateReminder-' + countReminder + '"></span> </td>' +
+ '<td ><span id="hourReminder-' + countReminder + '"></span></td>' +
+ '<td ><span id="typeReminder-' + countReminder + '"></span></td>' +
+ '<td ><span id="commentReminder-' + countReminder + '"></span></td>' +
+ '<td hidden="true"><span id="hiddenReminder-' + countReminder + '"></span></td>' +
+ '<td ><div class="reminderDeleteClass" id="buttonReminder-' + countReminder + '">Удалить</div></td>' +
+ '</tr>');
+ countReminder++;
+ });
+ countReminder=0;
+ dataCompanyReminderJsonAnswer.forEach(function (entry6) {     //создание напоминаний из ответа сервера(data)
+ data.forEach(function (entry7) {
+ $("#hourReminder-" + countReminder).html(entry7.hourReminder);
+ $("#dateReminder-" + countReminder).html(entry7.dateReminder);
+ $("#typeReminder-" + countReminder).html(entry7.typeReminder);
+ $("#commentReminder-" + countReminder).html(entry7.commentReminder);
+ $("#hiddenReminder-" + countReminder).html(entry7.id);
+ var typeReminder= entry7.typeReminder;
+ if(typeReminder=="Перезвонить"){
+ $ ("#trColorFill-"+countReminder).css("background-color", "#7dc573");
+ }
+ if(typeReminder=="Отказ"){
+ $ ("#trColorFill-"+countReminder).css("background-color", "#f16c4d");
+ }
+ if(typeReminder=="Встреча"){
+ $ ("#trColorFill-"+countReminder).css("background-color", "#4c89c1");
+ }
+ if(typeReminder=="Другое"){
+ $ ("#trColorFill-"+countReminder).css("background-color", "#fff79a");
+ }
+ countReminder++;
+ });
+ });
+ $(".reminderDeleteClass").on("click", function (event) {
+ var reminderId = event.target.getAttribute('id');
+ var reminderHiddenId = $("#hiddenReminder-" + reminderId.replace("buttonReminder-", "")).html();
+ var data = {};
+ data["id"] = reminderHiddenId;
+ data["companyId"] = $("#hiddenIdCompanyReminder").val();
+ var token = $('#csrfToken').val();
+ var header = $('#csrfHeader').val();
+ $.ajax({
+ type: "POST",
+ url: "deletereminder",
+ data: JSON.stringify(data),
+ dataType: 'json',
+ timeout: 600000,
+ async : false,
+ success: function (data) {      //получение ответа с rest сервера
+ display(data);               //вызов йункции для отображения полученных с сервера данных
+ },
+ beforeSend: function(xhr) {
+ xhr.setRequestHeader("Accept", "application/json");
+ xhr.setRequestHeader("Content-Type", "application/json");
+ xhr.setRequestHeader(header, token);
+ },
+ });
+ return false;
+ });
+ }
+ hiddenId.val(entry.id);
+ for (var i = 1; i < 13; i++) {
+ item = {};
+ item.id = i;
+ item.isOpen = false;
+ addressArray[i] = item;
+ $("#UpAdd" + i).hide();
+ $("#UpAdAd" + i).removeAttr('required');
+ $("#UpAdAd" + i).val("");
+ $("#UpRegAd" + i).val("-1");
+ $("#UpPhAd" + i).val("");
+ $("#UpInfAd" + i).val("");
+ $("#UpAddId" + i).val("");
+ }
 
-            var count = 1;
-            dataCompanyAddressJson.forEach(function(entry2) {
-                if (entry2.companyId == entry.id) {
-                    entry2.companyAddresses.forEach(function(entry3) {
-                        addressArray[count].isOpen = true;
-                        $("#UpAdd" + count).show();
-                        $("#UpAdAd" + count).prop("required", true);
-                        $("#UpAdAd" + count).val(entry3.address);
-                        $("#UpRegAd" + count).val(entry3.regionId);
-                        $("#UpPhAd" + count).val(entry3.phones);
-                        $("#UpInfAd" + count).val(entry3.information);
-                        $("#UpAddId" + count).val(entry3.id);
-                        count++;
-                    });
-                    calculatePosition(addressArray, "UpAdd");
-                }
-            });
-        }
-    });
-}
-*/
+ var count = 1;
+ dataCompanyAddressJson.forEach(function(entry2) {
+ if (entry2.companyId == entry.id) {
+ entry2.companyAddresses.forEach(function(entry3) {
+ addressArray[count].isOpen = true;
+ $("#UpAdd" + count).show();
+ $("#UpAdAd" + count).prop("required", true);
+ $("#UpAdAd" + count).val(entry3.address);
+ $("#UpRegAd" + count).val(entry3.regionId);
+ $("#UpPhAd" + count).val(entry3.phones);
+ $("#UpInfAd" + count).val(entry3.information);
+ $("#UpAddId" + count).val(entry3.id);
+ count++;
+ });
+ calculatePosition(addressArray, "UpAdd");
+ }
+ });
+ }
+ });
+ }
+ */
 
 function loadCompany(id) {
     if (companyName == undefined) {
@@ -453,19 +453,21 @@ function loadCompany(id) {
         hiddenNameCompanyReminder.val(entry.name);
 
         var countReminder=0;
+        //6.02.2017
         dataCompanyReminderJson.forEach(function(entry4) {     //создание дива для отображения  напоминаний
             if (entry4.companyId == entry.id) {
-                for(var i=0;i<entry4.companyReminders.length;i++){   $("#tbodyShowReminders").html(
-                    $("#tbodyShowReminders").html()+' <tr id="trColorFill-'+i+'">'+
+                for(var i=0;i<entry4.companyReminders.length;i++){   $(".tbodyShowReminders").html(
+                    $(".tbodyShowReminders").html()+' <tr id="trColorFill-'+i+'">'+
                     '<td ><span  id="dateReminder-'+i+'"></span> </td>'+
                     '<td ><span id="hourReminder-'+i+'"></span></td>'+
                     '<td ><span id="typeReminder-'+i+'"></span></td>'+
                     '<td ><span id="commentReminder-'+i+'"></span></td>'+
                     '<td hidden="true" ><span id="hiddenReminder-'+i+'"></span></td>'+
-                    '<td ><div class="reminderDeleteClass" id="buttonReminder-'+i+'">Удалить</div></td>'+
+                    '<td ><div class="reminderEditClass" id="buttonReminder-'+i+'" >Редактировать</div></td>'+
                     '</tr>');
                 }
-                $(".reminderDeleteClass").on("click", function (event) {
+
+                $(".reminderEditClass").on("click", function (event) {
                     var reminderId = event.target.getAttribute('id');
                     var reminderHiddenId = $("#hiddenReminder-" + reminderId.replace("buttonReminder-", "")).html();
                     var data = {};
@@ -475,13 +477,13 @@ function loadCompany(id) {
                     var header = $('#csrfHeader').val();
                     $.ajax({
                         type: "POST",
-                        url: "deletereminder",
+                        url: "getreminder",
                         data: JSON.stringify(data),
                         dataType: 'json',
                         timeout: 600000,
                         async : false,
                         success: function (data) {        //получение ответа с rest сервера
-                            display(data);               //вызов йункции для отображения полученных с сервера данных
+                            getReminder(data);               //вызов йункции для отображения полученных с сервера данных
                         },
                         beforeSend: function(xhr) {
                             xhr.setRequestHeader("Accept", "application/json");
@@ -493,7 +495,7 @@ function loadCompany(id) {
                 });
                 entry4.companyReminders.forEach(function(entry5) {
                     $( "#hourReminder-"+countReminder).html(entry5.hourReminder);
-                    $ ("#dateReminder-"+countReminder).html(entry5.dateReminder);
+                    $ ("#dateReminder-"+countReminder).html(new Date(entry5.dateReminder).customFormat("#DD#.#MM#.#YYYY#"));
                     $ ("#typeReminder-"+countReminder).html(entry5.typeReminder);
                     $ ("#commentReminder-"+countReminder).html(entry5.commentReminder);
                     $( "#hiddenReminder-"+countReminder).html(entry5.id);
@@ -514,53 +516,95 @@ function loadCompany(id) {
                 });
             }
         });
+        function getReminder(data) {
+            console.log(data)
+            $("#selectReminderHours").val(data.hourReminder);
+            $("#reminderDate").val(new Date(data.dateReminder).customFormat("#YYYY#-#MM#-#DD#"));
+            $("#selectReminderType").val(data.typeReminder);
+            $("#reminderComment").val(data.commentReminder);
+            $("#submitManagerFormReminder").val("Обновить");
+            idReminder=data.id;
+        }
         jQuery(document).ready(    //отпрвка джисоном данных с формы в фоновом режиме
             function($) {
                 $("#addReminderForm").submit(function(event) {
-                    var data = {};
-                    data["dateReminder"] =$("#reminderDate").val().toString();
-                    data["typeReminder"] = $("#selectReminderType").val();
-                    data["commentReminder"] = $("#reminderComment").val();
-                    data["companyId"] = $("#hiddenIdCompanyReminder").val();
-                    data["companyName"] = $("#hiddenNameCompanyReminder").val();
-                    data["hourReminder"] = $("#selectReminderHours").val();
-                    var token = $('#csrfToken').val();
-                    var header = $('#csrfHeader').val();
-                    console.log(JSON.stringify(data));
-                    $.ajax({
-                        type: "POST",
-                        url: "addreminder",
-                        data: JSON.stringify(data),
-                        dataType: 'json',
-                        timeout: 600000,
-                        async : false,
-                        success: function (data) {      //получение ответа с rest сервера
-                            display(data);               //вызов йункции для отображения полученных с сервера данных
-                        },
-                        beforeSend: function(xhr) {
-                            xhr.setRequestHeader("Accept", "application/json");
-                            xhr.setRequestHeader("Content-Type", "application/json");
-                            xhr.setRequestHeader(header, token);
-                        },
-                    });
-                    return false;
+                    if($("#submitManagerFormReminder").val()=="Создать") {
+                        var data = {};
+                        data["dateReminder"] = $("#reminderDate").val();
+                        data["typeReminder"] = $("#selectReminderType").val();
+                        data["commentReminder"] = $("#reminderComment").val();
+                        data["companyId"] = $("#hiddenIdCompanyReminder").val();
+                        data["companyName"] = $("#hiddenNameCompanyReminder").val();
+                        data["hourReminder"] = $("#selectReminderHours").val();
+                        var token = $('#csrfToken').val();
+                        var header = $('#csrfHeader').val();
+                        console.log(JSON.stringify(data));
+                        $.ajax({
+                            type: "POST",
+                            url: "addreminder",
+                            data: JSON.stringify(data),
+                            dataType: 'json',
+                            timeout: 600000,
+                            async: false,
+                            success: function (data) {      //получение ответа с rest сервера
+                                display(data);               //вызов йункции для отображения полученных с сервера данных
+                            },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Accept", "application/json");
+                                xhr.setRequestHeader("Content-Type", "application/json");
+                                xhr.setRequestHeader(header, token);
+                            },
+                        });
+                        return false;
+                    }
+                    if($("#submitManagerFormReminder").val()=="Обновить") {
+                        var data = {};
+                        data["dateReminder"] = $("#reminderDate").val();
+                        data["typeReminder"] = $("#selectReminderType").val();
+                        data["commentReminder"] = $("#reminderComment").val();
+                        data["companyName"] = $("#hiddenNameCompanyReminder").val();
+                        data["hourReminder"] = $("#selectReminderHours").val();
+                        data["id"] = idReminder;
+                        var token = $('#csrfToken').val();
+                        var header = $('#csrfHeader').val();
+                        console.log(JSON.stringify(data));
+                        $.ajax({
+                            type: "POST",
+                            url: "updatereminder",
+                            data: JSON.stringify(data),
+                            dataType: 'json',
+                            timeout: 600000,
+                            async: false,
+                            success: function (data) {
+                                $("#submitManagerFormReminder").val("Создать");//получение ответа с rest сервера
+                                display(data);               //вызов йункции для отображения полученных с сервера данных
+                            },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Accept", "application/json");
+                                xhr.setRequestHeader("Content-Type", "application/json");
+                                xhr.setRequestHeader(header, token);
+                            },
+                        });
+                        return false;
+                    }
                 });
             });
 
+
         function display(data) {
             $("#addReminderForm").trigger('reset');//reset  формы
-            $("#tbodyShowReminders").html(""); //очистка дива
+            $(".tbodyShowReminders").html(""); //очистка дива
             countReminder = 0;
             dataCompanyReminderJsonAnswer = data ;
             dataCompanyReminderJsonAnswer.forEach(function (entry6) {     //создание напоминаний из ответа сервера(data)
-                $("#tbodyShowReminders").html(
-                    $("#tbodyShowReminders").html() + ' <tr id="trColorFill-'+countReminder+'">' +
+                $(".tbodyShowReminders").html(
+                    $(".tbodyShowReminders").html() + ' <tr id="trColorFill-'+countReminder+'">' +
                     '<td ><span  id="dateReminder-' + countReminder + '"></span> </td>' +
                     '<td ><span id="hourReminder-' + countReminder + '"></span></td>' +
                     '<td ><span id="typeReminder-' + countReminder + '"></span></td>' +
                     '<td ><span id="commentReminder-' + countReminder + '"></span></td>' +
                     '<td hidden="true"><span id="hiddenReminder-' + countReminder + '"></span></td>' +
-                    '<td ><div class="reminderDeleteClass" id="buttonReminder-' + countReminder + '">Удалить</div></td>' +
+                    '<td ><div class="reminderEditClass" id="buttonReminder-' + countReminder + '">Редактировать</div></td>' +
                     '</tr>');
                 countReminder++;
             });
@@ -568,7 +612,7 @@ function loadCompany(id) {
             dataCompanyReminderJsonAnswer.forEach(function (entry6) {     //создание напоминаний из ответа сервера(data)
                 data.forEach(function (entry7) {
                     $("#hourReminder-" + countReminder).html(entry7.hourReminder);
-                    $("#dateReminder-" + countReminder).html(entry7.dateReminder);
+                    $("#dateReminder-" + countReminder).html(new Date(entry7.dateReminder).customFormat("#DD#.#MM#.#YYYY#"));
                     $("#typeReminder-" + countReminder).html(entry7.typeReminder);
                     $("#commentReminder-" + countReminder).html(entry7.commentReminder);
                     $("#hiddenReminder-" + countReminder).html(entry7.id);
@@ -588,7 +632,7 @@ function loadCompany(id) {
                     countReminder++;
                 });
             });
-            $(".reminderDeleteClass").on("click", function (event) {
+            $(".reminderEditClass").on("click", function (event) {
                 var reminderId = event.target.getAttribute('id');
                 var reminderHiddenId = $("#hiddenReminder-" + reminderId.replace("buttonReminder-", "")).html();
                 var data = {};
@@ -598,13 +642,13 @@ function loadCompany(id) {
                 var header = $('#csrfHeader').val();
                 $.ajax({
                     type: "POST",
-                    url: "deletereminder",
+                    url: "getreminder",
                     data: JSON.stringify(data),
                     dataType: 'json',
                     timeout: 600000,
                     async : false,
-                    success: function (data) {      //получение ответа с rest сервера
-                        display(data);               //вызов йункции для отображения полученных с сервера данных
+                    success: function (data) {        //получение ответа с rest сервера
+                        getReminder(data);               //вызов йункции для отображения полученных с сервера данных
                     },
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader("Accept", "application/json");
@@ -614,6 +658,35 @@ function loadCompany(id) {
                 });
                 return false;
             });
+            //6.02.2017
+            /*
+             $(".reminderDeleteClass").on("click", function (event) {
+             var reminderId = event.target.getAttribute('id');
+             var reminderHiddenId = $("#hiddenReminder-" + reminderId.replace("buttonReminder-", "")).html();
+             var data = {};
+             data["id"] = reminderHiddenId;
+             data["companyId"] = $("#hiddenIdCompanyReminder").val();
+             var token = $('#csrfToken').val();
+             var header = $('#csrfHeader').val();
+             $.ajax({
+             type: "POST",
+             url: "deletereminder",
+             data: JSON.stringify(data),
+             dataType: 'json',
+             timeout: 600000,
+             async : false,
+             success: function (data) {      //получение ответа с rest сервера
+             display(data);               //вызов йункции для отображения полученных с сервера данных
+             },
+             beforeSend: function(xhr) {
+             xhr.setRequestHeader("Accept", "application/json");
+             xhr.setRequestHeader("Content-Type", "application/json");
+             xhr.setRequestHeader(header, token);
+             },
+             });
+             return false;
+             });
+             */
         }
         hiddenId.val(entry.id);
         for (var i = 1; i < 13; i++) {
@@ -870,9 +943,11 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
 $(".searchButt").on("click", function () {
     $("#searchForm").submit();
 });
-$("#deleteReminder").on("click", function () {
-    $("#searchForm").submit();
-});
+/*
+ $("#deleteReminder").on("click", function () {
+ $("#searchForm").submit();
+ });
+ */
 
 Date.prototype.customFormat = function(formatString){
     var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhhh,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;
@@ -893,3 +968,4 @@ Date.prototype.customFormat = function(formatString){
     ss=(s=this.getSeconds())<10?('0'+s):s;
     return formatString.replace("#hhhh#",hhhh).replace("#hhh#",hhh).replace("#hh#",hh).replace("#h#",h).replace("#mm#",mm).replace("#m#",m).replace("#ss#",ss).replace("#s#",s).replace("#ampm#",ampm).replace("#AMPM#",AMPM);
 };
+

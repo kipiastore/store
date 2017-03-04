@@ -29,7 +29,6 @@ public class SearchByPage {
             String value;
             for (String key : searchMap.keySet()) {
                 value = (searchMap.get(key) + "").replace("[", "").replace("]", "").trim();
-                System.out.println(value);
                 if (!key.equals("_csrf") && !value.isEmpty()) {
                     if (key.equals("name") && selectSearchType.equals("searchAllCompany")) {
                         companies = companyService.findCompaniesByName(value);
