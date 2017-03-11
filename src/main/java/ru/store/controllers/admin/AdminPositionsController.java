@@ -3,14 +3,18 @@ package ru.store.controllers.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.CompanySubPartitionDAO;
-import ru.store.entities.*;
-import ru.store.service.*;
+import ru.store.entities.Company;
+import ru.store.entities.CompanySubPartition;
+import ru.store.entities.Partition;
+import ru.store.entities.SubPartition;
+import ru.store.service.CompanyService;
+import ru.store.service.PartitionService;
+import ru.store.service.SubPartitionService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,6 +99,10 @@ public class AdminPositionsController {
                         companies = companyService.findCompaniesByEmail(value);
                         break;
                     }
+                }
+                //7.03.17
+                else{
+                    companies = companyService.getCompanies();
                 }
             }
         } catch (Exception ex) {

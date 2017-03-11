@@ -40,18 +40,19 @@ public class ManagerDebtorsController {
         return modelAndView;
     }
     @RequestMapping(value = "/manager/searchcompanybydebtors", method = RequestMethod.POST)
-    public ModelAndView searchByDebtors(@RequestParam MultiValueMap<String, String> searchMap, @RequestParam("selectSearchCompany")String selectSearchType){
+    public ModelAndView searchByDebtors(@RequestParam MultiValueMap<String, String> searchMap,
+                                        @RequestParam("selectSearchCompanyByType")String selectSearchCompanyByType,
+                                        @RequestParam("selectSearchCompanyByPaymentStatus")String selectSearchCompanyByPaymentStatus){
         ModelAndView modelAndView=new ModelAndView();
         Model model=new Model();
-        List<Company> companies=searchByPage.search(searchMap,selectSearchType,modelAndView);
+        List<Company> companies=searchByPage.search(searchMap,selectSearchCompanyByType,selectSearchCompanyByPaymentStatus,modelAndView);
         loadPage(modelAndView,model);
         iSChoiceComments=searchByPage.getIsShowAllCompanyWithComments();
         loadPage(modelAndView,model);
         model.message = "Результаты поиска:";
         model.companyList = new ArrayList<>();
         for (Company company : companies) {
-            if (company.getDateOfEndContract().getTime() < new Date().getTime()) {
-
+            if (company.getDateOfContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
                 if (iSChoiceComments == false) {
                     List<Model.CompaniesItem> list = convert(company);
                     for (Model.CompaniesItem m : list) {
@@ -80,12 +81,13 @@ public class ManagerDebtorsController {
         List<Company> companies=companyService.getCompanies();
         model.companyList = new ArrayList<>();
             for (Company company : companies) {
-                if (company.getDateOfEndContract().getTime() < new Date().getTime()) {
-                    List<Model.CompaniesItem> list = convert(company);
-                    for (Model.CompaniesItem m : list) {
-                        model.companyList.add(m);
+                    if (company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
+                        List<Model.CompaniesItem> list = convert(company);
+                        for (Model.CompaniesItem m : list) {
+                            model.companyList.add(m);
+                        }
                     }
-                }
+
             }
         }
 
@@ -129,11 +131,12 @@ public class ManagerDebtorsController {
         return companyItems;
     }
     private String checkIsDebt(Company company) {
-        int debt=0;
-        if (company.getDateOfEndContract().getTime() < new Date().getTime()){
+        float debt=0;
+        if (company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null&&company.getDateOfEndContract().getTime() < new Date().getTime()){
            long debtDays=((new Date().getTime()-company.getDateOfEndContract().getTime())/86400000);
-            Calendar calendar=GregorianCalendar.getInstance();
-            int debtPerDay=company.getCostOf()/calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+            System.out.println("dabtDays----"+debtDays);
+            Calendar calendar=Calendar.getInstance();
+            float debtPerDay=company.getCostOf()/calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             debt=debtPerDay*(int)debtDays;
         }
         return debt+"гр";

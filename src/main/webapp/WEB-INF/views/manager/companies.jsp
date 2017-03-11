@@ -27,7 +27,7 @@
                 <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
                 <input type="text" maxlength="120" name="position" placeholder="position"/>
 
-                <select name="selectSearchCompany" id="allComment">
+                <select name="selectSearchCompanyByType" id="allComment">
                     <option selected value="searchAllCompany" >Все</option>
                     <option value="withCommentCompany">С замечаниями</option>
                     <option value="noCommentCompany">Без замечаний</option>
@@ -195,10 +195,10 @@
                                 <td colspan="5"align="center" id="trNotes">Заметки</td>
                             </tr>
                             <tr>
-                                <td style="width: 77px;">Дата </td>
-                                <td style="width: 50px;">Время</td>
+                                <td style="width: 65px;">Дата </td>
+                                <td style="width: 72px;">Время</td>
                                 <td style="width: 80px;">Статус</td>
-                                <td style="width: 200px;">Заметки</td>
+                                <td style="width: 280px;">Заметки</td>
                                 <td>Редактировать</td>
                             </tr>
                             </thead>

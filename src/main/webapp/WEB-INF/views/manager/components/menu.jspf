@@ -23,14 +23,6 @@
                                 <option value="11">Декабрь</option>
                             </select>
                         </td>
-                        <td>
-                            <select name="selectMonthContract" id="selectMonthContract">
-                                <option value="0" selected >Все</option>
-                                <option value="1">Без догов.</option>
-                                <option value="2">Оплач.</option>
-                                <option value="3">Неоплач.</option>
-                            </select>
-                        </td>
                     </tr>
                 </table>
                 <table class="tableCalendar">

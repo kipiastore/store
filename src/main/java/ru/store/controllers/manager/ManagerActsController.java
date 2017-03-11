@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.controllers.admin.AdminPositionsController;
 import ru.store.entities.Act;
 import ru.store.entities.Company;
 import ru.store.entities.File;
-import ru.store.entities.Report;
 import ru.store.exceptions.NotSupportedFormat;
 import ru.store.service.*;
 import ru.store.servlets.DownloadServlet;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -93,11 +93,12 @@ public class ManagerActsController {
     public ModelAndView searchByActs(@RequestParam MultiValueMap<String, String> searchMap) {
         ModelAndView modelAndView = new ModelAndView();
         Model model = new Model();
-        List<Company> companies = searchByPage.search(searchMap, "searchAllCompany", modelAndView);
+        List<Company> companies = searchByPage.search(searchMap, "searchAllCompany","selectSearchCompanyByPaymentStatusAll", modelAndView);
         loadPage(modelAndView,model);
         loadPage(modelAndView,model);
         model.message = "Результаты поиска:";
         model.companyList = new ArrayList<>();
+        System.out.println("Компании-----------"+companies);
         for (Company company : companies) {
             List<Model.CompaniesItem> list = convert(company);
             for (Model.CompaniesItem m : list) {

@@ -650,16 +650,17 @@ label {
 
 .right-body .notes .tableNotes{
     width: 100%;
-    text-align:center;
+    text-align: center;
     border-collapse:collapse;
 }
 .tbodyShowReminders{
     color:black;
-    overflow: auto;
+    text-align: -webkit-center;
 }
 table .tableNotes, .theadShowReminders, .tbodyShowReminders
 {
     display:block;
+    text-align: -webkit-center;
 }
 .tbodyShowReminders
 {

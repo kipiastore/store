@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.dao.interfaces.FileDAO;
-import ru.store.dao.interfaces.ReportDAO;
 import ru.store.entities.*;
 import ru.store.exceptions.NotSupportedFormat;
 import ru.store.service.*;
@@ -114,6 +112,10 @@ public class AdminReportsController {
                         companies = companyService.findCompaniesByEmail(value);
                         break;
                     }
+                }
+                //7.03.17
+                else{
+                    companies = companyService.getCompanies();
                 }
             }
         } catch (Exception ex) {

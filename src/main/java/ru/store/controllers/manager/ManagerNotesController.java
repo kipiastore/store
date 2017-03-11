@@ -120,19 +120,18 @@ public class ManagerNotesController {
     @RequestMapping(value = "/manager/searchnotesbymenu", method = RequestMethod.POST)
     public ModelAndView searchMenuDate (@RequestParam("hiddenSearchDate") Date date,
                                         @RequestParam("selectMonth") String selectMonth,
-                                        @RequestParam("selectMonthContract") String selectMonthContract,
                                         @RequestParam (value = "submitSearchToday",required = false) String submitSearchToday,
                                         @RequestParam (value = "submitSearchTomorrow",required = false)String submitSearchTomorrow,
                                         @RequestParam (value = "submitSearchWeek",required = false)String submitSearchWeek) {
         ModelAndView modelAndView = new ModelAndView();
         Model model = new Model();
-        loadPageBySearchMenu(modelAndView,model,date,selectMonth,selectMonthContract,submitSearchToday,submitSearchTomorrow,submitSearchWeek);
+        loadPageBySearchMenu(modelAndView,model,date,selectMonth,submitSearchToday,submitSearchTomorrow,submitSearchWeek);
         return modelAndView;
     }
     private void loadPageBySearchMenu(ModelAndView modelAndView, Model model,
-                                      Date date, String selectMonth,String selectMonthContract,
+                                      Date date, String selectMonth,
                                       String submitSearchToday,String submitSearchTomorrow,String submitSearchWeek ) {
-        loadCompaniesNotesBySearchMenu(date,searchByMenu(date, selectMonth,selectMonthContract,submitSearchToday,submitSearchTomorrow, submitSearchWeek),model);
+        loadCompaniesNotesBySearchMenu(date,searchByMenu(date, selectMonth,submitSearchToday,submitSearchTomorrow, submitSearchWeek),model);
         modelAndView.addObject("model",model);
         modelAndView.addObject("prefix","");
         modelAndView.setViewName("manager/menusearchnotes");
@@ -157,7 +156,7 @@ public class ManagerNotesController {
                 model.reminderList.add(m);
             }
         for(Company company:companies) {
-            if(company.getDateOfEndContract().getTime()-date.getTime()<=259200000)
+            if(company.getDateOfContract()!=null&&company.getDateOfEndContract().getTime()-date.getTime()<=259200000)
             {
                 companiesItem = new Model.CompaniesItem();
                 companiesItem.nameForNotes = company.getName();
@@ -186,37 +185,39 @@ public class ManagerNotesController {
         return debt+"гр";
     }
     //21.02.2017
-    private List<CompanyReminder> searchByMenu(Date date, String selectMonth, String selectMonthContract, String submitSearchToday, String submitSearchTomorrow, String submitSearchWeek ){
+    private List<CompanyReminder> searchByMenu(Date date, String selectMonth, String submitSearchToday, String submitSearchTomorrow, String submitSearchWeek ){
 
         List<CompanyReminder>companyReminders=new ArrayList<>();
         //ger reminders by date
-        if(selectMonth.equals("12")&&selectMonthContract.equals("0")&&submitSearchToday==null &&submitSearchTomorrow==null&&submitSearchWeek==null) {
+        if(selectMonth.equals("12")&&submitSearchToday==null &&submitSearchTomorrow==null&&submitSearchWeek==null) {
            companyReminders = companyReminderService.getCompanyReminderByDate(date);
         }
         //get reminders by month
-        if(!selectMonth.equals("12")&&selectMonthContract.equals("0")&&submitSearchToday==null &&submitSearchTomorrow==null&&submitSearchWeek==null) {
+        if(!selectMonth.equals("12")&&submitSearchToday==null &&submitSearchTomorrow==null&&submitSearchWeek==null) {
             companyReminders = companyReminderService.getCompanyReminderByMonth(selectMonth);
         }
         //get reminders by today
-        if(selectMonth.equals("12")&&selectMonthContract.equals("0")&&submitSearchToday!=null &&submitSearchTomorrow==null&&submitSearchWeek==null) {
+        if(selectMonth.equals("12")&&submitSearchToday!=null &&submitSearchTomorrow==null&&submitSearchWeek==null) {
             companyReminders = companyReminderService.getCompanyReminderByDateToday(date);
         }
         //get reminders by tomorrow
-        if(selectMonth.equals("12")&&selectMonthContract.equals("0")&&submitSearchToday==null &&submitSearchTomorrow!=null&&submitSearchWeek==null) {
+        if(selectMonth.equals("12")&&submitSearchToday==null &&submitSearchTomorrow!=null&&submitSearchWeek==null) {
             companyReminders = companyReminderService.getCompanyReminderByDateTomorrow(date);
         }
         //get reminders by week
-        if(selectMonth.equals("12")&&selectMonthContract.equals("0")&&submitSearchToday==null &&submitSearchTomorrow==null&&submitSearchWeek!=null) {
+        if(selectMonth.equals("12")&&submitSearchToday==null &&submitSearchTomorrow==null&&submitSearchWeek!=null) {
             companyReminders = companyReminderService.getCompanyReminderByDateWeek(date);
         }
         return companyReminders;
     }
     @RequestMapping(value = "/manager/searchcompanynotes", method = RequestMethod.POST)
-    public ModelAndView searchCompany(@RequestParam MultiValueMap<String, String> searchMap, @RequestParam("selectSearchCompany")String selectSearchType,@RequestParam("selectSearchCompanyByPaymentStatus")String selectSearchCompanyByPaymentStatus) {
+    public ModelAndView searchCompany(@RequestParam MultiValueMap<String, String> searchMap,
+                                      @RequestParam("selectSearchCompanyByType")String selectSearchCompanyByType,
+                                      @RequestParam("selectSearchCompanyByPaymentStatus")String selectSearchCompanyByPaymentStatus) {
         ModelAndView modelAndView = new ModelAndView();
         List<Company> companies;
         iSChoiceComments=false;
-        companies= searchByPage.search(searchMap,selectSearchType,modelAndView);
+        companies= searchByPage.search(searchMap,selectSearchCompanyByType,selectSearchCompanyByPaymentStatus,modelAndView);
         iSChoiceComments=searchByPage.getIsShowAllCompanyWithComments();
         Model model = new Model();
         loadPage(modelAndView,model);

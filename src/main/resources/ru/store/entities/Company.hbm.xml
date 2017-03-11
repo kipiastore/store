@@ -14,13 +14,13 @@
             <column name="keywords" length="250" not-null="false" />
         </property>
         <property name="dateOfContract" type="java.util.Date" >
-            <column name="date_of_contract" not-null="true" />
+            <column name="date_of_contract" not-null="false" />
         </property>
         <property name="dateOfStartContract" type="java.util.Date" >
-            <column name="date_of_start_contract" not-null="true" />
+            <column name="date_of_start_contract" not-null="false" />
         </property>
         <property name="dateOfEndContract" type="java.util.Date" >
-            <column name="date_of_end_contract" not-null="true" />
+            <column name="date_of_end_contract" not-null="false" />
         </property>
         <property name="manager" type="string" >
             <column name="manager" length="45" not-null="true" />

@@ -69,11 +69,13 @@ public class ManagerCompaniesController {
         return modelAndView;
     }
     @RequestMapping(value = "/manager/searchcompany", method = RequestMethod.POST)
-    public ModelAndView searchCompany(@RequestParam MultiValueMap<String, String> searchMap, @RequestParam("selectSearchCompany")String selectSearchType) {
+    public ModelAndView searchCompany(@RequestParam MultiValueMap<String, String> searchMap,
+                                      @RequestParam("selectSearchCompanyByType")String selectSearchCompanyByType,
+                                      @RequestParam("selectSearchCompanyByPaymentStatus")String selectSearchCompanyByPaymentStatus){
         ModelAndView modelAndView = new ModelAndView();
         List<Company> companies;
         iSChoiceComments=false;
-        companies= search.search(searchMap,selectSearchType,modelAndView);
+        companies= search.search(searchMap,selectSearchCompanyByType,selectSearchCompanyByPaymentStatus,modelAndView);
         iSChoiceComments=search.getIsShowAllCompanyWithComments();
         Model model = new Model();
         loadPage(model, modelAndView);

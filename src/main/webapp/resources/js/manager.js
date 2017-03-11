@@ -423,9 +423,11 @@ function loadCompany(id) {
     $.get('../api/admin/resource/v1/company/'+id, function(entry) {
         companyName.val(entry.name);
         keywords.val(entry.keywords);
-        dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
-        dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
-        dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
+        if(entry.dateOfContract!=undefined&&entry.dateOfStartContract!=undefined&&entry.dateOfEndContract!=undefined){
+            dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
+            dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
+            dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
+        }
         manager.val(entry.manager);
         companyPackageId.val(entry.companyPackageId);
         costOf.val(entry.costOf);
@@ -458,10 +460,10 @@ function loadCompany(id) {
             if (entry4.companyId == entry.id) {
                 for(var i=0;i<entry4.companyReminders.length;i++){   $(".tbodyShowReminders").html(
                     $(".tbodyShowReminders").html()+' <tr id="trColorFill-'+i+'">'+
-                    '<td ><span  id="dateReminder-'+i+'"></span> </td>'+
-                    '<td style="width: 50px;"><span id="hourReminder-'+i+'"></span></td>'+
+                    '<td style="width: 50px;"><span  id="dateReminder-'+i+'"></span> </td>'+
+                    '<td style="width: 80px;"><span id="hourReminder-'+i+'"></span></td>'+
                     '<td ><span id="typeReminder-'+i+'"></span></td>'+
-                    '<td style="width: 200px;"><span id="commentReminder-'+i+'"></span></td>'+
+                    '<td style="width: 290px;"><span id="commentReminder-'+i+'"></span></td>'+
                     '<td hidden="true" ><span id="hiddenReminder-'+i+'"></span></td>'+
                     '<td ><div class="reminderEditClass" id="buttonReminder-'+i+'" >Редактировать</div></td>'+
                     '</tr>');
@@ -598,11 +600,11 @@ function loadCompany(id) {
             dataCompanyReminderJsonAnswer = data ;
             dataCompanyReminderJsonAnswer.forEach(function (entry6) {     //создание напоминаний из ответа сервера(data)
                 $(".tbodyShowReminders").html(
-                    $(".tbodyShowReminders").html() + ' <tr id="trColorFill-'+countReminder+'">' +
-                    '<td ><span  id="dateReminder-' + countReminder + '"></span> </td>' +
-                    '<td ><span id="hourReminder-' + countReminder + '"></span></td>' +
+                    $(".tbodyShowReminders").html() + ' <tr style="width: 100%;"id="trColorFill-'+countReminder+'">' +
+                    '<td style="width: 50px;"><span  id="dateReminder-' + countReminder + '"></span> </td>' +
+                    '<td style="width: 80px;text-a"><span id="hourReminder-' + countReminder + '"></span></td>' +
                     '<td ><span id="typeReminder-' + countReminder + '"></span></td>' +
-                    '<td ><span id="commentReminder-' + countReminder + '"></span></td>' +
+                    '<td style="width: 290px;"><span id="commentReminder-' + countReminder + '"></span></td>' +
                     '<td hidden="true"><span id="hiddenReminder-' + countReminder + '"></span></td>' +
                     '<td ><div class="reminderEditClass" id="buttonReminder-' + countReminder + '">Редактировать</div></td>' +
                     '</tr>');

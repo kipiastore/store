@@ -66,12 +66,12 @@
                     <input title="Введите название фирмы." autofocus type="text" maxlength="255" name="name" id="newName" required />
                     <label>Keywords</label>
                     <input title="Введите keywords." type="text" maxlength="255" placeholder="" name="Keywords" id="newKeywords" />
-                    <label>Дата заключения договора<span class="required">*</span></label>
-                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="newDateOfContract" required />
-                    <label>Срок договора от<span class="required">*</span></label>
-                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfStartContract" id="newDateOfStartContract" required />
-                    <label>Срок договора до<span class="required">*</span></label>
-                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="newDateOfEndContract" required />
+                    <label>Дата заключения договора</label>
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="newDateOfContract" />
+                    <label>Срок договора от</label>
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfStartContract" id="newDateOfStartContract" />
+                    <label>Срок договора до</label>
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="newDateOfEndContract"  />
                     <label>Менеджер<span class="required">*</span></label>
                     <select name="manager" title="" id="newManager" required>
                         <c:forEach var="item" items="${model.managers}">
@@ -154,15 +154,15 @@
             <form:form action="updatecompany" modelAttribute="company" method="post" id="updateForm">
                 <div class="left-body">
                     <label>Название<span class="required">*</span></label>
-                    <input title="Введите название фирмы." maxlength="120" type="text" name="name" id="name" required />
+                    <input title="Введите название фирмы." maxlength="120" type="text" name="name" id="name"required  />
                     <label>Keywords</label>
                     <input title="Введите keywords." maxlength="255" placeholder="Keywords" type="text" name="keywords" id="keywords" />
-                    <label>Дата заключения договора<span class="required">*</span></label>
-                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="dateOfContract" required />
-                    <label>Срок договора от<span class="required">*</span></label>
-                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfStartContract" id="dateOfStartContract" required />
-                    <label>Срок договора до<span class="required">*</span></label>
-                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="dateOfEndContract" required />
+                    <label>Дата заключения договора<span class="required"></span></label>
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="dateOfContract"  />
+                    <label>Срок договора от<span class="required"></span></label>
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfStartContract" id="dateOfStartContract"  />
+                    <label>Срок договора до<span class="required"></span></label>
+                    <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="dateOfEndContract"  />
                     <label>Менеджер<span class="required">*</span></label>
                     <select name="manager" title="" id="manager" required>
                         <c:forEach var="item" items="${model.managers}">

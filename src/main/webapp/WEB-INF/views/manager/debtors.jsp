@@ -25,16 +25,16 @@
                 <input type="text" maxlength="120" name="contractNum" placeholder="№ Дог.(где его взять?)"/>
                 <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
                 <input type="text" maxlength="120" name="position" placeholder="position"/>
-                <select name="selectSearchCompany" id="allComment">
+                <select name="selectSearchCompanyByType" id="allComment">
                     <option selected value="searchAllCompany" >Все</option>
                     <option value="withCommentCompany">С замечаниями</option>
                     <option value="noCommentCompany">Без замечаний</option>
                 </select>
                 <select name="selectSearchCompanyByPaymentStatus" id="selectPaymentStatus">
                     <option selected value="selectSearchCompanyByPaymentStatusAll" >Все</option>
-                    <option value="withCommentCompany">Без договора</option>
-                    <option value="noCommentCompany">Оплаченные</option>
-                    <option value="noCommentCompany">Не оплаченные</option>
+                    <option value="withoutContract">Без договора</option>
+                    <option value="paidContract">Оплаченные</option>
+                    <option value="notPaidContract">Не оплаченные</option>
                 </select>
                 <span class="searchButt"><img class="searchIcon" src="<c:url value="/resources/images/search.png" />"/></span>
             </form:form>

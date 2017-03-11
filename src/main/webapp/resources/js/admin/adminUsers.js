@@ -272,9 +272,9 @@ function loadCompany(id) {
     $.get('../api/resource/v1/company/'+id, function(entry) {
         companyName.val(entry.name);
         keywords.val(entry.keywords);
-        dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
-        dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
-        dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
+            dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
+            dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
+            dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
         manager.val(entry.manager);
         companyPackageId.val(entry.companyPackageId);
         costOf.val(entry.costOf);

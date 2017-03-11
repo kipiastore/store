@@ -2,10 +2,8 @@ package ru.store.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.store.dao.interfaces.CompanyAddressDAO;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
-import ru.store.entities.SubPartition;
 import ru.store.exceptions.NotFoundException;
 
 import java.sql.Timestamp;
@@ -87,10 +85,18 @@ public class CompanyService {
         return companyDAO.getCompanies();
     }
 
+    public List<Company> getCompaniesByPaymentStatus(String selectSearchCompanyByPaymentStatus) {
+        return companyDAO.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus);
+    }
+
     public List<Company> getCompaniesByLastUpdate() { return companyDAO.getCompaniesByLastUpdate(); }
 
     public List<Company> findCompaniesByName(String name) {
         return companyDAO.findCompaniesByName(name);
+    }
+
+    public List<Company> findCompaniesByNameAndSearchPaymentStatus(String name,String selectSearchCompanyByPaymentStatus) {
+        return companyDAO.findCompaniesByNameAndSearchPaymentStatus(name,selectSearchCompanyByPaymentStatus);
     }
 
     public List<Company> findCompaniesByLegalName(String legalName) {
@@ -101,8 +107,16 @@ public class CompanyService {
         return companyDAO.findCompaniesByPhone(phone);
     }
 
+    public List<Company> findCompaniesByPhoneAndSearchPaymentStatus(String phone,String selectSearchCompanyByPaymentStatus) {
+        return companyDAO.findCompaniesByPhoneAndSearchPaymentStatus(phone,selectSearchCompanyByPaymentStatus);
+    }
+
     public List<Company> findCompaniesByEmail(String email) {
         return companyDAO.findCompaniesByEmail(email);
+    }
+
+    public List<Company> findCompaniesByEmailAndSearchPaymentStatus(String email,String selectSearchCompanyByPaymentStatus) {
+        return companyDAO.findCompaniesByEmailAndSearchPaymentStatus(email,selectSearchCompanyByPaymentStatus);
     }
 
     public List<Company> getCompanies(List<Integer> companyIds) {
