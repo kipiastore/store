@@ -24,6 +24,7 @@
             <a style="color: hsla(0,${item.colorPoint}%,66%,1);" href="${prefix}company/${model.subPartitionItem.subPartitionId}-${item.companyId}">${item.companyName}</a>
         </div>
     </k:forEach>
+    <div style="height: 20px; width: 100%;float: left;"></div>
 </div>
 <%@include file="/WEB-INF/views/operator/components/searchwindow.jspf"%>
 <%@include file="/WEB-INF/views/operator/components/bottombar.jspf"%>

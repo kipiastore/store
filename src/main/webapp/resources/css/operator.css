@@ -10,9 +10,9 @@
 }
 .content {
     float: left;
-    width: 300px;
-    height: 50px;
-    padding: 10px;
+    width: 400px;
+    /* height: 50px; */
+    padding: 5px;
 }
 .infoContent {
     float: left;

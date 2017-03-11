@@ -77,6 +77,10 @@ public class PortalController {
             }
         }
 
+        for (Integer idKey : subPartitionItemsGroupByPartitionId.keySet()) {
+            Collections.sort(subPartitionItemsGroupByPartitionId.get(idKey));
+        }
+
 
         List<SubPartition> subPartitions = subPartitionDAO.getSubPartitions();
         Map<Integer, Integer> partitionIdToCount = new HashMap<>();
@@ -103,6 +107,9 @@ public class PortalController {
             partitionItem.subPartitionItems = subPartitionItemsGroupByPartitionId.get(partition.getId());
             partitionItems.add(partitionItem);
         }
+
+        Collections.sort(partitionItems);
+
         // prepare next part of the model again;
         List<Model.BestCompanyItem> bestCompanyItems = new ArrayList<>();
         Model.BestCompanyItem bestCompanyItem;
@@ -180,7 +187,7 @@ public class PortalController {
             return bestCompanyGroupByColumn;
         }
 
-        public static class PartitionItem {
+        public static class PartitionItem implements Comparable<PartitionItem> {
             public int partitionId;
             public String partitionName;
             public int companyCount;
@@ -199,10 +206,20 @@ public class PortalController {
                 return subPartitionItems;
             }
 
-            public static class SubPartitionItem {
+            @Override
+            public int compareTo(PartitionItem o) {
+                return this.partitionName.compareTo(o.partitionName);
+            }
+
+            public static class SubPartitionItem implements Comparable<SubPartitionItem>{
                 public int subPartitionId;
                 public String subPartitionName;
                 public int companyCount;
+
+                @Override
+                public int compareTo(SubPartitionItem o) {
+                    return this.subPartitionName.compareTo(o.subPartitionName);
+                }
 
                 public int getSubPartitionId() {
                     return subPartitionId;

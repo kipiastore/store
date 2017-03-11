@@ -10,6 +10,7 @@ import ru.store.entities.Partition;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,6 +35,8 @@ public class OperatorController {
         }
         Model model = new Model();
         model.partitionItems = partitionItems;
+
+        Collections.sort(partitionItems);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("model", model);
@@ -61,9 +64,14 @@ public class OperatorController {
             return partitionItems;
         }
 
-        public static class PartitionItem {
+        public static class PartitionItem implements Comparable<PartitionItem> {
             public int partitionId;
             public String partitionName;
+
+            @Override
+            public int compareTo(PartitionItem o) {
+                return this.partitionName.compareTo(o.partitionName);
+            }
 
             public int getPartitionId() {
                 return partitionId;

@@ -3,7 +3,7 @@ package ru.store.entities;
 /**
  *
  */
-public class Partition {
+public class Partition implements Comparable<Partition> {
 
     private int id;
     private String name;
@@ -11,6 +11,12 @@ public class Partition {
     public Partition() {
 
     }
+
+    @Override
+    public int compareTo(Partition o) {
+        return this.name.compareTo(o.name);
+    }
+
 
     public int getId() {
         return id;

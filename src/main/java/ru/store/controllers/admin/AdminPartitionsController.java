@@ -13,10 +13,7 @@ import ru.store.entities.SubPartition;
 import ru.store.service.PartitionService;
 import ru.store.service.SubPartitionService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class AdminPartitionsController {
@@ -107,7 +104,10 @@ public class AdminPartitionsController {
         Model.PartitionItem mainPartitionItem;
         Map<Integer, Model.PartitionItem> partitionIdToPartitionItem = new HashMap<>();
         Map<Model.PartitionItem, List<Model.PartitionItem>> subPartitionsGroupedByPartition = new HashMap<>();
-        for (Partition partition : partitionService.getPartitions()) {
+        List<Partition> prList = partitionService.getPartitions();
+        Collections.sort(prList);
+
+        for (Partition partition : prList) {
             partitionItem = new Model.PartitionItem();
             partitionItem.id = partition.getId();
             partitionItem.name = getNormalName(partition.getName());
@@ -115,6 +115,8 @@ public class AdminPartitionsController {
             partitionItems.add(partitionItem);
             subPartitionsGroupedByPartition.put(partitionItem, null);
         }
+
+        Collections.sort(partitionItems);
         model.partitionItems = partitionItems;
         for (SubPartition subPartition : subPartitionService.getSubPartitions()) {
             if (subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())) != null) {
@@ -133,6 +135,10 @@ public class AdminPartitionsController {
                 partitionItems.add(partitionItem);
                 subPartitionsGroupedByPartition.put(mainPartitionItem, partitionItems);
             }
+        }
+        for (Model.PartitionItem item : subPartitionsGroupedByPartition.keySet()) {
+            if (subPartitionsGroupedByPartition.get(item) != null)
+                Collections.sort(subPartitionsGroupedByPartition.get(item));
         }
         model.subPartitionsGroupedByPartition = subPartitionsGroupedByPartition;
     }
@@ -182,12 +188,18 @@ public class AdminPartitionsController {
             return subPartitionsGroupedByPartition;
         }
 
-        public static class PartitionItem {
+        public static class PartitionItem implements Comparable<PartitionItem> {
             public int id;
             public String name;
 
             public PartitionItem() {
             }
+
+            @Override
+            public int compareTo(PartitionItem o) {
+                return this.name.compareTo(o.name);
+            }
+
 
             public PartitionItem(int id) {
                 this.id = id;

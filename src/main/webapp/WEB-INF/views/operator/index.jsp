@@ -16,6 +16,7 @@
             <a href="${prefix}partition/${partitionItem.partitionId}">${partitionItem.partitionName}</a>
         </div>
     </k:forEach>
+    <div style="height: 20px; width: 100%;float: left;"></div>
 </div>
 <%@include file="/WEB-INF/views/operator/components/searchwindow.jspf" %>
 <%@include file="/WEB-INF/views/operator/components/bottombar.jspf"%>
