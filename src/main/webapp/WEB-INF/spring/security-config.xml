@@ -32,12 +32,14 @@
 
     <http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint">
         <access-denied-handler error-page="/403" />
-        <intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/api/admin/**"  access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/api/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/operator/**"  access="hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/client/**"  access="hasRole('ROLE_CLIENT')or hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/mainAdmin/**"  access="hasRole('ROLE_MAINADMIN')" />
+        <intercept-url pattern="/api/mainAdmin/**"  access="hasRole('ROLE_MAINADMIN')" />
+        <intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
+        <intercept-url pattern="/api/admin/**"  access="hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
+        <intercept-url pattern="/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
+        <intercept-url pattern="/api/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
+        <intercept-url pattern="/operator/**"  access="hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
+        <intercept-url pattern="/client/**"  access="hasRole('ROLE_CLIENT')or hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
         <logout logout-url="/login"
                 logout-success-url="/"
                 delete-cookies="JSESSIONID"

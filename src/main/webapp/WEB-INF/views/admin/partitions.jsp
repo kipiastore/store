@@ -58,9 +58,10 @@
                     <div class="menuBodyItemHeadInfo" id="ID-${key.id}" data-name="${key.name}" data-id="${key.id}">
                         <span class="soloTest" id="ID-${key.id}" data-name="${key.name}" data-id="${key.id}">${key.name}</span>
                     </div>
+                    <!--
                     <div class="menuBodyItemButt">
                         <div class="menuBodyItemButtDel" data-type="partition" id="ID-${key.id}"></div>
-                    </div>
+                    </div>-->
                 </div>
                 <div style="display: none" class="subItemsList" id="itemsID-${key.id}">
                     <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
@@ -83,7 +84,7 @@
 <style>
     .menuBodyItemHeadInfo {
         //float: right;
-        width: 245px;
+        width: 300px;
     }
 </style>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>

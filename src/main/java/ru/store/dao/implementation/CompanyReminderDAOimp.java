@@ -9,6 +9,7 @@ import ru.store.dao.interfaces.CompanyReminderDAO;
 import ru.store.entities.CompanyReminder;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -94,29 +95,12 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
     }
     @Override
     @Transactional
-    public  String  getLastCompanyReminderTypeAndAmount(Integer companyId) {
-        String hql = "select MAX(id),count(companyId) from CompanyReminder where companyId =?";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId);
-        List<Object[]> listResult = query.list();
-        String defaultValue="";
-        Integer maxId = 0;
-        Long countId;
-        countId = Long.valueOf(0);
-        for (Object[] aRow : listResult) {
-            maxId = (Integer) aRow[0];
-            countId = (Long) aRow[1];
-        }
-        if (maxId != null) {
-            hql = "select typeReminder from CompanyReminder where id =:maxId";
-            List<String> typeReminder = sessionFactory.getCurrentSession().createQuery(hql).setInteger("maxId", maxId).list();
-
-            /*12.12.2016*/
-            return typeReminder.get(0) +" / "+ countId;
-        }
-        else {
-            return defaultValue;
-        }
+    public  List<CompanyReminder>  getLastCompaniesReminderType() {
+        String hql = "from CompanyReminder where dateReminder in (select max(dateReminder) from CompanyReminder group by companyName order by dateReminder desc )";
+        List<CompanyReminder> listResult= sessionFactory.getCurrentSession().createQuery(hql).list();
+        return listResult;
     }
+
     @Override
     @Transactional
     public  String  getCompanyReminderAmount(Integer companyId) {
@@ -128,6 +112,27 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
         }
         return "";
     }
+
+    @Override
+    @Transactional
+    public  List<String>  getAllCompanyReminderAmount() {
+        String hql = "select count(companyId),companyId from CompanyReminder group by companyName";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        List<Object[]> countList =query.list();
+        List<String>s=new ArrayList<>();
+        Long count=null;
+        Integer companyId=0;
+        if (!countList.isEmpty()){
+            for (Object[] aRow : countList) {
+                 count = (Long) aRow[0];
+                 companyId = (Integer) aRow[1];
+                s.add(companyId+"-"+count.toString());
+            }
+            return s;
+        }
+        return s;
+    }
+
     @Override
     @Transactional
     public List<CompanyReminder> getCompanyReminders() {

@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.entities.Company;
 import ru.store.entities.CompanyAddress;
+import ru.store.entities.CompanyReminder;
 import ru.store.service.*;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ManagerCompaniesController {
@@ -76,6 +75,8 @@ public class ManagerCompaniesController {
         List<Company> companies;
         iSChoiceComments=false;
         companies= search.search(searchMap,selectSearchCompanyByType,selectSearchCompanyByPaymentStatus,modelAndView);
+        List<CompanyReminder>companyReminders=companyReminderService.getLastCompaniesReminderType();
+        List<String> stringAllCounts=companyReminderService.getAllCompanyReminderAmount();
         iSChoiceComments=search.getIsShowAllCompanyWithComments();
         Model model = new Model();
         loadPage(model, modelAndView);
@@ -83,15 +84,15 @@ public class ManagerCompaniesController {
         model.companyList = new ArrayList<>();
         if(iSChoiceComments==false) {
             for (Company company : companies) {
-                model.companyList.add(convert(company));
+                        model.companyList.add(convert(company,companyReminders,stringAllCounts));
             }
         }
             else{
                 if(search.getChoice()==1){
-                    searchByChoice(companies,model,1);
+                    searchByChoice(companies,companyReminders,stringAllCounts,model,1);
                 }
                 if(search.getChoice()==2){
-                    searchByChoice(companies,model,2);
+                    searchByChoice(companies,companyReminders,stringAllCounts,model,2);
                 }
             }
         return modelAndView;
@@ -112,33 +113,65 @@ public class ManagerCompaniesController {
     }
     private void loadCompanies(Model model) {
         List<Company> companies = companyService.getCompanies();
-        List<Model.CompanyAddressItem> companyAddressItems = new ArrayList<>();
+        List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
+        List<CompanyReminder>companyReminders=companyReminderService.getCompanyReminders();
+        List<Model.CompanyAddressItem> companyAddressList = new ArrayList<>();
+        List<Model.CompanyReminderItem> companyRemindersList = new ArrayList<>();
         Model.CompanyAddressItem companyAddressItem;
-        List<Model.CompanyReminderItem> companyReminderItems = new ArrayList<>();
         Model.CompanyReminderItem companyReminderItem;
+        Map<Integer,List<CompanyReminder>> mapReminders=new HashMap<>();
+        Map<Integer,List<CompanyAddress>> mapAddresses=new HashMap<>();
         for (Company company : companies) {
-            companyAddressItem = new Model.CompanyAddressItem();
-            companyAddressItem.setCompanyId(company.getId());
-            // запросы в цыкле - это плохо
-            companyAddressItem.setCompanyAddresses(companyAddressService.getCompanyAddresses(company.getId()));
-            companyAddressItems.add(companyAddressItem);
-            companyReminderItem = new Model.CompanyReminderItem();
-            companyReminderItem.setCompanyId(company.getId());
-            // запросы в цыкле - это плохо
-            companyReminderItem.setCompanyReminders(companyReminderService.getCompanyReminders(company.getId()));
-            companyReminderItems.add(companyReminderItem);
+            List<CompanyAddress> companyAddressesList;
+            List<CompanyReminder> companyReminderList;
+            for (CompanyAddress companyAddress : companyAddresses) {
+                if(company.getId()==companyAddress.getCompanyId()) {
+                    if(mapAddresses.get(company.getId())==null){
+                        companyAddressesList=new ArrayList<>();
+                        companyAddressesList.add(companyAddress);
+                        mapAddresses.put(company.getId(),companyAddressesList);
+                    }
+                    else{
+                        mapAddresses.get(company.getId()).add(companyAddress);
+                    }
+                }
+            }
+            for (CompanyReminder companyReminder : companyReminders) {
+               if(company.getId()==companyReminder.getCompanyId()) {
+                       if(mapReminders.get(company.getId())==null){
+                           companyReminderList=new ArrayList<>();
+                           companyReminderList.add(companyReminder);
+                           mapReminders.put(company.getId(),companyReminderList);
+                }
+                else{
+                           mapReminders.get(company.getId()).add(companyReminder);
+                }
+               }
+            }
         }
-
+        for(Integer companyId:mapAddresses.keySet()) {
+            companyAddressItem = new Model.CompanyAddressItem();
+            companyAddressItem.companyAddresses = mapAddresses.get(companyId);
+            companyAddressItem.setCompanyId(companyId);
+            companyAddressList.add(companyAddressItem);
+        }
+        for(Integer companyId:mapReminders.keySet()){
+            companyReminderItem = new Model.CompanyReminderItem();
+            companyReminderItem.companyReminders = mapReminders.get(companyId);
+            companyReminderItem.setCompanyId(companyId);
+            companyRemindersList.add(companyReminderItem);
+        }
         //model.companiesJson = companies.toString();
-        model.companyAddressJson = companyAddressItems.toString();
-        model.companyReminderJson = companyReminderItems.toString();
+        model.companyAddressJson = companyAddressList.toString();
+        model.companyReminderJson = companyRemindersList.toString();
         model.regions = regionService.getRegions();
         model.numOfAddress = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         model.message = "Последние редактированные фирмы:";
         model.companyList = new ArrayList<>();
-
+        List<CompanyReminder>companyLastReminders=companyReminderService.getLastCompaniesReminderType();
+        List<String> s=companyReminderService.getAllCompanyReminderAmount();
         for (Company company : companyService.getCompaniesByLastUpdate()) {
-            model.companyList.add(convert(company));
+                    model.companyList.add(convert(company,companyLastReminders,s));
         }
     }
     private String getNormalName(String name) {
@@ -148,33 +181,43 @@ public class ManagerCompaniesController {
             return name;
     }
 
-    private void searchByChoice(List<Company>companies,Model model,int choice) {
+    private void searchByChoice(List<Company>companies,List<CompanyReminder>companyReminders,List<String>stringAllCounts,Model model,int choice) {
         System.out.println("Выборррррррр поиска"+choice);
         Model.CompaniesItem c;
         for (Company company : companies) {
-            c = convert(company);
-            if(choice==1) {
-                if(c.getTypeOfNote()!="") {
-                    model.companyList.add(c);
-                }
-            }
-            if(choice==2) {
-                   if(c.getTypeOfNote()=="") {
-                       model.companyList.add(c);
-                   }
-            }
+                    c = convert(company, companyReminders,stringAllCounts);
+                    if (choice == 1) {
+                        if (c.getTypeOfNote() != "") {
+                            model.companyList.add(c);
+                        }
+                    }
+                    if (choice == 2) {
+                        if (c.getTypeOfNote() == "") {
+                            model.companyList.add(c);
+                        }
+                    }
         }
     }
-    private Model.CompaniesItem convert(Company company) {
-        Model.CompaniesItem companyItem = new Model.CompaniesItem();
-        companyItem.id = company.getId();
-        companyItem.name = getNormalName(company.getName());
-        companyItem.directorFullName = company.getDirectorFullName();
-        companyItem.legalAddress = company.getLegalAddress();
-        companyItem.phone = company.getPhone();
-        // запросы в цыкле - это плохо
-        companyItem.typeOfNote = companyReminderService.getLastCompanyReminderTypeAndAmount(company.getId());
-        return companyItem;
+    private Model.CompaniesItem convert(Company company,List<CompanyReminder> companyLastReminders,List<String>allRemindersCount) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+            Model.CompaniesItem companyItem = new Model.CompaniesItem();
+            companyItem.id = company.getId();
+            companyItem.name = getNormalName(company.getName());
+            companyItem.directorFullName = company.getDirectorFullName();
+            companyItem.legalAddress = company.getLegalAddress();
+            companyItem.phone = company.getPhone();
+            companyItem.typeOfNote = "";
+        for(CompanyReminder companyReminder:companyLastReminders) {
+            if(company.getId()==companyReminder.getCompanyId()) {
+                for(String s:allRemindersCount) {
+                   String []tempS=s.split("-");
+                    if(Integer.parseInt(tempS[0])==companyReminder.getCompanyId()) {
+                        companyItem.typeOfNote = sdf.format(companyReminder.getDateReminder()) + " " + companyReminder.getTypeReminder()+" "+tempS[1];
+                    }
+                }
+            }
+        }
+            return companyItem;
     }
     @RequestMapping(value = "/manager/updatecompany", method = RequestMethod.GET)
     public String redirect1() {

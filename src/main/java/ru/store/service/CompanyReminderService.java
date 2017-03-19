@@ -46,11 +46,16 @@ public class CompanyReminderService {
     public String getLastCompanyReminderComment(Integer companyId){
         return reminderDAO.getLastCompanyReminderComment(companyId);
     }
-    public String getLastCompanyReminderTypeAndAmount(Integer companyId){
-        return reminderDAO.getLastCompanyReminderTypeAndAmount(companyId);
+    public List<CompanyReminder> getLastCompaniesReminderType(){
+        return reminderDAO.getLastCompaniesReminderType();
     }
+
     public String getCompanyReminderAmount(Integer companyId){
         return reminderDAO.getCompanyReminderAmount(companyId);
+    }
+
+    public List<String> getAllCompanyReminderAmount(){
+        return reminderDAO.getAllCompanyReminderAmount();
     }
 
     public CompanyReminder getCompanyReminder(Integer id) {

@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         if (captchaResponse == null || !captchaResponse.success) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
+
                 if (cookie.getName().equals("JSESSIONID")) {
+
                     cookie.setMaxAge(0);
                     cookie.setValue("");
                 }

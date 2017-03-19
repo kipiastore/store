@@ -75,7 +75,7 @@ public class AdminUsersController {
     }
 
     private void loadPage(Model model, ModelAndView modelAndView) {
-        model.selectedPageNum = 4;
+        model.selectedPageNum = 5;
         loadUsers(model, userService, "ROLE_CLIENT");
         modelAndView.addObject("model", model);
         modelAndView.setViewName("admin/users");

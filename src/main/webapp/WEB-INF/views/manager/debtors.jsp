@@ -30,12 +30,6 @@
                     <option value="withCommentCompany">С замечаниями</option>
                     <option value="noCommentCompany">Без замечаний</option>
                 </select>
-                <select name="selectSearchCompanyByPaymentStatus" id="selectPaymentStatus">
-                    <option selected value="selectSearchCompanyByPaymentStatusAll" >Все</option>
-                    <option value="withoutContract">Без договора</option>
-                    <option value="paidContract">Оплаченные</option>
-                    <option value="notPaidContract">Не оплаченные</option>
-                </select>
                 <span class="searchButt"><img class="searchIcon" src="<c:url value="/resources/images/search.png" />"/></span>
             </form:form>
         </div>
@@ -63,7 +57,7 @@
                             <td>${item.directorFullName}</td>
                             <td>
                         <c:forEach var="itemAdress" items="${item.companyAddresses}">
-                          ${itemAdress} <br>
+                                ${itemAdress}</br></br>
                         </c:forEach>
                             </td>
                             <td>

@@ -21,109 +21,55 @@ public class SearchByPage {
 
     private Boolean IsComments=false;
 
-    int choice;
+    private int choice;
+
 
     public   List<Company> search(MultiValueMap<String, String> searchMap, String selectSearchCompanyByType,String selectSearchCompanyByPaymentStatus,ModelAndView modelAndView){
         List<Company> companies=new ArrayList<>();
+
         try {
             String value;
             for (String key : searchMap.keySet()) {
                 value = (searchMap.get(key) + "").replace("[", "").replace("]", "").trim();
                 if (!key.equals("_csrf") && !value.isEmpty()) {
-                    if (key.equals("name") && selectSearchCompanyByType.equals("searchAllCompany")) {
+                    if (key.equals("name") && selectSearchCompanyByType.equals("searchAllCompany")||
+                            key.equals("name") && selectSearchCompanyByType.equals("withCommentCompany")||
+                            key.equals("name") && selectSearchCompanyByType.equals("noCommentCompany") ) {
                         companies = companyService.findCompaniesByNameAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus);
-                        IsComments =false;
+                        isNeedComment(selectSearchCompanyByType);
                         break;
                     }
-                    if (key.equals("phone") && selectSearchCompanyByType.equals("searchAllCompany")) {
+                    if (key.equals("phone") && selectSearchCompanyByType.equals("searchAllCompany")||
+                            key.equals("phone") && selectSearchCompanyByType.equals("withCommentCompany")||
+                            key.equals("phone") && selectSearchCompanyByType.equals("noCommentCompany") ) {
                         companies = companyService.findCompaniesByPhoneAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus);
-                        IsComments =false;
+                        isNeedComment(selectSearchCompanyByType);
                         break;
                     }
-                    if (key.equals("email") && selectSearchCompanyByType.equals("searchAllCompany")) {
+                    if (key.equals("email") && selectSearchCompanyByType.equals("searchAllCompany")||
+                            key.equals("email") && selectSearchCompanyByType.equals("withCommentCompany")||
+                            key.equals("email") && selectSearchCompanyByType.equals("noCommentCompany") ) {
                         companies = companyService.findCompaniesByEmailAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus);
-                        IsComments =false;
+                        isNeedComment(selectSearchCompanyByType);
+                        break;
                     }
-                    if (key.equals("contractNum") && selectSearchCompanyByType.equals("searchAllCompany")) {
+                    if (key.equals("contractNum") && selectSearchCompanyByType.equals("searchAllCompany")||
+                            key.equals("contractNum") && selectSearchCompanyByType.equals("withCommentCompany")||
+                            key.equals("contractNum") && selectSearchCompanyByType.equals("noCommentCompany") ) {
                         //companies = companyService.findCompaniesByContractAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus);
-                        IsComments =false;
+                        isNeedComment(selectSearchCompanyByType);
                         break;
-
-                    }
-                    if (key.equals("name") && selectSearchCompanyByType.equals("withCommentCompany")) {
-                        IsComments =true;
-                        choice=1;
-                        companies = companyService.findCompaniesByName(value);
-                        break;
-
-                    }
-                    if (key.equals("phone") && selectSearchCompanyByType.equals("withCommentCompany")) {
-                        IsComments =true;
-                        choice=1;
-                        companies = companyService.findCompaniesByPhone(value);
-                        break;
-
-                    }
-                    if (key.equals("email") && selectSearchCompanyByType.equals("withCommentCompany")) {
-                        IsComments =true;
-                        choice=1;
-                        companies = companyService.findCompaniesByEmail(value);
-                        break;
-
-                    }
-                    if (key.equals("contractNum") && selectSearchCompanyByType.equals("withCommentCompany")) {
-                        choice=1;
-                        //companies = companyService.findCompaniesByContractNumber(value);
-                        IsComments =true;
-                        break;
-
-                    }
-                    if(key.equals("name") && selectSearchCompanyByType.equals("noCommentCompany")) {
-                        IsComments =true;
-                        choice=2;
-                        companies = companyService.findCompaniesByName(value);
-                        break;
-
-                }
-                    if(key.equals("contractNum") && selectSearchCompanyByType.equals("noCommentCompany")) {
-                        //companies = companyService.findCompaniesByContractNumber(value);
-                        IsComments =true;
-                        choice=2;
-                        break;
-
-                    }
-                    if(key.equals("phone") && selectSearchCompanyByType.equals("noCommentCompany")) {
-                        IsComments =true;
-                        choice=2;
-                        companies = companyService.findCompaniesByPhone(value);
-                        break;
-
-                    }
-                    if(key.equals("email") && selectSearchCompanyByType.equals("noCommentCompany")) {
-                        IsComments =true;
-                        choice=2;
-                        companies = companyService.findCompaniesByEmail(value);
-                        break;
-
                     }
                 }
-                if (selectSearchCompanyByType.equals("searchAllCompany")){
-                    companies = companyService.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus);
-                    IsComments =false;
-                    break;
-                }
-                if(selectSearchCompanyByType.equals("withCommentCompany")) {
-                    IsComments =true;
-                    choice=1;
-                    companies = companyService.getCompanies();
-                    break;
-                }
-                if(selectSearchCompanyByType.equals("noCommentCompany")) {
-                    IsComments =true;
-                    choice=2;
-                    companies = companyService.getCompanies();
-                    break;
-
+                else{
+                    if(selectSearchCompanyByType.equals("searchAllCompany")) {
+                        companies = companyService.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus);
+                        isNeedComment(selectSearchCompanyByType);
+                    }
+                    else{
+                        companies = companyService.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus);
+                        isNeedComment(selectSearchCompanyByType);
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -139,4 +85,19 @@ public class SearchByPage {
         return choice;
     }
 
-}
+    private void isNeedComment(String selectSearchCompanyByType){
+        if(selectSearchCompanyByType.equals("searchAllCompany")) {
+            IsComments = false;
+        }
+        else{
+            IsComments = true;
+            if(selectSearchCompanyByType.equals("withCommentCompany")){
+                choice=1;
+            }
+            else{
+                choice=2;
+            }
+        }
+    }
+
+    }

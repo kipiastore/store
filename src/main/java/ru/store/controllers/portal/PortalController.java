@@ -124,7 +124,17 @@ public class PortalController {
         int columnCount = 7;
         Map<Integer, List<Model.BestCompanyItem>> bestCompanyGroupByColumn = Util.cutPie(bestCompanyItems, columnCount);
         Model model = new Model();
-        model.partitionItems = partitionItems;
+        List<Model.PartitionItem> tmp1 = new ArrayList<>();
+        List<Model.PartitionItem> tmp2 = new ArrayList<>();
+        for (int i = 0; i < partitionItems.size(); i++) {
+            if (i > partitionItems.size() / 2) {
+                tmp1.add(partitionItems.get(i));
+            } else {
+                tmp2.add(partitionItems.get(i));
+            }
+        }
+        model.partitionItems = tmp1;
+        model.partitionItems2 = tmp2;
         model.bestCompanyGroupByColumn = bestCompanyGroupByColumn;
         // load the model to the page;
         ModelAndView modelAndView = new ModelAndView();
@@ -178,6 +188,7 @@ public class PortalController {
      */
     public static class Model {
         public List<PartitionItem> partitionItems;
+        public List<PartitionItem> partitionItems2;
         public Map<Integer, List<BestCompanyItem>> bestCompanyGroupByColumn;
 
         public List<PartitionItem> getPartitionItems() {
@@ -185,6 +196,9 @@ public class PortalController {
         }
         public Map<Integer, List<BestCompanyItem>> getBestCompanyGroupByColumn() {
             return bestCompanyGroupByColumn;
+        }
+        public List<PartitionItem> getPartitionItems2() {
+            return partitionItems2;
         }
 
         public static class PartitionItem implements Comparable<PartitionItem> {

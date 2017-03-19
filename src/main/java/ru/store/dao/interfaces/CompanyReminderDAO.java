@@ -32,8 +32,10 @@ public interface CompanyReminderDAO {
 
     String  getLastCompanyReminderDateHourType(Integer companyId);
 
-    String  getLastCompanyReminderTypeAndAmount(Integer companyId);
+    List<CompanyReminder>  getLastCompaniesReminderType();
 
     String  getCompanyReminderAmount(Integer companyId);
+
+    List<String>  getAllCompanyReminderAmount();
 
 }

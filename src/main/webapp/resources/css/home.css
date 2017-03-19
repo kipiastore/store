@@ -1000,7 +1000,8 @@ footer.f .cr {
     overflow: hidden;
     text-align: center;
 }
-.rptShort p {
+.rptShort div p {
+    /*
     background: no-repeat 50% 0;
     display: inline-block;
     text-align: center;
@@ -1012,17 +1013,18 @@ footer.f .cr {
     padding: 70px 10px 0;
     margin-bottom: 20px;
     margin-top: 5px;
+    */
 }
-.rptShort p a {
+.rptShort div p a {
     display: inline-block;
     color: #7e7e7e;
     text-decoration: none;
     width: 350px;
 }
 .rptShort p:nth-child(5n+1) {
-    clear: left;
+    //clear: left;
 }
-.rptShort p a:hover {
+.rptShort div p a:hover {
     color: #16a085;
     transition: color 0.3s ease-out;
     text-decoration: none;
@@ -1042,22 +1044,22 @@ footer.f .cr {
     background-image: url('');
 }
 */
-.rptShort p {
-    width: 50%;
+.rptShort div p {
+    //width: 50%;
     background-position: 0 50%;
-    padding: 0 0 0 30px;
+    //padding: 0 0 0 30px;
     text-align: left;
-    background-size: 16px;
-    margin-bottom: 5px;
+    //background-size: 16px;
+    //margin-bottom: 5px;
 }
 .rptShort span {
     float: right;
 }
 .rptShort p:nth-child(5n+1) {
-    clear: none;
+    //clear: none;
 }
 .rptShort p:nth-child(2n+1) {
-    width: 480px;
+    //width: 480px;
 }
 .topHideButt {
     display: none;

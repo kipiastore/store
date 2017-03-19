@@ -233,21 +233,23 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
         }
     });
     console.log('sad');
-    var container = $(".container");
-    container.animate({opacity: 0}, 200);
-    setTimeout(function() { container.hide(); }, 190);
-    isShowUpdateForm = true;
+
+    //var container = $(".container");
+    //container.animate({opacity: 0}, 200);
+    //setTimeout(function() { container.hide(); }, 190);
+    //isShowUpdateForm = true;
 
     $(".error").hide();
     $(".success").hide();
-    updateForm = $("#updateForm");
+    //updateForm = $("#updateForm");
     if (isShowCreateForm) {
-        var createForm = $("#createForm");
+        //var createForm = $("#createForm");
         if (pageMenuButtTarget != undefined)
             pageMenuButtTarget.setAttribute("style", "background : #738dae;");
-        createForm.animate({opacity: 0}, 200);
-        setTimeout(function() { createForm.hide(); }, 200);
+        //createForm.animate({opacity: 0}, 200);
+        //setTimeout(function() { createForm.hide(); }, 200);
     }
+    /*
     if (isShowCreateForm && !isShowUpdateForm) {
         setTimeout(function() {
             updateForm.show();
@@ -266,7 +268,7 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
     }
     isShowUpdateForm = true;
     isShowCreateForm = false;
-
+    */
     if (currentItem != undefined) {
         $("div#" + currentItem).css("border-left", "0");
     }
@@ -275,9 +277,12 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
     $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
     console.log(id);
+    /*
     $('#updateKey').val(id);
     $('#keyName').val(event.target.getAttribute("data-name"));
     $('#updateType').val(event.target.getAttribute("data-type"));
+
+    */
     $(".subItemsList").hide();
     $("#itemsID-"+id).show();
 });

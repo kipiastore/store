@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.entities.Company;
+import ru.store.entities.CompanyAddress;
+import ru.store.entities.CompanyReminder;
+import ru.store.entities.Package;
 import ru.store.service.CompanyAddressService;
 import ru.store.service.CompanyReminderService;
 import ru.store.service.CompanyService;
 import ru.store.service.PackageService;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -41,33 +45,35 @@ public class ManagerDebtorsController {
     }
     @RequestMapping(value = "/manager/searchcompanybydebtors", method = RequestMethod.POST)
     public ModelAndView searchByDebtors(@RequestParam MultiValueMap<String, String> searchMap,
-                                        @RequestParam("selectSearchCompanyByType")String selectSearchCompanyByType,
-                                        @RequestParam("selectSearchCompanyByPaymentStatus")String selectSearchCompanyByPaymentStatus){
+                                        @RequestParam("selectSearchCompanyByType")String selectSearchCompanyByType){
         ModelAndView modelAndView=new ModelAndView();
         Model model=new Model();
-        List<Company> companies=searchByPage.search(searchMap,selectSearchCompanyByType,selectSearchCompanyByPaymentStatus,modelAndView);
-        loadPage(modelAndView,model);
+        List<Company> companies=searchByPage.search(searchMap,selectSearchCompanyByType,"selectSearchCompanyByPaymentStatusAll",modelAndView);
+        System.out.println("----------------------------------------------"+companies);
+        List<Package> packages=packageService.getPackages();
+        List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
+        List<CompanyReminder> companyReminders=companyReminderService.getLastCompaniesReminderType();
         iSChoiceComments=searchByPage.getIsShowAllCompanyWithComments();
-        loadPage(modelAndView,model);
+        System.out.println("===="+iSChoiceComments);
         model.message = "Результаты поиска:";
         model.companyList = new ArrayList<>();
         for (Company company : companies) {
-            if (company.getDateOfContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
+            if (company.getIsPaid().equals(false)&&company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null&&company.getDateOfEndContract().getTime() < new Date().getTime()) {
                 if (iSChoiceComments == false) {
-                    List<Model.CompaniesItem> list = convert(company);
+                    List<Model.CompaniesItem> list = convert(company,packages,companyReminders,companyAddresses);
                     for (Model.CompaniesItem m : list) {
                         model.companyList.add(m);
                     }
-                } else {
-                    if (searchByPage.getChoice() == 1) {
-                        searchByChoice(companies, model, 1);
-                    }
-                    if (searchByPage.getChoice() == 2) {
-                        searchByChoice(companies, model, 2);
-                    }
                 }
+                else {
+                        searchByChoice(company, model, searchByPage.getChoice() ,packages,companyReminders,companyAddresses);
+                    }
             }
         }
+        model.selectedPageNum=3;
+        modelAndView.addObject("model",model);
+        modelAndView.addObject("prefix","");
+        modelAndView.setViewName("manager/debtors");
         return modelAndView;
     }
     private void loadPage(ModelAndView modelAndView,Model model){
@@ -79,10 +85,14 @@ public class ManagerDebtorsController {
     }
     private void loadCompanies(Model model){
         List<Company> companies=companyService.getCompanies();
+        List<Package> packages=packageService.getPackages();
+        List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
+        List<CompanyReminder> companyReminders=companyReminderService.getLastCompaniesReminderType();
         model.companyList = new ArrayList<>();
             for (Company company : companies) {
-                    if (company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
-                        List<Model.CompaniesItem> list = convert(company);
+                    if (company.getIsPaid().equals(false)&&company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
+                        List<Model.CompaniesItem> list = convert(company,packages,companyReminders,companyAddresses);
+                        System.out.println("-------------------"+list);
                         for (Model.CompaniesItem m : list) {
                             model.companyList.add(m);
                         }
@@ -97,36 +107,65 @@ public class ManagerDebtorsController {
         else
             return name;
     }
-    private void searchByChoice(List<Company>companies,Model model,int choice) {
+    private void searchByChoice(Company company,Model model,int choice,List<Package> packages,List<CompanyReminder>companyReminders,List<CompanyAddress>companyAddresses) {
         List<Model.CompaniesItem> companyItems;
-        for (Company company : companies) {
-            companyItems = convert(company);
+            companyItems = convert(company,packages,companyReminders,companyAddresses);
             for(Model.CompaniesItem companyItem:companyItems) {
                 if (choice == 1) {
-                    if (!companyItem.getNote().equals("")) {
+                    System.out.println("note----"+companyItem.getNote());
+                    if (companyItem.getNote()!=null) {
                         model.companyList.add(companyItem);
                     }
                 }
                 if (choice == 2) {
-                    if (companyItem.getNote().equals("")) {
+                    System.out.println("note----"+companyItem.getNote());
+                    if (companyItem.getNote()==null) {
                         model.companyList.add(companyItem);
                     }
                 }
             }
-        }
+
     }
-    private List<Model.CompaniesItem> convert(Company company) {
+    private List<Model.CompaniesItem> convert(Company company,List<Package> packages,List<CompanyReminder>companyReminders,List<CompanyAddress>companyAddresses) {
+        SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy");
         List<Model.CompaniesItem> companyItems = new ArrayList<>();
         Model.CompaniesItem companyItem;
         companyItem=new Model.CompaniesItem();
         companyItem.name=company.getName();
-         // запросы в цыкле - это плохо
-        companyItem.companyPackage=packageService.getPackage(company.getCompanyPackageId()).getName();
+        if(!packages.isEmpty()) {
+            for (Package pack:packages){
+                if (company.getCompanyPackageId() ==pack.getId()) {
+                    companyItem.companyPackage = pack.getName();
+                }
+            }
+        }
+        else{
+            companyItem.companyPackage = "";
+        }
         companyItem.debt=checkIsDebt(company);
         companyItem.directorFullName=company.getDirectorFullName();
-        // запросы в цыкле - это плохо
-        companyItem.companyAddresses=companyAddressService.getCompanyAddressString(company.getId());
-        companyItem.note=companyReminderService.getLastCompanyReminderDateHourType(company.getId());
+        if(!companyAddresses.isEmpty()) {
+            List<String>s=new ArrayList();
+            for(CompanyAddress companyAddress:companyAddresses) {
+                if(company.getId()==companyAddress.getCompanyId()){
+                    s.add(companyAddress.getAddress());
+                    companyItem.companyAddresses=s;
+                }
+            }
+        }
+        else{
+            companyItem.companyAddresses= new ArrayList<>();
+        }
+        if(!companyReminders.isEmpty()) {
+            for (CompanyReminder companyReminder:companyReminders){
+                if (company.getId() ==companyReminder.getCompanyId()) {
+                    companyItem.note = sdf.format(companyReminder.getDateReminder())+" "+companyReminder.getHourReminder()+" "+companyReminder.getTypeReminder();
+                }
+            }
+        }
+        else{
+            companyItem.note = "";
+        }
         companyItems.add(companyItem);
         return companyItems;
     }
@@ -134,7 +173,6 @@ public class ManagerDebtorsController {
         float debt=0;
         if (company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null&&company.getDateOfEndContract().getTime() < new Date().getTime()){
            long debtDays=((new Date().getTime()-company.getDateOfEndContract().getTime())/86400000);
-            System.out.println("dabtDays----"+debtDays);
             Calendar calendar=Calendar.getInstance();
             float debtPerDay=company.getCostOf()/calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             debt=debtPerDay*(int)debtDays;
