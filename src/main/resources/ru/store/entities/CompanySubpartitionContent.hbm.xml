@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ru.store.entities.CompanySubpartitionContent" table="company_subpartition_content"  >
+        <id name="id" type="java.lang.Integer" >
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="imageId" type="java.lang.Integer" >
+            <column name="image_id" not-null="false" />
+        </property>
+        <property name="info" type="string" >
+            <column name="info" length="1024" not-null="false" />
+        </property>
+    </class>
+</hibernate-mapping>

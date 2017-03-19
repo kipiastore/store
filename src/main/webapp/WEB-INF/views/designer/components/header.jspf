@@ -1,0 +1,13 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="header">
+    <div class="headerMenu">
+        <div class="headerMenuContent">
+
+        </div>
+    </div>
+    <style scoped>
+        .headerMenuContent a[data-id="${model.selectedPageNum}"] {
+            color: #16a085;
+        }
+    </style>
+</div>

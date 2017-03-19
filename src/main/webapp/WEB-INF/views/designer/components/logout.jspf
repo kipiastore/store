@@ -1,0 +1,13 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="logout">
+    <c:url value="/login" var="logoutUrl" />
+    <form action="${logoutUrl}" method="post" id="logoutForm">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+    ${pageContext.request.userPrincipal.name} | <a href="<c:url value="/"/>" class="homeLink">Портал</a> | <a href="javascript:formSubmit()">Выход</a>
+</div>
+<script>
+    function formSubmit() {
+        document.getElementById("logoutForm").submit();
+    }
+</script>

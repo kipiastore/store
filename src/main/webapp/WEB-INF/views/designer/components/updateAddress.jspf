@@ -1,0 +1,36 @@
+<%@ page pageEncoding="UTF-8" %>
+<div>
+    <div class="address-list"></div>
+    <div class="add-addressUp">Добавить адрес</div>
+</div>
+<c:forEach var="num" items="${model.numOfAddress}">
+    <div class="" id="UpAdd${num}" style="display: none;">
+        <div class="close-address">
+            <img id="UpClAd${num}" data-id="${num}" class="UpCloseAdButt" src="<c:url value="/resources/images/delete.png" />">
+        </div>
+        <div class="left-body">
+            <label>Адрес<span class="required">*</span></label>
+            <input title="Введите номер факса." maxlength="255" type="text" name="address" id="UpAdAd${num}" />
+        </div>
+        <div class="right-body">
+            <label>Район</label>
+            <select name="region" title="" id="UpRegAd${num}">
+                <option value="-1">Не выбран</option>
+                <c:forEach var="item" items="${model.regions}">
+                    <option value="${item.id}">${item.name}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="left-body">
+            <label>Телефоны</label>
+            <textarea rows="3" name="phones" maxlength="255" id="UpPhAd${num}"></textarea>
+        </div>
+        <div class="right-body">
+            <label>Информация</label>
+            <textarea rows="3" name="information" maxlength="255" id="UpInfAd${num}"></textarea>
+        </div>
+    </div>
+    <input type="hidden" name="UpAddId${num}" value="" id="UpAddId${num}"/>
+</c:forEach>
+<input type="hidden" name="UpDelete" value="" id="UpDelete"/>
+<input type="hidden" name="UpAddressJson" value="" id="UpAddressJson"/>
