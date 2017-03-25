@@ -33,6 +33,7 @@
                 <value>ru/store/entities/Report.hbm.xml</value>
                 <value>ru/store/entities/CompanySubpartition.hbm.xml</value>
                 <value>ru/store/entities/File.hbm.xml</value>
+                <value>ru/store/entities/Image.hbm.xml</value>
                 <value>ru/store/entities/CompanyReminder.hbm.xml</value>
                 <value>ru/store/entities/Act.hbm.xml</value>
                 <value>ru/store/entities/CompanySubpartitionContent.hbm.xml</value>
