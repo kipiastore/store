@@ -8,6 +8,8 @@ public class CompanySubpartitionContent {
     private Integer id;
     private Integer imageId;
     private String info;
+    private Integer companyId;
+    private Integer companySubpartitionId;
 
     public CompanySubpartitionContent() {
 
@@ -31,5 +33,18 @@ public class CompanySubpartitionContent {
     public void setInfo(String info) {
         this.info = info;
     }
+    public Integer getCompanyId() {
+        return companyId;
+    }
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
 
+    public Integer getCompanySubpartitionId() {
+        return companySubpartitionId;
+    }
+
+    public void setCompanySubpartitionId(Integer companySubpartitionId) {
+        this.companySubpartitionId = companySubpartitionId;
+    }
 }

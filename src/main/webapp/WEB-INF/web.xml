@@ -41,6 +41,16 @@
         <url-pattern>/admin/download</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>downloadImage</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>downloadImage</servlet-name>
+        <url-pattern>/designer/download</url-pattern>
+    </servlet-mapping>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/db-config.xml</param-value>

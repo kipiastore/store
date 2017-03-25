@@ -54,4 +54,12 @@ public class CompanySubpartitionContentDAOImpl implements CompanySubpartitionCon
         else
             return null;
     }
+
+    @Override
+    @Transactional
+    public List<CompanySubpartitionContent> getCompanySubpartitionContents(Integer companyId) {
+        String hql = "from CompanySubpartitionContent where companyId =?";
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId).list();
+    }
+
 }

@@ -43,8 +43,31 @@
             <span class="success">${successMessage}</span>
             <span class="localMessage"></span>
 
+            <c:forEach var="item" items="${model.companySubpartitionContentList}">
+                <div class="position-main-container">
+                    <div class="position-block">
+                        <div class="position-addintional-block">
+                            <span>${item.subPartitionName}</span>
+                        </div>
+                        <div class="position-image-block">
+                            <img class="position-image" src="../../download?id=${item.imageId}" title="">
+                        </div>
+                        <div class="position-text-block">
+                            <span>${item.info}</span>
+                        </div>
 
+                        <div class="position-addintional-block-a">
+                            <span class="button" >Удалить</span>
+                            <span class="button" >Редактировать</span>
+                        </div>
+                        <hr/>
+                    </div>
+                </div>
+            </c:forEach>
 
+            <form:form action="../addsubpartitioninfos" method="post" id="createForm">
+
+            </form:form>
             <form:form action="../addsubpartitioninfos" method="post" id="updateForm">
 
             </form:form>
@@ -74,6 +97,62 @@
     }
     @media screen and (max-width : 1136px) {
         .body .pageMenu { height: 76px; }
+    }
+</style>
+<style>
+    .position-main-container {
+        //max-width: 900px;
+        margin: auto;
+    }
+    .position-block {
+
+    }
+    .position-image-block {
+        float: left;
+    }
+    .position-image {
+        height: 250px;
+        padding: 10px;
+    }
+    .position-text-block {
+        padding: 10px;
+    }
+    .position-addintional-block {
+        float: left;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 10px;
+    }
+    .position-addintional-block-a {
+        float: left;
+        width: 100%;
+    }
+    .button {
+        display: block;
+        border: 1px solid #a8cb98;
+        width: 130px;
+        text-align: center;
+        padding: 6px;
+        background-color: #16a085;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 20px;
+        float: right;
+    }
+    hr {
+        float: left;
+        width: 100%;
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+    .button a {
+        color: #fff;
+    }
+    .button a:hover {
+        color: #fff;
     }
 </style>
 </body>

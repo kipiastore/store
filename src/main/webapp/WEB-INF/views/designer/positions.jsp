@@ -72,10 +72,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <form:form action="addsubpartitioninfo" method="post" id="updateForm">
-
-            </form:form>
         </div>
     </div>
 </div>

@@ -39,11 +39,14 @@ $(window).on("load", function () {
 
 $(".menuTitleText").on("click", function () {
     if (document.URL.indexOf("designer/positions/company/") != -1) {
-
         // временное решение
         //window.location.replace(document.URL.replace("searchcompany", "s"));
         window.location.replace(document.URL.split('/positions/company/')[0]);
-
+    }
+    if (document.URL.indexOf("designer/positionsearchcompany") != -1) {
+        // временное решение
+        //window.location.replace(document.URL.replace("searchcompany", "s"));
+        window.location.replace((document.URL + '').replace('positionsearchcompany','positions'));
     }
     updateForm = $("#updateForm");
     updateForm.animate({opacity: 0}, 200);

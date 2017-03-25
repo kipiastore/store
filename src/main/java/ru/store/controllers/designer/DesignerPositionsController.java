@@ -7,19 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.dao.interfaces.CompanySubPartitionDAO;
 import ru.store.entities.Company;
-import ru.store.entities.CompanySubPartition;
-import ru.store.entities.Partition;
-import ru.store.entities.SubPartition;
 import ru.store.service.CompanyService;
-import ru.store.service.PartitionService;
-import ru.store.service.SubPartitionService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -29,10 +21,6 @@ public class DesignerPositionsController {
 
     @Autowired
     private CompanyService companyService;
-    @Autowired
-    private SubPartitionService subPartitionService;
-    @Autowired
-    private PartitionService partitionService;
 
     @RequestMapping(value = "/designer/positions", method = RequestMethod.GET)
     public ModelAndView positions() {
@@ -82,6 +70,7 @@ public class DesignerPositionsController {
             modelAndView.addObject("deleteError", "Возникла ошибка. " + ex.getMessage());
             ex.printStackTrace();
         }
+
         Model model = new Model();
         loadPage(model, modelAndView);
         model.message = "Результаты поиска:";
@@ -106,38 +95,6 @@ public class DesignerPositionsController {
         for (Company company : companyService.getCompaniesByLastUpdate()) {
             model.companyList.add(convert(company));
         }
-        List<Model.PartitionItem> partitionItems = new ArrayList<>();
-        Model.PartitionItem partitionItem;
-        Model.PartitionItem mainPartitionItem;
-        Map<Integer, Model.PartitionItem> partitionIdToPartitionItem = new HashMap<>();
-        Map<Model.PartitionItem, List<Model.PartitionItem>> subPartitionsGroupedByPartition = new HashMap<>();
-        for (Partition partition : partitionService.getPartitions()) {
-            partitionItem = new Model.PartitionItem();
-            partitionItem.id = partition.getId();
-            partitionItem.name = getNormalName(partition.getName());
-            partitionIdToPartitionItem.put(partition.getId(), partitionItem);
-            partitionItems.add(partitionItem);
-            subPartitionsGroupedByPartition.put(partitionItem, null);
-        }
-        for (SubPartition subPartition : subPartitionService.getSubPartitions()) {
-            if (subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())) != null) {
-                partitionItem = new Model.PartitionItem();
-                partitionItem.id = subPartition.getId();
-                partitionItem.name = getNormalName(subPartition.getName());
-                subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())).add(partitionItem);
-            } else {
-                mainPartitionItem = new Model.PartitionItem();
-                mainPartitionItem.id = partitionIdToPartitionItem.get(subPartition.getPartitionId()).getId();
-                mainPartitionItem.name = getNormalName(partitionIdToPartitionItem.get(subPartition.getPartitionId()).getName());
-                partitionItems = new ArrayList<>();
-                partitionItem = new Model.PartitionItem();
-                partitionItem.id = subPartition.getId();
-                partitionItem.name = getNormalName(subPartition.getName());
-                partitionItems.add(partitionItem);
-                subPartitionsGroupedByPartition.put(mainPartitionItem, partitionItems);
-            }
-        }
-        model.subPartitionsGroupedByPartition = subPartitionsGroupedByPartition;
     }
 
     private Model.CompaniesItem convert(Company company) {
@@ -163,7 +120,6 @@ public class DesignerPositionsController {
         public int selectedPageNum;
         public List<CompaniesItem> companyList;
         public String message;
-        public Map<PartitionItem, List<PartitionItem>> subPartitionsGroupedByPartition;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
@@ -173,9 +129,6 @@ public class DesignerPositionsController {
         }
         public String getMessage() {
             return message;
-        }
-        public Map<PartitionItem, List<PartitionItem>> getSubPartitionsGroupedByPartition() {
-            return subPartitionsGroupedByPartition;
         }
 
         public static class CompaniesItem {
@@ -195,36 +148,6 @@ public class DesignerPositionsController {
 
         }
 
-        public static class PartitionItem {
-            public int id;
-            public String name;
 
-            public PartitionItem() {
-            }
-
-            public PartitionItem(int id) {
-                this.id = id;
-            }
-
-            public int getId() {
-                return id;
-            }
-            public String getName() {
-                return name;
-            }
-
-            @Override
-            public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || getClass() != o.getClass()) return false;
-                PartitionItem that = (PartitionItem) o;
-                return id == that.id;
-
-            }
-            @Override
-            public int hashCode() {
-                return id;
-            }
-        }
     }
 }

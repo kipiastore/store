@@ -16,23 +16,27 @@ public class CompanySubpartitionContentService {
     @Autowired
     private CompanySubpartitionContentDAO companySubpartitionContentDAO;
 
-    void createCompanySubpartitionContent(CompanySubpartitionContent companySubpartitionContent) {
+    public void createCompanySubpartitionContent(CompanySubpartitionContent companySubpartitionContent) {
         companySubpartitionContentDAO.createCompanySubpartitionContent(companySubpartitionContent);
     }
 
-    void deleteCompanySubpartitionContent(Integer id) {
+    public void deleteCompanySubpartitionContent(Integer id) {
         companySubpartitionContentDAO.deleteCompanySubpartitionContent(id);
     }
 
-    void updateCompanySubpartitionContent(CompanySubpartitionContent companySubpartitionContent) {
+    public void updateCompanySubpartitionContent(CompanySubpartitionContent companySubpartitionContent) {
         companySubpartitionContentDAO.updateCompanySubpartitionContent(companySubpartitionContent);
     }
 
-    List<CompanySubpartitionContent> getCompanySubpartitionContents() {
+    public List<CompanySubpartitionContent> getCompanySubpartitionContents() {
         return companySubpartitionContentDAO.getCompanySubpartitionContents();
     }
 
-    CompanySubpartitionContent getCompanySubpartitionContent(Integer id) {
+    public CompanySubpartitionContent getCompanySubpartitionContent(Integer id) {
         return companySubpartitionContentDAO.getCompanySubpartitionContent(id);
+    }
+
+    public List<CompanySubpartitionContent> getCompanySubpartitionContents(Integer companyId) {
+        return companySubpartitionContentDAO.getCompanySubpartitionContents(companyId);
     }
 }

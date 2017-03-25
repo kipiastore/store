@@ -10,6 +10,12 @@
         <property name="imageId" type="java.lang.Integer" >
             <column name="image_id" not-null="false" />
         </property>
+        <property name="companyId" type="java.lang.Integer" >
+            <column name="company_id" not-null="false" />
+        </property>
+        <property name="companySubpartitionId" type="java.lang.Integer" >
+            <column name="company_subpartition_id" not-null="false" />
+        </property>
         <property name="info" type="string" >
             <column name="info" length="1024" not-null="false" />
         </property>

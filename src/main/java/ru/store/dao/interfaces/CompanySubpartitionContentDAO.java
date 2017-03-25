@@ -19,4 +19,6 @@ public interface CompanySubpartitionContentDAO {
 
     CompanySubpartitionContent getCompanySubpartitionContent(Integer id);
 
+    List<CompanySubpartitionContent> getCompanySubpartitionContents(Integer companyId);
+
 }
