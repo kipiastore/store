@@ -162,6 +162,7 @@ $(".tableName").on("click", function (event) {
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
+
     var container = $(".container");
     container.animate({opacity: 0}, 200);
     setTimeout(function() { container.hide(); }, 190);

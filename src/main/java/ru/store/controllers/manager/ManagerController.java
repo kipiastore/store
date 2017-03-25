@@ -9,7 +9,7 @@ public class ManagerController {
 
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String managerPage() {
-        return "redirect:manager/companies";
+        return "redirect:/manager/companies";
     }
 
 }

@@ -28,10 +28,6 @@ public class ManagerCompaniesController {
     @Autowired
     private RegionService regionService;
     @Autowired
-    private PackageService packageService;
-    @Autowired
-    private UserService userService;
-    @Autowired
     private SearchByPage search;
 
     private Boolean iSChoiceComments;
@@ -105,11 +101,11 @@ public class ManagerCompaniesController {
         return companyAddresses;
     }
     private void loadPage(Model model, ModelAndView modelAndView) {
-        loadCompanies(model);
         model.selectedPageNum=1;
+        loadCompanies(model);
         modelAndView.addObject("model", model);
         modelAndView.addObject("prefix", "");
-            modelAndView.setViewName("manager/companies");
+        modelAndView.setViewName("manager/companies");
     }
     private void loadCompanies(Model model) {
         List<Company> companies = companyService.getCompanies();

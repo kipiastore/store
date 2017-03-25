@@ -49,12 +49,10 @@ public class ManagerDebtorsController {
         ModelAndView modelAndView=new ModelAndView();
         Model model=new Model();
         List<Company> companies=searchByPage.search(searchMap,selectSearchCompanyByType,"selectSearchCompanyByPaymentStatusAll",modelAndView);
-        System.out.println("----------------------------------------------"+companies);
         List<Package> packages=packageService.getPackages();
         List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
         List<CompanyReminder> companyReminders=companyReminderService.getLastCompaniesReminderType();
         iSChoiceComments=searchByPage.getIsShowAllCompanyWithComments();
-        System.out.println("===="+iSChoiceComments);
         model.message = "Результаты поиска:";
         model.companyList = new ArrayList<>();
         for (Company company : companies) {
@@ -92,7 +90,6 @@ public class ManagerDebtorsController {
             for (Company company : companies) {
                     if (company.getIsPaid().equals(false)&&company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
                         List<Model.CompaniesItem> list = convert(company,packages,companyReminders,companyAddresses);
-                        System.out.println("-------------------"+list);
                         for (Model.CompaniesItem m : list) {
                             model.companyList.add(m);
                         }

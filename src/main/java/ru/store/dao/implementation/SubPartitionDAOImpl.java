@@ -71,7 +71,7 @@ public class SubPartitionDAOImpl implements SubPartitionDAO {
     @Override
     @Transactional
     public List<SubPartition> getSubPartitions() {
-        String hql = "from SubPartition order by name desc";
+        String hql = "from SubPartition order by name";
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 

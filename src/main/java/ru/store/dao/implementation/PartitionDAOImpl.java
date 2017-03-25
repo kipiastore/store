@@ -40,7 +40,7 @@ public class PartitionDAOImpl implements PartitionDAO {
     @Override
     @Transactional
     public List<Partition> getPartitions() {
-        String hql = "from Partition order by name desc";
+        String hql = "from Partition order by name";
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 

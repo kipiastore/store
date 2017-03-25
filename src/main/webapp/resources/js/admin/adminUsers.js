@@ -550,6 +550,26 @@ $(document).ready(function(){
             $("#show").hide();
     });
 });
+$("#showPassword").on("click",function(){
+    if($("#showPassword").prop('checked') == true) {
+        $("#password").prop('type', 'text');
+        $("#password2").prop('type', 'text');
+    }
+    else {
+        $("#password").prop('type', 'password');
+        $("#password2").prop('type', 'password');
+    }
+});
+$("#showPasswordUpdate").on("click",function(){
+    if($("#showPasswordUpdate").prop('checked') == true) {
+        $("#passwordUpdate").prop('type', 'text');
+        $("#passwordUpdate2").prop('type', 'text');
+    }
+    else {
+        $("#passwordUpdate").prop('type', 'password');
+        $("#passwordUpdate2").prop('type', 'password');
+    }
+});
 
 //http://loudev.com/
 if (pageInformation == undefined)

@@ -3,7 +3,7 @@
 <div class="menu">
     <div class="menuTitle">
         <div class="menuTable">
-            <form:form action="searchnotesbymenu" method="post" id="searchDateByMenu">
+            <form:form action="searchnotesbycalendar" method="post" id="searchDateByMenu">
                 <table class="tableCalendar">
                     <tr>
                         <td>

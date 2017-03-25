@@ -28,14 +28,14 @@
                 <label>Логин<span class="required">*</span></label>
                 <input title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов."
                        type="text" required pattern="(^[\w+]{4,20}$)" name="username" id="newUsername" />
-                <label>Пароль<span class="required">*</span></label>
+                <label>Пароль<span class="required">*</span></label> <input type="checkbox"  name="showPassword" id="showPassword" /> <label>Показать пароль</label>
                 <input title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
-                       type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"
+                       type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"id="password"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
                             if(this.checkValidity()) form.password2.pattern = this.value;" >
                 <label>Подтвердите пароль<span class="required">*</span></label>
                 <input title="Пожалуйста, введите тот же пароль, как указано выше." type="password" required
-                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password2"
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password2" id="password2"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');" />
                 <label>Доступ</label>
                 <select name="status" title="" id="newStatus">
@@ -55,13 +55,13 @@
                 <label>Логин</label>
                 <input id="username" type="text" disabled pattern="(^[\w+]{4,20}$)" name="username"
                        title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов.">
-                <label>Новый пароль</label>
+                <label>Новый пароль</label> <input type="checkbox"  name="showPassword" id="showPasswordUpdate" /> <label>Показать пароль</label>
                 <input title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
-                       id="password" type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"
+                       id="passwordUpdate" type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
                             if(this.checkValidity()) form.password2.pattern = this.value;">
                 <label>Подтвердите новый пароль</label>
-                <input id="password2" title="Пожалуйста, введите тот же пароль, как указано выше." type="password"
+                <input id="passwordUpdate2" title="Пожалуйста, введите тот же пароль, как указано выше." type="password"
                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password2"
                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
                 <label>Доступ</label>

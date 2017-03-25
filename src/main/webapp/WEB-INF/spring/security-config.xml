@@ -12,9 +12,7 @@
         <beans:constructor-arg name="loginFormUrl" value="/login"/>
     </beans:bean>
 
-    <beans:bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-        <beans:property name="defaultTargetUrl" value="/"/>
-        <beans:property name="alwaysUseDefaultTargetUrl" value="true"/>
+    <beans:bean id="successHandler" class="ru.store.controllers.AuthenticationSuccessHandler.AuthenticationSuccessHandlerImp">
     </beans:bean>
 
     <beans:bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
@@ -32,15 +30,15 @@
 
     <http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint">
         <access-denied-handler error-page="/403" />
-        <intercept-url pattern="/mainAdmin/**"  access="hasRole('ROLE_MAINADMIN')" />
-        <intercept-url pattern="/api/mainAdmin/**"  access="hasRole('ROLE_MAINADMIN')" />
-        <intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
-        <intercept-url pattern="/api/admin/**"  access="hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
-        <intercept-url pattern="/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
-        <intercept-url pattern="/designer/**"  access="hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')or hasRole('ROLE_DESIGNER')" />
-        <intercept-url pattern="/api/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
-        <intercept-url pattern="/operator/**"  access="hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
-        <intercept-url pattern="/client/**"  access="hasRole('ROLE_CLIENT')or hasRole('ROLE_OPERATOR')or hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_MAINADMIN')" />
+        <intercept-url pattern="/director/**"  access="hasRole('ROLE_DIRECTOR')" />
+        <intercept-url pattern="/api/director/**"  access="hasRole('ROLE_DIRECTOR')" />
+        <intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')or hasRole('ROLE_DIRECTOR')" />
+        <intercept-url pattern="/api/admin/**"  access="hasRole('ROLE_ADMIN')or hasRole('ROLE_DIRECTOR')" />
+        <intercept-url pattern="/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_DIRECTOR')" />
+        <intercept-url pattern="/designer/**"  access="hasRole('ROLE_DIRECTOR')or hasRole('ROLE_DESIGNER')" />
+        <intercept-url pattern="/api/manager/**"  access="hasRole('ROLE_MANAGER')or hasRole('ROLE_DIRECTOR')" />
+        <intercept-url pattern="/operator/**"  access="hasRole('ROLE_OPERATOR')or hasRole('ROLE_DIRECTOR')" />
+        <intercept-url pattern="/client/**"  access="hasRole('ROLE_CLIENT')or('ROLE_DIRECTOR')" />
         <logout logout-url="/login"
                 logout-success-url="/"
                 delete-cookies="JSESSIONID"
