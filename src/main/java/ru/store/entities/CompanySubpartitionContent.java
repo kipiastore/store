@@ -47,4 +47,15 @@ public class CompanySubpartitionContent {
     public void setCompanySubpartitionId(Integer companySubpartitionId) {
         this.companySubpartitionId = companySubpartitionId;
     }
+
+    @Override
+    public String toString() {
+        return "CompanySubpartitionContent{" +
+                "id=" + id +
+                ", imageId=" + imageId +
+                ", info='" + info + '\'' +
+                ", companyId=" + companyId +
+                ", companySubpartitionId=" + companySubpartitionId +
+                '}';
+    }
 }

@@ -2,21 +2,20 @@ package ru.store.controllers.designer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.SubPartitionDAO;
-import ru.store.entities.CompanySubPartition;
-import ru.store.entities.CompanySubpartitionContent;
-import ru.store.entities.SubPartition;
+import ru.store.entities.*;
+import ru.store.exceptions.NotSupportedFormat;
 import ru.store.service.CompanySubPartitionService;
 import ru.store.service.CompanySubpartitionContentService;
+import ru.store.service.ImageService;
 import ru.store.service.SubPartitionService;
+import ru.store.servlets.DownloadImage;
+import ru.store.servlets.DownloadServlet;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -30,6 +29,8 @@ public class DesignerCompanyPositionsController {
     private CompanySubPartitionService companySubPartitionService;
     @Autowired
     private SubPartitionDAO subPartitionService;
+    @Autowired
+    private ImageService imageService;
 
     @RequestMapping(value = "/designer/positions/company/{id}", method = RequestMethod.GET)
     public ModelAndView positions(@PathVariable String id) {
@@ -40,20 +41,70 @@ public class DesignerCompanyPositionsController {
     }
 
     @RequestMapping(value = "/designer/addsubpartitioninfos", method = RequestMethod.POST)
-    public ModelAndView updateCompany(@RequestParam("positions") String positions) {
-        ModelAndView modelAndView = new ModelAndView();
-        Integer companyId = null;
+    public String updateCompany(@ModelAttribute("companySubpartitionContent") CompanySubpartitionContent companySubpartitionContent,
+                                @RequestParam("file") MultipartFile multipartFile,
+                                @RequestParam("companySubpartitionId") String companySubpartitionId) {
         try {
-
-
-            modelAndView.addObject("successMessage", "Обновление проведено успешно.");
+            String[] tmp = multipartFile.getOriginalFilename().split("\\.");
+            if (tmp.length >= 2) {
+                if (DownloadImage.FILE_TYPE_TO_CONTENT_TYPE.get(tmp[tmp.length-1]) == null) {
+                    throw new NotSupportedFormat("Этот формат не поддерживается.");
+                }
+                Image image = new Image();
+                image.setFile(multipartFile.getBytes());
+                image.setName(multipartFile.getOriginalFilename());
+                imageService.createImage(image);
+                companySubpartitionContent.setImageId(image.getId());
+            }
+            companySubpartitionContent.setCompanySubpartitionId(Integer.valueOf(companySubpartitionId));
+            System.out.println(companySubpartitionContent);
+            companySubpartitionContentService.createCompanySubpartitionContent(companySubpartitionContent);
         } catch (Exception ex) {
-            modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());
             ex.printStackTrace();
         }
-        Model model = new Model();
-        loadPage(model, modelAndView, companyId);
-        return modelAndView;
+        return "redirect:/designer/positions/company/" + companySubpartitionContent.getCompanyId();
+    }
+
+    @RequestMapping(value = "/designer/deletesubpartitioninfos", method = RequestMethod.POST)
+    public String deleteCompany(@RequestParam("companyId") String companyId,
+                                @RequestParam("companySubpartitionContentId") String companySubpartitionContentId) {
+        try {
+            companySubpartitionContentService.deleteCompanySubpartitionContent(Integer.valueOf(companySubpartitionContentId));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return "redirect:/designer/positions/company/" + companyId;
+    }
+
+    @RequestMapping(value = "/designer/editsubpartitioninfos", method = RequestMethod.POST)
+    public String editCompany(@ModelAttribute("companySubpartitionContent") CompanySubpartitionContent companySubpartitionContent,
+                              @RequestParam("file") MultipartFile multipartFile,
+                              @RequestParam("contentId") String contentId,
+                              @RequestParam("companySubpartitionId") String companySubpartitionId,
+                              @RequestParam("imageId") String imageId) {
+        try {
+            String[] tmp = multipartFile.getOriginalFilename().split("\\.");
+            if (tmp.length >= 2) {
+                if (DownloadImage.FILE_TYPE_TO_CONTENT_TYPE.get(tmp[tmp.length-1]) == null) {
+                    throw new NotSupportedFormat("Этот формат не поддерживается.");
+                }
+                Image image = new Image();
+                image.setFile(multipartFile.getBytes());
+                image.setName(multipartFile.getOriginalFilename());
+                imageService.createImage(image);
+                companySubpartitionContent.setImageId(image.getId());
+            } else {
+                companySubpartitionContent.setImageId(Integer.valueOf(imageId));
+            }
+
+            companySubpartitionContent.setId(Integer.valueOf(contentId));
+            companySubpartitionContent.setCompanySubpartitionId(Integer.valueOf(companySubpartitionId));
+            System.out.println(companySubpartitionContent);
+            companySubpartitionContentService.updateCompanySubpartitionContent(companySubpartitionContent);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return "redirect:/designer/positions/company/" + companySubpartitionContent.getCompanyId();
     }
 
     private void loadPage(Model model, ModelAndView modelAndView, Integer id) {
@@ -65,7 +116,6 @@ public class DesignerCompanyPositionsController {
     }
 
     private void loadCompanySubpartitionContent(Model model, Integer id) {
-
         List<CompanySubPartition> companySubPartitions = companySubPartitionService.findCompanySubpartitionByCompanyId(id);
         List<Integer> subPartitionIds = new ArrayList<>();
         for (CompanySubPartition companySubPartition : companySubPartitions) {
@@ -85,7 +135,7 @@ public class DesignerCompanyPositionsController {
             item.info = content.getInfo();
 
             for (CompanySubPartition companySubPartition : companySubPartitions) {
-                if (companySubPartition.getId() != content.getCompanySubpartitionId())
+                if (!Objects.equals(companySubPartition.getSubPartitionId(), content.getCompanySubpartitionId()))
                     continue;
                 for (SubPartition subPartition : subPartitions) {
                     if (companySubPartition.getSubPartitionId() == subPartition.getId()) {
@@ -94,6 +144,29 @@ public class DesignerCompanyPositionsController {
                 }
             }
             model.companySubpartitionContentList.add(item);
+        }
+        model.companyId = id;
+
+        model.subPartitionItemList = new ArrayList<>();
+        Model.SubPartitionItem subPartitionItem;
+        List<CompanySubpartitionContent> currentContents = companySubpartitionContentService.getCompanySubpartitionContents(id);
+
+
+        Set<Integer> currentContentSet = new HashSet<>();
+        for (CompanySubpartitionContent content : currentContents) {
+            currentContentSet.add(content.getCompanySubpartitionId());
+        }
+
+        for (CompanySubPartition companySubPartition : companySubPartitions) {
+            subPartitionItem = new Model.SubPartitionItem();
+            subPartitionItem.companySubpartitionId = companySubPartition.getSubPartitionId();
+            for (SubPartition subPartition : subPartitions) {
+                if (subPartition.getId() == companySubPartition.getSubPartitionId()) {
+                    subPartitionItem.subpartitionName = subPartition.getName();
+                }
+            }
+            if (!currentContentSet.contains(companySubPartition.getSubPartitionId()))
+                model.subPartitionItemList.add(subPartitionItem);
         }
     }
 
@@ -108,15 +181,25 @@ public class DesignerCompanyPositionsController {
     public String redirect1() {
         return "redirect:/designer/positions";
     }
-    @RequestMapping(value = "/designer/companypositionsearchcompany", method = RequestMethod.GET)
+    @RequestMapping(value = "/designer/deletesubpartitioninfos", method = RequestMethod.GET)
     public String redirect2() {
+        return "redirect:/designer/positions";
+    }
+    @RequestMapping(value = "/designer/editsubpartitioninfos", method = RequestMethod.GET)
+    public String redirect3() {
+        return "redirect:/designer/positions";
+    }
+    @RequestMapping(value = "/designer/companypositionsearchcompany", method = RequestMethod.GET)
+    public String redirect4() {
         return "redirect:/designer/positions";
     }
 
     public static class Model {
         public int selectedPageNum;
         public String message;
+        public Integer companyId;
         public List<CompanySubpartitionContentItem> companySubpartitionContentList;
+        public List<SubPartitionItem> subPartitionItemList;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
@@ -126,6 +209,12 @@ public class DesignerCompanyPositionsController {
         }
         public List<CompanySubpartitionContentItem> getCompanySubpartitionContentList() {
             return companySubpartitionContentList;
+        }
+        public Integer getCompanyId() {
+            return companyId;
+        }
+        public List<SubPartitionItem> getSubPartitionItemList() {
+            return subPartitionItemList;
         }
 
         public static class CompanySubpartitionContentItem {
@@ -153,6 +242,18 @@ public class DesignerCompanyPositionsController {
             }
             public Integer getCompanySubpartitionId() {
                 return companySubpartitionId;
+            }
+        }
+
+        public static class SubPartitionItem {
+            public Integer companySubpartitionId;
+            public String subpartitionName;
+
+            public Integer getCompanySubpartitionId() {
+                return companySubpartitionId;
+            }
+            public String getSubpartitionName() {
+                return subpartitionName;
             }
         }
     }

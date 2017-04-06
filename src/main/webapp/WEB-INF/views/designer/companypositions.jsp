@@ -42,35 +42,74 @@
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
             <span class="localMessage"></span>
-
+            <span class="button create" >Добавить</span>
+            <div style="height: 5px;"></div>
             <c:forEach var="item" items="${model.companySubpartitionContentList}">
-                <div class="position-main-container">
+                <div class="position-main-container def-block">
                     <div class="position-block">
                         <div class="position-addintional-block">
-                            <span>${item.subPartitionName}</span>
+                            <span data-id="${item.companySubpartitionId}" id="subNameId-${item.id}">${item.subPartitionName}</span>
                         </div>
                         <div class="position-image-block">
-                            <img class="position-image" src="../../download?id=${item.imageId}" title="">
+                            <img class="position-image" id="imageId-${item.id}" data-id="${item.imageId}" src="../../download?id=${item.imageId}" title="">
                         </div>
                         <div class="position-text-block">
-                            <span>${item.info}</span>
+                            <span id="infoId-${item.id}">${item.info}</span>
                         </div>
-
                         <div class="position-addintional-block-a">
-                            <span class="button" >Удалить</span>
-                            <span class="button" >Редактировать</span>
+                            <span class="button delete" data-id="${item.id}">Удалить</span>
+                            <span class="button edit" data-id="${item.id}">Редактировать</span>
                         </div>
                         <hr/>
                     </div>
                 </div>
             </c:forEach>
 
-            <form:form action="../addsubpartitioninfos" method="post" id="createForm">
+            <form:form action="../../addsubpartitioninfos" method="post" id="createForm" modelAttribute="companySubpartitionContent" enctype="multipart/form-data">
+                <div class="def-block">
+                    <div class="position-addintional-block-b">
+                        <label>Позиция<span class="required">*</span></label>
 
-            </form:form>
-            <form:form action="../addsubpartitioninfos" method="post" id="updateForm">
+                        <select name="companySubpartitionId" title="" required id="createCompanySubpartitionId">
+                            <c:forEach var="item" items="${model.subPartitionItemList}">
+                                <option value="${item.companySubpartitionId}">${item.subpartitionName}</option>
+                            </c:forEach>
+                        </select>
 
+                        <label>Файл<span class="required">*</span></label>
+                        <input type="file" required name="file" title="gif jpeg jpg png bmp" id="createFile"/>
+                        <label>Информация<span class="required">*</span></label>
+                        <textarea rows="10" required name="info" maxlength="1600" id="createDescription"></textarea>
+                        <input type="hidden" name="companyId" value="${model.companyId}" />
+                        <span class="button create-cancel" >Отменить</span>
+                        <span class="button create-submit" >Сохранить</span>
+                    </div>
+                </div>
             </form:form>
+            <form:form action="../../editsubpartitioninfos" modelAttribute="companySubpartitionContent" enctype="multipart/form-data" method="post" id="updateForm">
+                <div class="def-block">
+                    <div class="position-addintional-block-a">
+                        <div class="position-addintional-block">
+                            <span class="subPartitionNameSpan"></span>
+                        </div>
+                        <label>Файл</label>
+                        <input type="file" name="file" title="gif jpeg jpg png bmp" id="updateFile"/>
+                        <textarea rows="10" name="info" maxlength="1600" id="updateDescription"></textarea>
+                        <input type="hidden" name="companyId" value="${model.companyId}" />
+                        <input type="hidden" name="contentId" id="updateCompanySubpartitionContentId"  />
+                        <input type="hidden" name="companySubpartitionId" id="updateCompanySubpartitionId" />
+                        <input type="hidden" name="imageId" id="updateImageId" />
+                        <span class="button edit-cancel" >Отменить</span>
+                        <span class="button edit-submit" >Сохранить</span>
+                    </div>
+                </div>
+            </form:form>
+
+            <form:form action="../../deletesubpartitioninfos" method="post" id="deleteForm">
+                <input type="hidden" name="companyId" value="${model.companyId}" />
+                <input type="hidden" name="companySubpartitionContentId" id="companySubpartitionContentId"  />
+            </form:form>
+
         </div>
     </div>
 </div>
@@ -100,9 +139,10 @@
     }
 </style>
 <style>
-    .position-main-container {
+    .def-block {
         //max-width: 900px;
         margin: auto;
+        height: 370px;
     }
     .position-block {
 
@@ -116,6 +156,7 @@
     }
     .position-text-block {
         padding: 10px;
+        text-align: justify;
     }
     .position-addintional-block {
         float: left;
@@ -153,6 +194,15 @@
     }
     .button a:hover {
         color: #fff;
+    }
+    #deleteForm {
+        display: none;
+    }
+    #updateForm {
+        display: none;
+    }
+    #createForm {
+        display: none;
     }
 </style>
 </body>

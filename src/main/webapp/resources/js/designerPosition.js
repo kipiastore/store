@@ -36,6 +36,89 @@ $(window).on("load", function () {
     messageSubpartition = $(".messageSubpartition");
 });
 
+$(".button.delete").on("click", function (event) {
+    var itemsID = event.target.getAttribute('data-id');
+    console.log(itemsID);
+    $("#companySubpartitionContentId").val(itemsID);
+    if (confirm("Удалить?")) {
+        $("#deleteForm").submit();
+    }
+});
+
+$(".button.edit").on("click", function (event) {
+    var itemsID = event.target.getAttribute('data-id');
+    console.log(itemsID);
+
+    var mainContainer = $(".position-main-container");
+    var updateForm = $("#updateForm");
+    mainContainer.animate({opacity: 0}, 200);
+    setTimeout(function() {
+        mainContainer.hide();
+        $(".button.create").hide();
+        updateForm.show();
+        updateForm.animate({opacity: 1}, 200);
+    }, 200);
+    $("#updateCompanySubpartitionContentId").val(itemsID);
+    $(".subPartitionNameSpan").html($("#subNameId-"+itemsID).html());
+    $("#updateDescription").val($("#infoId-"+itemsID).html());
+    $("#updateCompanySubpartitionId").val($("#subNameId-"+itemsID).attr('data-id'));
+    $("#updateImageId").val($("#imageId-"+itemsID).attr('data-id'));
+});
+
+$(".button.create").on("click", function () {
+    var mainContainer = $(".position-main-container");
+    var createForm = $("#createForm");
+    mainContainer.animate({opacity: 0}, 200);
+    setTimeout(function() {
+        mainContainer.hide();
+        createForm.show();
+        createForm.animate({opacity: 1}, 200);
+    }, 200);
+});
+
+
+$(".button.edit-cancel").on("click", function () {
+    var mainContainer = $(".position-main-container");
+    var updateForm = $("#updateForm");
+    updateForm.animate({opacity: 0}, 200);
+    setTimeout(function() {
+        updateForm.hide();
+        mainContainer.show();
+        $(".button.create").show();
+        mainContainer.animate({opacity: 1}, 200);
+    }, 200);
+    $("#updateDescription").val("");
+    $("#updateFile").val("");
+    $("#updateCompanySubpartitionContentId").val("");
+    $(".subPartitionNameSpan").html();
+    $("#updateCompanySubpartitionId").val();
+});
+
+$(".button.create-cancel").on("click", function () {
+    var mainContainer = $(".position-main-container");
+    var createForm = $("#createForm");
+    createForm.animate({opacity: 0}, 200);
+    setTimeout(function() {
+        createForm.hide();
+        mainContainer.show();
+        mainContainer.animate({opacity: 1}, 200);
+    }, 200);
+    $("#createFile").val();
+    $("#createDescription").val();
+    $("#createCompanySubpartitionId").val();
+});
+
+$(".button.edit-submit").on("click", function () {
+    if (confirm("Сохранить?")) {
+        $("#updateForm").submit();
+    }
+});
+
+$(".button.create-submit").on("click", function () {
+    if (confirm("Сохранить?")) {
+        $("#createForm").submit();
+    }
+});
 
 $(".menuTitleText").on("click", function () {
     if (document.URL.indexOf("designer/positions/company/") != -1) {
@@ -64,57 +147,7 @@ $(".menuTitleText").on("click", function () {
     }, 200);
 
 });
-/*
-$(".tableName").on("click", function (event) {
-    $(".error").hide();
-    $(".success").hide();
-    var prLoader = $(".pre-loading");
-    var container = $(".container");
-    container.animate({opacity: 0}, 200);
-    setTimeout(function() { container.hide(); }, 190);
-    updateForm = $("#updateForm");
-    setTimeout(function() {
-        updateForm.show();
-        //updateForm.animate({opacity: 1}, 200);
-        prLoader.show();
-    }, 200);
-    isShowUpdateForm = true;
 
-    currentItem = event.target.getAttribute("id");
-    console.log(currentItem);
-    $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
-    $(".menuBodyItemButtDel").css("border-left", "0");
-    var id = currentItem.replace("ID-", "");
-    if (pageInformation == undefined)
-        pageInformation = $("#pageInformation").val();
-    if (pageInformation == 2) {
-        if (hiddenId == undefined) {
-            hiddenId = $("#hiddenId");
-        }
-        $.get('../api/admin/resource/v1/company/'+id, function(entry1) {
-            hiddenId.val(id);
-            $.get('../api/admin/resource/v1/package/'+entry1.companyPackageId, function(entry2) {
-                numOfMaxSelected = entry2.numOfPositions;
-                numOfSelectedItems = 0;
-                $('#optgroup').multiSelect('deselect_all');
-                $.get('../api/admin/resource/v1/companySubpartition/company/'+id, function(entry3) {
-                    if (entry3.length > 0) {
-                        var tmpArray = [];
-                        var tmpCounter = 0;
-                        entry3.forEach(function (entry4) {
-                            tmpArray[tmpCounter] = entry4.subPartitionId + '';
-                            tmpCounter++;
-                        });
-                        $('#optgroup').multiSelect('select', tmpArray);
-                    }
-                    prLoader.hide();
-                    updateForm.animate({opacity: 1}, 200);
-                });
-            });
-        });
-    }
-});
-*/
 $(".menuBodyItemInfo").on("click", function (event) {
     $(".error").hide();
     $(".success").hide();

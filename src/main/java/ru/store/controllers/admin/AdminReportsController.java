@@ -43,7 +43,7 @@ public class AdminReportsController {
 
     @RequestMapping(value = "/admin/addreport", method = RequestMethod.POST)
     public ModelAndView addReport(@ModelAttribute("report") Report report,
-                                      @RequestParam("file") MultipartFile multipartFile) {
+                                  @RequestParam("file") MultipartFile multipartFile) {
         ModelAndView modelAndView = new ModelAndView();
         try {
             String[] tmp = multipartFile.getOriginalFilename().split("\\.");

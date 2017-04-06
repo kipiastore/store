@@ -16,23 +16,23 @@ public class ImageService {
     @Autowired
     private ImageDAO imageDAO;
 
-    void createImage(Image image) {
+    public void createImage(Image image) {
         imageDAO.createImage(image);
     }
 
-    void deleteImage(Integer id) {
+    public void deleteImage(Integer id) {
         imageDAO.deleteImage(id);
     }
 
-    void updateImage(Image image) {
+    public void updateImage(Image image) {
         imageDAO.updateImage(image);
     }
 
-    List<Image> getImages() {
+    public List<Image> getImages() {
         return imageDAO.getImages();
     }
 
-    Image getImage(Integer id) {
+    public Image getImage(Integer id) {
         return imageDAO.getImage(id);
     }
 
