@@ -71,6 +71,7 @@ $(".button.create").on("click", function () {
     mainContainer.animate({opacity: 0}, 200);
     setTimeout(function() {
         mainContainer.hide();
+        $(".button.create").hide();
         createForm.show();
         createForm.animate({opacity: 1}, 200);
     }, 200);
@@ -101,6 +102,7 @@ $(".button.create-cancel").on("click", function () {
     setTimeout(function() {
         createForm.hide();
         mainContainer.show();
+        $(".button.create").show();
         mainContainer.animate({opacity: 1}, 200);
     }, 200);
     $("#createFile").val();

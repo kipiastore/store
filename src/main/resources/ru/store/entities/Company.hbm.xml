@@ -29,7 +29,7 @@
             <column name="company_package_id" not-null="true" />
         </property>
         <property name="costOf" type="integer" >
-            <column name="cost_of" length="10" not-null="true" />
+            <column name="cost_of" length="10" not-null="false" />
         </property>
         <property name="legalName" type="string" >
             <column name="legal_name" length="120" not-null="false" />

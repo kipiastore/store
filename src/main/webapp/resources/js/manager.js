@@ -420,7 +420,7 @@ function loadCompany(id) {
     var item;
     addressArray = [];
     cleanAddressBlocks();
-    $.get('../api/admin/resource/v1/company/'+id, function(entry) {
+    $.get('../api/manager/resource/v1/company/'+id, function(entry) {
         companyName.val(entry.name);
         keywords.val(entry.keywords);
         if(entry.dateOfContract!=undefined&&entry.dateOfStartContract!=undefined&&entry.dateOfEndContract!=undefined){

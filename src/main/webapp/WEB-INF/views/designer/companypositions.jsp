@@ -140,9 +140,11 @@
 </style>
 <style>
     .def-block {
-        //max-width: 900px;
-        margin: auto;
-        height: 370px;
+    //max-width: 900px;
+    //margin: auto;
+    //height: 370px;
+    //max-height: 370px;
+        min-height: 320px;
     }
     .position-block {
 
@@ -152,17 +154,19 @@
     }
     .position-image {
         height: 250px;
-        padding: 10px;
+        padding: 5px 10px 0px 10px;
+        max-width: 1050px;
     }
     .position-text-block {
         padding: 10px;
         text-align: justify;
+        min-height: 290px;
     }
     .position-addintional-block {
         float: left;
         width: 100%;
         text-align: center;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         padding-top: 10px;
     }
     .position-addintional-block-a {

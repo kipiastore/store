@@ -218,12 +218,12 @@ public class DesignerCompanyPositionsController {
         }
 
         public static class CompanySubpartitionContentItem {
-            private Integer id;
-            private Integer imageId;
-            private String info;
-            private Integer companyId;
-            private Integer companySubpartitionId;
-            private String subPartitionName;
+            public Integer id;
+            public Integer imageId;
+            public String info;
+            public Integer companyId;
+            public Integer companySubpartitionId;
+            public String subPartitionName;
 
             public Integer getId() {
                 return id;

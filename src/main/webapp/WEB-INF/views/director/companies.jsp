@@ -84,8 +84,8 @@
                             <option value="${item.id}">${item.name}</option>
                         </c:forEach>
                     </select>
-                    <label>Стоимость<span class="required">*</span></label>
-                    <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="newCostOf" required />
+                    <label>Стоимость</label>
+                    <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="newCostOf"  />
                     <label>E-mail</label>
                     <input title="Введите e-mail." type="text" maxlength="120" name="email" id="newEmail" />
                     <label>Сайт</label>
@@ -175,8 +175,8 @@
                             <option value="${item.id}">${item.name}</option>
                         </c:forEach>
                     </select>
-                    <label>Стоимость<span class="required">*</span></label>
-                    <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="costOf" required />
+                    <label>Стоимость</label>
+                    <input title="Введите стоимость. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="costOf" id="costOf" />
                     <label>E-mail</label>
                     <input title="Введите e-mail." type="text" maxlength="120" name="email" id="email" />
                     <label>Сайт</label>
