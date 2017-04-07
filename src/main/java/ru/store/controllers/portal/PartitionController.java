@@ -5,14 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.beans.EmailSender;
-import ru.store.beans.GoogleCaptcha;
-import ru.store.controllers.operator.OperatorCompanyController;
 import ru.store.controllers.operator.OperatorSearchController;
 import ru.store.dao.interfaces.*;
 import ru.store.entities.*;
-import ru.store.utility.Util;
-
+import ru.store.service.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -32,6 +28,9 @@ public class PartitionController {
     @Autowired
     private CompanyAddressDAO companyAddressDAO;
 
+    @Autowired
+    private PartitionService partitionService;
+
     @RequestMapping(value = "/partition/*", method = RequestMethod.GET)
     public ModelAndView partition(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
@@ -40,6 +39,15 @@ public class PartitionController {
         int partitionId;
         if (splitResult.length == 2 && splitResult[1].matches("\\d+")) {
             partitionId = Integer.valueOf(splitResult[1]);
+
+            //подсчет переходов на разделы
+            Partition partition=partitionService.getPartitionById(partitionId);
+            partition.setCountPartition();
+            partitionService.updatePartition(partition);
+            modelAndView.addObject("countInfo","раздела");
+            modelAndView.addObject("portalCount",partition.getCountPartition());
+            //
+
         } else {
             modelAndView.setViewName("redirect:/");
             return modelAndView;

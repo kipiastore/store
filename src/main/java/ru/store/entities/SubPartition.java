@@ -8,7 +8,7 @@ public class SubPartition {
     private int id;
     private Integer partitionId;
     private String name;
-
+    private Integer countSubPartition=0;
     public SubPartition() {
 
     }
@@ -31,4 +31,16 @@ public class SubPartition {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getCountSubPartition() {
+        return countSubPartition;
+    }
+
+    public void setCountSubPartition(int countSubPartition) {
+        this.countSubPartition = countSubPartition;
+    }
+    public void setCountSubPartition() {
+        this.countSubPartition = countSubPartition+1;
+    }
+
 }

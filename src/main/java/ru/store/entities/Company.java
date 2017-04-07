@@ -38,6 +38,7 @@ public class Company {
     private Boolean isPriority = false;
     private String email;
     private String site;
+    private Integer countCompany=0;
 
     //private String site;
     //private Partition partition;
@@ -230,6 +231,18 @@ public class Company {
     public void setSite(String site) {
         this.site = site;
     }
+
+    public Integer getCountCompany() {
+        return countCompany;
+    }
+
+    public void setCountCompany(Integer countCompany) {
+        this.countCompany = countCompany;
+    }
+    public void setCountCompany() {
+        this.countCompany = countCompany+1;
+    }
+
 
     @Override
     public String toString() {

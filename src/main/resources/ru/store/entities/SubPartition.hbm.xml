@@ -13,5 +13,8 @@
         <property name="name" type="string" >
             <column name="name" length="120" not-null="true" />
         </property>
+        <property name="countSubPartition" type="java.lang.Integer" >
+            <column name="count_sub_partition" length="11" not-null="false" />
+        </property>
     </class>
 </hibernate-mapping>

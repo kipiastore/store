@@ -11,6 +11,7 @@ import ru.store.beans.EmailSender;
 import ru.store.beans.GoogleCaptcha;
 import ru.store.dao.interfaces.*;
 import ru.store.entities.*;
+import ru.store.service.CountingService;
 import ru.store.utility.Util;
 
 import java.util.*;
@@ -35,11 +36,21 @@ public class PortalController {
     private CompanySubPartitionDAO companySubPartitionDAO;
     @Autowired
     private CompanyDAO companyDAO;
+    @Autowired
+    private CountingService countingService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
-        Map<Integer, Integer> subPartitionIdToCount = new HashMap<>();
+        ModelAndView modelAndView = new ModelAndView();
 
+        //calculating portal visitors
+        CountingPortalPage countingPortalPage=countingService.getCountPortalPage();
+        countingPortalPage.setCountPortal();
+        countingService.addCountPortalPage(countingPortalPage);
+        modelAndView.addObject("countInfo","ресурса");
+        modelAndView.addObject("portalCount",countingPortalPage.getCountPortal());
+        //
+        Map<Integer, Integer> subPartitionIdToCount = new HashMap<>();
         List<Integer> companies = companyDAO.getOptimizationCompanies();
         Set<Integer> availableCompany = new TreeSet<>();
         for (Integer companyId : companies) {
@@ -137,7 +148,7 @@ public class PortalController {
         model.partitionItems2 = tmp2;
         model.bestCompanyGroupByColumn = bestCompanyGroupByColumn;
         // load the model to the page;
-        ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.addObject("model", model);
         modelAndView.setViewName("portal/index");
         return modelAndView;
@@ -166,14 +177,14 @@ public class PortalController {
             String body = mailMap.get("body").get(0);
             String type = mailMap.get("type").get(0);
             if (!name.isEmpty() &&
-                !email.isEmpty() &&
-                !body.isEmpty() &&
-                !type.isEmpty() &&
-                type.matches("\\d") &&
-                email.matches(EmailSender.EMAIL_REGEX) &&
-                email.length() < 81 &&
-                body.length() < 2001 &&
-                name.length() < 81) {
+                    !email.isEmpty() &&
+                    !body.isEmpty() &&
+                    !type.isEmpty() &&
+                    type.matches("\\d") &&
+                    email.matches(EmailSender.EMAIL_REGEX) &&
+                    email.length() < 81 &&
+                    body.length() < 2001 &&
+                    name.length() < 81) {
                 emailSender.send(name, email, body, Integer.valueOf(type));
             }
         }

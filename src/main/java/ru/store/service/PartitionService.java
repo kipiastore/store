@@ -48,4 +48,8 @@ public class PartitionService {
         return partitionDAO.getPartitionByName(name);
     }
 
+    public Partition getPartitionById(int id) {
+        return partitionDAO.getPartitionById(id);
+    }
+
 }

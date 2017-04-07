@@ -37,6 +37,7 @@
                 <value>ru/store/entities/CompanyReminder.hbm.xml</value>
                 <value>ru/store/entities/Act.hbm.xml</value>
                 <value>ru/store/entities/CompanySubpartitionContent.hbm.xml</value>
+                <value>ru/store/entities/CountingPortalPage.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">

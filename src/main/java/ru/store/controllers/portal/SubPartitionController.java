@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.SubPartition;
+import ru.store.service.SubPartitionService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +20,10 @@ public class SubPartitionController {
     @Autowired
     private SubPartitionDAO subPartitionDAO;
 
+    @Autowired
+    private SubPartitionService subPartitionService;
+
+
     @RequestMapping(value = "/subPartition/*", method = RequestMethod.GET)
     public ModelAndView subPartition(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
@@ -28,6 +33,14 @@ public class SubPartitionController {
         int subPartitionId;
         if (splitResult.length == 2 && splitResult[1].matches("\\d+")) {
             subPartitionId = Integer.valueOf(splitResult[1]);
+
+            //подсчет переходов на подразделы
+            SubPartition subPartition=subPartitionService.getSubPartition(subPartitionId);
+            subPartition.setCountSubPartition();
+            subPartitionService.updateSubPartition(subPartition);
+            modelAndView.addObject("countInfo","подраздела");
+            modelAndView.addObject("portalCount",subPartition.getCountSubPartition());
+            //
         } else {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
@@ -39,7 +52,6 @@ public class SubPartitionController {
         SubPartition subPartition = subPartitionDAO.getSubPartitionById(subPartitionId);
         modelAndView.addObject("subPartitionName", subPartition.getName());
         modelAndView.addObject("subPartitionId", subPartitionId);
-
         modelAndView.addObject("prefix", "../");
         modelAndView.setViewName("portal/subpartition");
         return modelAndView;

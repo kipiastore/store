@@ -9,6 +9,7 @@ import ru.store.api.portal.PriorityResource;
 import ru.store.dao.interfaces.CompanyAddressDAO;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
+import ru.store.service.CompanyService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -22,6 +23,8 @@ public class CompanyController {
     private CompanyAddressDAO companyAddressDAO;
     @Autowired
     private PriorityResource priorityResource;
+    @Autowired
+    private CompanyService companyService;
 
     @RequestMapping(value = "/company/*", method = RequestMethod.GET)
     public ModelAndView company(HttpServletRequest request) {
@@ -30,6 +33,15 @@ public class CompanyController {
         int companyId;
         if (splitResult.length == 2 && splitResult[1].matches("\\d+")) {
             companyId = Integer.valueOf(splitResult[1]);
+
+            //подсчет переходов на компании
+            Company company=companyService.getCompany(companyId);
+            company.setCountCompany();
+            companyService.updateCompany(company);
+            modelAndView.addObject("countInfo","компании");
+            modelAndView.addObject("portalCount",company.getCountCompany());
+            //
+
         } else {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
