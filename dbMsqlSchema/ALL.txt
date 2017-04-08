@@ -3,12 +3,12 @@ CREATE TABLE company
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     keywords VARCHAR(255),
-    date_of_contract DATE NOT NULL,
-    date_of_start_contract DATE NOT NULL,
-    date_of_end_contract DATE NOT NULL,
+    date_of_contract DATE,
+    date_of_start_contract DATE,
+    date_of_end_contract DATE,
     manager VARCHAR(45) NOT NULL,
     company_package_id INT(11) NOT NULL,
-    cost_of INT(11) NOT NULL,
+    cost_of INT(11),
     legal_name VARCHAR(120),
     inn INT(11),
     legal_address VARCHAR(120),
@@ -20,7 +20,7 @@ CREATE TABLE company
     last_modified_date DATETIME NOT NULL,
     owner VARCHAR(45) NOT NULL,
     last_modified_by VARCHAR(45) NOT NULL,
-    description VARCHAR(255),
+    description VARCHAR(1024),
     is_show_for_operator TINYINT(4) NOT NULL,
     is_show_for_site TINYINT(4) NOT NULL,
     is_paid TINYINT(4) NOT NULL,
@@ -29,7 +29,8 @@ CREATE TABLE company
     is_closed TINYINT(4) NOT NULL,
     is_priority TINYINT(4) NOT NULL,
     email VARCHAR(120),
-    site VARCHAR(120)
+    site VARCHAR(120),
+    count_company INT(11) DEFAULT '0'
 );
 CREATE TABLE company_address
 (
@@ -39,6 +40,28 @@ CREATE TABLE company_address
     phones VARCHAR(255),
     information VARCHAR(255),
     company_id INT(11) NOT NULL
+);
+CREATE TABLE company_reminder
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    hour VARCHAR(5),
+    date DATE,
+    type VARCHAR(60),
+    comment VARCHAR(250),
+    company_id INT(11) NOT NULL,
+    company_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE company_subpartition
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    company_id INT(11) NOT NULL,
+    subpartition_id INT(11) NOT NULL
+);
+CREATE TABLE files
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    file LONGBLOB NOT NULL
 );
 CREATE TABLE package
 (
@@ -55,7 +78,8 @@ CREATE TABLE package
 CREATE TABLE partitions
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(120) NOT NULL
+    name VARCHAR(120) NOT NULL,
+    count_partition INT(11) DEFAULT '0'
 );
 CREATE TABLE region
 (
@@ -63,12 +87,6 @@ CREATE TABLE region
     created_datetime DATETIME NOT NULL,
     owner VARCHAR(45) NOT NULL,
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT
-);
-CREATE TABLE subpartition
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    partition_id INT(11) NOT NULL,
-    name VARCHAR(120) NOT NULL
 );
 CREATE TABLE reports
 (
@@ -81,6 +99,22 @@ CREATE TABLE reports
     description VARCHAR(255),
     file_id INT(11) NOT NULL
 );
+CREATE TABLE subpartition
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    partition_id INT(11) NOT NULL,
+    name VARCHAR(120) NOT NULL,
+    count_sub_partition INT(11) DEFAULT '0'
+);
+CREATE TABLE user_roles
+(
+    user_role_id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    username VARCHAR(45) NOT NULL,
+    role VARCHAR(45) NOT NULL,
+    CONSTRAINT user_roles_ibfk_1 FOREIGN KEY (username) REFERENCES users (username)
+);
+CREATE INDEX fk_username_idx ON user_roles (username);
+CREATE UNIQUE INDEX uni_username_role ON user_roles (role, username);
 CREATE TABLE users
 (
     username VARCHAR(45) PRIMARY KEY NOT NULL,
@@ -93,34 +127,36 @@ CREATE TABLE users
     owner VARCHAR(45) NOT NULL,
     last_modified_by VARCHAR(45) NOT NULL
 );
-CREATE TABLE user_roles
-(
-    user_role_id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    username VARCHAR(45) NOT NULL,
-    role VARCHAR(45) NOT NULL
-);
-CREATE TABLE company_subpartition
+CREATE TABLE acts
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(120) NOT NULL,
     company_id INT(11) NOT NULL,
-    subpartition_id INT(11) NOT NULL
+    limitation VARCHAR(120),
+    total INT(11),
+    payment INT(11),
+    created_datetime DATETIME NOT NULL,
+    last_modified_date DATETIME NOT NULL,
+    owner VARCHAR(45) NOT NULL,
+    description VARCHAR(255),
+    file_id INT(11) NOT NULL
 );
-CREATE TABLE files
+CREATE TABLE company_subpartition_content
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    file LONGBLOB NOT NULL
-);
-CREATE TABLE company_reminder
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    hour VARCHAR(5),
-    date DATE,
-    type VARCHAR(60),
-    comment VARCHAR(250),
+    image_id INT(11),
+    info LONGTEXT,
     company_id INT(11) NOT NULL,
-    company_name VARCHAR(255) NOT NULL
+    company_subpartition_id INT(11) NOT NULL
 );
-ALTER TABLE user_roles ADD FOREIGN KEY (username) REFERENCES users (username);
-CREATE INDEX fk_username_idx ON user_roles (username);
-CREATE UNIQUE INDEX uni_username_role ON user_roles (role, username);
+CREATE TABLE images
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    file MEDIUMBLOB NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
+CREATE TABLE counting_portal_page
+(
+    id INT(11) DEFAULT '1',
+    count_portal INT(11) DEFAULT '0'
+);

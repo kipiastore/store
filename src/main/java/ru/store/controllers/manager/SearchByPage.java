@@ -1,6 +1,7 @@
 package ru.store.controllers.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +25,7 @@ public class SearchByPage {
     private int choice;
 
 
-    public   List<Company> search(MultiValueMap<String, String> searchMap, String selectSearchCompanyByType,String selectSearchCompanyByPaymentStatus,ModelAndView modelAndView){
+    public   List<Company> search(MultiValueMap<String, String> searchMap, String selectSearchCompanyByType,String selectSearchCompanyByPaymentStatus,ModelAndView modelAndView,Authentication auth){
         List<Company> companies=new ArrayList<>();
 
         try {
@@ -35,21 +36,21 @@ public class SearchByPage {
                     if (key.equals("name") && selectSearchCompanyByType.equals("searchAllCompany")||
                             key.equals("name") && selectSearchCompanyByType.equals("withCommentCompany")||
                             key.equals("name") && selectSearchCompanyByType.equals("noCommentCompany") ) {
-                        companies = companyService.findCompaniesByNameAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus);
+                        companies = companyService.findCompaniesByNameAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus,auth);
                         isNeedComment(selectSearchCompanyByType);
                         break;
                     }
                     if (key.equals("phone") && selectSearchCompanyByType.equals("searchAllCompany")||
                             key.equals("phone") && selectSearchCompanyByType.equals("withCommentCompany")||
                             key.equals("phone") && selectSearchCompanyByType.equals("noCommentCompany") ) {
-                        companies = companyService.findCompaniesByPhoneAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus);
+                        companies = companyService.findCompaniesByPhoneAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus,auth);
                         isNeedComment(selectSearchCompanyByType);
                         break;
                     }
                     if (key.equals("email") && selectSearchCompanyByType.equals("searchAllCompany")||
                             key.equals("email") && selectSearchCompanyByType.equals("withCommentCompany")||
                             key.equals("email") && selectSearchCompanyByType.equals("noCommentCompany") ) {
-                        companies = companyService.findCompaniesByEmailAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus);
+                        companies = companyService.findCompaniesByEmailAndSearchPaymentStatus(value,selectSearchCompanyByPaymentStatus,auth);
                         isNeedComment(selectSearchCompanyByType);
                         break;
                     }
@@ -62,14 +63,8 @@ public class SearchByPage {
                     }
                 }
                 else{
-                    if(selectSearchCompanyByType.equals("searchAllCompany")) {
-                        companies = companyService.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus);
-                        isNeedComment(selectSearchCompanyByType);
-                    }
-                    else{
-                        companies = companyService.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus);
-                        isNeedComment(selectSearchCompanyByType);
-                    }
+                    companies = companyService.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus,auth);
+                    isNeedComment(selectSearchCompanyByType);
                 }
             }
         } catch (Exception ex) {
@@ -100,4 +95,4 @@ public class SearchByPage {
         }
     }
 
-    }
+}

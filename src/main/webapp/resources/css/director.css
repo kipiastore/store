@@ -448,6 +448,7 @@ textarea {
 }
 input[type="checkbox"] {
     width: 15px;
+    margin-top: 20px;
 }
 .pr input {
     width: 150px;

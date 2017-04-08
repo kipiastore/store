@@ -45,7 +45,9 @@ $(window).on('load', function() {
                     });
                     var tmpText = '';
                     if (company.costOf != '')
-                        tmpText = '<span class="companyAmount">Стоимость: <b>' + company.costOf + '</b></k:if>';
+                        tmpText = '<span class="companyAmount">Стоимость: <b>' + company.costOf + '</b>';
+                        if (company.costOf == null)
+                            tmpText = '';
                     tmpHtml
                         += '<div class="rua-l-wrapper2" style="border-color: hsla(0,' + color + '%,66%,1)">'
                         + '<div class="companyMainInfo">'

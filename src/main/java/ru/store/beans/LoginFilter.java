@@ -31,13 +31,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         if (captchaResponse == null || !captchaResponse.success) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
- /*
                 if (cookie.getName().equals("JSESSIONID")) {
 
                     cookie.setMaxAge(0);
                     cookie.setValue("");
                 }
-                */
             }
 
             response.sendRedirect("login?error");

@@ -1,6 +1,8 @@
 package ru.store.controllers.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -92,8 +94,9 @@ public class ManagerActsController {
     @RequestMapping(value = "/manager/searchcompanybyacts", method = RequestMethod.POST)
     public ModelAndView searchByActs(@RequestParam MultiValueMap<String, String> searchMap) {
         ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Model model = new Model();
-        List<Company> companies = searchByPage.search(searchMap, "searchAllCompany","selectSearchCompanyByPaymentStatusAll", modelAndView);
+        List<Company> companies = searchByPage.search(searchMap, "searchAllCompany","selectSearchCompanyByPaymentStatusAll", modelAndView,auth);
         loadPage(modelAndView,model);
         loadPage(modelAndView,model);
         model.message = "Результаты поиска:";
@@ -115,12 +118,23 @@ public class ManagerActsController {
         modelAndView.setViewName("manager/acts");
     }
     private void loadCompanies(Model model){
-        List<Company> companies = companyService.getCompanies();
+        List<Company> companies=new ArrayList<>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+        String role= auth.getAuthorities().toString();
+        if(role.equals("[ROLE_DIRECTOR]")) {
+            System.out.println("director");
+            companies = companyService.getCompanies();
+        }
+        if(role.equals("[ROLE_MANAGER]")) {
+            System.out.println("manager");
+            companies = companyService.getCompaniesByManagerName(name);
+        }
         model.companyList = new ArrayList<>();
         for (Company company : companies) {
-                List<Model.CompaniesItem> list = convert(company);
-                for (Model.CompaniesItem m : list) {
-                    model.companyList.add(m);
+            List<Model.CompaniesItem> list = convert(company);
+            for (Model.CompaniesItem m : list) {
+                model.companyList.add(m);
 
             }
         }

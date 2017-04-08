@@ -33,4 +33,4 @@ public interface CompanyAddressDAO {
 
     List<CompanyAddress> getCompanyAddresses(List<Integer> companyIds);
 
-    }
+}

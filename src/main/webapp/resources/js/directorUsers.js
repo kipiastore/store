@@ -47,9 +47,6 @@ var BreakException = {};
 var dataCompanyAddressJson;
 
 $(window).on("load", function () {
-    var container = $(".container");
-    container.show();
-    container.animate({opacity: 1}, 200);
     if ($("#addError")[0].innerHTML != "") {
         try {
             var user = $.parseJSON($(".addingUserJson")[0].innerHTML);
@@ -63,6 +60,10 @@ $(window).on("load", function () {
         createForm.show();
         createForm.animate({opacity: 1}, 200);
         isShowCreateForm = true;
+    } else {
+        var container = $(".container");
+        container.show();
+        container.animate({opacity: 1}, 200);
     }
 });
 

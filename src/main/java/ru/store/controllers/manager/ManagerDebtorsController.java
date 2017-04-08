@@ -1,6 +1,8 @@
 package ru.store.controllers.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,8 +49,9 @@ public class ManagerDebtorsController {
     public ModelAndView searchByDebtors(@RequestParam MultiValueMap<String, String> searchMap,
                                         @RequestParam("selectSearchCompanyByType")String selectSearchCompanyByType){
         ModelAndView modelAndView=new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Model model=new Model();
-        List<Company> companies=searchByPage.search(searchMap,selectSearchCompanyByType,"selectSearchCompanyByPaymentStatusAll",modelAndView);
+        List<Company> companies=searchByPage.search(searchMap,selectSearchCompanyByType,"selectSearchCompanyByPaymentStatusAll",modelAndView,auth);
         List<Package> packages=packageService.getPackages();
         List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
         List<CompanyReminder> companyReminders=companyReminderService.getLastCompaniesReminderType();
@@ -64,8 +67,8 @@ public class ManagerDebtorsController {
                     }
                 }
                 else {
-                        searchByChoice(company, model, searchByPage.getChoice() ,packages,companyReminders,companyAddresses);
-                    }
+                    searchByChoice(company, model, searchByPage.getChoice() ,packages,companyReminders,companyAddresses);
+                }
             }
         }
         model.selectedPageNum=3;
@@ -82,21 +85,32 @@ public class ManagerDebtorsController {
         modelAndView.setViewName("manager/debtors");
     }
     private void loadCompanies(Model model){
-        List<Company> companies=companyService.getCompanies();
+        List<Company> companies=new ArrayList<>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+        String role= auth.getAuthorities().toString();
+        if(role.equals("[ROLE_DIRECTOR]")) {
+            System.out.println("director");
+            companies = companyService.getCompanies();
+        }
+        if(role.equals("[ROLE_MANAGER]")) {
+            System.out.println("manager");
+            companies = companyService.getCompaniesByManagerName(name);
+        }
         List<Package> packages=packageService.getPackages();
         List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
         List<CompanyReminder> companyReminders=companyReminderService.getLastCompaniesReminderType();
         model.companyList = new ArrayList<>();
-            for (Company company : companies) {
-                    if (company.getIsPaid().equals(false)&&company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
-                        List<Model.CompaniesItem> list = convert(company,packages,companyReminders,companyAddresses);
-                        for (Model.CompaniesItem m : list) {
-                            model.companyList.add(m);
-                        }
-                    }
-
+        for (Company company : companies) {
+            if (company.getIsPaid().equals(false)&&company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
+                List<Model.CompaniesItem> list = convert(company,packages,companyReminders,companyAddresses);
+                for (Model.CompaniesItem m : list) {
+                    model.companyList.add(m);
+                }
             }
+
         }
+    }
 
     private String getNormalName(String name) {
         if (name != null && name.length() > 26)
@@ -106,21 +120,21 @@ public class ManagerDebtorsController {
     }
     private void searchByChoice(Company company,Model model,int choice,List<Package> packages,List<CompanyReminder>companyReminders,List<CompanyAddress>companyAddresses) {
         List<Model.CompaniesItem> companyItems;
-            companyItems = convert(company,packages,companyReminders,companyAddresses);
-            for(Model.CompaniesItem companyItem:companyItems) {
-                if (choice == 1) {
-                    System.out.println("note----"+companyItem.getNote());
-                    if (companyItem.getNote()!=null) {
-                        model.companyList.add(companyItem);
-                    }
-                }
-                if (choice == 2) {
-                    System.out.println("note----"+companyItem.getNote());
-                    if (companyItem.getNote()==null) {
-                        model.companyList.add(companyItem);
-                    }
+        companyItems = convert(company,packages,companyReminders,companyAddresses);
+        for(Model.CompaniesItem companyItem:companyItems) {
+            if (choice == 1) {
+                System.out.println("note----"+companyItem.getNote());
+                if (companyItem.getNote()!=null) {
+                    model.companyList.add(companyItem);
                 }
             }
+            if (choice == 2) {
+                System.out.println("note----"+companyItem.getNote());
+                if (companyItem.getNote()==null) {
+                    model.companyList.add(companyItem);
+                }
+            }
+        }
 
     }
     private List<Model.CompaniesItem> convert(Company company,List<Package> packages,List<CompanyReminder>companyReminders,List<CompanyAddress>companyAddresses) {
@@ -169,11 +183,11 @@ public class ManagerDebtorsController {
     private String checkIsDebt(Company company) {
         float debt=0;
         if (company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null&&company.getDateOfEndContract().getTime() < new Date().getTime()){
-           long debtDays=((new Date().getTime()-company.getDateOfEndContract().getTime())/86400000);
+            long debtDays=((new Date().getTime()-company.getDateOfEndContract().getTime())/86400000);
             Calendar calendar=Calendar.getInstance();
             float debtPerDay=company.getCostOf()/calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             debt=debtPerDay*(int)debtDays;
         }
         return debt+"гр";
     }
- }
+}

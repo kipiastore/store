@@ -35,6 +35,7 @@
             <div class="media-body">
                 <b>ООО «Store» © 2016</b>
                 <br>Все права защищены и охраняются действующим законодательством Украины.
+                <br><p>Количество просмотров ${countInfo}: ${portalCount}</p>
             </div>
         </div>
         <p class="cr"></p>

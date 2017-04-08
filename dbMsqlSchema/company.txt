@@ -3,12 +3,12 @@ CREATE TABLE company
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     keywords VARCHAR(255),
-    date_of_contract DATE NOT NULL,
-    date_of_start_contract DATE NOT NULL,
-    date_of_end_contract DATE NOT NULL,
+    date_of_contract DATE,
+    date_of_start_contract DATE,
+    date_of_end_contract DATE,
     manager VARCHAR(45) NOT NULL,
     company_package_id INT(11) NOT NULL,
-    cost_of INT(11) NOT NULL,
+    cost_of INT(11),
     legal_name VARCHAR(120),
     inn INT(11),
     legal_address VARCHAR(120),
@@ -20,7 +20,7 @@ CREATE TABLE company
     last_modified_date DATETIME NOT NULL,
     owner VARCHAR(45) NOT NULL,
     last_modified_by VARCHAR(45) NOT NULL,
-    description VARCHAR(255),
+    description VARCHAR(1024),
     is_show_for_operator TINYINT(4) NOT NULL,
     is_show_for_site TINYINT(4) NOT NULL,
     is_paid TINYINT(4) NOT NULL,
@@ -29,5 +29,6 @@ CREATE TABLE company
     is_closed TINYINT(4) NOT NULL,
     is_priority TINYINT(4) NOT NULL,
     email VARCHAR(120),
-    site VARCHAR(120)
+    site VARCHAR(120),
+    count_company INT(11) DEFAULT '0'
 );

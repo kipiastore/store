@@ -2,6 +2,7 @@ package ru.store.dao.implementation;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.store.dao.interfaces.CompanyDAO;
@@ -57,22 +58,54 @@ public class CompanyDAOImpl implements CompanyDAO {
     }
     @Override
     @Transactional
-    public List<Company> getCompaniesByPaymentStatus(String selectSearchCompanyByPaymentStatus) {
+    public List<Company> getCompaniesByManagerName(String name) {
+        String hql = "from Company where  lastModifiedDate != createdDate  and lower( manager) like lower(:name) order by lastModifiedDate desc";
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name).list();
+    }
+    @Override
+    @Transactional
+    public List<Company> getCompaniesByPaymentStatus(String selectSearchCompanyByPaymentStatus,Authentication auth) {
+        String hql;
+        String managerName=auth.getName();
         if(selectSearchCompanyByPaymentStatus.equals("selectSearchCompanyByPaymentStatusAll")) {
-            String hql = "from Company order by name";
-            return sessionFactory.getCurrentSession().createQuery(hql).list();
+            if (auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company  order by name";
+                return sessionFactory.getCurrentSession().createQuery(hql).list();
+            }
+            else{
+                hql = "from Company where lower(manager) LIKE lower(:managerName) order by name";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("managerName",managerName).list();
+            }
         }
         if(selectSearchCompanyByPaymentStatus.equals("withoutContract")) {
-            String hql = "from Company where dateOfContract is null order by name";
-            return sessionFactory.getCurrentSession().createQuery(hql).list();
+            if (auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where dateOfContract is null order by name";
+                return sessionFactory.getCurrentSession().createQuery(hql).list();
+            }
+            else{
+                hql = "from Company where dateOfContract is null and  lower(manager) LIKE lower(:managerName) order by name";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("managerName",managerName).list();
+            }
         }
         if(selectSearchCompanyByPaymentStatus.equals("paidContract")) {
-            String hql = "from Company where dateOfContract is not null and isPaid=true order by name";
-            return sessionFactory.getCurrentSession().createQuery(hql).list();
+            if (auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where dateOfContract is not null and isPaid=true order by name";
+                return sessionFactory.getCurrentSession().createQuery(hql).list();
+            }
+            else{
+                hql = "from Company where dateOfContract is not null and isPaid=true and  lower(manager) LIKE lower(:managerName)  order by name";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("managerName",managerName).list();
+            }
         }
         if(selectSearchCompanyByPaymentStatus.equals("notPaidContract")) {
-            String hql = "from Company where dateOfContract is not null and isPaid=false order by name";
-            return sessionFactory.getCurrentSession().createQuery(hql).list();
+            if (auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where dateOfContract is not null and isPaid=false order by name";
+                return sessionFactory.getCurrentSession().createQuery(hql).list();
+            }
+            else{
+                hql = "from Company where dateOfContract is not null and isPaid=false and  lower(manager) LIKE lower(:managerName) order by name";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("managerName",managerName).list();
+            }
         }
         return null;
     }
@@ -99,24 +132,58 @@ public class CompanyDAOImpl implements CompanyDAO {
     }
     @Override
     @Transactional
-    public List<Company> findCompaniesByNameAndSearchPaymentStatus(String name, String selectSearchCompanyByPaymentStatus) {
+    public List<Company> findCompaniesByNameAndByManager(String name,String managerName) {
+        String hql = "from Company where lower(name) LIKE lower(:name) and lower(manager)like lower(:managerName) order by name desc";
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").setString("managerName", managerName).list();
+    }
+    @Override
+    @Transactional
+    public List<Company> findCompaniesByNameAndSearchPaymentStatus(String name, String selectSearchCompanyByPaymentStatus,Authentication auth) {
+        String hql;
+        String managerName=auth.getName();
         if(selectSearchCompanyByPaymentStatus.equals("selectSearchCompanyByPaymentStatusAll")) {
-            String hql = "from Company where lower(name) LIKE lower(:name)order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(name) LIKE lower(:name)order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").list();
+            }
+            else{
+                hql = "from Company where lower(name) LIKE lower(:name) and lower(manager) like lower(:managerName)order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").setString("managerName",managerName).list();
+            }
+
         }
         if(selectSearchCompanyByPaymentStatus.equals("withoutContract")) {
-            String hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NULL order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NULL order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").list();
+            }
+            else{
+                hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NULL and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").setString("managerName",managerName).list();
+            }
+
         }
         if(selectSearchCompanyByPaymentStatus.equals("paidContract")) {
-            String hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NOT NULL and isPaid=true order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NOT NULL and isPaid=true order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").list();
+            }
+            else{
+                hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NOT NULL and isPaid=true and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").setString("managerName",managerName).list();
+            }
         }
         if(selectSearchCompanyByPaymentStatus.equals("notPaidContract")) {
-            String hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NOT NULL and isPaid=false order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NOT NULL and isPaid=false order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").list();
+            }
+            else{
+                hql = "from Company where lower(name) LIKE lower(:name)and dateOfContract IS NOT NULL and isPaid=false and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("name", name + "%").setString("managerName",managerName).list();
+            }
         }
-      return null;
+        return null;
     }
     //15.02.2017
     @Override
@@ -139,24 +206,60 @@ public class CompanyDAOImpl implements CompanyDAO {
         String hql = "from Company where lower(phone) LIKE lower(:phone) order by name desc";
         return sessionFactory.getCurrentSession().createQuery(hql).setString("phone",phone + "%").list();
     }
+
     @Override
     @Transactional
-    public List<Company> findCompaniesByPhoneAndSearchPaymentStatus(String phone,String selectSearchCompanyByPaymentStatus) {
+    public List<Company> findCompaniesByPhoneAndByManager(String phone,String managerName) {
+        String hql = "from Company where lower(phone) LIKE lower(:phone) and lower(manager) like lower(:managerName) order by name desc";
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("phone",phone + "%").setString("managerName",managerName).list();
+    }
+
+    @Override
+    @Transactional
+    public List<Company> findCompaniesByPhoneAndSearchPaymentStatus(String phone,String selectSearchCompanyByPaymentStatus,Authentication auth) {
+        String hql;
+        String managerName=auth.getName();
         if(selectSearchCompanyByPaymentStatus.equals("selectSearchCompanyByPaymentStatusAll")) {
-            String hql = "from Company where lower(phone) LIKE lower(:phone)order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(phone) LIKE lower(:phone)order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").list();
+            }
+            else{
+                hql = "from Company where lower(phone) LIKE lower(:phone) and lower(manager) like lower(:managerName)order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").setString("managerName",managerName).list();
+            }
+
         }
         if(selectSearchCompanyByPaymentStatus.equals("withoutContract")) {
-            String hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NULL order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NULL order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").list();
+            }
+            else{
+                hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NULL and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").setString("managerName",managerName).list();
+            }
+
         }
         if(selectSearchCompanyByPaymentStatus.equals("paidContract")) {
-            String hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NOT NULL and isPaid=true order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NOT NULL and isPaid=true order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").list();
+            }
+            else{
+                hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NOT NULL and isPaid=true and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").setString("managerName",managerName).list();
+            }
         }
         if(selectSearchCompanyByPaymentStatus.equals("notPaidContract")) {
-            String hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NOT NULL and isPaid=false order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NOT NULL and isPaid=false order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").list();
+            }
+            else{
+                hql = "from Company where lower(phone) LIKE lower(:phone)and dateOfContract IS NOT NULL and isPaid=false and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("phone", phone + "%").setString("managerName",managerName).list();
+            }
         }
         return null;
     }
@@ -167,24 +270,59 @@ public class CompanyDAOImpl implements CompanyDAO {
         String hql = "from Company where lower(email) LIKE lower(:email) order by name desc";
         return sessionFactory.getCurrentSession().createQuery(hql).setString("email",email + "%").list();
     }
+
     @Override
     @Transactional
-    public List<Company> findCompaniesByEmailAndSearchPaymentStatus(String email,String selectSearchCompanyByPaymentStatus) {
+    public List<Company> findCompaniesByEmailAndByManager(String email,String managerName) {
+        String hql = "from Company where lower(email) LIKE lower(:email) and lower(manager)like lower(:managerName) order by name desc";
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("email",email + "%").setString("managerName",managerName).list();
+    }
+    @Override
+    @Transactional
+    public List<Company> findCompaniesByEmailAndSearchPaymentStatus(String email,String selectSearchCompanyByPaymentStatus,Authentication auth) {
+        String hql;
+        String managerName=auth.getName();
         if(selectSearchCompanyByPaymentStatus.equals("selectSearchCompanyByPaymentStatusAll")) {
-            String hql = "from Company where lower(email) LIKE lower(:email)order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(email) LIKE lower(:email)order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").list();
+            }
+            else{
+                hql = "from Company where lower(email) LIKE lower(:email) and lower(manager) like lower(:managerName)order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").setString("managerName",managerName).list();
+            }
+
         }
         if(selectSearchCompanyByPaymentStatus.equals("withoutContract")) {
-            String hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NULL order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NULL order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").list();
+            }
+            else{
+                hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NULL and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").setString("managerName",managerName).list();
+            }
+
         }
         if(selectSearchCompanyByPaymentStatus.equals("paidContract")) {
-            String hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NOT NULL and isPaid=true order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NOT NULL and isPaid=true order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").list();
+            }
+            else{
+                hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NOT NULL and isPaid=true and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").setString("managerName",managerName).list();
+            }
         }
         if(selectSearchCompanyByPaymentStatus.equals("notPaidContract")) {
-            String hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NOT NULL and isPaid=false order by name desc";
-            return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").list();
+            if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")) {
+                hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NOT NULL and isPaid=false order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").list();
+            }
+            else{
+                hql = "from Company where lower(email) LIKE lower(:email)and dateOfContract IS NOT NULL and isPaid=false and lower(manager) like lower(:managerName) order by name desc";
+                return sessionFactory.getCurrentSession().createQuery(hql).setString("email", email + "%").setString("managerName",managerName).list();
+            }
         }
         return null;
     }

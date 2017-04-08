@@ -1,6 +1,7 @@
 package ru.store.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
@@ -85,8 +86,13 @@ public class CompanyService {
         return companyDAO.getCompanies();
     }
 
-    public List<Company> getCompaniesByPaymentStatus(String selectSearchCompanyByPaymentStatus) {
-        return companyDAO.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus);
+    public List<Company> getCompaniesByManagerName(String name) {
+        return companyDAO.getCompaniesByManagerName(name);
+    }
+
+
+    public List<Company> getCompaniesByPaymentStatus(String selectSearchCompanyByPaymentStatus,Authentication auth) {
+        return companyDAO.getCompaniesByPaymentStatus(selectSearchCompanyByPaymentStatus,auth);
     }
 
     public List<Company> getCompaniesByLastUpdate() { return companyDAO.getCompaniesByLastUpdate(); }
@@ -95,8 +101,12 @@ public class CompanyService {
         return companyDAO.findCompaniesByName(name);
     }
 
-    public List<Company> findCompaniesByNameAndSearchPaymentStatus(String name,String selectSearchCompanyByPaymentStatus) {
-        return companyDAO.findCompaniesByNameAndSearchPaymentStatus(name,selectSearchCompanyByPaymentStatus);
+    public List<Company> findCompaniesByNameAndByManager(String name,String managerName) {
+        return companyDAO.findCompaniesByNameAndByManager(name,managerName);
+    }
+
+    public List<Company> findCompaniesByNameAndSearchPaymentStatus(String name, String selectSearchCompanyByPaymentStatus, Authentication auth) {
+        return companyDAO.findCompaniesByNameAndSearchPaymentStatus(name,selectSearchCompanyByPaymentStatus,auth);
     }
 
     public List<Company> findCompaniesByLegalName(String legalName) {
@@ -107,16 +117,24 @@ public class CompanyService {
         return companyDAO.findCompaniesByPhone(phone);
     }
 
-    public List<Company> findCompaniesByPhoneAndSearchPaymentStatus(String phone,String selectSearchCompanyByPaymentStatus) {
-        return companyDAO.findCompaniesByPhoneAndSearchPaymentStatus(phone,selectSearchCompanyByPaymentStatus);
+    public List<Company> findCompaniesByPhoneAndByManager(String phone,String managerName) {
+        return companyDAO.findCompaniesByPhoneAndByManager(phone,managerName);
+    }
+
+    public List<Company> findCompaniesByPhoneAndSearchPaymentStatus(String phone,String selectSearchCompanyByPaymentStatus,Authentication auth) {
+        return companyDAO.findCompaniesByPhoneAndSearchPaymentStatus(phone,selectSearchCompanyByPaymentStatus,auth);
     }
 
     public List<Company> findCompaniesByEmail(String email) {
         return companyDAO.findCompaniesByEmail(email);
     }
 
-    public List<Company> findCompaniesByEmailAndSearchPaymentStatus(String email,String selectSearchCompanyByPaymentStatus) {
-        return companyDAO.findCompaniesByEmailAndSearchPaymentStatus(email,selectSearchCompanyByPaymentStatus);
+    public List<Company> findCompaniesByEmailAndByManager(String email,String managerName) {
+        return companyDAO.findCompaniesByEmailAndByManager(email,managerName);
+    }
+
+    public List<Company> findCompaniesByEmailAndSearchPaymentStatus(String email,String selectSearchCompanyByPaymentStatus,Authentication auth) {
+        return companyDAO.findCompaniesByEmailAndSearchPaymentStatus(email,selectSearchCompanyByPaymentStatus,auth);
     }
 
     public List<Company> getCompanies(List<Integer> companyIds) {
