@@ -26,12 +26,14 @@
     <div class="content">
         <span>Название: ${model.company.name}</span>
     </div>
+    <!--
     <div class="content">
         <span>Менеджер: ${model.managerName}</span>
     </div>
     <div class="content">
         <span>Пакет: ${model.packageName}</span>
     </div>
+    -->
     <div class="content">
         <span>E-mail: ${model.company.email}</span>
     </div>

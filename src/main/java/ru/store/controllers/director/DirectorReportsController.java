@@ -133,7 +133,7 @@ public class DirectorReportsController {
     }
 
     private void loadPage(DirectorPositionsController.Model model, ModelAndView modelAndView) {
-        model.selectedPageNum = 9;
+        model.selectedPageNum = 10;
         loadCompanies(model);
         modelAndView.addObject("model", model);
         modelAndView.addObject("prefix", "");

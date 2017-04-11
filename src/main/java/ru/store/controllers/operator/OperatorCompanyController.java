@@ -77,8 +77,8 @@ public class OperatorCompanyController {
         model.companyId = company.getId();
         model.subPartitionItem = subPartitionItem;
         model.company = company;
-        model.managerName = userService.getUser(company.getManager()).getFullName();
-        model.packageName = packageService.getPackage(company.getCompanyPackageId()).getName();
+        //model.managerName = userService.getUser(company.getManager()).getFullName();
+        //model.packageName = packageService.getPackage(company.getCompanyPackageId()).getName();
         model.companyAddresses = companyAddressService.getCompanyAddresses(company.getId());
 
         List<CompanySubPartition> companySubPartitions = companySubPartitionService.findCompanySubpartitionByCompanyId(companyId);

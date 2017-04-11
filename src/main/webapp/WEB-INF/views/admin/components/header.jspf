@@ -6,10 +6,11 @@
             <a class="headerMenuItem" href="${prefix}positions" data-id="2">Позиции</a>
             <a class="headerMenuItem" href="${prefix}partitions" data-id="3">Разделы</a>
             <a class="headerMenuItem" href="${prefix}managers" data-id="4">Менеджеры</a>
-            <a class="headerMenuItem" href="${prefix}users" data-id="5">Пользователи</a>
-            <a class="headerMenuItem" href="${prefix}regions" data-id="6">Районы</a>
-            <a class="headerMenuItem" href="${prefix}packages" data-id="7">Пакеты</a>
-            <a class="headerMenuItem" href="${prefix}reports" data-id="8">Отчеты</a>
+            <a class="headerMenuItem" href="${prefix}operators" data-id="5">Операторы</a>
+            <a class="headerMenuItem" href="${prefix}users" data-id="6">Пользователи</a>
+            <a class="headerMenuItem" href="${prefix}regions" data-id="7">Районы</a>
+            <a class="headerMenuItem" href="${prefix}packages" data-id="8">Пакеты</a>
+            <a class="headerMenuItem" href="${prefix}reports" data-id="9">Отчеты</a>
         </div>
     </div>
     <style scoped>

@@ -76,7 +76,7 @@ public class DirectorPackagesController {
     }
 
     private void loadPage(ModelAndView modelAndView, Model model) {
-        model.selectedPageNum = 8;
+        model.selectedPageNum = 9;
         loadRegions(model);
         modelAndView.addObject("model", model);
         modelAndView.addObject("prefix", "");

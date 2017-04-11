@@ -133,7 +133,7 @@ public class AdminReportsController {
     }
 
     private void loadPage(AdminPositionsController.Model model, ModelAndView modelAndView) {
-        model.selectedPageNum = 8;
+        model.selectedPageNum = 9;
         loadCompanies(model);
         modelAndView.addObject("model", model);
         modelAndView.addObject("prefix", "");

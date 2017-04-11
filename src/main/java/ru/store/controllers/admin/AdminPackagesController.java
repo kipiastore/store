@@ -76,7 +76,7 @@ public class AdminPackagesController {
     }
 
     private void loadPage(ModelAndView modelAndView, Model model) {
-        model.selectedPageNum = 7;
+        model.selectedPageNum = 8;
         loadRegions(model);
         modelAndView.addObject("model", model);
         modelAndView.addObject("prefix", "");

@@ -21,10 +21,10 @@
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
             <form:form action="addadmin" modelAttribute="user" method="post" id="createForm">
-                <label>ФИО</label>
-                <input title="Введите ФИО." autofocus type="text" maxlength="255" name="fullName" id="newFullName" />
+                <label>Ф.И.О.</label>
+                <input title="Введите Ф.И.О." autofocus type="text" maxlength="255" name="fullName" id="newFullName" />
                 <label>Логин<span class="required">*</span></label>
-                <input title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов."
+                <input title="Логин админа может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов."
                        type="text" required pattern="(^[\w+]{4,20}$)" name="username" id="newUsername" />
                 <label>Пароль<span class="required">*</span></label><input type="checkbox"  name="showPassword" id="showPassword" /> <label>Показать пароль</label>
                 <input title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
@@ -45,11 +45,11 @@
                 <input type="submit" value="Создать" />
             </form:form>
             <form:form action="updateadmin" modelAttribute="user" method="post" id="updateForm">
-                <label>ФИО</label>
-                <input id="fullName" title="Введите ФИО." maxlength="255" type="text" name="fullName">
+                <label>Ф.И.О.</label>
+                <input id="fullName" title="Введите Ф.И.О." maxlength="255" type="text" name="fullName">
                 <label>Логин</label>
                 <input id="username" type="text" disabled pattern="(^[\w+]{4,20}$)" name="username"
-                       title="Имя пользователя может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов.">
+                       title="Логин админа может содержать латинские буквы, цифры, знаки дефиса, подчеркивания. От 4 до 20 символов.">
                 <label>Новый пароль</label><input type="checkbox"  name="showPassword" id="showPasswordUpdate" /> <label>Показать пароль</label>
                 <input title="Пароль должен содержать не менее 6 символов, включая верхний/нижний регистр и цифры."
                        id="passwordUpdate" type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password"

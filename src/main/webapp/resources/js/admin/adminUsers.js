@@ -169,7 +169,7 @@ $(".menuBodyItemInfo").on("click", function (event) {
 
     if (pageInformation == undefined)
         pageInformation = $("#pageInformation").val();
-    if (!(pageInformation == 4 || pageInformation == 5 || pageInformation == 1))
+    if (!(pageInformation == 4 || pageInformation == 5 || pageInformation == 6|| pageInformation == 1))
         return;
     $(".error").hide();
     $(".success").hide();
@@ -208,7 +208,7 @@ $(".menuBodyItemInfo").on("click", function (event) {
     $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
 
-    if (pageInformation == 4 || pageInformation == 5) {
+    if (pageInformation == 4 || pageInformation == 5|| pageInformation == 6) {
         if (data == undefined) {
             data = $.parseJSON($(".dataJson")[0].innerHTML);
             fullName = $("#fullName");
@@ -272,9 +272,9 @@ function loadCompany(id) {
     $.get('../api/resource/v1/company/'+id, function(entry) {
         companyName.val(entry.name);
         keywords.val(entry.keywords);
-            dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
-            dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
-            dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
+        dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
+        dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
+        dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
         manager.val(entry.manager);
         companyPackageId.val(entry.companyPackageId);
         costOf.val(entry.costOf);

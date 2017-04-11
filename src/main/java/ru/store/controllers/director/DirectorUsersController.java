@@ -75,7 +75,7 @@ public class DirectorUsersController {
     }
 
     private void loadPage(Model model, ModelAndView modelAndView) {
-        model.selectedPageNum = 6;
+        model.selectedPageNum = 7;
         loadUsers(model, userService, "ROLE_CLIENT");
         modelAndView.addObject("model", model);
         modelAndView.setViewName("director/users");
