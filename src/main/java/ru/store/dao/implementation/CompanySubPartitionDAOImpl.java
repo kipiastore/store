@@ -77,4 +77,32 @@ public class CompanySubPartitionDAOImpl implements CompanySubPartitionDAO {
         String hql = "delete from CompanySubPartition where subPartitionId =:subPartitionId";
         sessionFactory.getCurrentSession().createQuery(hql).setInteger("subPartitionId", subPartitionId).executeUpdate();
     }
+
+    @Override
+    @Transactional
+    public void deleteCompanySubpartitionBySubPartitionIds(List<Integer> subPartitionIds) {
+        if (subPartitionIds == null || subPartitionIds.size() == 0)
+            return;
+        String hql = "delete from CompanySubPartition where subPartitionId in (:subPartitionIds)";
+        sessionFactory.getCurrentSession().createQuery(hql).setParameterList("subPartitionIds", subPartitionIds).executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public void deleteCompanySubpartitionIds(List<Integer> idList) {
+        if (idList == null || idList.size() == 0)
+            return;
+        String hql = "delete from CompanySubPartition where id in (:idList)";
+        sessionFactory.getCurrentSession().createQuery(hql).setParameterList("idList", idList).executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public List<CompanySubPartition> findCompanySubpartitionByIds(List<Integer> idList) {
+        if (idList == null || idList.size() == 0)
+            return new ArrayList<>();
+        String hql = "from CompanySubPartition where id in (:idList)";
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("idList", idList).list();
+    }
+
 }

@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ru.store.dao.interfaces.CompanyDAO;
-import ru.store.dao.interfaces.CompanySubPartitionDAO;
 import ru.store.entities.Company;
 import ru.store.entities.CompanySubPartition;
+import ru.store.service.CompanyService;
+import ru.store.service.CompanySubPartitionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +20,16 @@ import java.util.List;
 public class PortalCompanyLightResource {
 
     @Autowired
-    private CompanyDAO companyDAO;
+    private CompanyService companyService;
     @Autowired
-    private CompanySubPartitionDAO companySubPartitionDAO;
+    private CompanySubPartitionService companySubPartitionService;
 
     @RequestMapping(value = "/api/portal/resource/v1/company/SubPartition/{subPartitionId}/{position}",
             method = RequestMethod.GET)
     public List<Company> getCompany(@PathVariable String subPartitionId, @PathVariable String position) {
 
         List<CompanySubPartition> companySubPartitions =
-                companySubPartitionDAO.findCompanySubpartitionBySubPartitionId(Integer.valueOf(subPartitionId));
+                companySubPartitionService.findCompanySubpartitionBySubPartitionId(Integer.valueOf(subPartitionId));
         List<Integer> companyId = new ArrayList<>();
         for (CompanySubPartition companySubPartition : companySubPartitions) {
             companyId.add(companySubPartition.getCompanyId());
@@ -40,7 +40,7 @@ public class PortalCompanyLightResource {
         int minPosition = positionCounter;
         int counter = 0;
         List<Company> tmpCompanies = new ArrayList<>();
-        List<Company> companies = companyDAO.getPortalCompanies(companyId);
+        List<Company> companies = companyService.getPortalCompanies(companyId);
         for (Company company : companies) {
             if (counter == minPosition) {
                 tmpCompanies.add(company);

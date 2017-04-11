@@ -19,4 +19,6 @@ public interface ImageDAO {
 
     Image getImage(Integer id);
 
+    void deleteImage(List<Integer> imageIds);
+
 }

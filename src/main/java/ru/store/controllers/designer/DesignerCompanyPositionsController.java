@@ -159,7 +159,7 @@ public class DesignerCompanyPositionsController {
 
         for (CompanySubPartition companySubPartition : companySubPartitions) {
             subPartitionItem = new Model.SubPartitionItem();
-            subPartitionItem.companySubpartitionId = companySubPartition.getSubPartitionId();
+            subPartitionItem.companySubpartitionId = companySubPartition.getId();
             for (SubPartition subPartition : subPartitions) {
                 if (subPartition.getId() == companySubPartition.getSubPartitionId()) {
                     subPartitionItem.subpartitionName = subPartition.getName();

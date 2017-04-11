@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.controllers.operator.OperatorSearchController;
-import ru.store.dao.interfaces.*;
 import ru.store.entities.*;
 import ru.store.service.*;
 import javax.servlet.http.HttpServletRequest;
@@ -16,18 +15,15 @@ import java.util.*;
 public class PartitionController {
 
     @Autowired
-    private PartitionDAO partitionDAO;
+    private SubPartitionService subPartitionService;
     @Autowired
-    private SubPartitionDAO subPartitionDAO;
+    private CompanySubPartitionService companySubPartitionService;
     @Autowired
-    private CompanySubPartitionDAO companySubPartitionDAO;
+    private CompanyService companyService;
     @Autowired
-    private CompanyDAO companyDAO;
+    private PackageService packageService;
     @Autowired
-    private PackageDAO packageDAO;
-    @Autowired
-    private CompanyAddressDAO companyAddressDAO;
-
+    private CompanyAddressService companyAddressService;
     @Autowired
     private PartitionService partitionService;
 
@@ -52,20 +48,20 @@ public class PartitionController {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
         }
-        if (partitionDAO.getPartitionById(partitionId) == null) {
+        if (partitionService.getPartitionById(partitionId) == null) {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
         }
 
         Map<Integer, Integer> subPartitionIdToCount = new HashMap<>();
-        List<Integer> companiesIds = companyDAO.getOptimizationCompanies();
+        List<Integer> companiesIds = companyService.getOptimizationCompanies();
         Set<Integer> availableCompany = new TreeSet<>();
         for (Integer companyId : companiesIds) {
             availableCompany.add(companyId);
         }
         List<Model.PartitionItem.SubPartitionItem> subPartitionItems = new ArrayList<>();
         Model.PartitionItem.SubPartitionItem subPartitionItem;
-        for (CompanySubPartition companySubPartition : companySubPartitionDAO.getCompanySubPartitions()) {
+        for (CompanySubPartition companySubPartition : companySubPartitionService.getCompanySubPartitions()) {
             if (!availableCompany.contains(companySubPartition.getCompanyId()))
                 continue;
             if (subPartitionIdToCount.get(companySubPartition.getSubPartitionId()) == null) {
@@ -77,7 +73,7 @@ public class PartitionController {
             }
         }
         List<Integer> subPartitionIds = new ArrayList<>();
-        for (SubPartition subPartition : subPartitionDAO.getSubPartitionsByPartitionId(partitionId)) {
+        for (SubPartition subPartition : subPartitionService.getSubPartitionsByPartitionId(partitionId)) {
             subPartitionIds.add(subPartition.getId());
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
@@ -88,7 +84,7 @@ public class PartitionController {
         }
 
         Model.PartitionItem partitionItem = new Model.PartitionItem();
-        Partition partition = partitionDAO.getPartitionById(partitionId);
+        Partition partition = partitionService.getPartitionById(partitionId);
         partitionItem.partitionId = partition.getId();
         partitionItem.partitionName = getNormalName(partition.getName(), 50);
         partitionItem.subPartitionItems = subPartitionItems;
@@ -97,13 +93,13 @@ public class PartitionController {
         model.partitionItem = partitionItem;
 
 
-        Map<Integer, Integer> packageIdToPriority = OperatorSearchController.priorityHandler(packageDAO.getPackages());
-        List<CompanySubPartition> companySubPartitions = companySubPartitionDAO.findCompanySubpartitionBySubPartitionsId(subPartitionIds);
+        Map<Integer, Integer> packageIdToPriority = OperatorSearchController.priorityHandler(packageService.getPackages());
+        List<CompanySubPartition> companySubPartitions = companySubPartitionService.findCompanySubpartitionBySubPartitionsId(subPartitionIds);
         Set<Integer> companyIds = new HashSet<>();
         for (CompanySubPartition companySubPartition : companySubPartitions) {
             companyIds.add(companySubPartition.getCompanyId());
         }
-        List<Company> companies = companyDAO.getPortalCompanies(new ArrayList<>(companyIds));
+        List<Company> companies = companyService.getPortalCompanies(new ArrayList<>(companyIds));
         List<Model.CompanyItem> companyItems = new ArrayList<>();
         Model.CompanyItem companyItem;
         List<Integer> companyId = new ArrayList<>();
@@ -131,7 +127,7 @@ public class PartitionController {
                 break;
         }
         List<CompanyAddress> companyAddresses =
-                companyAddressDAO.getCompanyAddresses(new ArrayList<>(companyToCompanyAddress.keySet()));
+                companyAddressService.getCompanyAddresses(new ArrayList<>(companyToCompanyAddress.keySet()));
         for (CompanyAddress companyAddress : companyAddresses) {
             companyToCompanyAddress.get(companyAddress.getCompanyId()).add(companyAddress);
         }

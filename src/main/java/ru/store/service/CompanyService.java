@@ -141,5 +141,16 @@ public class CompanyService {
         return companyDAO.getCompanies(companyIds);
     }
 
+    public List<Company> getPortalCompanies(List<Integer> companyIds) {
+        return companyDAO.getPortalCompanies(companyIds);
+    }
+
+    public List<Company> findCompaniesByKeyword(String keywords) {
+        return companyDAO.findCompaniesByKeyword(keywords);
+    }
+
+    public List<Integer> getOptimizationCompanies() {
+        return companyDAO.getOptimizationCompanies();
+    }
 }
 

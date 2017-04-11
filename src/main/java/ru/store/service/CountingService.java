@@ -10,12 +10,16 @@ import ru.store.entities.CountingPortalPage;
  */
 @Service
 public class CountingService {
+
     @Autowired
     private CountingDAO countingDAO;
+
     public void addCountPortalPage(CountingPortalPage c) {
         countingDAO.addCountPortalPage(c);
     }
+
     public CountingPortalPage getCountPortalPage() {
         return countingDAO.getCountPortalPage();
     }
+
 }

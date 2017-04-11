@@ -36,4 +36,8 @@ public class ImageService {
         return imageDAO.getImage(id);
     }
 
+    public void deleteImage(List<Integer> imageIds) {
+        imageDAO.deleteImage(imageIds);
+    }
+
 }

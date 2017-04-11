@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ru.store.dao.interfaces.PackageDAO;
 import ru.store.entities.Package;
+import ru.store.service.PackageService;
 
 import java.util.*;
 
@@ -16,12 +16,12 @@ import java.util.*;
 public class PriorityResource {
 
     @Autowired
-    private PackageDAO packageDAO;
+    private PackageService packageService;
 
     @RequestMapping(value = "/api/portal/resource/v1/company/priority/", method = RequestMethod.GET)
     public List<PriorityModel> priorityHandler() {
         List<PriorityModel> result = new ArrayList<>();
-        List<Package> packages = packageDAO.getPackages();
+        List<Package> packages = packageService.getPackages();
         Set<Integer> prioritySet = new TreeSet<>();
         for (Package aPackages : packages) {
             prioritySet.add(aPackages.getPriority());

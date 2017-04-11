@@ -66,4 +66,12 @@ public class CompanyAddressService {
         return companyAddressDAO.getCompanyAddresses(companyId);
     }
 
+    public List<CompanyAddress> getCompanyAddresses(List<Integer> companyIds) {
+        return companyAddressDAO.getCompanyAddresses(companyIds);
+    }
+
+    public List<CompanyAddress> findCompanyAddressByAddress(String address) {
+        return companyAddressDAO.findCompanyAddressByAddress(address);
+    }
+
 }

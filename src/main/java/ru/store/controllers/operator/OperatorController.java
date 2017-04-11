@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.entities.Partition;
+import ru.store.service.PartitionService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -20,14 +20,14 @@ import java.util.List;
 public class OperatorController {
 
     @Autowired
-    private PartitionDAO partitionDAO;
+    private PartitionService partitionService;
 
     @RequestMapping(value = "/operator", method = RequestMethod.GET)
     public ModelAndView manager(HttpServletRequest request) {
 
         List<Model.PartitionItem> partitionItems = new ArrayList<>();
         Model.PartitionItem partitionItem;
-        for (Partition partition : partitionDAO.getPartitions()) {
+        for (Partition partition : partitionService.getPartitions()) {
             partitionItem = new Model.PartitionItem();
             partitionItem.partitionId = partition.getId();
             partitionItem.partitionName = getNormalName(partition.getName(), 36);

@@ -11,7 +11,7 @@ import ru.store.beans.EmailSender;
 import ru.store.beans.GoogleCaptcha;
 import ru.store.dao.interfaces.*;
 import ru.store.entities.*;
-import ru.store.service.CountingService;
+import ru.store.service.*;
 import ru.store.utility.Util;
 
 import java.util.*;
@@ -23,19 +23,19 @@ import java.util.*;
 public class PortalController {
 
     @Autowired
-    private PartitionDAO partitionDAO;
+    private PartitionService partitionService;
     @Autowired
     private BestCompanyDAO bestCompanyDAO;
     @Autowired
-    private SubPartitionDAO subPartitionDAO;
+    private SubPartitionService subPartitionService;
     @Autowired
     private GoogleCaptcha googleCaptcha;
     @Autowired
     private EmailSender emailSender;
     @Autowired
-    private CompanySubPartitionDAO companySubPartitionDAO;
+    private CompanySubPartitionService companySubPartitionService;
     @Autowired
-    private CompanyDAO companyDAO;
+    private CompanyService companyService;
     @Autowired
     private CountingService countingService;
 
@@ -51,12 +51,12 @@ public class PortalController {
         modelAndView.addObject("portalCount",countingPortalPage.getCountPortal());
         //
         Map<Integer, Integer> subPartitionIdToCount = new HashMap<>();
-        List<Integer> companies = companyDAO.getOptimizationCompanies();
+        List<Integer> companies = companyService.getOptimizationCompanies();
         Set<Integer> availableCompany = new TreeSet<>();
         for (Integer companyId : companies) {
             availableCompany.add(companyId);
         }
-        List<CompanySubPartition> companySubPartitions = companySubPartitionDAO.getCompanySubPartitions();
+        List<CompanySubPartition> companySubPartitions = companySubPartitionService.getCompanySubPartitions();
         for (CompanySubPartition companySubPartition : companySubPartitions) {
             if (!availableCompany.contains(companySubPartition.getCompanyId()))
                 continue;
@@ -73,7 +73,7 @@ public class PortalController {
         Map<Integer, List<Model.PartitionItem.SubPartitionItem>> subPartitionItemsGroupByPartitionId = new HashMap<>();
         List<Model.PartitionItem.SubPartitionItem> subPartitionItems;
         Model.PartitionItem.SubPartitionItem subPartitionItem;
-        for (SubPartition subPartition : subPartitionDAO.getSubPartitions()) {
+        for (SubPartition subPartition : subPartitionService.getSubPartitions()) {
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
             subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 24);
@@ -93,7 +93,7 @@ public class PortalController {
         }
 
 
-        List<SubPartition> subPartitions = subPartitionDAO.getSubPartitions();
+        List<SubPartition> subPartitions = subPartitionService.getSubPartitions();
         Map<Integer, Integer> partitionIdToCount = new HashMap<>();
         for (SubPartition subPartition : subPartitions) {
             if (subPartitionIdToCount.get(subPartition.getId()) != null) {
@@ -109,7 +109,7 @@ public class PortalController {
         // prepare next part of the model;
         List<Model.PartitionItem> partitionItems = new ArrayList<>();
         Model.PartitionItem partitionItem;
-        for (Partition partition : partitionDAO.getPartitions()) {
+        for (Partition partition : partitionService.getPartitions()) {
             partitionItem = new Model.PartitionItem();
             if (partitionIdToCount.get(partition.getId()) != null)
                 partitionItem.companyCount = partitionIdToCount.get(partition.getId());

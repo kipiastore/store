@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.store.dao.interfaces.CompanySubpartitionContentDAO;
 import ru.store.entities.CompanySubpartitionContent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,6 +61,24 @@ public class CompanySubpartitionContentDAOImpl implements CompanySubpartitionCon
     public List<CompanySubpartitionContent> getCompanySubpartitionContents(Integer companyId) {
         String hql = "from CompanySubpartitionContent where companyId =?";
         return sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, companyId).list();
+    }
+
+    @Override
+    @Transactional
+    public void deleteCompanySubpartitionContent(List<Integer> companySubpartitionIds) {
+        if (companySubpartitionIds == null || companySubpartitionIds.size() == 0)
+            return;
+        String hql = "delete from CompanySubpartitionContent where companySubpartitionId in (:companySubpartitionIds)";
+        sessionFactory.getCurrentSession().createQuery(hql).setParameterList("companySubpartitionIds", companySubpartitionIds).executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public List<CompanySubpartitionContent> getCompanySubpartitionContents(List<Integer> companySubpartitionIds) {
+        if (companySubpartitionIds == null || companySubpartitionIds.size() == 0)
+            return new ArrayList<>();
+        String hql = "from CompanySubpartitionContent where companySubpartitionId in (:companySubpartitionIds)";
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("companySubpartitionIds", companySubpartitionIds).list();
     }
 
 }

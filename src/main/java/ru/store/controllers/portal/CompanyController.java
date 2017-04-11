@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.api.portal.PriorityResource;
 import ru.store.controllers.designer.DesignerCompanyPositionsController;
-import ru.store.dao.interfaces.CompanyAddressDAO;
-import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.Company;
 import ru.store.entities.CompanySubPartition;
 import ru.store.entities.CompanySubpartitionContent;
 import ru.store.entities.SubPartition;
+import ru.store.service.CompanyAddressService;
 import ru.store.service.CompanyService;
 import ru.store.service.CompanySubPartitionService;
 import ru.store.service.CompanySubpartitionContentService;
@@ -27,9 +26,7 @@ import java.util.Objects;
 public class CompanyController {
 
     @Autowired
-    private CompanyDAO companyDAO;
-    @Autowired
-    private CompanyAddressDAO companyAddressDAO;
+    private CompanyAddressService companyAddressService;
     @Autowired
     private PriorityResource priorityResource;
     @Autowired
@@ -61,7 +58,7 @@ public class CompanyController {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
         }
-        Company company = companyDAO.getCompany(companyId);
+        Company company = companyService.getCompany(companyId);
         if (company == null) {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
@@ -105,7 +102,7 @@ public class CompanyController {
 
         modelAndView.addObject("model", model);
         modelAndView.addObject("company", company);
-        modelAndView.addObject("addresses", companyAddressDAO.getCompanyAddresses(companyId));
+        modelAndView.addObject("addresses", companyAddressService.getCompanyAddresses(companyId));
         modelAndView.addObject("prefix", "../");
         modelAndView.setViewName("portal/company");
         return modelAndView;

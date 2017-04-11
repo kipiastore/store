@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ru.store.dao.interfaces.CompanyAddressDAO;
 import ru.store.entities.CompanyAddress;
+import ru.store.service.CompanyAddressService;
 
 
 import java.util.*;
@@ -18,7 +18,7 @@ import java.util.*;
 public class AddressResource {
 
     @Autowired
-    private CompanyAddressDAO companyAddressDAO;
+    private CompanyAddressService companyAddressService;
 
     @RequestMapping(value = "/api/portal/resource/v1/company/address/{companyIdList}", method = RequestMethod.GET)
     public List<AddressModel> getAddress(@PathVariable String companyIdList) {
@@ -28,7 +28,7 @@ public class AddressResource {
         for (String value : companyIdList.split(",")) {
             companyIds.add(Integer.valueOf(value));
         }
-        List<CompanyAddress> companyAddresses = companyAddressDAO.getCompanyAddresses(companyIds);
+        List<CompanyAddress> companyAddresses = companyAddressService.getCompanyAddresses(companyIds);
         Map<Integer, List<CompanyAddress>> tmpMap = new HashMap<>();
         List<CompanyAddress> tmpList;
         for (CompanyAddress companyAddress : companyAddresses) {

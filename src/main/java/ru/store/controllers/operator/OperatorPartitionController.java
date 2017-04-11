@@ -5,11 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.dao.interfaces.*;
-import ru.store.entities.Company;
-import ru.store.entities.CompanySubPartition;
 import ru.store.entities.Partition;
 import ru.store.entities.SubPartition;
+import ru.store.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -21,15 +19,15 @@ import java.util.*;
 public class OperatorPartitionController {
 
     @Autowired
-    private PartitionDAO partitionDAO;
+    private PartitionService partitionService;
     @Autowired
-    private SubPartitionDAO subPartitionDAO;
+    private SubPartitionService subPartitionService;
     @Autowired
-    private PackageDAO packageDAO;
+    private PackageService packageService;
     @Autowired
-    private CompanySubPartitionDAO companySubPartitionDAO;
+    private CompanySubPartitionService companySubPartitionService;
     @Autowired
-    private CompanyDAO companyDAO;
+    private CompanyService companyService;
 
     @RequestMapping(value = "/operator/partition/*", method = RequestMethod.GET)
     public ModelAndView partition(HttpServletRequest request) {
@@ -43,12 +41,12 @@ public class OperatorPartitionController {
             return modelAndView;
         }
 
-        Partition partition = partitionDAO.getPartitionById(partitionId);
+        Partition partition = partitionService.getPartitionById(partitionId);
         if (partition == null) {
             modelAndView.setViewName("redirect:/operator");
             return modelAndView;
         }
-        List<SubPartition> subPartitions = subPartitionDAO.getSubPartitionsByPartition(partition);
+        List<SubPartition> subPartitions = subPartitionService.getSubPartitionsByPartition(partition);
 
         Model.PartitionItem partitionItem = new Model.PartitionItem();
         partitionItem.partitionId = partition.getId();

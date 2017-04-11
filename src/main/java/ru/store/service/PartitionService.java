@@ -18,7 +18,7 @@ public class PartitionService {
     @Autowired
     private PartitionDAO partitionDAO;
     @Autowired
-    private SubPartitionDAO subPartitionDAO;
+    private SubPartitionService subPartitionService;
 
     public void createPartition(Partition partition) {
         if (getPartitionByName(partition.getName()) == null)
@@ -32,7 +32,7 @@ public class PartitionService {
     }
 
     public void deletePartition(int id) {
-        subPartitionDAO.deleteSubPartitionByPartition(id);
+        subPartitionService.deleteSubPartitionByPartition(id);
         partitionDAO.deletePartition(id);
     }
 

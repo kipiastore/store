@@ -21,4 +21,10 @@ public interface CompanySubpartitionContentDAO {
 
     List<CompanySubpartitionContent> getCompanySubpartitionContents(Integer companyId);
 
+    List<CompanySubpartitionContent> getCompanySubpartitionContents(List<Integer> companySubpartitionIds);
+
+    void deleteCompanySubpartitionContent(List<Integer> companySubpartitionIds);
+
+
+
 }

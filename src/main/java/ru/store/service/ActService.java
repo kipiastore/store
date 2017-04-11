@@ -17,7 +17,7 @@ public class ActService {
     @Autowired
     private ActDAO actDAO;
     @Autowired
-    private FileDAO fileDAO;
+    private FileService fileService;
 
     public void createAct(Act report) {
         actDAO.createAct(report);
@@ -28,7 +28,7 @@ public class ActService {
     }
 
     public void deleteAct(Integer id) {
-        fileDAO.deleteFile(actDAO.getAct(id).getFileId());
+        fileService.deleteFile(actDAO.getAct(id).getFileId());
         actDAO.deleteAct(id);
     }
 

@@ -17,7 +17,7 @@ public class ReportService {
     @Autowired
     private ReportDAO reportDAO;
     @Autowired
-    private FileDAO fileDAO;
+    private FileService fileService;
 
     public void createReport(Report report) {
         reportDAO.createReport(report);
@@ -28,7 +28,7 @@ public class ReportService {
     }
 
     public void deleteReport(Integer id) {
-        fileDAO.deleteFile(reportDAO.getReport(id).getFileId());
+        fileService.deleteFile(reportDAO.getReport(id).getFileId());
         reportDAO.deleteReport(id);
     }
 

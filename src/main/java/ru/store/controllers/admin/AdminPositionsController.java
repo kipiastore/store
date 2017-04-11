@@ -7,19 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.dao.interfaces.CompanySubPartitionDAO;
 import ru.store.entities.Company;
 import ru.store.entities.CompanySubPartition;
 import ru.store.entities.Partition;
 import ru.store.entities.SubPartition;
 import ru.store.service.CompanyService;
+import ru.store.service.CompanySubPartitionService;
 import ru.store.service.PartitionService;
 import ru.store.service.SubPartitionService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -34,7 +31,7 @@ public class AdminPositionsController {
     @Autowired
     private PartitionService partitionService;
     @Autowired
-    private CompanySubPartitionDAO companySubPartitionDAO;
+    private CompanySubPartitionService companySubPartitionService;
 
     @RequestMapping(value = "/admin/positions", method = RequestMethod.GET)
     public ModelAndView positions() {
@@ -49,16 +46,31 @@ public class AdminPositionsController {
                                       @RequestParam("companyId") String companyId) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            CompanySubPartition companySubPartition;
-            companySubPartitionDAO.deleteCompanySubpartitionByCompanyId(Integer.valueOf(companyId));
+            CompanySubPartition companySubPartitionItem;
+            List<CompanySubPartition> companySubPartitions = companySubPartitionService.findCompanySubpartitionByCompanyId(Integer.valueOf(companyId));
+            Set<Integer> currentSubPartitionIds = new HashSet<>();
+            Set<Integer> newSubPartitionIds = new HashSet<>();
+            List<Integer> toDeleteSubPartitionIds = new ArrayList<>();
+            for (CompanySubPartition companySubPartition : companySubPartitions) {
+                currentSubPartitionIds.add(companySubPartition.getSubPartitionId());
+            }
             for (String id : positions.split(",")) {
                 if (id.equals("-1"))
                     continue;
-                companySubPartition = new CompanySubPartition();
-                companySubPartition.setCompanyId(Integer.valueOf(companyId));
-                companySubPartition.setSubPartitionId(Integer.valueOf(id));
-                companySubPartitionDAO.createCompanySubPartition(companySubPartition);
+                if (!currentSubPartitionIds.contains(Integer.valueOf(id))) {
+                    companySubPartitionItem = new CompanySubPartition();
+                    companySubPartitionItem.setCompanyId(Integer.valueOf(companyId));
+                    companySubPartitionItem.setSubPartitionId(Integer.valueOf(id));
+                    companySubPartitionService.createCompanySubPartition(companySubPartitionItem);
+                }
+                newSubPartitionIds.add(Integer.valueOf(id));
             }
+            for (CompanySubPartition companySubPartition : companySubPartitions) {
+                if (!newSubPartitionIds.contains(companySubPartition.getSubPartitionId())) {
+                    toDeleteSubPartitionIds.add(companySubPartition.getSubPartitionId());
+                }
+            }
+            companySubPartitionService.deleteCompanySubpartitionBySubPartitionIds(toDeleteSubPartitionIds);
             modelAndView.addObject("successMessage", "Обновление проведено успешно.");
         } catch (Exception ex) {
             modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());

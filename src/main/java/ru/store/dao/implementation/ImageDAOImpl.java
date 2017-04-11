@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.store.dao.interfaces.ImageDAO;
 import ru.store.entities.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,6 +54,15 @@ public class ImageDAOImpl implements ImageDAO {
             return images.get(0);
         else
             return null;
+    }
+
+    @Override
+    @Transactional
+    public void deleteImage(List<Integer> imageIds) {
+        if (imageIds == null || imageIds.size() == 0)
+            return;
+        String hql = "delete from Image where id in (:imageIds)";
+        sessionFactory.getCurrentSession().createQuery(hql).setParameterList("imageIds", imageIds).executeUpdate();
     }
 
 }

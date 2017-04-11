@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.store.dao.interfaces.CompanyAddressDAO;
-import ru.store.dao.interfaces.CompanyDAO;
-import ru.store.dao.interfaces.CompanySubPartitionDAO;
-import ru.store.dao.interfaces.PackageDAO;
 import ru.store.entities.Company;
 import ru.store.entities.CompanyAddress;
 import ru.store.entities.CompanySubPartition;
 import ru.store.entities.Package;
+import ru.store.service.CompanyAddressService;
+import ru.store.service.CompanyService;
+import ru.store.service.CompanySubPartitionService;
+import ru.store.service.PackageService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -24,13 +24,13 @@ import java.util.*;
 public class OperatorSearchController {
 
     @Autowired
-    private CompanyDAO companyDAO;
+    private CompanyService companyService;
     @Autowired
-    private CompanySubPartitionDAO companySubPartitionDAO;
+    private CompanySubPartitionService companySubPartitionService;
     @Autowired
-    private CompanyAddressDAO companyAddressDAO;
+    private CompanyAddressService companyAddressService;
     @Autowired
-    private PackageDAO packageDAO;
+    private PackageService packageService;
 
     @RequestMapping(value = "/operator/search", method = RequestMethod.GET)
     public ModelAndView search(HttpServletRequest request) {
@@ -42,22 +42,22 @@ public class OperatorSearchController {
         Model model = new Model();
 
         if (byKeyword != null && !byKeyword.isEmpty()) {
-            List<Company> companies = companyDAO.findCompaniesByKeyword(byKeyword);
+            List<Company> companies = companyService.findCompaniesByKeyword(byKeyword);
             model.companyItemsByKeyword = searchCompany(companies);
         }
 
         if (byCompany != null && !byCompany.isEmpty()) {
-            List<Company> companies = companyDAO.findCompaniesByName(byCompany);
+            List<Company> companies = companyService.findCompaniesByName(byCompany);
             model.companyItemsByCompany = searchCompany(companies);
         }
 
         if (byAddress != null && !byAddress.isEmpty()) {
-            List<CompanyAddress> companyAddresses = companyAddressDAO.findCompanyAddressByAddress(byAddress);
+            List<CompanyAddress> companyAddresses = companyAddressService.findCompanyAddressByAddress(byAddress);
             List<Integer> companyIds = new ArrayList<>();
             for (CompanyAddress companyAddress : companyAddresses) {
                 companyIds.add(companyAddress.getCompanyId());
             }
-            List<Company> companies = companyDAO.getCompanies(companyIds);
+            List<Company> companies = companyService.getCompanies(companyIds);
             model.companyItemsByAddress = searchCompany(companies);
         }
 
@@ -69,7 +69,7 @@ public class OperatorSearchController {
     }
 
     private List<Model.CompanyItem> searchCompany(List<Company> companies) {
-        Map<Integer, Integer> packageIdToPriority = priorityHandler(packageDAO.getPackages());
+        Map<Integer, Integer> packageIdToPriority = priorityHandler(packageService.getPackages());
         List<Model.CompanyItem> result = new ArrayList<>();
         Model.CompanyItem companyItem;
         Map<Integer, Integer> companyWithPosition = new HashMap<>();
@@ -79,7 +79,7 @@ public class OperatorSearchController {
         }
         List<CompanySubPartition> companySubPartitions = new ArrayList<>();
         if (companyIds.size() > 0)
-            companySubPartitions = companySubPartitionDAO.findCompanySubpartitionByCompanyId(companyIds);
+            companySubPartitions = companySubPartitionService.findCompanySubpartitionByCompanyId(companyIds);
         for (CompanySubPartition companySubPartition : companySubPartitions) {
             companyWithPosition.put(companySubPartition.getCompanyId(), companySubPartition.getSubPartitionId());
         }

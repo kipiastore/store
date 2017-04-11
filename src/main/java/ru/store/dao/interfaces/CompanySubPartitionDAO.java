@@ -23,8 +23,12 @@ public interface CompanySubPartitionDAO {
 
     List<CompanySubPartition> getCompanySubPartitions();
 
-
     List<CompanySubPartition> findCompanySubpartitionBySubPartitionsId(List<Integer> subPartitionId);
 
+    void deleteCompanySubpartitionBySubPartitionIds(List<Integer> subPartitionIds);
 
-    }
+    void deleteCompanySubpartitionIds(List<Integer> idList);
+
+    List<CompanySubPartition> findCompanySubpartitionByIds(List<Integer> idList);
+
+}

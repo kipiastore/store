@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ru.store.dao.interfaces.CompanySubPartitionDAO;
 import ru.store.entities.CompanySubPartition;
 import ru.store.service.CompanySubPartitionService;
 
