@@ -30,7 +30,7 @@ body {
     opacity: 0;
 }
 .headerMenuContent {
-    width: 80%;
+    width: 85%;
     margin: auto;
     height: 40px;
     position: relative;
@@ -346,6 +346,7 @@ label {
     padding-top: 14px;
     display: block;
     padding-left: 5px;
+    padding-bottom: 14px;
 }
 .requisites {
     display: none;

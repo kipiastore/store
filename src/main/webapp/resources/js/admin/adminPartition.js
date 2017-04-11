@@ -269,8 +269,12 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
     isShowUpdateForm = true;
     isShowCreateForm = false;
     */
+    var prvItem;
     if (currentItem != undefined) {
         $("div#" + currentItem).css("border-left", "0");
+        if (currentItem == event.target.getAttribute("id")) {
+            prvItem = currentItem;
+        }
     }
     currentItem = event.target.getAttribute("id");
     $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
@@ -285,6 +289,14 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
     */
     $(".subItemsList").hide();
     $("#itemsID-"+id).show();
+
+    //
+    if (prvItem != undefined && prvItem == currentItem) {
+        $("div#" + currentItem).css("border-left", "0");
+        $("#itemsID-"+id).hide();
+        $(".pageMenuButt").click();
+        currentItem = undefined;
+    }
 });
 
 function loadCompany(id) {

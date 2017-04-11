@@ -13,10 +13,7 @@ import ru.store.entities.SubPartition;
 import ru.store.service.PartitionService;
 import ru.store.service.SubPartitionService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class DirectorPartitionsController {
@@ -135,6 +132,22 @@ public class DirectorPartitionsController {
             }
         }
         model.subPartitionsGroupedByPartition = subPartitionsGroupedByPartition;
+
+        Map<Model.PartitionItem2, Set<Model.PartitionItem2>> subPartitionsGroupedByPartition2 = new TreeMap<>();
+        Set<Model.PartitionItem2> partitionItem2List;
+
+        for (Model.PartitionItem partitionItem1 : subPartitionsGroupedByPartition.keySet()) {
+            partitionItem2List = new TreeSet<>();
+            if (subPartitionsGroupedByPartition.get(partitionItem1) == null) {
+                subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName()), partitionItem2List);
+                continue;
+            }
+            for (Model.PartitionItem partitionItem2 : subPartitionsGroupedByPartition.get(partitionItem1)) {
+                partitionItem2List.add(new Model.PartitionItem2(partitionItem2.getId(), partitionItem2.getName()));
+            }
+            subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName()), partitionItem2List);
+        }
+        model.subPartitionsGroupedByPartition2 = subPartitionsGroupedByPartition2;
     }
 
     private String getNormalName(String name) {
@@ -171,6 +184,7 @@ public class DirectorPartitionsController {
         public int selectedPageNum;
         public List<PartitionItem> partitionItems;
         public Map<PartitionItem, List<PartitionItem>> subPartitionsGroupedByPartition;
+        public Map<PartitionItem2, Set<PartitionItem2>> subPartitionsGroupedByPartition2;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
@@ -180,6 +194,9 @@ public class DirectorPartitionsController {
         }
         public Map<PartitionItem, List<PartitionItem>> getSubPartitionsGroupedByPartition() {
             return subPartitionsGroupedByPartition;
+        }
+        public Map<PartitionItem2, Set<PartitionItem2>> getSubPartitionsGroupedByPartition2() {
+            return subPartitionsGroupedByPartition2;
         }
 
         public static class PartitionItem {
@@ -211,6 +228,50 @@ public class DirectorPartitionsController {
             @Override
             public int hashCode() {
                 return id;
+            }
+        }
+
+        public static class PartitionItem2 implements Comparable<PartitionItem2> {
+            public int id;
+            public String name;
+
+            public int getId() {
+                return id;
+            }
+            public String getName() {
+                return name;
+            }
+
+            public PartitionItem2() { }
+            public PartitionItem2(int id, String name) {
+                this.id = id;
+                this.name = name;
+            }
+
+            @Override
+            public int compareTo(PartitionItem2 o) {
+                return this.name.compareTo(o.name);
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                PartitionItem2 that = (PartitionItem2) o;
+                return Objects.equals(name, that.name);
+
+            }
+            @Override
+            public int hashCode() {
+                return name.hashCode();
+            }
+
+            @Override
+            public String toString() {
+                return "PartitionItem2{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        '}';
             }
         }
     }

@@ -234,22 +234,22 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
     });
     console.log('sad');
 
-    //var container = $(".container");
-    //container.animate({opacity: 0}, 200);
-    //setTimeout(function() { container.hide(); }, 190);
-    //isShowUpdateForm = true;
+    var container = $(".container");
+    container.animate({opacity: 0}, 200);
+    setTimeout(function() { container.hide(); }, 190);
+    isShowUpdateForm = true;
 
     $(".error").hide();
     $(".success").hide();
-    //updateForm = $("#updateForm");
+    updateForm = $("#updateForm");
     if (isShowCreateForm) {
-        //var createForm = $("#createForm");
+        var createForm = $("#createForm");
         if (pageMenuButtTarget != undefined)
             pageMenuButtTarget.setAttribute("style", "background : #738dae;");
-        //createForm.animate({opacity: 0}, 200);
-        //setTimeout(function() { createForm.hide(); }, 200);
+        createForm.animate({opacity: 0}, 200);
+        setTimeout(function() { createForm.hide(); }, 200);
     }
-    /*
+
     if (isShowCreateForm && !isShowUpdateForm) {
         setTimeout(function() {
             updateForm.show();
@@ -268,23 +268,36 @@ $(".menuBodyItemHeadInfo").on("click", function (event) {
     }
     isShowUpdateForm = true;
     isShowCreateForm = false;
-    */
+
+    var prvItem;
     if (currentItem != undefined) {
         $("div#" + currentItem).css("border-left", "0");
+        if (currentItem == event.target.getAttribute("id")) {
+            prvItem = currentItem;
+        }
     }
     currentItem = event.target.getAttribute("id");
+
     $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
     $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
     console.log(id);
-    /*
+
     $('#updateKey').val(id);
     $('#keyName').val(event.target.getAttribute("data-name"));
     $('#updateType').val(event.target.getAttribute("data-type"));
 
-    */
+
     $(".subItemsList").hide();
     $("#itemsID-"+id).show();
+
+    //
+    if (prvItem != undefined && prvItem == currentItem) {
+        $("div#" + currentItem).css("border-left", "0");
+        $("#itemsID-"+id).hide();
+        $(".pageMenuButt").click();
+        currentItem = undefined;
+    }
 });
 
 function loadCompany(id) {
