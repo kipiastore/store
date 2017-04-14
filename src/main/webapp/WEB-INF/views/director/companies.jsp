@@ -40,22 +40,22 @@
                 <span class="message">${model.message}</span>
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th>Название</th>
-                            <th>Менеджер</th>
-                            <th>Пакет</th>
-                            <th>Истекает</th>
-                        </tr>
+                    <tr>
+                        <th>Название</th>
+                        <th>Менеджер</th>
+                        <th>Пакет</th>
+                        <th>Истекает</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="item" items="${model.companyList}">
-                            <tr>
-                                <td class="tableName" id="ID-${item.id}">${item.name}</td>
-                                <td>${item.manager}</td>
-                                <td>${item.aPackage}</td>
-                                <td>${item.dateOfEndContract}</td>
-                            </tr>
-                        </c:forEach>
+                    <c:forEach var="item" items="${model.companyList}">
+                        <tr>
+                            <td class="tableName" id="ID-${item.id}">${item.name}</td>
+                            <td>${item.manager}</td>
+                            <td>${item.aPackage}</td>
+                            <td>${item.dateOfEndContract}</td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -72,8 +72,8 @@
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfStartContract" id="newDateOfStartContract" />
                     <label>Срок договора до</label>
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="newDateOfEndContract"  />
-                    <label>Менеджер<span class="required">*</span></label>
-                    <select name="manager" title="" id="newManager" required>
+                    <label>Менеджер</label>
+                    <select name="manager" title="" id="newManager">
                         <c:forEach var="item" items="${model.managers}">
                             <option value="${item.username}">${item.fullName}</option>
                         </c:forEach>
@@ -157,14 +157,14 @@
                     <input title="Введите название фирмы." maxlength="120" type="text" name="name" id="name"required  />
                     <label>Keywords</label>
                     <input title="Введите keywords." maxlength="255" placeholder="Keywords" type="text" name="keywords" id="keywords" />
-                    <label>Дата заключения договора<span class="required"></span></label>
+                    <label>Дата заключения договора</label>
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfContract" id="dateOfContract"  />
-                    <label>Срок договора от<span class="required"></span></label>
+                    <label>Срок договора от</label>
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfStartContract" id="dateOfStartContract"  />
-                    <label>Срок договора до<span class="required"></span></label>
+                    <label>Срок договора до</label>
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="dateOfEndContract"  />
-                    <label>Менеджер<span class="required">*</span></label>
-                    <select name="manager" title="" id="manager" required>
+                    <label>Менеджер</label>
+                    <select name="manager" title="" id="manager">
                         <c:forEach var="item" items="${model.managers}">
                             <option value="${item.username}">${item.fullName}</option>
                         </c:forEach>

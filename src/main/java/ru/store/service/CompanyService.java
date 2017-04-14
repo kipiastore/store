@@ -20,6 +20,8 @@ public class CompanyService {
     private CompanyDAO companyDAO;
     @Autowired
     private CompanyAddressService companyAddressService;
+    @Autowired
+    private CompanyReminderService companyReminderService;
 
     public void createCompany(Company company) {
         companyDAO.createCompany(company);
@@ -74,8 +76,10 @@ public class CompanyService {
     }
 
     public void deleteCompany(int id) {
+
         companyDAO.deleteCompany(id);
         companyAddressService.deleteCompanyAddressByCompany(id);
+        companyReminderService.deleteCompanyRemindersByCompany(id);
     }
 
     public Company getCompany(int id) {

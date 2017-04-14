@@ -108,6 +108,7 @@ public class DirectorPartitionsController {
             partitionItem = new Model.PartitionItem();
             partitionItem.id = partition.getId();
             partitionItem.name = getNormalName(partition.getName());
+            partitionItem.fullName = partition.getName();
             partitionIdToPartitionItem.put(partition.getId(), partitionItem);
             partitionItems.add(partitionItem);
             subPartitionsGroupedByPartition.put(partitionItem, null);
@@ -118,15 +119,18 @@ public class DirectorPartitionsController {
                 partitionItem = new Model.PartitionItem();
                 partitionItem.id = subPartition.getId();
                 partitionItem.name = getNormalName(subPartition.getName());
+                partitionItem.fullName = subPartition.getName();
                 subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())).add(partitionItem);
             } else {
                 mainPartitionItem = new Model.PartitionItem();
                 mainPartitionItem.id = partitionIdToPartitionItem.get(subPartition.getPartitionId()).getId();
                 mainPartitionItem.name = getNormalName(partitionIdToPartitionItem.get(subPartition.getPartitionId()).getName());
+                mainPartitionItem.fullName = partitionIdToPartitionItem.get(subPartition.getPartitionId()).getName();
                 partitionItems = new ArrayList<>();
                 partitionItem = new Model.PartitionItem();
                 partitionItem.id = subPartition.getId();
                 partitionItem.name = getNormalName(subPartition.getName());
+                partitionItem.fullName = subPartition.getName();
                 partitionItems.add(partitionItem);
                 subPartitionsGroupedByPartition.put(mainPartitionItem, partitionItems);
             }
@@ -139,13 +143,13 @@ public class DirectorPartitionsController {
         for (Model.PartitionItem partitionItem1 : subPartitionsGroupedByPartition.keySet()) {
             partitionItem2List = new TreeSet<>();
             if (subPartitionsGroupedByPartition.get(partitionItem1) == null) {
-                subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName()), partitionItem2List);
+                subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName(), partitionItem1.getFullName()), partitionItem2List);
                 continue;
             }
             for (Model.PartitionItem partitionItem2 : subPartitionsGroupedByPartition.get(partitionItem1)) {
-                partitionItem2List.add(new Model.PartitionItem2(partitionItem2.getId(), partitionItem2.getName()));
+                partitionItem2List.add(new Model.PartitionItem2(partitionItem2.getId(), partitionItem2.getName(), partitionItem2.getFullName()));
             }
-            subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName()), partitionItem2List);
+            subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName(), partitionItem1.getFullName()), partitionItem2List);
         }
         model.subPartitionsGroupedByPartition2 = subPartitionsGroupedByPartition2;
     }
@@ -202,6 +206,7 @@ public class DirectorPartitionsController {
         public static class PartitionItem {
             public int id;
             public String name;
+            public String fullName;
 
             public PartitionItem() {
             }
@@ -215,6 +220,9 @@ public class DirectorPartitionsController {
             }
             public String getName() {
                 return name;
+            }
+            public String getFullName() {
+                return fullName;
             }
 
             @Override
@@ -234,6 +242,7 @@ public class DirectorPartitionsController {
         public static class PartitionItem2 implements Comparable<PartitionItem2> {
             public int id;
             public String name;
+            public String fullName;
 
             public int getId() {
                 return id;
@@ -241,11 +250,15 @@ public class DirectorPartitionsController {
             public String getName() {
                 return name;
             }
+            public String getFullName() {
+                return fullName;
+            }
 
             public PartitionItem2() { }
-            public PartitionItem2(int id, String name) {
+            public PartitionItem2(int id, String name, String fullName) {
                 this.id = id;
                 this.name = name;
+                this.fullName = fullName;
             }
 
             @Override

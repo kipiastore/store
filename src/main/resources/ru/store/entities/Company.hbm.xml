@@ -23,7 +23,7 @@
             <column name="date_of_end_contract" not-null="false" />
         </property>
         <property name="manager" type="string" >
-            <column name="manager" length="45" not-null="true" />
+            <column name="manager" length="45" not-null="false" />
         </property>
         <property name="companyPackageId" type="java.lang.Integer" >
             <column name="company_package_id" not-null="true" />

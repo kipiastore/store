@@ -31,7 +31,14 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
     @Override
     @Transactional
     public void updateCompanyReminder(CompanyReminder reminder) {
-            sessionFactory.getCurrentSession().update(reminder);
+        sessionFactory.getCurrentSession().update(reminder);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCompanyRemindersByCompany(Integer companyId) {
+        String hql = "delete from CompanyReminder where companyId =:companyId";
+        sessionFactory.getCurrentSession().createQuery(hql).setInteger("companyId", companyId).executeUpdate();
     }
 
     @Override
@@ -90,7 +97,7 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
 
             return sdf.format(tempDate) + " " + hour + " " + type;
         } else {
-          return "";
+            return "";
         }
     }
     @Override
@@ -124,8 +131,8 @@ public class CompanyReminderDAOimp implements CompanyReminderDAO {
         Integer companyId=0;
         if (!countList.isEmpty()){
             for (Object[] aRow : countList) {
-                 count = (Long) aRow[0];
-                 companyId = (Integer) aRow[1];
+                count = (Long) aRow[0];
+                companyId = (Integer) aRow[1];
                 s.add(companyId+"-"+count.toString());
             }
             return s;

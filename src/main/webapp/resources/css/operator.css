@@ -17,8 +17,9 @@
 .infoContent {
     float: left;
     width: 94%;
-    //height: 30px;
-    padding: 10px;
+//
+height: 30px;
+    padding: 6px;
     text-align: justify;
 }
 .empDiv {
@@ -123,8 +124,8 @@ a:hover {
     background-color: #ff7f7f;
 }
 h3 {
-     font: normal 20px/1.5 "Helvetica Neue", Helvetica,Arial, sans-serif;
-     margin-left: 40px;
+    font: normal 20px/1.5 "Helvetica Neue", Helvetica,Arial, sans-serif;
+    margin-left: 40px;
 }
 .button a {
     color: #fff;
@@ -169,7 +170,7 @@ h3 a:hover {
 }
 .table {
     width: 92%;
-    //max-width: 100%;
+//max-width: 100%;
     margin-bottom: 20px
 }
 .table>tbody>tr>td,

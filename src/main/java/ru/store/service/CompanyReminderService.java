@@ -32,6 +32,9 @@ public class CompanyReminderService {
         reminder.setCompanyId(oldReminder.getCompanyId());
         reminderDAO.updateCompanyReminder(reminder);
     }
+    public void deleteCompanyRemindersByCompany(Integer companyId) {
+        reminderDAO.deleteCompanyRemindersByCompany(companyId);
+    }
 
     public List<CompanyReminder> getCompanyReminders() {
         return reminderDAO.getCompanyReminders();

@@ -10,12 +10,16 @@
 <%@include file="/WEB-INF/views/admin/components/logout.jspf"%>
 <%@include file="/WEB-INF/views/admin/components/header.jspf"%>
 <div class="body">
+
     <div class="pageMenu">
         <div class="pr"></div>
+        <!--
         <span class="pageMenuButt">Добавить</span>
+        -->
     </div>
     <div class="menuBody">
         <div class="generalContent">
+            <!--
             <span class="error" id="addError">${addError}</span>
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
@@ -33,18 +37,21 @@
                 <input type="submit" value="Добавить" />
             </form:form>
             <form:form action="updatepackage" modelAttribute="package" method="post" id="updateForm">
-                <label>Название<span class="required">*</span></label>
-                <input autofocus title="Введите название пакета." type="text" maxlength="120" name="name" id="name" required />
-                <label>Приоритет<span class="required">*</span></label>
-                <input title="Введите приоритет пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="priority" id="priority" required />
-                <label>Стоимость<span class="required">*</span></label>
-                <input title="Введите стоимость пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="cost" id="cost" required />
-                <label>Кол. Позиций<span class="required">*</span></label>
-                <input title="Введите кол. позиций пакета. Не больше 9 цифр." pattern="(^[\d+]{1,9}$)" type="text" name="numOfPositions" id="numOfPositions" required />
-                <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
-                <input type="hidden" name="hiddenId" id="hiddenId" />
+            -->
+            <label>Название</label>
+            <input disabled type="text" maxlength="120" name="name" id="name" required />
+            <label>Приоритет</label>
+            <input disabled type="text"type="text" name="priority" id="priority" required />
+            <label>Стоимость</label>
+            <input disabled type="text" name="cost" id="cost" required />
+            <label>Кол. Позиций</label>
+            <input disabled type="text"name="numOfPositions" id="numOfPositions" required />
+            <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
+            <input type="hidden" name="hiddenId" id="hiddenId" />
+            <!--
                 <input type="submit" value="Обновить" />
             </form:form>
+            -->
         </div>
     </div>
 </div>
@@ -61,13 +68,16 @@
                         <span id="ID-${item.id}">Приоритет: ${item.priority}</span><br/>
                         <span id="ID-${item.id}">${item.name}</span>
                     </div>
+                    <!--
                     <div class="menuBodyItemButt">
                         <div class="menuBodyItemButtDel" id="ID-${item.id}"></div>
                     </div>
+                     -->
                 </div>
             </c:forEach>
             <input type="hidden" name="packageId" id="deleteKey" />
         </form:form>
+
     </div>
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>

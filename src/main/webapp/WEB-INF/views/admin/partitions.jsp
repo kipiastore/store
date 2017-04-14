@@ -55,8 +55,8 @@
         <form:form action="deletepartition" method="post" id="deleteForm">
             <c:forEach var="key" items="${model.subPartitionsGroupedByPartition2.keySet()}">
                 <div class="menuBodyItem">
-                    <div class="menuBodyItemHeadInfo" id="ID-${key.id}" data-name="${key.name}" data-id="${key.id}">
-                        <span class="soloTest" id="ID-${key.id}" data-name="${key.name}" data-id="${key.id}">${key.name}</span>
+                    <div class="menuBodyItemHeadInfo" id="ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">
+                        <span class="soloTest" id="ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">${key.name}</span>
                     </div>
                     <!--
                     <div class="menuBodyItemButt">

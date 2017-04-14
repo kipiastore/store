@@ -279,7 +279,28 @@ function loadCompany(id) {
             dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
             dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
             dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
-            }
+        }
+        if(entry.dateOfContract!=undefined&&entry.dateOfStartContract==undefined&&entry.dateOfEndContract==undefined){
+            dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
+        }
+        if(entry.dateOfContract!=undefined&&entry.dateOfStartContract!=undefined&&entry.dateOfEndContract==undefined){
+            dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
+            dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
+        }
+        if(entry.dateOfContract!=undefined&&entry.dateOfStartContract==undefined&&entry.dateOfEndContract!=undefined){
+            dateOfContract.val(new Date(entry.dateOfContract).customFormat("#YYYY#-#MM#-#DD#"));
+            dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
+        }
+        if(entry.dateOfContract==undefined&&entry.dateOfStartContract!=undefined&&entry.dateOfEndContract==undefined){
+            dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
+        }
+        if(entry.dateOfContract==undefined&&entry.dateOfStartContract!=undefined&&entry.dateOfEndContract!=undefined){
+            dateOfStartContract.val(new Date(entry.dateOfStartContract).customFormat("#YYYY#-#MM#-#DD#"));
+            dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
+        }
+        if(entry.dateOfContract==undefined&&entry.dateOfStartContract==undefined&&entry.dateOfEndContract!=undefined){
+            dateOfEndContract.val(new Date(entry.dateOfEndContract).customFormat("#YYYY#-#MM#-#DD#"));
+        }
         manager.val(entry.manager);
         companyPackageId.val(entry.companyPackageId);
         costOf.val(entry.costOf);

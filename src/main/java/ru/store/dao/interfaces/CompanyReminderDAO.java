@@ -14,6 +14,8 @@ public interface CompanyReminderDAO {
 
     void updateCompanyReminder(CompanyReminder reminder);
 
+    void deleteCompanyRemindersByCompany(Integer companyId);
+
     CompanyReminder getCompanyReminder(Integer id);
 
     List<CompanyReminder> getCompanyReminders();

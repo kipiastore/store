@@ -26,6 +26,26 @@
     <div class="content">
         <span>Название: ${model.company.name}</span>
     </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Район</th>
+            <th>Адрес</th>
+            <th>Телефоны</th>
+            <th>Информация</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="item" items="${model.companyAddresses}">
+            <tr>
+                <td>${model.idToRegionName.get(item.regionId)}</td>
+                <td>${item.address}</td>
+                <td>${item.phones}</td>
+                <td>${item.information}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
     <!--
     <div class="content">
         <span>Менеджер: ${model.managerName}</span>
@@ -51,29 +71,11 @@
     </div>
     <div class="infoContent">
         <span>Информация: ${model.company.description}</span>
+
     </div>
     <div class="empDiv"></div>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Район</th>
-            <th>Адрес</th>
-            <th>Телефоны</th>
-            <th>Информация</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="item" items="${model.companyAddresses}">
-            <tr>
-                <td>${model.idToRegionName.get(item.regionId)}</td>
-                <td>${item.address}</td>
-                <td>${item.phones}</td>
-                <td>${item.information}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <div class="empDiv">Позиции</div>
+
+    <div class="empDiv">Позиции:</div>
     <c:forEach var="item" items="${model.subPartitions}">
         <div class="content">
             <span>${item.name}</span>

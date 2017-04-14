@@ -344,7 +344,7 @@ public class ManagerNotesController {
             model.reminderList.add(m);
         }
         for(Company company:companies) {
-            if(company.getDateOfContract()!=null&&company.getDateOfEndContract().getTime()-date.getTime()<=259200000)
+            if(company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null&&company.getDateOfEndContract().getTime()-date.getTime()<=259200000)
             {
                 companiesItem = new Model.CompaniesItem();
                 companiesItem.nameForNotes = company.getName();
