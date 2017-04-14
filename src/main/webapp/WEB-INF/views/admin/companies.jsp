@@ -74,6 +74,7 @@
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="newDateOfEndContract"  />
                     <label>Менеджер</label>
                     <select name="manager" title="" id="newManager">
+                        <option value="">Не выбран</option>
                         <c:forEach var="item" items="${model.managers}">
                             <option value="${item.username}">${item.fullName}</option>
                         </c:forEach>
@@ -165,6 +166,7 @@
                     <input title="Введите дату." pattern="\d\d\d\d-\d\d-\d\d\s?" type="text" name="dateOfEndContract" id="dateOfEndContract"  />
                     <label>Менеджер</label>
                     <select name="manager" title="" id="manager">
+                        <option value="">Не выбран</option>
                         <c:forEach var="item" items="${model.managers}">
                             <option value="${item.username}">${item.fullName}</option>
                         </c:forEach>
