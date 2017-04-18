@@ -114,7 +114,7 @@ public class PortalController {
             if (partitionIdToCount.get(partition.getId()) != null)
                 partitionItem.companyCount = partitionIdToCount.get(partition.getId());
             partitionItem.partitionId = partition.getId();
-            partitionItem.partitionName = getNormalName(partition.getName(), 47);
+            partitionItem.partitionName = getNormalName(partition.getName(), 33);
             partitionItem.subPartitionItems = subPartitionItemsGroupByPartitionId.get(partition.getId());
             partitionItems.add(partitionItem);
         }

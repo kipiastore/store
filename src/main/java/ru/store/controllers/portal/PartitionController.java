@@ -77,7 +77,7 @@ public class PartitionController {
             subPartitionIds.add(subPartition.getId());
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
-            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 32);
+            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 31);
             if (subPartitionIdToCount.get(subPartition.getId()) != null)
                 subPartitionItem.companyCount = subPartitionIdToCount.get(subPartition.getId());
             subPartitionItems.add(subPartitionItem);

@@ -18,44 +18,11 @@
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 30px 0;">
-            <!--
-            <div class="rua-l-wrapper" style="margin-top: 20px; margin-bottom: 40px;">
-                <div class="row text-center">
-                    <div class="col d-1of3 m-1of1">
-                        <div class="box">
-                            <div class="border"></div>
-                            <div class="front"><strong>100%</strong><span>Проверенные<br>данные</span></div>
-                            <div class="back">
-                                <div class="rua-p-c-light">Наша команда профессиональных модераторов внимательно изучает новые ресурсы.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col d-1of3 m-1of1">
-                        <div class="box">
-                            <div class="border"></div>
-                            <div class="front"><strong>53 765</strong><span>Наибольшее количество<br>предложений</span></div>
-                            <div class="back">
-                                <div class="rua-p-c-light">Ежемесячно на нашем сайте размещают более 500 новых ресурсов.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col d-1of3 m-1of1">
-                        <div class="box">
-                            <div class="border"></div>
-                            <div class="front"><strong>24/7</strong><span>Актуальные<br>данные</span></div>
-                            <div class="back">
-                                <div class="rua-p-c-light">Вы видите только актуальные предложения.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr style="width: 300px; margin: 110px auto 35px auto;"/>
-            -->
+
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">Разделы</h2>
                 <div class="rptShort">
-                    <div style="float: left;width: 480px;">
+                    <div style="float: left;width: 465px;">
                         <k:forEach var="partitionItem" items="${model.partitionItems2}">
                             <p>
                             <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
@@ -81,7 +48,7 @@
                             </p>
                         </k:forEach>
                     </div>
-                    <div style="float: right;width: 480px;">
+                    <div style="float: right;width: 455px;">
                         <k:forEach var="partitionItem" items="${model.partitionItems}">
                             <p>
                             <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
@@ -110,28 +77,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="bestResources">
-        <div style="opacity: 1; width: 100%; height: 100px;z-index: 0;"></div>
-        <!--
-        <h2 class="headline centered mtmb">Лучшие ресурсы</h2>
-        <div class="rua-l-wrapper text-center mtmb">
-            <table class="logos">
-                <tbody>
-                    <k:forEach var="key" items="${model.bestCompanyGroupByColumn.keySet()}">
-                        <tr>
-                            <k:forEach var="bestCompanyItem" items="${model.bestCompanyGroupByColumn.get(key)}">
-                                <td>
-                                    <a href="company/${bestCompanyItem.companyId}" title="${bestCompanyItem.companyName}"
-                                       style="background-image: url(<c:url value="/resources/images/${bestCompanyItem.companyLogoFileName}"/>);"></a>
-                                </td>
-                            </k:forEach>
-                        </tr>
-                    </k:forEach>
-                </tbody>
-            </table>
-        </div>
-        -->
     </div>
     <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
