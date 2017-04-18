@@ -47,51 +47,33 @@ public class OperatorPartitionController {
             return modelAndView;
         }
         List<SubPartition> subPartitions = subPartitionService.getSubPartitionsByPartition(partition);
-
+        Collections.sort(subPartitions);
         Model.PartitionItem partitionItem = new Model.PartitionItem();
         partitionItem.partitionId = partition.getId();
-        partitionItem.partitionName = getNormalName(partition.getName(), 36);
-        List<Model.SubPartitionItem> subPartitionItems = new ArrayList<>();
+        partitionItem.partitionName = getNormalName(partition.getName(), 46);
+
+        List<Model.SubPartitionItem> subPartitionItems1 = new ArrayList<>();
+        List<Model.SubPartitionItem> subPartitionItems2 = new ArrayList<>();
         Model.SubPartitionItem subPartitionItem;
-        List<Integer> subPartitionIds = new ArrayList<>();
+
+        int tmp = subPartitions.size();
+        int step = tmp / 2;
+        int counter = 0;
         for (SubPartition subPartition : subPartitions) {
-            subPartitionIds.add(subPartition.getId());
             subPartitionItem = new Model.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
-            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 36);
-            subPartitionItems.add(subPartitionItem);
+            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 46);
+            if (counter <= step) {
+                subPartitionItems1.add(subPartitionItem);
+            } else {
+                subPartitionItems2.add(subPartitionItem);
+            }
+            counter++;
         }
         Model model = new Model();
         model.partitionItem = partitionItem;
-        model.subPartitionItems = subPartitionItems;
-/*
-        Map<Integer, Integer> packageIdToPriority = OperatorSearchController.priorityHandler(packageDAO.getPackages());
-        List<CompanySubPartition> companySubPartitions = companySubPartitionDAO.findCompanySubpartitionBySubPartitionsId(subPartitionIds);
-        List<Integer> companyIds = new ArrayList<>();
-        for (CompanySubPartition companySubPartition : companySubPartitions) {
-            companyIds.add(companySubPartition.getCompanyId());
-        }
-        List<Company> companies = companyDAO.getCompanies(companyIds);
-        Set<Model.CompanyItem> companyItems = new TreeSet<>();
-        Model.CompanyItem companyItem;
-        for (Company company : companies) {
-            companyItem = new Model.CompanyItem();
-            companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());
-            companyItem.companyId = company.getId();
-            companyItem.companyInformation = company.getDescription();
-            companyItem.companyName = company.getName();
-            companyItems.add(companyItem);
-        }
-        model.companyHiPrior = new TreeSet<>();
-        int counter = 0;
-        for (Model.CompanyItem companyItem1 : companyItems) {
-            model.companyHiPrior.add(companyItem1);
-            counter++;
-            if (counter > 10)
-                break;
-        }
-        System.out.println(model.companyHiPrior);
-*/
+        model.subPartitionItems1 = subPartitionItems1;
+        model.subPartitionItems2 = subPartitionItems2;
         modelAndView.addObject("model", model);
 
         modelAndView.addObject("prefix", "../");
@@ -109,7 +91,8 @@ public class OperatorPartitionController {
 
     public static class Model {
         public PartitionItem partitionItem;
-        public List<SubPartitionItem> subPartitionItems;
+        public List<SubPartitionItem> subPartitionItems1;
+        public List<SubPartitionItem> subPartitionItems2;
         public Set<CompanyItem> companyHiPrior;
 
         public Set<CompanyItem> getCompanyHiPrior() {
@@ -118,8 +101,11 @@ public class OperatorPartitionController {
         public PartitionItem getPartitionItem() {
             return partitionItem;
         }
-        public List<SubPartitionItem> getSubPartitionItems() {
-            return subPartitionItems;
+        public List<SubPartitionItem> getSubPartitionItems1() {
+            return subPartitionItems1;
+        }
+        public List<SubPartitionItem> getSubPartitionItems2() {
+            return subPartitionItems2;
         }
 
         public static class PartitionItem {

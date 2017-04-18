@@ -15,12 +15,25 @@
     <a>${model.partitionItem.partitionName}</a>
 </h3>
 <div class="menu">
-    <k:forEach var="item" items="${model.subPartitionItems}">
-        <div class="content">
-            <a href="${prefix}subpartition/${item.subPartitionId}">${item.subPartitionName}</a>
-        </div>
-    </k:forEach>
-    <div style="height: 20px; width: 100%;float: left;"></div>
+
+    <div class="content">
+        <k:forEach var="item" items="${model.subPartitionItems1}">
+            <span style="line-height: 30px;">
+                <a href="${prefix}subpartition/${item.subPartitionId}">${item.subPartitionName}</a>
+            </span>
+            <br/>
+        </k:forEach>
+    </div>
+    <div class="content">
+        <k:forEach var="item" items="${model.subPartitionItems2}">
+            <span style="line-height: 30px;">
+                <a href="${prefix}subpartition/${item.subPartitionId}">${item.subPartitionName}</a>
+            </span>
+            <br/>
+        </k:forEach>
+    </div>
+
+    <div style="height: 50px; width: 100%;float: left;"></div>
 </div>
 <%@include file="/WEB-INF/views/operator/components/searchwindow.jspf"%>
 <%@include file="/WEB-INF/views/operator/components/bottombar.jspf"%>

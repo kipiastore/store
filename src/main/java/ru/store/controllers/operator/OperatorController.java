@@ -25,18 +25,34 @@ public class OperatorController {
     @RequestMapping(value = "/operator", method = RequestMethod.GET)
     public ModelAndView manager(HttpServletRequest request) {
 
-        List<Model.PartitionItem> partitionItems = new ArrayList<>();
+        List<Partition> partitionList = partitionService.getPartitions();
+        Collections.sort(partitionList);
+        List<Model.PartitionItem> partitionItems1 = new ArrayList<>();
+        List<Model.PartitionItem> partitionItems2 = new ArrayList<>();
+
         Model.PartitionItem partitionItem;
-        for (Partition partition : partitionService.getPartitions()) {
+        int tmp = partitionList.size();
+        int step = tmp / 2;
+        int counter = 0;
+        for (Partition partition : partitionList) {
             partitionItem = new Model.PartitionItem();
             partitionItem.partitionId = partition.getId();
-            partitionItem.partitionName = getNormalName(partition.getName(), 36);
-            partitionItems.add(partitionItem);
+            partitionItem.partitionName = getNormalName(partition.getName(), 46);
+            if (counter <= step) {
+                partitionItems1.add(partitionItem);
+            } else {
+                partitionItems2.add(partitionItem);
+            }
+            counter++;
         }
         Model model = new Model();
-        model.partitionItems = partitionItems;
+        Collections.sort(partitionItems1);
+        Collections.sort(partitionItems2);
+        model.partitionItems1 = partitionItems1;
+        model.partitionItems2 = partitionItems2;
 
-        Collections.sort(partitionItems);
+        Collections.sort(partitionItems1);
+        Collections.sort(partitionItems2);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("model", model);
@@ -58,10 +74,14 @@ public class OperatorController {
     }
 
     public static class Model {
-        public List<PartitionItem> partitionItems;
+        public List<PartitionItem> partitionItems1;
+        public List<PartitionItem> partitionItems2;
 
-        public List<PartitionItem> getPartitionItems() {
-            return partitionItems;
+        public List<PartitionItem> getPartitionItems1() {
+            return partitionItems1;
+        }
+        public List<PartitionItem> getPartitionItems2() {
+            return partitionItems2;
         }
 
         public static class PartitionItem implements Comparable<PartitionItem> {
