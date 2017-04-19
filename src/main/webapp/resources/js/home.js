@@ -150,3 +150,16 @@ $('.b').on("click", function() {
     container.animate({opacity: 1}, 200);
     $('#emailType').val(3);
 });
+$('.btn.btn-primary').on("click", function(event) {
+    var currentItem = event.target.getAttribute("data-id");
+    var hiddenBlock = $('.address.hiddenAdr.address-' + currentItem);
+    if (!hiddenBlock.is(':visible')) {
+        hiddenBlock.show();
+        hiddenBlock.animate({opacity: 1}, 200);
+    } else {
+        setTimeout(function() {
+            hiddenBlock.hide();
+        }, 190);
+        hiddenBlock.animate({opacity: 0}, 200);
+    }
+});

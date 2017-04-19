@@ -8,6 +8,7 @@
     <title>Справочная Одессы | Call центр</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home-min.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/home-min2.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
@@ -53,12 +54,26 @@
                     </span>
                 </div>
                 <div class="AddressList">
+                    <k:set var="count" value="0" scope="page" />
                     <k:forEach var="addresItem" items="${model.companyToCompanyAddress.get(item.companyId)}">
-                        <div class="address">
-                            <span class="addressInfo">${addresItem.address}</span>&nbsp;
-                            <span>${addresItem.phones}</span>&nbsp;
-                            <span>${addresItem.information}</span>
-                        </div>
+                        <k:if test="${count == 0}">
+                            <div class="address">
+                                <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                <span>${addresItem.phones}&nbsp;</span>
+                                <span>${addresItem.information}</span>
+                            </div>
+                        </k:if>
+                        <k:if test="${count > 0}">
+                            <div class="hiddenAdr-btn">
+                                <p><a class="btn btn-primary" data-id="${item.companyId}">Филиалы</a></p>
+                            </div>
+                            <div class="address hiddenAdr address-${item.companyId}">
+                                <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                <span>${addresItem.phones}&nbsp;</span>
+                                <span>${addresItem.information}</span>
+                            </div>
+                        </k:if>
+                        <k:set var="count" value="${count + 1}" scope="page"/>
                     </k:forEach>
                 </div>
             </div>

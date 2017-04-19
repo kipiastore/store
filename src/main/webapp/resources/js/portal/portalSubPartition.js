@@ -21,6 +21,7 @@ $(window).on('load', function() {
             addressList = addressList.replace(/,$/, '');
             $.get('../api/portal/resource/v1/company/address/' + addressList, function(companyAddressItems) {
                 entry.forEach(function(company) {
+                    var count = 0;
                     var tmpAddersList;
                     companyAddressItems.forEach(function(companyAddressItem) {
                         if (company.id == companyAddressItem.companyId) {
@@ -30,11 +31,24 @@ $(window).on('load', function() {
                     var tmpAddressTxt = '';
                     if (tmpAddersList != undefined) {
                         tmpAddersList.forEach(function (aItem) {
-                            tmpAddressTxt += '<div class="address">'
-                                + '<span class="addressInfo">' + aItem.address + '</span>&nbsp;'
-                                + '<span>' + aItem.phones + '</span>&nbsp;'
-                                + '<span>' + aItem.information + '</span>'
-                                + '</div>';
+                            if (count == 0) {
+                                tmpAddressTxt += '<div class="address">'
+                                    + '<span class="addressInfo">' + aItem.address + '</span>&nbsp;'
+                                    + '<span>' + aItem.phones + '</span>&nbsp;'
+                                    + '<span>' + aItem.information + '</span>'
+                                    + '</div>';
+                            }
+                            if (count > 0) {
+                                tmpAddressTxt += '<div class="hiddenAdr-btn">'
+                                    + '<p><a class="btn btn-primary" data-id="' + company.id + '">Филиалы</a></p>'
+                                    + '</div>'
+                                    + '<div class="address hiddenAdr address-' + company.id + '">'
+                                    + '<span class="addressInfo">' + aItem.address + '</span>&nbsp;'
+                                    + '<span>' + aItem.phones + '</span>&nbsp;'
+                                    + '<span>' + aItem.information + '</span>'
+                                    + '</div>';
+                            }
+                            count++;
                         });
                     }
                     var color = 0;
@@ -64,6 +78,19 @@ $(window).on('load', function() {
                 });
                 container.html(tmpHtml);
                 $('.pre-loading').hide();
+                $('.btn.btn-primary').on("click", function(event) {
+                    var currentItem = event.target.getAttribute("data-id");
+                    var hiddenBlock = $('.address.hiddenAdr.address-' + currentItem);
+                    if (!hiddenBlock.is(':visible')) {
+                        hiddenBlock.show();
+                        hiddenBlock.animate({opacity: 1}, 200);
+                    } else {
+                        setTimeout(function() {
+                            hiddenBlock.hide();
+                        }, 190);
+                        hiddenBlock.animate({opacity: 0}, 200);
+                    }
+                });
             });
         });
     });
