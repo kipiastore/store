@@ -138,10 +138,18 @@ public class PortalController {
         List<Model.PartitionItem> tmp1 = new ArrayList<>();
         List<Model.PartitionItem> tmp2 = new ArrayList<>();
         for (int i = 0; i < partitionItems.size(); i++) {
-            if (i > partitionItems.size() / 2) {
-                tmp1.add(partitionItems.get(i));
+            if ((partitionItems.size() % 2) == 0) {
+                if (i >= partitionItems.size() / 2) {
+                    tmp1.add(partitionItems.get(i));
+                } else {
+                    tmp2.add(partitionItems.get(i));
+                }
             } else {
-                tmp2.add(partitionItems.get(i));
+                if (i > partitionItems.size() / 2) {
+                    tmp1.add(partitionItems.get(i));
+                } else {
+                    tmp2.add(partitionItems.get(i));
+                }
             }
         }
         model.partitionItems = tmp1;

@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Справочная Одессы | Call центр</title>
+    <title>Справочная Одессы | ${subPartitionName}</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/home-min.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home-min2.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -27,6 +27,37 @@
         </div>
     </div>
     <div class="container">
+
+
+        <!--
+        <div class="rua-l-wrapper2" style="border-color: hsla(0,26%,66%,1)">
+            <div class="companyMainInfo">
+                <a data-id="1" href="../company/1">
+                    <h3>Company</h3>
+                </a>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;В книгео рнно тестиротирменеджеров.</span>
+            </div>
+            <div class="AddressList">
+                <div class="address">
+                    <span class="addressInfo">Приморская 33</span>&nbsp;
+                    <span>063 534 34 55, 078 455 32 45</span>&nbsp;
+                    <span>с пн по пт с 9 до 18</span>
+                </div>
+                <div class="hiddenAdr-btn">
+                    <p>
+                        <a class="btn btn-primary" data-id="1">Филиалы</a>
+                    </p>
+                </div>
+                <div class="address hiddenAdr address-1">
+                    <span class="addressInfo">Бунина 33</span>&nbsp;
+                    <span>063 534 34 55, 078 455 32 45</span>&nbsp;
+                    <span>с пн по пт с 9 до 18</span>
+                </div>
+            </div>
+        </div>
+        -->
+
+
     </div>
     <div class="container2">
         <div class="pre-loading">

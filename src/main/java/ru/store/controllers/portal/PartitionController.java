@@ -87,7 +87,28 @@ public class PartitionController {
         Partition partition = partitionService.getPartitionById(partitionId);
         partitionItem.partitionId = partition.getId();
         partitionItem.partitionName = getNormalName(partition.getName(), 50);
-        partitionItem.subPartitionItems = subPartitionItems;
+
+        List<Model.PartitionItem.SubPartitionItem> tmp1 = new ArrayList<>();
+        List<Model.PartitionItem.SubPartitionItem> tmp2 = new ArrayList<>();
+        for (int i = 0; i < subPartitionItems.size(); i++) {
+            if ((subPartitionItems.size() % 2) == 0) {
+                if (i >= subPartitionItems.size() / 2) {
+                    tmp1.add(subPartitionItems.get(i));
+                } else {
+                    tmp2.add(subPartitionItems.get(i));
+                }
+            } else {
+                if (i > subPartitionItems.size() / 2) {
+                    tmp1.add(subPartitionItems.get(i));
+                } else {
+                    tmp2.add(subPartitionItems.get(i));
+                }
+            }
+        }
+        partitionItem.subPartitionItems1 = tmp1;
+        partitionItem.subPartitionItems2 = tmp2;
+
+        //partitionItem.subPartitionItems = subPartitionItems;
 
         Model model = new Model();
         model.partitionItem = partitionItem;
@@ -164,7 +185,8 @@ public class PartitionController {
         public static class PartitionItem {
             public int partitionId;
             public String partitionName;
-            public List<SubPartitionItem> subPartitionItems;
+            public List<SubPartitionItem> subPartitionItems1;
+            public List<SubPartitionItem> subPartitionItems2;
 
             public int getPartitionId() {
                 return partitionId;
@@ -172,8 +194,11 @@ public class PartitionController {
             public String getPartitionName() {
                 return partitionName;
             }
-            public List<SubPartitionItem> getSubPartitionItems() {
-                return subPartitionItems;
+            public List<SubPartitionItem> getSubPartitionItems1() {
+                return subPartitionItems1;
+            }
+            public List<SubPartitionItem> getSubPartitionItems2() {
+                return subPartitionItems2;
             }
 
             public static class SubPartitionItem {

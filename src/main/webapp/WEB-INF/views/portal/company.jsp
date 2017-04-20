@@ -5,20 +5,14 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Справочная Одессы | Call центр</title>
+    <title>Справочная Одессы | ${company.name}</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/home-min.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home-min2.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
-
-
     <style>
         .def-block {
-            //max-width: 900px;
-            //margin: auto;
-            //height: 370px;
-            //max-height: 370px;
             min-height: 320px;
         }
         .position-block {
@@ -53,9 +47,6 @@
         .rua-l-wrapper2 {
             max-width: 960px;
             margin: 0 auto;
-            /* border-top: 10px solid #fff; */
-            /* border-left: 1px solid #fff; */
-            /* border-radius: 5px; */
             border: none;
             margin-bottom: 15px;
         }
@@ -65,7 +56,6 @@
             color: #d67b7b;
         }
     </style>
-
 </head>
 <body>
 <a name="top" id="top"></a>
@@ -81,7 +71,6 @@
     </div>
     <div class="rua-l-wrapper2" style="border-color: hsla(0,${color}%,66%,1)">
         <div class="companyMainInfo">
-            <!--<h3>${company.name}</h3>-->
             <span>&nbsp;&nbsp;&nbsp;&nbsp;${company.description}</span>
             <span class="companyAmount">
                 <k:if test="${not empty company.costOf}">
@@ -90,15 +79,6 @@
             </span>
         </div>
         <div class="AddressList">
-            <!--
-            <k:forEach var="addresItem" items="${addresses}">
-                <div class="address">
-                    <span class="addressInfo">${addresItem.address}</span>&nbsp;
-                    <span>${addresItem.phones}</span>&nbsp;
-                    <span>${addresItem.information}</span>
-                </div>
-            </k:forEach>
-            -->
             <k:set var="count" value="0" scope="page" />
             <k:forEach var="addresItem" items="${addresses}">
                 <k:if test="${count == 0}">
@@ -138,7 +118,6 @@
             </div>
         </k:forEach>
     </div>
-
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>

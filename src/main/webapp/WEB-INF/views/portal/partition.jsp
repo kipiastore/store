@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Справочная Одессы | Call центр</title>
+    <title>Справочная Одессы | ${model.partitionItem.partitionName}</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/home-min.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home-min2.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -20,19 +20,28 @@
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 30px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">Подразделы</h2>
+                <h2 class="headline centered mtmb">${model.partitionItem.partitionName}</h2>
                 <div class="rptShort">
-                    <k:forEach var="item" items="${model.partitionItem.subPartitionItems}">
-                        <p>
-                            <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
-                            <span class="rua-p-c-red">${item.companyCount}</span>
-                        </p>
-                    </k:forEach>
+                    <div style="float: left;width: 465px;">
+                        <k:forEach var="item" items="${model.partitionItem.subPartitionItems2}">
+                            <p>
+                                <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                                <span class="rua-p-c-red">${item.companyCount}</span>
+                            </p>
+                        </k:forEach>
+                    </div>
+                    <div style="float: right;width: 455px;">
+                        <k:forEach var="item" items="${model.partitionItem.subPartitionItems1}">
+                            <p>
+                                <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                                <span class="rua-p-c-red">${item.companyCount}</span>
+                            </p>
+                        </k:forEach>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <k:if test="${not empty model.companyHiPrior}">
         <div class="bestResources">
             <div style="opacity: 1; width: 100%; text-align:center; margin-top: 30px; margin-bottom: 30px;">
@@ -47,11 +56,7 @@
                         <h3>${item.companyName}</h3>
                     </a>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;${item.companyInformation}</span>
-                    <span class="companyAmount">
-                        <k:if test="${not empty item.costOf}">
-                            Стоимость: <b>${item.costOf}</b>
-                        </k:if>
-                    </span>
+                    <span class="companyAmount"><k:if test="${not empty item.costOf}">Стоимость: <b>${item.costOf}</b></k:if></span>
                 </div>
                 <div class="AddressList">
                     <k:set var="count" value="0" scope="page" />
@@ -79,7 +84,6 @@
             </div>
         </k:forEach>
     </k:if>
-
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>

@@ -18,32 +18,24 @@
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 30px 0;">
-
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">Разделы</h2>
                 <div class="rptShort">
                     <div style="float: left;width: 465px;">
                         <k:forEach var="partitionItem" items="${model.partitionItems2}">
                             <p>
-                            <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
-                                <span class="subsection-list" data-id="${partitionItem.partitionId}">
-                                    <k:if test="${partitionItem.subPartitionItems == null}" >
-                                        Список пуст!
-                                    </k:if>
-                                    <k:forEach var="subPartitionItem" items="${partitionItem.subPartitionItems}">
-                                        <span class="rua-p-c-red2">${subPartitionItem.companyCount}</span>
-                                        <a data-id="${partitionItem.partitionId}"
-                                           href="subPartition/${subPartitionItem.subPartitionId}">${subPartitionItem.subPartitionName}</a>
-                                        <br/>
-                                    </k:forEach>
+                                <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
+                                    <span class="subsection-list" data-id="${partitionItem.partitionId}">
+                                        <k:if test="${partitionItem.subPartitionItems == null}">Список пуст!</k:if>
+                                        <k:forEach var="subPartitionItem" items="${partitionItem.subPartitionItems}">
+                                            <span class="rua-p-c-red2">${subPartitionItem.companyCount}</span>
+                                            <a data-id="${partitionItem.partitionId}" href="subPartition/${subPartitionItem.subPartitionId}">${subPartitionItem.subPartitionName}</a>
+                                            <br/>
+                                        </k:forEach>
+                                    </span>
                                 </span>
-                            </span>
-                                <a data-id="${partitionItem.partitionId}" href="partition/${partitionItem.partitionId}">
-                                        ${partitionItem.partitionName}
-                                </a>
-                                <span class="rua-p-c-red">
-                                        ${partitionItem.companyCount}
-                                </span>
+                                <a data-id="${partitionItem.partitionId}" href="partition/${partitionItem.partitionId}">${partitionItem.partitionName}</a>
+                                <span class="rua-p-c-red">${partitionItem.companyCount}</span>
                                 <span class="show-subsection" data-id="${partitionItem.partitionId}"></span>
                             </p>
                         </k:forEach>
@@ -51,25 +43,18 @@
                     <div style="float: right;width: 455px;">
                         <k:forEach var="partitionItem" items="${model.partitionItems}">
                             <p>
-                            <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
-                                <span class="subsection-list" data-id="${partitionItem.partitionId}">
-                                    <k:if test="${partitionItem.subPartitionItems == null}" >
-                                        Список пуст!
-                                    </k:if>
-                                    <k:forEach var="subPartitionItem" items="${partitionItem.subPartitionItems}">
-                                        <span class="rua-p-c-red2">${subPartitionItem.companyCount}</span>
-                                        <a data-id="${partitionItem.partitionId}"
-                                           href="subPartition/${subPartitionItem.subPartitionId}">${subPartitionItem.subPartitionName}</a>
-                                        <br/>
-                                    </k:forEach>
+                                <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
+                                    <span class="subsection-list" data-id="${partitionItem.partitionId}">
+                                        <k:if test="${partitionItem.subPartitionItems == null}">Список пуст!</k:if>
+                                        <k:forEach var="subPartitionItem" items="${partitionItem.subPartitionItems}">
+                                            <span class="rua-p-c-red2">${subPartitionItem.companyCount}</span>
+                                            <a data-id="${partitionItem.partitionId}" href="subPartition/${subPartitionItem.subPartitionId}">${subPartitionItem.subPartitionName}</a>
+                                            <br/>
+                                        </k:forEach>
+                                    </span>
                                 </span>
-                            </span>
-                                <a data-id="${partitionItem.partitionId}" href="partition/${partitionItem.partitionId}">
-                                        ${partitionItem.partitionName}
-                                </a>
-                                <span class="rua-p-c-red">
-                                        ${partitionItem.companyCount}
-                                </span>
+                                <a data-id="${partitionItem.partitionId}" href="partition/${partitionItem.partitionId}">${partitionItem.partitionName}</a>
+                                <span class="rua-p-c-red">${partitionItem.companyCount}</span>
                                 <span class="show-subsection" data-id="${partitionItem.partitionId}"></span>
                             </p>
                         </k:forEach>

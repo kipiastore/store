@@ -7,7 +7,7 @@
 <head>
     <title>Справочная Одессы | Call центр</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/home-min.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>

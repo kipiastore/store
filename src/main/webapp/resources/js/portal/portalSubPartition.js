@@ -10,9 +10,14 @@ $(window).on('load', function() {
     $.get('../api/portal/resource/v1/company/priority/', function(entryP) {
         priority = entryP;
         $.get('../api/portal/resource/v1/company/SubPartition/' + subPartitionId + '/' + position, function(entry) {
+            var tmpHtml = '';
+            if (entry.length == 0) {
+                container.html(tmpHtml);
+                $('.pre-loading').hide();
+                return;
+            }
             if (entry.length < 10)
                 isEnd = true;
-            var tmpHtml = '';
             position += 10;
             var addressList = '';
             entry.forEach(function(company) {
@@ -60,8 +65,8 @@ $(window).on('load', function() {
                     var tmpText = '';
                     if (company.costOf != '')
                         tmpText = '<span class="companyAmount">Стоимость: <b>' + company.costOf + '</b>';
-                        if (company.costOf == null)
-                            tmpText = '';
+                    if (company.costOf == null)
+                        tmpText = '';
                     tmpHtml
                         += '<div class="rua-l-wrapper2" style="border-color: hsla(0,' + color + '%,66%,1)">'
                         + '<div class="companyMainInfo">'
@@ -137,6 +142,8 @@ $(window).on('scroll', function() {
                     var tmpText = '';
                     if (company.costOf != '')
                         tmpText = '<span class="companyAmount">Стоимость: <b>' + company.costOf + '</b></k:if>';
+                    if (company.costOf == null)
+                        tmpText = '';
                     tmpHtml
                         += '<div class="rua-l-wrapper2" style="border-color: hsla(0,' + color + '%,66%,1)">'
                         + '<div class="companyMainInfo">'
@@ -155,6 +162,19 @@ $(window).on('scroll', function() {
                 position += 10;
                 isReady = true;
                 $('.pre-loading').hide();
+                $('.btn.btn-primary').on("click", function(event) {
+                    var currentItem = event.target.getAttribute("data-id");
+                    var hiddenBlock = $('.address.hiddenAdr.address-' + currentItem);
+                    if (!hiddenBlock.is(':visible')) {
+                        hiddenBlock.show();
+                        hiddenBlock.animate({opacity: 1}, 200);
+                    } else {
+                        setTimeout(function() {
+                            hiddenBlock.hide();
+                        }, 190);
+                        hiddenBlock.animate({opacity: 0}, 200);
+                    }
+                });
             });
         });
     }

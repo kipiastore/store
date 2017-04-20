@@ -19,13 +19,10 @@ public class SubPartitionController {
     @Autowired
     private SubPartitionService subPartitionService;
 
-
     @RequestMapping(value = "/subPartition/*", method = RequestMethod.GET)
     public ModelAndView subPartition(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-
         String[] splitResult = request.getRequestURL().toString().split("subPartition/");
-
         int subPartitionId;
         if (splitResult.length == 2 && splitResult[1].matches("\\d+")) {
             subPartitionId = Integer.valueOf(splitResult[1]);
@@ -37,6 +34,10 @@ public class SubPartitionController {
             modelAndView.addObject("countInfo","подраздела");
             modelAndView.addObject("portalCount",subPartition.getCountSubPartition());
             //
+
+
+
+
         } else {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
