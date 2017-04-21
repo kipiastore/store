@@ -1486,3 +1486,6 @@ p::-moz-selection {
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
 }
+.companyCounter {
+    display: none;
+}

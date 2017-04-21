@@ -51,7 +51,7 @@ public class DirectorPositionsController {
             List<CompanySubPartition> companySubPartitions = companySubPartitionService.findCompanySubpartitionByCompanyId(Integer.valueOf(companyId));
             Set<Integer> currentSubPartitionIds = new HashSet<>();
             Set<Integer> newSubPartitionIds = new HashSet<>();
-            List<Integer> toDeleteSubPartitionIds = new ArrayList<>();
+            List<Integer> toDeleteCompanySubPartitionIds = new ArrayList<>();
             for (CompanySubPartition companySubPartition : companySubPartitions) {
                 currentSubPartitionIds.add(companySubPartition.getSubPartitionId());
             }
@@ -68,10 +68,10 @@ public class DirectorPositionsController {
             }
             for (CompanySubPartition companySubPartition : companySubPartitions) {
                 if (!newSubPartitionIds.contains(companySubPartition.getSubPartitionId())) {
-                    toDeleteSubPartitionIds.add(companySubPartition.getSubPartitionId());
+                    toDeleteCompanySubPartitionIds.add(companySubPartition.getId());
                 }
             }
-            companySubPartitionService.deleteCompanySubpartitionBySubPartitionIds(toDeleteSubPartitionIds);
+            companySubPartitionService.deleteCompanySubpartitionIds(toDeleteCompanySubPartitionIds);
             modelAndView.addObject("successMessage", "Обновление проведено успешно.");
         } catch (Exception ex) {
             modelAndView.addObject("updateError", "Возникла ошибка. " + ex.getMessage());
