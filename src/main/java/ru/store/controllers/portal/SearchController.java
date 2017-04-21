@@ -8,8 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.store.api.portal.PriorityResource;
 import ru.store.entities.Company;
 import ru.store.entities.CompanyAddress;
+import ru.store.entities.CompanySubPartition;
 import ru.store.service.CompanyAddressService;
 import ru.store.service.CompanyService;
+import ru.store.service.CompanySubPartitionService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -23,18 +25,32 @@ public class SearchController {
     private CompanyAddressService companyAddressService;
     @Autowired
     private PriorityResource priorityResource;
+    @Autowired
+    private CompanySubPartitionService companySubPartitionService;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String searchKey = request.getParameter("value");
-        List<Company> companies =  companyService.findCompaniesByKeyword(searchKey);
+        List<Company> companies = companyService.findPortalCompaniesByName(searchKey);
+        companies.addAll(companyService.findPortalCompaniesByKeyword(searchKey));
         Set<Integer> companyIds = new HashSet<>();
         Map<Integer, List<CompanyAddress>> companyToCompanyAddress = new HashMap<>();
+        List<CompanySubPartition> companySubPartitions = new ArrayList<>();
+        Map<Integer, Company> companyMap = new HashMap<>();
         for (Company company : companies) {
             companyIds.add(company.getId());
+            companyMap.put(company.getId(), company);
             companyToCompanyAddress.put(company.getId(), new ArrayList<CompanyAddress>());
         }
+
+        List<Company> finalCompanyList = new ArrayList<>();
+        if (companyIds.size() > 0)
+            companySubPartitions = companySubPartitionService.findCompanySubpartitionByCompanyId(new ArrayList<>(companyIds));
+        for (CompanySubPartition companySubPartition : companySubPartitions) {
+            finalCompanyList.add(companyMap.get(companySubPartition.getCompanyId()));
+        }
+
         List<CompanyAddress> companyAddresses = companyAddressService.getCompanyAddresses(new ArrayList<>(companyIds));
         for (CompanyAddress companyAddress : companyAddresses) {
             companyToCompanyAddress.get(companyAddress.getCompanyId()).add(companyAddress);
@@ -45,7 +61,7 @@ public class SearchController {
         }
         modelAndView.addObject("packageToColor", packageToColor);
         modelAndView.addObject("companyToCompanyAddress", companyToCompanyAddress);
-        modelAndView.addObject("companies", companies);
+        modelAndView.addObject("companies", finalCompanyList);
         modelAndView.addObject("prefix", "");
         modelAndView.setViewName("portal/search");
         return modelAndView;

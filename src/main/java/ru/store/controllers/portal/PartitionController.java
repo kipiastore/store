@@ -123,11 +123,9 @@ public class PartitionController {
         List<Company> companies = companyService.getPortalCompanies(new ArrayList<>(companyIds));
         List<Model.CompanyItem> companyItems = new ArrayList<>();
         Model.CompanyItem companyItem;
-        List<Integer> companyId = new ArrayList<>();
         Map<Integer, List<CompanyAddress>> companyToCompanyAddress = new HashMap<>();
         for (Company company : companies) {
             companyToCompanyAddress.put(company.getId(), new ArrayList<CompanyAddress>());
-            companyId.add(company.getId());
             companyItem = new Model.CompanyItem();
             if (packageIdToPriority.get(company.getCompanyPackageId()) != null)
                 companyItem.colorPoint = packageIdToPriority.get(company.getCompanyPackageId());

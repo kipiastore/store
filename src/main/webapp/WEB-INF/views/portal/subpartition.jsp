@@ -27,37 +27,40 @@
         </div>
     </div>
     <div class="container">
-
-
-        <!--
-        <div class="rua-l-wrapper2" style="border-color: hsla(0,26%,66%,1)">
-            <div class="companyMainInfo">
-                <a data-id="1" href="../company/1">
-                    <h3>Company</h3>
-                </a>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;В книгео рнно тестиротирменеджеров.</span>
+        <k:forEach var="item" items="${model.companyHiPrior}">
+            <div class="rua-l-wrapper2" style="border-color: hsla(0,${item.colorPoint}%,66%,1)">
+                <div class="companyMainInfo">
+                    <a data-id="${item.companyId}" href="../company/${item.companyId}">
+                        <h3>${item.companyName}</h3>
+                    </a>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;${item.companyInformation}</span>
+                    <span class="companyAmount"><k:if test="${not empty item.costOf}">Стоимость: <b>${item.costOf}</b></k:if></span>
+                </div>
+                <div class="AddressList">
+                    <k:set var="count" value="0" scope="page" />
+                    <k:forEach var="addresItem" items="${model.companyToCompanyAddress.get(item.companyId)}">
+                        <k:if test="${count == 0}">
+                            <div class="address">
+                                <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                <span>${addresItem.phones}&nbsp;</span>
+                                <span>${addresItem.information}</span>
+                            </div>
+                        </k:if>
+                        <k:if test="${count > 0}">
+                            <div class="hiddenAdr-btn">
+                                <p><a class="btn btn-primary" data-id="${item.companyId}">Филиалы</a></p>
+                            </div>
+                            <div class="address hiddenAdr address-${item.companyId}">
+                                <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                <span>${addresItem.phones}&nbsp;</span>
+                                <span>${addresItem.information}</span>
+                            </div>
+                        </k:if>
+                        <k:set var="count" value="${count + 1}" scope="page"/>
+                    </k:forEach>
+                </div>
             </div>
-            <div class="AddressList">
-                <div class="address">
-                    <span class="addressInfo">Приморская 33</span>&nbsp;
-                    <span>063 534 34 55, 078 455 32 45</span>&nbsp;
-                    <span>с пн по пт с 9 до 18</span>
-                </div>
-                <div class="hiddenAdr-btn">
-                    <p>
-                        <a class="btn btn-primary" data-id="1">Филиалы</a>
-                    </p>
-                </div>
-                <div class="address hiddenAdr address-1">
-                    <span class="addressInfo">Бунина 33</span>&nbsp;
-                    <span>063 534 34 55, 078 455 32 45</span>&nbsp;
-                    <span>с пн по пт с 9 до 18</span>
-                </div>
-            </div>
-        </div>
-        -->
-
-
+        </k:forEach>
     </div>
     <div class="container2">
         <div class="pre-loading">
@@ -70,6 +73,7 @@
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>
 <span class="subPartitionId">${subPartitionId}</span>
+<span class="companyCounter">${companyCounter}</span>
 <%@include file="/WEB-INF/views/portal/components/emailWindow.jspf"%>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/portal/portalSubPartition.js" />"></script>

@@ -5,6 +5,18 @@ var priority;
 var isEnd;
 
 $(window).on('load', function() {
+    $.get('../api/portal/resource/v1/company/priority/', function(entryP) {
+        priority = entryP;
+    });
+    if (parseInt($('.companyCounter').html()) < 10)
+        isEnd = true;
+    else
+        isEnd = false;
+    position += 10;
+});
+
+/*
+$(window).on('load', function() {
     isEnd = false;
     $('.pre-loading').show();
     $.get('../api/portal/resource/v1/company/priority/', function(entryP) {
@@ -100,9 +112,11 @@ $(window).on('load', function() {
         });
     });
 });
-
+*/
 var isReady = true;
 $(window).on('scroll', function() {
+    if (parseInt($('.companyCounter').html()) === 0)
+        isEnd = true;
     if($(window).scrollTop() + $(window).height() == $(document).height() && position != 0 && isReady && !isEnd) {
         isReady = false;
         $('.pre-loading').show();

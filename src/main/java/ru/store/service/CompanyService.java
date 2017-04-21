@@ -156,5 +156,13 @@ public class CompanyService {
     public List<Integer> getOptimizationCompanies() {
         return companyDAO.getOptimizationCompanies();
     }
+
+    public List<Company> findPortalCompaniesByName(String name) {
+        return companyDAO.findPortalCompaniesByName(name);
+    }
+
+    public List<Company> findPortalCompaniesByKeyword(String keywords) {
+        return companyDAO.findPortalCompaniesByKeyword(keywords);
+    }
 }
 
