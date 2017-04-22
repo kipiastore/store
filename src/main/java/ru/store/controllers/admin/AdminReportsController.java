@@ -151,7 +151,8 @@ public class AdminReportsController {
         AdminPositionsController.Model.PartitionItem mainPartitionItem;
         Map<Integer, AdminPositionsController.Model.PartitionItem> partitionIdToPartitionItem = new HashMap<>();
         Map<AdminPositionsController.Model.PartitionItem, List<AdminPositionsController.Model.PartitionItem>> subPartitionsGroupedByPartition = new HashMap<>();
-        for (Partition partition : partitionService.getPartitions()) {
+        List<Partition> partitions=partitionService.getPartitions();
+        for (Partition partition : partitions) {
             partitionItem = new AdminPositionsController.Model.PartitionItem();
             partitionItem.id = partition.getId();
             partitionItem.name = getNormalName(partition.getName());
@@ -159,7 +160,8 @@ public class AdminReportsController {
             partitionItems.add(partitionItem);
             subPartitionsGroupedByPartition.put(partitionItem, null);
         }
-        for (SubPartition subPartition : subPartitionService.getSubPartitions()) {
+        List<SubPartition> subPartitions=subPartitionService.getSubPartitions();
+        for (SubPartition subPartition : subPartitions) {
             if (subPartitionsGroupedByPartition.get(new AdminPositionsController.Model.PartitionItem(subPartition.getPartitionId())) != null) {
                 partitionItem = new AdminPositionsController.Model.PartitionItem();
                 partitionItem.id = subPartition.getId();

@@ -14,13 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.store.entities.Company;
 import ru.store.entities.CompanyAddress;
 import ru.store.entities.CompanyReminder;
-import ru.store.service.CompanyAddressService;
-import ru.store.service.CompanyReminderService;
-import ru.store.service.CompanyService;
-import ru.store.service.RegionService;
+import ru.store.service.*;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ManagerCompaniesController {
@@ -30,14 +29,15 @@ public class ManagerCompaniesController {
     private CompanyAddressService companyAddressService;
     @Autowired
     private CompanyReminderService companyReminderService;
+
     @Autowired
-    private RegionService regionService;
+    private LoadMapsService loadMapsServiceService;
+
     @Autowired
     private SearchByPage search;
 
     private Boolean iSChoiceComments;
 
-    public ManagerController managerController;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -87,6 +87,7 @@ public class ManagerCompaniesController {
         loadPage(model, modelAndView);
         model.message = "Результаты поиска:";
         model.companyList = new ArrayList<>();
+        System.out.println(iSChoiceComments);
         if(iSChoiceComments==false) {
             for (Company company : companies) {
                 model.companyList.add(convert(company,companyReminders,stringAllCounts));
@@ -118,6 +119,8 @@ public class ManagerCompaniesController {
     }
     private void loadCompanies(Model model) {
         List<Company> companies=new ArrayList<>();
+        List<CompanyReminder>companyReminders=companyReminderService.getCompanyReminders();
+        List<CompanyAddress> companyAddresses=companyAddressService.getCompanyAddresses();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username
         String role= auth.getAuthorities().toString();
@@ -129,61 +132,7 @@ public class ManagerCompaniesController {
             System.out.println("manager");
             companies = companyService.getCompaniesByManagerName(name);
         }
-        List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
-        List<CompanyReminder>companyReminders=companyReminderService.getCompanyReminders();
-        List<Model.CompanyAddressItem> companyAddressList = new ArrayList<>();
-        List<Model.CompanyReminderItem> companyRemindersList = new ArrayList<>();
-        Model.CompanyAddressItem companyAddressItem;
-        Model.CompanyReminderItem companyReminderItem;
-        Map<Integer,List<CompanyReminder>> mapReminders=new HashMap<>();
-        Map<Integer,List<CompanyAddress>> mapAddresses=new HashMap<>();
-        for (Company company : companies) {
-            System.out.println("компании"+companies);
-            System.out.println("компания"+company);
-            List<CompanyAddress> companyAddressesList;
-            List<CompanyReminder> companyReminderList;
-            for (CompanyAddress companyAddress : companyAddresses) {
-                if(company.getId()==companyAddress.getCompanyId()) {
-                    if(mapAddresses.get(company.getId())==null){
-                        companyAddressesList=new ArrayList<>();
-                        companyAddressesList.add(companyAddress);
-                        mapAddresses.put(company.getId(),companyAddressesList);
-                    }
-                    else{
-                        mapAddresses.get(company.getId()).add(companyAddress);
-                    }
-                }
-            }
-            for (CompanyReminder companyReminder : companyReminders) {
-                if(company.getId()==companyReminder.getCompanyId()) {
-                    if(mapReminders.get(company.getId())==null){
-                        companyReminderList=new ArrayList<>();
-                        companyReminderList.add(companyReminder);
-                        mapReminders.put(company.getId(),companyReminderList);
-                    }
-                    else{
-                        mapReminders.get(company.getId()).add(companyReminder);
-                    }
-                }
-            }
-        }
-        for(Integer companyId:mapAddresses.keySet()) {
-            companyAddressItem = new Model.CompanyAddressItem();
-            companyAddressItem.companyAddresses = mapAddresses.get(companyId);
-            companyAddressItem.setCompanyId(companyId);
-            companyAddressList.add(companyAddressItem);
-        }
-        for(Integer companyId:mapReminders.keySet()){
-            companyReminderItem = new Model.CompanyReminderItem();
-            companyReminderItem.companyReminders = mapReminders.get(companyId);
-            companyReminderItem.setCompanyId(companyId);
-            companyRemindersList.add(companyReminderItem);
-        }
-        //model.companiesJson = companies.toString();
-        model.companyAddressJson = companyAddressList.toString();
-        model.companyReminderJson = companyRemindersList.toString();
-        model.regions = regionService.getRegions();
-        model.numOfAddress = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        loadMapsServiceService.load(model,companyReminders,companyAddresses,companies);
         model.message = "Последние редактированные фирмы:";
         model.companyList = new ArrayList<>();
         List<CompanyReminder>companyLastReminders=companyReminderService.getLastCompaniesReminderType();
@@ -204,6 +153,7 @@ public class ManagerCompaniesController {
         Model.CompaniesItem c;
         for (Company company : companies) {
             c = convert(company, companyReminders,stringAllCounts);
+            System.out.println("---"+c.getTypeOfNote());
             if (choice == 1) {
                 if (c.getTypeOfNote() != "") {
                     model.companyList.add(c);
@@ -225,12 +175,14 @@ public class ManagerCompaniesController {
         companyItem.legalAddress = company.getLegalAddress();
         companyItem.phone = company.getPhone();
         companyItem.typeOfNote = "";
-        for(CompanyReminder companyReminder:companyLastReminders) {
-            if(company.getId()==companyReminder.getCompanyId()) {
-                for(String s:allRemindersCount) {
-                    String []tempS=s.split("-");
-                    if(Integer.parseInt(tempS[0])==companyReminder.getCompanyId()) {
-                        companyItem.typeOfNote = sdf.format(companyReminder.getDateReminder()) + " " + companyReminder.getTypeReminder()+" "+tempS[1];
+        if(!companyLastReminders.isEmpty()) {
+            for (CompanyReminder companyReminder : companyLastReminders) {
+                if (company.getId() == companyReminder.getCompanyId()) {
+                    for (String s : allRemindersCount) {
+                        String[] tempS = s.split("-");
+                        if (Integer.parseInt(tempS[0]) == companyReminder.getCompanyId()) {
+                            companyItem.typeOfNote = sdf.format(companyReminder.getDateReminder()) + " " + companyReminder.getTypeReminder() + " " + tempS[1];
+                        }
                     }
                 }
             }

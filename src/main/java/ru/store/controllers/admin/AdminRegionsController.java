@@ -71,7 +71,8 @@ public class AdminRegionsController {
     private void loadRegions(Model model) {
         List<Model.RegionItem> regionItems = new ArrayList<>();
         Model.RegionItem regionItem;
-        for (Region region : regionService.getRegions()) {
+        List<Region> regions=regionService.getRegions();
+        for (Region region : regions) {
             regionItem = new Model.RegionItem();
             regionItem.id = region.getId();
             if (region.getName() != null && region.getName().length() > 24)

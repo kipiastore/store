@@ -86,7 +86,8 @@ public class AdminPackagesController {
     private void loadRegions(Model model) {
         List<Model.PackageItem> packageItems = new ArrayList<>();
         Model.PackageItem packageItem;
-        for (Package aPackage : packageService.getPackages()) {
+        List<Package> packages=packageService.getPackages();
+        for (Package aPackage : packages) {
             packageItem = new Model.PackageItem();
             packageItem.id = aPackage.getId();
             if (aPackage.getName() != null && aPackage.getName().length() > 24)

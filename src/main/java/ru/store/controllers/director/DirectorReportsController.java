@@ -43,7 +43,7 @@ public class DirectorReportsController {
 
     @RequestMapping(value = "/director/addreport", method = RequestMethod.POST)
     public ModelAndView addReport(@ModelAttribute("report") Report report,
-                                      @RequestParam("file") MultipartFile multipartFile) {
+                                  @RequestParam("file") MultipartFile multipartFile) {
         ModelAndView modelAndView = new ModelAndView();
         try {
             String[] tmp = multipartFile.getOriginalFilename().split("\\.");
@@ -151,7 +151,8 @@ public class DirectorReportsController {
         DirectorPositionsController.Model.PartitionItem mainPartitionItem;
         Map<Integer, DirectorPositionsController.Model.PartitionItem> partitionIdToPartitionItem = new HashMap<>();
         Map<DirectorPositionsController.Model.PartitionItem, List<DirectorPositionsController.Model.PartitionItem>> subPartitionsGroupedByPartition = new HashMap<>();
-        for (Partition partition : partitionService.getPartitions()) {
+        List<Partition> partitions=partitionService.getPartitions();
+        for (Partition partition : partitions) {
             partitionItem = new DirectorPositionsController.Model.PartitionItem();
             partitionItem.id = partition.getId();
             partitionItem.name = getNormalName(partition.getName());
@@ -159,7 +160,8 @@ public class DirectorReportsController {
             partitionItems.add(partitionItem);
             subPartitionsGroupedByPartition.put(partitionItem, null);
         }
-        for (SubPartition subPartition : subPartitionService.getSubPartitions()) {
+        List<SubPartition> subPartitions=subPartitionService.getSubPartitions();
+        for (SubPartition subPartition : subPartitions) {
             if (subPartitionsGroupedByPartition.get(new DirectorPositionsController.Model.PartitionItem(subPartition.getPartitionId())) != null) {
                 partitionItem = new DirectorPositionsController.Model.PartitionItem();
                 partitionItem.id = subPartition.getId();

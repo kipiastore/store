@@ -72,16 +72,16 @@ public class DirectorCompaniesController {
                                       @RequestParam("UpAddressJson") String UpAddressJson,
                                       @RequestParam("UpDelete") String UpDelete) {
         ModelAndView modelAndView = new ModelAndView();
-try {
-    company.setId(Integer.valueOf(id));
-    companyService.updateCompany(company);
-    companyAddressService.updateCompanyAddresses(buildCompanyAddress(company, UpAddressJson));
-    companyAddressService.deleteCompanyAddress(UpDelete.split(","));
-    modelAndView.addObject("successMessage", "Обновление проведено успешно.");
-}
-catch (Exception ex) {
-    modelAndView.addObject("deleteError", "Возникла ошибка. " + ex.getMessage());
-}
+        try {
+            company.setId(Integer.valueOf(id));
+            companyService.updateCompany(company);
+            companyAddressService.updateCompanyAddresses(buildCompanyAddress(company, UpAddressJson));
+            companyAddressService.deleteCompanyAddress(UpDelete.split(","));
+            modelAndView.addObject("successMessage", "Обновление проведено успешно.");
+        }
+        catch (Exception ex) {
+            modelAndView.addObject("deleteError", "Возникла ошибка. " + ex.getMessage());
+        }
         Model model = new Model();
         loadPage(model, modelAndView);
         return modelAndView;
@@ -187,7 +187,7 @@ catch (Exception ex) {
 
     private List<CompanyAddress> buildCompanyAddress(Company company, String addressJson) {
         List<CompanyAddress> companyAddresses = new Gson().fromJson(addressJson,
-                                                                    new TypeToken<List<CompanyAddress>>(){}.getType());
+                new TypeToken<List<CompanyAddress>>(){}.getType());
         for (CompanyAddress companyAddress : companyAddresses)
             companyAddress.setCompanyId(company.getId());
         return companyAddresses;
@@ -203,15 +203,33 @@ catch (Exception ex) {
 
     private void loadCompanies(Model model) {
         List<Company> companies = companyService.getCompanies();
-        List<Model.CompanyAddressItem> companyAddressItems = new ArrayList<>();
+        List<CompanyAddress> companyAddresses=companyAddressService.getCompanyAddresses();
+        List<Model.CompanyAddressItem> companyAddressList = new ArrayList<>();
         Model.CompanyAddressItem companyAddressItem;
+        Map<Integer,List<CompanyAddress>> mapAddresses=new HashMap<>();
         for (Company company : companies) {
-            companyAddressItem = new Model.CompanyAddressItem();
-            companyAddressItem.setCompanyId(company.getId());
-            companyAddressItem.setCompanyAddresses(companyAddressService.getCompanyAddresses(company.getId()));
-            companyAddressItems.add(companyAddressItem);
+            List<CompanyAddress> companyAddressesList;
+            if(!companyAddresses.isEmpty()) {
+                for (CompanyAddress companyAddress : companyAddresses) {
+                    if (company.getId() == companyAddress.getCompanyId()) {
+                        if (mapAddresses.get(company.getId()) == null) {
+                            companyAddressesList = new ArrayList<>();
+                            companyAddressesList.add(companyAddress);
+                            mapAddresses.put(company.getId(), companyAddressesList);
+                        } else {
+                            mapAddresses.get(company.getId()).add(companyAddress);
+                        }
+                    }
+                }
+            }
         }
-        model.companyAddressJson = companyAddressItems.toString();
+        for(Integer companyId:mapAddresses.keySet()) {
+            companyAddressItem = new Model.CompanyAddressItem();
+            companyAddressItem.companyAddresses = mapAddresses.get(companyId);
+            companyAddressItem.setCompanyId(companyId);
+            companyAddressList.add(companyAddressItem);
+        }
+        model.companyAddressJson = companyAddressList.toString();
         model.regions = regionService.getRegions();
         model.packages = packageService.getPackages();
         model.filterListMap = groupByFilter(companies);
@@ -230,7 +248,8 @@ catch (Exception ex) {
         model.numOfAddress = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         model.message = "Последние редактированные фирмы:";
         model.companyList = new ArrayList<>();
-        for (Company company : companyService.getCompaniesByLastUpdate()) {
+        List<Company> companyList=companyService.getCompaniesByLastUpdate();
+        for (Company company : companyList) {
             model.companyList.add(convert(company));
         }
         Map<String, String> packageIdToName = new HashMap<>();
@@ -418,7 +437,7 @@ catch (Exception ex) {
         else
             return name;
     }
-//07.03.17.
+    //07.03.17.
     private Model.CompaniesItem convert(Company company) {
         Model.CompaniesItem companyItem = new Model.CompaniesItem();
         companyItem.id = company.getId();

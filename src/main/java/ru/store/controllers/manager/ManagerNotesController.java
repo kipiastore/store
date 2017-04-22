@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.entities.Company;
+import ru.store.entities.CompanyAddress;
 import ru.store.entities.CompanyReminder;
-import ru.store.service.CompanyReminderService;
-import ru.store.service.CompanyService;
+import ru.store.entities.Package;
+import ru.store.service.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,6 +32,15 @@ public class ManagerNotesController {
     CompanyService companyService;
     @Autowired
     CompanyReminderService companyReminderService;
+    @Autowired
+    private RegionService regionService;
+    @Autowired
+    PackageService packageService;
+    @Autowired
+    CompanyAddressService companyAddressService;
+
+    @Autowired
+    private LoadMapsService loadMapsServiceService;
 
     private Boolean iSChoiceComments;
 
@@ -103,6 +113,12 @@ public class ManagerNotesController {
             System.out.println("manager");
             companies = companyService.getCompaniesByManagerName(name);
         }
+
+        List<Package> packages=packageService.getPackages();
+        List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
+        List<CompanyReminder>allCompanyReminders=companyReminderService.getCompanyReminders();
+        loadMapsServiceService.load(model,allCompanyReminders,companyAddresses,companies);
+        model.message = "Заметки:";
         model.companyList=new ArrayList<>();
         for(Company company:companies) {
             List<Model.CompaniesItem> list = convert(company);
@@ -141,10 +157,10 @@ public class ManagerNotesController {
         List<Model.CompaniesItem> companyItems = new ArrayList<>();
         Model.CompaniesItem companyItem;
         List<CompanyReminder> companyReminders;
-        // запросы в цыкле - это плохо
         companyReminders= companyReminderService.getCompanyReminders(company.getId());
         if(companyReminders.isEmpty()){
             companyItem=new Model.CompaniesItem();
+            companyItem.id=company.getId();
             companyItem.name=company.getName();
             companyItem.dateOfNote="";
             companyItem.typeOfNote="";
@@ -154,6 +170,7 @@ public class ManagerNotesController {
         else {
             for (CompanyReminder companyReminder : companyReminders) {
                 companyItem = new Model.CompaniesItem();
+                companyItem.id=company.getId();
                 companyItem.name = getNormalName(companyReminder.getCompanyName());
                 companyItem.dateOfNote = sdf.format(companyReminder.getDateReminder());
                 if (companyReminder.getCommentReminder() != null) {
@@ -193,11 +210,32 @@ public class ManagerNotesController {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
         model.selectedPageNum=4;
         List<Model.CompaniesItem> companiesItems=new ArrayList<>();
+        List<Company> companies=new ArrayList<>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+        String role= auth.getAuthorities().toString();
+        if(role.equals("[ROLE_DIRECTOR]")) {
+            System.out.println("director");
+            companies = companyService.getCompanies();
+        }
+        if(role.equals("[ROLE_MANAGER]")) {
+            System.out.println("manager");
+            companies = companyService.getCompaniesByManagerName(name);
+        }
+
+        List<Package> packages=packageService.getPackages();
+        List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
+        List<CompanyReminder>allCompanyReminders=companyReminderService.getCompanyReminders();
+        loadMapsServiceService.load(model,allCompanyReminders,companyAddresses,companies);
+        model.message = "Заметки:";
+        model.companyList=new ArrayList<>();
+        model.reminderList = new ArrayList<>();
         Model.CompaniesItem companiesItem;
         for(Company company:tempList ) {
             for (CompanyReminder companyReminder : companyReminders) {
                 if(company.getName().equals(companyReminder.getCompanyName())) {
                     companiesItem = new Model.CompaniesItem();
+                    companiesItem.id=company.getId();
                     companiesItem.name = company.getName();
                     companiesItem.dateOfNote = sdf.format(companyReminder.getDateReminder());
                     companiesItem.commentOfNote = companyReminder.getCommentReminder();
@@ -230,11 +268,17 @@ public class ManagerNotesController {
     }
     //27.02.17
     private ModelAndView loadCompaniesNotesForSecondPage(List<Company> companies,ModelAndView modelAndView, Model model) {
-
-        List<CompanyReminder>companyReminders=companyReminderService.getCompanyReminders();
+        List<Package> packages=packageService.getPackages();
+        List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
+        List<CompanyReminder>allCompanyReminders=companyReminderService.getCompanyReminders();
+        List<Model.CompanyAddressItem> companyAddressList = new ArrayList<>();
+        List<Model.CompanyReminderItem> companyRemindersList = new ArrayList<>();
+        loadMapsServiceService.load(model,allCompanyReminders,companyAddresses,companies);
+        model.message = "Заметки:";
+        model.companyList=new ArrayList<>();
         model.reminderList = new ArrayList<>();
         for (Company company : companies) {
-            for (CompanyReminder companyReminder : companyReminders) {
+            for (CompanyReminder companyReminder : allCompanyReminders) {
                 if (company.getId()==companyReminder.getCompanyId()){
                     model.reminderList.add(convertForSecondPage(companyReminder));
                 }
@@ -255,8 +299,8 @@ public class ManagerNotesController {
                         if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")){
                             companies = companyService.findCompaniesByName(value);
                         }
-                        else{
-                            companies = companyService.findCompaniesByNameAndByManager(value,auth.getName());
+                        if(auth.getAuthorities().toString().equals("[ROLE_MANAGER]")) {
+                            companies = companyService.findCompaniesByNameAndByManager(value, auth.getName());
                         }
                         break;
                     }
@@ -264,7 +308,7 @@ public class ManagerNotesController {
                         if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")){
                             companies = companyService.findCompaniesByPhone(value);
                         }
-                        else{
+                        if(auth.getAuthorities().toString().equals("[ROLE_MANAGER]")) {
                             companies = companyService.findCompaniesByPhoneAndByManager(value,auth.getName());
                         }
                         break;
@@ -273,7 +317,7 @@ public class ManagerNotesController {
                         if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")){
                             companies = companyService.findCompaniesByEmail(value);
                         }
-                        else{
+                        if(auth.getAuthorities().toString().equals("[ROLE_MANAGER]")) {
                             companies = companyService.findCompaniesByEmailAndByManager(value,auth.getName());
                         }
                         break;
@@ -286,7 +330,12 @@ public class ManagerNotesController {
 
                 }
                 else{
-                    companies = companyService.getCompaniesByManagerName(auth.getName());
+                    if(auth.getAuthorities().toString().equals("[ROLE_DIRECTOR]")){
+                        companies = companyService.getCompanies();
+                    }
+                    if(auth.getAuthorities().toString().equals("[ROLE_MANAGER]")) {
+                        companies = companyService.getCompaniesByManagerName(auth.getName());
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -298,6 +347,7 @@ public class ManagerNotesController {
     private Model.CompaniesItem convertForSecondPage(CompanyReminder companyReminder) {
         Model.CompaniesItem companiesItem = new Model.CompaniesItem();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+        companiesItem.id=companyReminder.getCompanyId();
         companiesItem.name = companyReminder.getCompanyName();
         companiesItem.dateOfNote = sdf.format(companyReminder.getDateReminder());
         companiesItem.commentOfNote = companyReminder.getCommentReminder();
@@ -325,13 +375,23 @@ public class ManagerNotesController {
         modelAndView.setViewName("manager/notesSecond");
     }
     private void loadCompaniesNotesByCalendar(Date date,List<CompanyReminder>companyReminders,Model model){
+        List<Package> packages=packageService.getPackages();
+        List<Company>companies=companyService.getCompanies();
+        List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
+        List<CompanyReminder>allCompanyReminders=companyReminderService.getCompanyReminders();
+        loadMapsServiceService.load(model,allCompanyReminders,companyAddresses,companies);
+        model.message = "Заметки:";
+        model.companyList=new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
         List<Model.CompaniesItem> companiesItems=new ArrayList<>();
         List<Model.CompaniesItem> remindersItems=new ArrayList<>();
-        List<Company>companies=companyService.getCompanies();
+
+        List<String> amountList=companyReminderService.getAllCompanyReminderAmount();
+        List<CompanyReminder> companyRemindersAmount=companyReminderService.getLastCompaniesReminderType();
         Model.CompaniesItem companiesItem;
         for (CompanyReminder companyReminder : companyReminders) {
             companiesItem = new Model.CompaniesItem();
+            companiesItem.id=companyReminder.getCompanyId();
             companiesItem.name = companyReminder.getCompanyName();
             companiesItem.dateOfNote = sdf.format(companyReminder.getDateReminder());
             companiesItem.commentOfNote = companyReminder.getCommentReminder();
@@ -347,12 +407,28 @@ public class ManagerNotesController {
             if(company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null&&company.getDateOfEndContract().getTime()-date.getTime()<=259200000)
             {
                 companiesItem = new Model.CompaniesItem();
+                companiesItem.id=company.getId();
                 companiesItem.nameForNotes = company.getName();
-                companiesItem.noteMain = "";
-                companiesItem.historyOfNote = companyReminderService.getCompanyReminderAmount(company.getId());
+                companiesItem.historyOfNote = "";
+                companiesItem.noteMain = "Что это такое????";
+                if (!amountList.isEmpty()){
+                    for (String s : amountList) {
+                        String[] tempS = s.split("-");
+                        if (Integer.parseInt(tempS[0]) == company.getId()) {
+                            companiesItem.historyOfNote = tempS[1];
+                        }
+                    }
+                }
                 companiesItem.periodOfContract = "c "+sdf.format(company.getDateOfStartContract())+" по "+sdf.format(company.getDateOfEndContract());
                 companiesItem.debt = checkIsDebt(company.getId());
-                companiesItem.note = companyReminderService.getLastCompanyReminderDateHourType(company.getId());
+                companiesItem.note = "";
+                if(!companyRemindersAmount.isEmpty()) {
+                    for (CompanyReminder companyReminder : companyRemindersAmount) {
+                        if (company.getId() == companyReminder.getCompanyId()) {
+                            companiesItem.note = sdf.format(companyReminder.getDateReminder()) + " " + companyReminder.getHourReminder() + " " + companyReminder.getTypeReminder();
+                        }
+                    }
+                }
                 companiesItems.add(companiesItem);
                 model.companyList = new ArrayList<>();
                 for (Model.CompaniesItem m : companiesItems) {

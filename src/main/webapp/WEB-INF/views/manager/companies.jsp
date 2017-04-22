@@ -65,11 +65,11 @@
                     <tbody>
                     <c:forEach var="item" items="${model.companyList}">
                         <tr>
-                            <td class="tableName" id="ID-${item.id}">${item.name}</td>
-                            <td>${item.directorFullName}</td>
-                            <td>${item.legalAddress}</td>
-                            <td>${item.phone}</td>
-                            <td id="tdSelectShowTypeReminder">${item.typeOfNote}</td>
+                            <td width="120px" class="tableName" id="ID-${item.id}">${item.name}</td>
+                            <td width="100px" >${item.directorFullName}</td>
+                            <td width="120px" >${item.legalAddress}</td>
+                            <td width="60px" >${item.phone}</td>
+                            <td width="60px"  id="tdSelectShowTypeReminder">${item.typeOfNote}</td>
                         </tr>
                     </c:forEach>
                     </tbody>

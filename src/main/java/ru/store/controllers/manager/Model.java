@@ -2,6 +2,7 @@ package ru.store.controllers.manager;
 
 import ru.store.entities.CompanyAddress;
 import ru.store.entities.CompanyReminder;
+import ru.store.entities.Package;
 import ru.store.entities.Region;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public  class Model {
     public String addingCompanyJson;
     public String companiesJson;
     public List<Region> regions;
+    public List<Package> packages;
     public List<CompanyReminder> companyReminders;
     public int[] numOfAddress;
     public String companyAddressJson;
@@ -52,6 +54,9 @@ public  class Model {
         return message;
     }
 
+    public List<Package> getPackages() {
+        return packages;
+    }
 
     public static class CompaniesItem {
         public int id;
