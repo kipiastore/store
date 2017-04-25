@@ -999,6 +999,10 @@ footer.f .cr {
 .rptShort {
     overflow: hidden;
     text-align: center;
+    padding: 0px 10px 0px 10px;
+    border-left: 1px solid rgba(120, 120, 120, 0.12);
+    border-right: 1px solid rgba(120, 120, 120, 0.12);
+    border-radius: 10px;
 }
 .rptShort div p {
     /*
@@ -1488,4 +1492,36 @@ p::-moz-selection {
 }
 .companyCounter {
     display: none;
+}
+
+.f .c ul li p {
+    display: block;
+    color: #7E7E7E;
+    margin-bottom: 22px;
+    float: none;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 0;
+}
+
+footer.f .c>ul .kk {
+    display: block;
+    font-size: 13px;
+    color: #7E7E7E;
+    line-height: 33px;
+    margin-top: 25px;
+    margin-bottom: 22px;
+    float: none;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 0;
+}
+
+footer.f .c>ul li {
+    float: left;
+    width: 21%;
+}
+
+footer.f .c>ul .b {
+    font-size: 13px;
 }

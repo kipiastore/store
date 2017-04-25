@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.*;
+import ru.store.entities.Image;
 import ru.store.exceptions.NotSupportedFormat;
 import ru.store.service.CompanySubPartitionService;
 import ru.store.service.CompanySubpartitionContentService;
@@ -15,7 +16,13 @@ import ru.store.service.SubPartitionService;
 import ru.store.servlets.DownloadImage;
 import ru.store.servlets.DownloadServlet;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -40,6 +47,14 @@ public class DesignerCompanyPositionsController {
         return modelAndView;
     }
 
+    public static BufferedImage convertToBufferedImage(java.awt.Image image) {
+        BufferedImage newImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = newImage.createGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        return newImage;
+    }
+
     @RequestMapping(value = "/designer/addsubpartitioninfos", method = RequestMethod.POST)
     public String updateCompany(@ModelAttribute("companySubpartitionContent") CompanySubpartitionContent companySubpartitionContent,
                                 @RequestParam("file") MultipartFile multipartFile,
@@ -51,13 +66,33 @@ public class DesignerCompanyPositionsController {
                     throw new NotSupportedFormat("Этот формат не поддерживается.");
                 }
                 Image image = new Image();
-                image.setFile(multipartFile.getBytes());
+                BufferedImage imageData = ImageIO.read(new ByteArrayInputStream(multipartFile.getBytes()));
+                int currentHeight = imageData.getHeight();
+                int currentWidth = imageData.getWidth();
+                if (currentHeight > 250) {
+
+                    double newWidth = currentWidth * 250 / currentHeight;
+                    java.awt.Image scaled = imageData.getScaledInstance((int) newWidth, 250, java.awt.Image.SCALE_SMOOTH);
+
+                    Graphics2D g = imageData.createGraphics();
+                    g.drawImage(scaled, 0, 0, null);
+                    g.dispose();
+
+
+                    BufferedImage bufferedImage = convertToBufferedImage(scaled);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(bufferedImage, tmp[tmp.length-1], baos);
+                    baos.flush();
+                    image.setFile(baos.toByteArray());
+                    baos.close();
+                } else {
+                    image.setFile(multipartFile.getBytes());
+                }
                 image.setName(multipartFile.getOriginalFilename());
                 imageService.createImage(image);
                 companySubpartitionContent.setImageId(image.getId());
             }
             companySubpartitionContent.setCompanySubpartitionId(Integer.valueOf(companySubpartitionId));
-            System.out.println(companySubpartitionContent);
             companySubpartitionContentService.createCompanySubpartitionContent(companySubpartitionContent);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -92,6 +127,7 @@ public class DesignerCompanyPositionsController {
                 image.setFile(multipartFile.getBytes());
                 image.setName(multipartFile.getOriginalFilename());
                 imageService.createImage(image);
+                imageService.deleteImage(Integer.valueOf(imageId));
                 companySubpartitionContent.setImageId(image.getId());
             } else {
                 companySubpartitionContent.setImageId(Integer.valueOf(imageId));
@@ -99,7 +135,6 @@ public class DesignerCompanyPositionsController {
 
             companySubpartitionContent.setId(Integer.valueOf(contentId));
             companySubpartitionContent.setCompanySubpartitionId(Integer.valueOf(companySubpartitionId));
-            System.out.println(companySubpartitionContent);
             companySubpartitionContentService.updateCompanySubpartitionContent(companySubpartitionContent);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -135,7 +170,7 @@ public class DesignerCompanyPositionsController {
             item.info = content.getInfo();
 
             for (CompanySubPartition companySubPartition : companySubPartitions) {
-                if (!Objects.equals(companySubPartition.getSubPartitionId(), content.getCompanySubpartitionId()))
+                if (!Objects.equals(companySubPartition.getId(), content.getCompanySubpartitionId()))
                     continue;
                 for (SubPartition subPartition : subPartitions) {
                     if (companySubPartition.getSubPartitionId() == subPartition.getId()) {
@@ -165,7 +200,8 @@ public class DesignerCompanyPositionsController {
                     subPartitionItem.subpartitionName = subPartition.getName();
                 }
             }
-            if (!currentContentSet.contains(companySubPartition.getSubPartitionId()))
+
+            if (!currentContentSet.contains(companySubPartition.getId()))
                 model.subPartitionItemList.add(subPartitionItem);
         }
     }

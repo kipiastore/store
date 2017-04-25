@@ -63,6 +63,7 @@ public class CompanyController {
             modelAndView.setViewName("redirect:/");
             return modelAndView;
         }
+        company.setDescription(company.getDescription().replaceAll("\n","<br/>").replaceAll("script",""));
         for (PriorityResource.PriorityModel priorityModel : priorityResource.priorityHandler()) {
             if (Objects.equals(priorityModel.getPackageId(), company.getCompanyPackageId()))
                 modelAndView.addObject("color", priorityModel.getPriority());
@@ -88,7 +89,7 @@ public class CompanyController {
             item.info = content.getInfo();
 
             for (CompanySubPartition companySubPartition : companySubPartitions) {
-                if (!Objects.equals(companySubPartition.getSubPartitionId(), content.getCompanySubpartitionId()))
+                if (!Objects.equals(companySubPartition.getId(), content.getCompanySubpartitionId()))
                     continue;
                 for (SubPartition subPartition : subPartitions) {
                     if (companySubPartition.getSubPartitionId() == subPartition.getId()) {

@@ -125,6 +125,7 @@ public class PartitionController {
         Model.CompanyItem companyItem;
         Map<Integer, List<CompanyAddress>> companyToCompanyAddress = new HashMap<>();
         for (Company company : companies) {
+            company.setDescription(company.getDescription().replaceAll("\n","<br/>").replaceAll("script",""));
             companyToCompanyAddress.put(company.getId(), new ArrayList<CompanyAddress>());
             companyItem = new Model.CompanyItem();
             if (packageIdToPriority.get(company.getCompanyPackageId()) != null)

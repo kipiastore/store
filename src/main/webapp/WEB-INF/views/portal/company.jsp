@@ -71,7 +71,7 @@
     </div>
     <div class="rua-l-wrapper2" style="border-color: hsla(0,${color}%,66%,1)">
         <div class="companyMainInfo">
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;${company.description}</span>
+            <span>${company.description}</span>
             <span class="companyAmount">
                 <k:if test="${not empty company.costOf}">
                     Стоимость: <b>${company.costOf}</b>

@@ -66,6 +66,7 @@ public class SubPartitionController {
             List<PartitionController.Model.CompanyItem> companyItems = new ArrayList<>();
             PartitionController.Model.CompanyItem companyItem;
             for (Company company : companies) {
+                company.setDescription(company.getDescription().replaceAll("\n","<br/>").replaceAll("script",""));
                 companyToCompanyAddress.put(company.getId(), new ArrayList<CompanyAddress>());
                 companyItem = new PartitionController.Model.CompanyItem();
                 if (packageIdToPriority.get(company.getCompanyPackageId()) != null)

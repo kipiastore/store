@@ -117,12 +117,16 @@ var isReady = true;
 $(window).on('scroll', function() {
     if (parseInt($('.companyCounter').html()) === 0)
         isEnd = true;
-    if($(window).scrollTop() + $(window).height() == $(document).height() && position != 0 && isReady && !isEnd) {
+    if($(window).scrollTop() + $(window).height() >= $(document).height() - 220  && position != 0 && isReady && !isEnd) {
         isReady = false;
         $('.pre-loading').show();
         $.get('../api/portal/resource/v1/company/SubPartition/' + subPartitionId + '/' + position, function(entry) {
             if (entry.length < 10)
                 isEnd = true;
+            if (entry.length == 0) {
+                $('.pre-loading').hide();
+                return;
+            }
             var addressList = '';
             entry.forEach(function(company) {
                 addressList += company.id + ',';
@@ -132,6 +136,7 @@ $(window).on('scroll', function() {
             $.get('../api/portal/resource/v1/company/address/' + addressList, function(companyAddressItems) {
                 entry.forEach(function(company) {
                     var tmpAddersList;
+                    var count = 0;
                     companyAddressItems.forEach(function(companyAddressItem) {
                         if (company.id == companyAddressItem.companyId) {
                             tmpAddersList = companyAddressItem.companyAddresses;
@@ -140,11 +145,24 @@ $(window).on('scroll', function() {
                     var tmpAddressTxt = '';
                     if (tmpAddersList != undefined) {
                         tmpAddersList.forEach(function (aItem) {
-                            tmpAddressTxt += '<div class="address">'
-                                + '<span class="addressInfo">' + aItem.address + '</span>&nbsp;'
-                                + '<span>' + aItem.phones + '</span>&nbsp;'
-                                + '<span>' + aItem.information + '</span>'
-                                + '</div>';
+                            if (count == 0) {
+                                tmpAddressTxt += '<div class="address">'
+                                    + '<span class="addressInfo">' + aItem.address + '</span>&nbsp;'
+                                    + '<span>' + aItem.phones + '</span>&nbsp;'
+                                    + '<span>' + aItem.information + '</span>'
+                                    + '</div>';
+                            }
+                            if (count > 0) {
+                                tmpAddressTxt += '<div class="hiddenAdr-btn">'
+                                    + '<p><a class="btn btn-primary" data-id="' + company.id + '">Филиалы</a></p>'
+                                    + '</div>'
+                                    + '<div class="address hiddenAdr address-' + company.id + '">'
+                                    + '<span class="addressInfo">' + aItem.address + '</span>&nbsp;'
+                                    + '<span>' + aItem.phones + '</span>&nbsp;'
+                                    + '<span>' + aItem.information + '</span>'
+                                    + '</div>';
+                            }
+                            count++;
                         });
                     }
                     var color = 0;
@@ -164,7 +182,7 @@ $(window).on('scroll', function() {
                         + '<a data-id="' + company.id + '" href="../company/' + company.id + '">'
                         + '<h3>' + company.name + '</h3>'
                         + '</a>'
-                        + '<span>&nbsp;&nbsp;&nbsp;&nbsp;' + company.description + '</span>'
+                        + '<span>' + company.description + '</span>'
                         + tmpText
                         + '</div>'
                         + '<div class="AddressList">'

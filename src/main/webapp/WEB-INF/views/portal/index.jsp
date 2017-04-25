@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
+
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>

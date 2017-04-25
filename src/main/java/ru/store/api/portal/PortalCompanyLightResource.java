@@ -42,6 +42,7 @@ public class PortalCompanyLightResource {
         List<Company> tmpCompanies = new ArrayList<>();
         List<Company> companies = companyService.getPortalCompanies(companyId);
         for (Company company : companies) {
+            company.setDescription(company.getDescription().replaceAll("\n","<br/>").replaceAll("script",""));
             if (counter == minPosition) {
                 tmpCompanies.add(company);
                 positionCounter++;

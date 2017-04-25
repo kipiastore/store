@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Справочная Одессы | ${subPartitionName}</title>
+    <title>Справочная Одессы | ${subPartitionName} в Одессе</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/home-min2.css" />"/>
@@ -20,7 +20,7 @@
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 0px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">${subPartitionName}</h2>
+                <h2 class="headline centered mtmb">${subPartitionName} в Одессе</h2>
                 <div class="rptShort">
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <a data-id="${item.companyId}" href="../company/${item.companyId}">
                         <h3>${item.companyName}</h3>
                     </a>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;${item.companyInformation}</span>
+                    <span>${item.companyInformation}</span>
                     <span class="companyAmount"><k:if test="${not empty item.costOf}">Стоимость: <b>${item.costOf}</b></k:if></span>
                 </div>
                 <div class="AddressList">

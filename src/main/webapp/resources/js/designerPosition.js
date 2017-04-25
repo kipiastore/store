@@ -117,8 +117,12 @@ $(".button.edit-submit").on("click", function () {
 });
 
 $(".button.create-submit").on("click", function () {
-    if (confirm("Сохранить?")) {
-        $("#createForm").submit();
+    if ($("#createCompanySubpartitionId").val() != null) {
+        if (confirm("Сохранить?")) {
+            $("#createForm").submit();
+        }
+    } else {
+        alert("Свободных позиций нет.");
     }
 });
 

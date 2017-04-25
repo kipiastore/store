@@ -39,6 +39,7 @@ public class SearchController {
         List<CompanySubPartition> companySubPartitions = new ArrayList<>();
         Map<Integer, Company> companyMap = new HashMap<>();
         for (Company company : companies) {
+            company.setDescription(company.getDescription().replaceAll("\n","<br/>").replaceAll("script",""));
             companyIds.add(company.getId());
             companyMap.put(company.getId(), company);
             companyToCompanyAddress.put(company.getId(), new ArrayList<CompanyAddress>());
