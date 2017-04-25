@@ -12,6 +12,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/datapicker/datepicker.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/datapicker/jquery-ui.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/ckeditor/ckeditor.js" />"></script>
 <body>
 <%@include file="/WEB-INF/views/designer/components/logout.jspf"%>
 <%@include file="/WEB-INF/views/designer/components/header.jspf"%>
@@ -125,6 +126,10 @@
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.multi-select.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/designerPosition.js" />"></script>
+<script>
+    //CKEDITOR.replace( 'createDescription' );
+    //CKEDITOR.replace( 'updateDescription' );
+</script>
 <style>
     .pr {
         //float: left;
