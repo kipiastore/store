@@ -8,14 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.store.api.portal.PriorityResource;
 import ru.store.controllers.designer.DesignerCompanyPositionsController;
 import ru.store.dao.interfaces.SubPartitionDAO;
-import ru.store.entities.Company;
-import ru.store.entities.CompanySubPartition;
-import ru.store.entities.CompanySubpartitionContent;
-import ru.store.entities.SubPartition;
-import ru.store.service.CompanyAddressService;
-import ru.store.service.CompanyService;
-import ru.store.service.CompanySubPartitionService;
-import ru.store.service.CompanySubpartitionContentService;
+import ru.store.entities.*;
+import ru.store.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -37,12 +31,15 @@ public class CompanyController {
     private CompanySubPartitionService companySubPartitionService;
     @Autowired
     private SubPartitionDAO subPartitionService;
+    @Autowired
+    private PartitionService partitionService;
 
     @RequestMapping(value = "/company/*", method = RequestMethod.GET)
     public ModelAndView company(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String[] splitResult = request.getRequestURL().toString().split("company/");
         int companyId;
+        Partition partition = null;
         if (splitResult.length == 2 && splitResult[1].matches("\\d+")) {
             companyId = Integer.valueOf(splitResult[1]);
 
@@ -77,6 +74,10 @@ public class CompanyController {
             subPartitionIds.add(companySubPartition.getSubPartitionId());
         }
         List<SubPartition> subPartitions = subPartitionService.getSubPartitions(subPartitionIds);
+        for (SubPartition subPartition : subPartitions) {
+            partition = partitionService.getPartitionById(subPartition.getPartitionId());
+            break;
+        }
 
         model.companySubpartitionContentList = new ArrayList<>();
         DesignerCompanyPositionsController.Model.CompanySubpartitionContentItem item;
@@ -100,9 +101,9 @@ public class CompanyController {
             model.companySubpartitionContentList.add(item);
         }
 
-
         modelAndView.addObject("model", model);
         modelAndView.addObject("company", company);
+        modelAndView.addObject("partition", partition);
         modelAndView.addObject("addresses", companyAddressService.getCompanyAddresses(companyId));
         modelAndView.addObject("prefix", "../");
         modelAndView.setViewName("portal/company");

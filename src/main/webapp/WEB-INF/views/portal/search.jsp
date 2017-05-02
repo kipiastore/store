@@ -20,6 +20,31 @@
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 0px 0;">
             <div class="rua-l-wrapper">
+                <h2 class="headline centered mtmb">Найдено в рубриках</h2>
+                <div class="rptShort">
+                    <div style="float: left;width: 465px;">
+                        <k:forEach var="item" items="${subPartitions2}">
+                            <p>
+                                <a data-id="${item.subPartitionId}" href="subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                                <span class="rua-p-c-red">${item.companyCount}</span>
+                            </p>
+                        </k:forEach>
+                    </div>
+                    <div style="float: right;width: 455px;">
+                        <k:forEach var="item" items="${subPartitions1}">
+                            <p>
+                                <a data-id="${item.subPartitionId}" href="subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                                <span class="rua-p-c-red">${item.companyCount}</span>
+                            </p>
+                        </k:forEach>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: -30px;">
+        <div style="padding: 1px 0 0px 0;">
+            <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">Результаты поиска в Одессе</h2>
                 <div class="rptShort">
                 </div>
@@ -29,7 +54,7 @@
     <k:forEach var="item" items="${companies}">
         <div class="rua-l-wrapper2" style="border-color: hsla(0,${ packageToColor.get(item.companyPackageId) }%,66%,1)">
             <div class="companyMainInfo">
-                <a data-id="${item.id}" href="../company/${item.id}">
+                <a data-id="${item.id}" href="company/${item.id}">
                     <h3>${item.name}</h3>
                 </a>
                 <span>${item.description}</span>

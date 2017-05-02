@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.controllers.operator.OperatorSearchController;
-import ru.store.entities.Company;
-import ru.store.entities.CompanyAddress;
-import ru.store.entities.CompanySubPartition;
-import ru.store.entities.SubPartition;
+import ru.store.entities.*;
 import ru.store.service.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +28,8 @@ public class SubPartitionController {
     private CompanyAddressService companyAddressService;
     @Autowired
     private PackageService packageService;
+    @Autowired
+    private PartitionService partitionService;
 
     @RequestMapping(value = "/subPartition/*", method = RequestMethod.GET)
     public ModelAndView subPartition(HttpServletRequest request) {
@@ -38,6 +37,7 @@ public class SubPartitionController {
         String[] splitResult = request.getRequestURL().toString().split("subPartition/");
         int subPartitionId;
         SubPartition subPartition;
+        Partition partition;
         PartitionController.Model model = new PartitionController.Model();
         if (splitResult.length == 2 && splitResult[1].matches("\\d+")) {
 
@@ -54,6 +54,8 @@ public class SubPartitionController {
             modelAndView.addObject("countInfo","подраздела");
             modelAndView.addObject("portalCount",subPartition.getCountSubPartition());
             //
+
+            partition = partitionService.getPartitionById(subPartition.getPartitionId());
 
             Map<Integer, Integer> packageIdToPriority = OperatorSearchController.priorityHandler(packageService.getPackages());
             List<CompanySubPartition> companySubPartitions = companySubPartitionService.findCompanySubpartitionBySubPartitionId(subPartitionId);
@@ -103,6 +105,7 @@ public class SubPartitionController {
         modelAndView.addObject("companyCounter", model.companyHiPrior.size() + "");
         modelAndView.addObject("subPartitionName", subPartition.getName());
         modelAndView.addObject("subPartitionId", subPartitionId);
+        modelAndView.addObject("partition", partition);
         modelAndView.addObject("prefix", "../");
         modelAndView.setViewName("portal/subpartition");
         return modelAndView;

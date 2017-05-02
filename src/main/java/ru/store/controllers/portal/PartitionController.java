@@ -83,6 +83,8 @@ public class PartitionController {
             subPartitionItems.add(subPartitionItem);
         }
 
+        Collections.sort(subPartitionItems);
+
         Model.PartitionItem partitionItem = new Model.PartitionItem();
         Partition partition = partitionService.getPartitionById(partitionId);
         partitionItem.partitionId = partition.getId();
@@ -138,6 +140,9 @@ public class PartitionController {
             companyItem.costOf = company.getCostOf();
             companyItems.add(companyItem);
         }
+
+        Collections.sort(companyItems);
+
         model.companyHiPrior = new ArrayList<>();
         int counter = 0;
         for (Model.CompanyItem companyItem1 : companyItems) {
@@ -159,7 +164,7 @@ public class PartitionController {
         return modelAndView;
     }
 
-    private String getNormalName(String name, int length) {
+    public static String getNormalName(String name, int length) {
         if (name != null && name.length() > length)
             return name.substring(0, length) + "..";
         else
@@ -200,7 +205,7 @@ public class PartitionController {
                 return subPartitionItems2;
             }
 
-            public static class SubPartitionItem {
+            public static class SubPartitionItem implements Comparable<SubPartitionItem> {
                 public int subPartitionId;
                 public String subPartitionName;
                 public int companyCount;
@@ -214,10 +219,16 @@ public class PartitionController {
                 public int getCompanyCount() {
                     return companyCount;
                 }
+
+                @Override
+                public int compareTo(SubPartitionItem o) {
+                    return this.subPartitionName.compareTo(o.subPartitionName);
+                }
+
             }
         }
 
-        public static class CompanyItem implements Comparable, Comparator<CompanyItem> {
+        public static class CompanyItem implements Comparable<CompanyItem>, Comparator<CompanyItem> {
             public int companyId;
             public String companyName;
             public String companyInformation;
@@ -272,14 +283,13 @@ public class PartitionController {
             }
 
             @Override
-            public int compareTo(Object o) {
-                if (this.colorPoint == ((CompanyItem) o).getColorPoint())
-                    return 0;
-                else if (this.colorPoint > ((CompanyItem) o).getColorPoint()) {
-                    return -1;
-                } else {
+            public int compareTo(CompanyItem o) {
+                int res = this.colorPoint.compareTo(o.colorPoint);
+                if (res == -1)
                     return 1;
-                }
+                if (res == 1)
+                    return -1;
+                return 0;
             }
         }
     }

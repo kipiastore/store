@@ -65,7 +65,7 @@
     <div style="margin-top: -30px;">
         <div style="padding: 1px 0 0px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">${company.name}</h2>
+                <h2 class="headline centered mtmb"><a class="main-ref" href="../index">Главная страница</a> → <a class="main-ref" href="../partition/${partition.id}">${partition.name}</a> → ${company.name}</h2>
             </div>
         </div>
     </div>

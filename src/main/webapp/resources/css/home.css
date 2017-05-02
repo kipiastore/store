@@ -1000,9 +1000,9 @@ footer.f .cr {
     overflow: hidden;
     text-align: center;
     padding: 0px 10px 0px 10px;
-    border-left: 1px solid rgba(120, 120, 120, 0.12);
-    border-right: 1px solid rgba(120, 120, 120, 0.12);
-    border-radius: 10px;
+    border-left: 1px solid rgba(120, 120, 120, 0.36);
+    border-right: 1px solid rgba(120, 120, 120, 0.36);
+    border-radius: 5px;
 }
 .rptShort div p {
     /*
@@ -1519,9 +1519,20 @@ footer.f .c>ul .kk {
 
 footer.f .c>ul li {
     float: left;
-    width: 21%;
+    width: 29%;
 }
 
 footer.f .c>ul .b {
     font-size: 13px;
+}
+
+.main-ref {
+    display: inline-block;
+    color: #7e7e7e;
+    text-decoration: none;
+}
+.main-ref:hover {
+    color: #16a085;
+    transition: color 0.3s ease-out;
+    cursor: pointer;
 }

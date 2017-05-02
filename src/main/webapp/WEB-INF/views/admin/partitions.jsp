@@ -67,7 +67,7 @@
                     <c:forEach var="item" items="${model.subPartitionsGroupedByPartition2.get(key)}">
                         <div class="menuBodyItem" >
                             <div class="menuBodyItemInfo" id="ID-${item.id}">
-                                <span class="soloTest" data-type="subPartition" data-name="${item.name}" id="ID-${item.id}">${item.name}</span>
+                                <span class="soloTest" data-type="subPartition" data-name="${item.fullName}" id="ID-${item.id}">${item.name}</span>
                             </div>
                             <div class="menuBodyItemButt" id="menuBodyItemButtId">
                                 <div class="menuBodyItemButtDel" data-type="subPartition" id="ID-${item.id}"></div>

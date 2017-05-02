@@ -113,7 +113,7 @@ public class CompanyDAOImpl implements CompanyDAO {
     @Override
     @Transactional
     public List<Integer> getOptimizationCompanies() {
-        String hql = "select id from Company where isShowForSite = true and isOffPosition = false";
+        String hql = "select id from Company where isShowForSite = true and isOffPosition = false order by name";
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
@@ -342,7 +342,7 @@ public class CompanyDAOImpl implements CompanyDAO {
     public List<Company> getPortalCompanies(List<Integer> companyIds) {
         if (companyIds.size() == 0)
             return new ArrayList<>();
-        String hql = "from Company where id IN (:companyIds) and isShowForSite = true and isOffPosition = false";
+        String hql = "from Company where id IN (:companyIds) and isShowForSite = true and isOffPosition = false order by name";
         return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("companyIds", companyIds).list();
     }
     //15.02.2017

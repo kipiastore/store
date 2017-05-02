@@ -61,21 +61,21 @@ public class ManagerNotesController {
     }
     @RequestMapping(value = "/manager/searchnotesbyfirstpage", method = RequestMethod.POST)
     public ModelAndView searchCompany(@RequestParam MultiValueMap<String, String> searchMap,
-                                      @RequestParam("selectSearchCompanyByType")String selectSearchCompanyByType,
                                       @RequestParam("selectSearchCompanyByPaymentStatus")String selectSearchCompanyByPaymentStatus) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<Company> companies;
         iSChoiceComments=false;
-        companies= searchByPage.search(searchMap,selectSearchCompanyByType,selectSearchCompanyByPaymentStatus,modelAndView,auth);
+        companies= searchByPage.search(searchMap,"searchAllCompany",selectSearchCompanyByPaymentStatus,modelAndView,auth);
         iSChoiceComments=searchByPage.getIsShowAllCompanyWithComments();
+        List<CompanyReminder>allCompanyReminders=companyReminderService.getCompanyReminders();
         Model model = new Model();
         loadNotesForFirstPage(modelAndView,model);
         model.message = "Результаты поиска:";
         model.companyList = new ArrayList<>();
         if(iSChoiceComments==false) {
             for (Company company : companies) {
-                List<Model.CompaniesItem> list=convert(company);
+                List<Model.CompaniesItem> list=convert(company,allCompanyReminders);
                 for(Model.CompaniesItem m:list) {
                     model.companyList.add(m);
                 }
@@ -83,10 +83,10 @@ public class ManagerNotesController {
         }
         else{
             if(searchByPage.getChoice()==1){
-                searchByChoice(companies,model,1);
+                searchByChoice(companies,allCompanyReminders,model,1);
             }
             if(searchByPage.getChoice()==2){
-                searchByChoice(companies,model,2);
+                searchByChoice(companies,allCompanyReminders,model,2);
             }
         }
         tempList=new ArrayList<>();
@@ -113,15 +113,13 @@ public class ManagerNotesController {
             System.out.println("manager");
             companies = companyService.getCompaniesByManagerName(name);
         }
-
-        List<Package> packages=packageService.getPackages();
         List<CompanyAddress>companyAddresses=companyAddressService.getCompanyAddresses();
         List<CompanyReminder>allCompanyReminders=companyReminderService.getCompanyReminders();
         loadMapsServiceService.load(model,allCompanyReminders,companyAddresses,companies);
         model.message = "Заметки:";
         model.companyList=new ArrayList<>();
         for(Company company:companies) {
-            List<Model.CompaniesItem> list = convert(company);
+            List<Model.CompaniesItem> list = convert(company,allCompanyReminders);
             for (Model.CompaniesItem m : list) {
                 model.companyList.add(m);
             }
@@ -134,10 +132,10 @@ public class ManagerNotesController {
         else
             return name;
     }
-    private void searchByChoice(List<Company>companies,Model model,int choice) {
+    private void searchByChoice(List<Company>companies,List<CompanyReminder>companyReminders,Model model,int choice) {
         List<Model.CompaniesItem> companyItems;
         for (Company company : companies) {
-            companyItems = convert(company);
+            companyItems = convert(company,companyReminders);
             for(Model.CompaniesItem companyItem:companyItems) {
                 if (choice == 1) {
                     if (!companyItem.getTypeOfNote().equals("")) {
@@ -152,36 +150,26 @@ public class ManagerNotesController {
             }
         }
     }
-    private List<Model.CompaniesItem> convert(Company company) {
+    private List<Model.CompaniesItem> convert(Company company,List<CompanyReminder>companyReminders) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
         List<Model.CompaniesItem> companyItems = new ArrayList<>();
         Model.CompaniesItem companyItem;
-        List<CompanyReminder> companyReminders;
-        companyReminders= companyReminderService.getCompanyReminders(company.getId());
-        if(companyReminders.isEmpty()){
-            companyItem=new Model.CompaniesItem();
-            companyItem.id=company.getId();
-            companyItem.name=company.getName();
-            companyItem.dateOfNote="";
-            companyItem.typeOfNote="";
-            companyItem.commentOfNote="";
-            companyItems.add(companyItem);
-        }
-        else {
             for (CompanyReminder companyReminder : companyReminders) {
-                companyItem = new Model.CompaniesItem();
-                companyItem.id=company.getId();
-                companyItem.name = getNormalName(companyReminder.getCompanyName());
-                companyItem.dateOfNote = sdf.format(companyReminder.getDateReminder());
-                if (companyReminder.getCommentReminder() != null) {
-                    companyItem.commentOfNote = companyReminder.getCommentReminder();
-                } else {
-                    companyItem.commentOfNote = "";
+                if (company.getId() == companyReminder.getCompanyId()) {
+                    companyItem = new Model.CompaniesItem();
+                    companyItem.id = company.getId();
+                    companyItem.name = getNormalName(companyReminder.getCompanyName());
+                    companyItem.dateOfNote = sdf.format(companyReminder.getDateReminder());
+                    if (companyReminder.getCommentReminder() != null) {
+                        companyItem.commentOfNote = companyReminder.getCommentReminder();
+                    } else {
+                        companyItem.commentOfNote = "";
+                    }
+                    companyItem.typeOfNote = companyReminder.getTypeReminder();
+                    companyItems.add(companyItem);
                 }
-                companyItem.typeOfNote = companyReminder.getTypeReminder();
-                companyItems.add(companyItem);
             }
-        }
+
         return companyItems;
     }
     //22.02.17
