@@ -73,10 +73,13 @@ $(document).on('click', function (event) {
     if (itemId != undefined && itemId != event.target.getAttribute('data-id')) {
         $('#item-'+itemId).hide();
         itemId = undefined;
+        $('.show-subsection').removeClass("open-down");
     }
 });
 
 $('.show-subsection').on('click', function(event) {
+    $('.show-subsection').removeClass("open-down");
+    $(event.target).addClass("open-down");
     if (itemId != undefined && itemId != event.target.getAttribute('data-id'))
         $('#item-'+itemId).hide();
     if (itemId != undefined && itemId == event.target.getAttribute('data-id')) {

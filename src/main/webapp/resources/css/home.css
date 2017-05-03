@@ -717,12 +717,12 @@ hr {
     border-bottom: 1px solid #ffffff;
 }
 .rua-p-c-red {
-    color: rgba(162, 127, 100, 1);
+    color: #a27f64;
     width: 30px;
     text-align: right;
 }
 .rua-p-c-red2 {
-    color: rgba(162, 127, 100, 1);
+    color: #a27f64;
     text-align: center;
 }
 .mtmb {
@@ -993,9 +993,10 @@ footer.f .cr {
 .rptShort {
     overflow: hidden;
     text-align: center;
-    padding: 7px 15px 7px 15px;
+    padding: 10px 15px 5px 15px;
     box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 5px 0 rgba(0,0,0,0.12)!important;
     background: white;
+    line-height: 1.3em;
 }
 .rptShort div p {
     /*
@@ -1020,7 +1021,7 @@ footer.f .cr {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    line-height: 1em;
+    //line-height: 1em;
 }
 .rptShort p:nth-child(5n+1) {
     //clear: left;
@@ -1251,9 +1252,9 @@ p::-moz-selection {
 }
 .show-subsection {
     background-image: url("../images/arrowdown.png");
-    background-size: 20px;
-    width: 20px;
-    height: 20px;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
     margin-right: 5px;
     cursor: pointer;
 }
@@ -1263,9 +1264,9 @@ p::-moz-selection {
     width: 310px;
     background: rgba(255, 255, 255, 0.84);
     position: absolute;
-    margin-top: 10px;
+    margin-top: 0;
     padding: 10px;
-    margin-left: 80px;
+    margin-left: 60px;
 }
 .subsection-list {
     background-color: #fff;
@@ -1287,7 +1288,7 @@ p::-moz-selection {
     margin: auto;
 }
 .rptShort .subsection .subsection-list a {
-    width: auto;
+    width: 290px;
 }
 .mail-container {
     width: 100%;
@@ -1508,16 +1509,13 @@ footer.f .c>ul .kk {
     width: 100%;
     border-radius: 0;
 }
-
 footer.f .c>ul li {
     float: left;
     width: 33%;
 }
-
 footer.f .c>ul .b {
     font-size: 13px;
 }
-
 .main-ref {
     display: inline-block;
     color: #7e7e7e;
@@ -1528,7 +1526,6 @@ footer.f .c>ul .b {
     transition: color 0.3s ease-out;
     cursor: pointer;
 }
-
 .headline.centered.mtmb.title {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -1537,4 +1534,7 @@ footer.f .c>ul .b {
     padding-top: 20px;
     padding-bottom: 20px;
     color: #6d7983;
+}
+.open-down {
+    background-image: url("../images/arrowdown-open-down.png");
 }
