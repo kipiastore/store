@@ -16,12 +16,12 @@
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
-    <div style="margin-top: -30px;">
-        <div style="padding: 1px 0 30px 0;">
+    <div style="margin-top: -30px;background: rgba(126, 126, 126, 0.04);">
+        <div style="padding: 1px 0 15px 0;border-bottom: 20px solid #3d7677;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb">Разделы</h2>
+                <h2 class="headline centered mtmb title">Разделы</h2>
                 <div class="rptShort">
-                    <div style="float: left;width: 465px;">
+                    <div style="float: left;width: 450px;">
                         <k:forEach var="partitionItem" items="${model.partitionItems2}">
                             <p>
                                 <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">
@@ -40,7 +40,7 @@
                             </p>
                         </k:forEach>
                     </div>
-                    <div style="float: right;width: 455px;">
+                    <div style="float: right;width: 450px;">
                         <k:forEach var="partitionItem" items="${model.partitionItems}">
                             <p>
                                 <span class="subsection" data-id="${partitionItem.partitionId}" id="item-${partitionItem.partitionId}">

@@ -46,8 +46,6 @@
         <div style="padding: 1px 0 0px 0;">
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb">Результаты поиска в Одессе</h2>
-                <div class="rptShort">
-                </div>
             </div>
         </div>
     </div>

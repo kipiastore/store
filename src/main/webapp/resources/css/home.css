@@ -502,6 +502,7 @@ html, body, .rua-l-body, .ui-widget {
 .header-sticky {
     background: rgba(255, 255, 255, 0.84);
     border-bottom: 1px solid #e7e7e7;
+    box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 5px 0 rgba(0,0,0,0.12)!important;
 }
 .header-sticky .header-link-button {
     background: #16a085;
@@ -572,7 +573,7 @@ h2 small {
     float: right
 }
 .searchform .btn.btn-primary.submit_button {
-    background: #16a085;
+    background: #3d7677;
     color: white;
     padding: 16px 20px 17px 20px;
     height: 50px;
@@ -580,7 +581,7 @@ h2 small {
 .searchform .btn.btn-primary.submit_button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    border: 1px solid #16a085;
+    border: 1px solid #3d7677;
 }
 .searchform input.keyword, .searchform .city-picker, .searchform .btn.btn-primary.submit_button {
     font-size: 16px;
@@ -588,7 +589,7 @@ h2 small {
 }
 .btn.btn-primary, .btn.btn-primary:visited {
     color: white;
-    background: #16a085 none;
+    background: #3d7677 none;
     border-color: #b9dcd5;
     text-shadow: none;
     text-transform: uppercase;
@@ -607,8 +608,8 @@ h2 small {
     outline: none;
 }
 .searchform input.keyword {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    //border-top-left-radius: 3px;
+    //border-bottom-left-radius: 3px;
     padding: 16px 10px 13px 10px;
     height: 19px;
 }
@@ -652,14 +653,9 @@ input[type="color"], .uneditable-input, select {
 }
 .rua-l-wrapper2 {
     max-width: 960px;
-    margin: 0 auto;
-    border-top: 2px solid #fff;
-    border-left: 1px solid #fff;
-    //border-right: 1px solid #fff;;
-    border-radius: 5px;
-    //padding-left: 22px;
-    //padding-bottom: 20px;
-    margin-bottom: 15px;
+    border-top: 5px solid #fff;
+    margin: 0 auto 15px;
+    box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 5px 0 rgba(0,0,0,0.12)!important
 }
 .rua-g-clearfix {
     overflow: hidden;
@@ -721,15 +717,12 @@ hr {
     border-bottom: 1px solid #ffffff;
 }
 .rua-p-c-red {
-    color: #da6c6c;
-    //margin-right: 30px;
+    color: rgba(162, 127, 100, 1);
     width: 30px;
     text-align: right;
 }
 .rua-p-c-red2 {
-    color: #da6c6c;
-    //margin-right: 30px;
-    //width: 32px;
+    color: rgba(162, 127, 100, 1);
     text-align: center;
 }
 .mtmb {
@@ -770,7 +763,7 @@ table {
 }
 #headlinemtmb {
     font: normal 20px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #0f0f0f;
+    color: #6d7983;
     padding: 0;
     display: block;
     margin: 40px 0;
@@ -847,6 +840,7 @@ footer.f .c {
     padding: 0 20px;
     margin: 0 auto;
     overflow: hidden;
+    height: 175px;
 }
 footer.f .c>ul {
     overflow: hidden;
@@ -855,27 +849,27 @@ footer.f .c>ul {
 footer.f ul, footer.f li {
     list-style: none;
     padding: 0;
-    margin: 0 40px 0 0;
+    margin: 0 0px 0 0;
 }
 footer.f .c>ul li {
     float: left;
     width: 20%;
 }
 footer.f .c>ul b {
-    margin: 33px 0 29px 0;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #0F0F0F;
+    //margin: 33px 0 29px 0;
+    //font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    //color: #0F0F0F;
 }
 footer.f .c>ul a, footer.f .c>ul b {
-    float: left;
-    clear: left;
+    //float: left;
+    //clear: left;
 }
 footer.f .c>ul a {
     text-decoration: none;
 }
 footer.f .c>ul a, footer.f .c>ul b {
-    float: left;
-    clear: left;
+    //float: left;
+    //clear: left;
 }
 footer.f a {
     color: #7e7e7e;
@@ -999,10 +993,9 @@ footer.f .cr {
 .rptShort {
     overflow: hidden;
     text-align: center;
-    padding: 0px 10px 0px 10px;
-    border-left: 1px solid rgba(120, 120, 120, 0.36);
-    border-right: 1px solid rgba(120, 120, 120, 0.36);
-    border-radius: 5px;
+    padding: 7px 15px 7px 15px;
+    box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 5px 0 rgba(0,0,0,0.12)!important;
+    background: white;
 }
 .rptShort div p {
     /*
@@ -1024,6 +1017,10 @@ footer.f .cr {
     color: #7e7e7e;
     text-decoration: none;
     width: 370px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 1em;
 }
 .rptShort p:nth-child(5n+1) {
     //clear: left;
@@ -1103,7 +1100,7 @@ footer.f .cr {
 }
 .circle {
     display: block;
-    background-color: #16a085;
+    background-color: #3d7677;
     width: 55px;
     height: 55px;
     -moz-border-radius: 50px;
@@ -1174,7 +1171,7 @@ footer.f .cr {
 .ourBrandFooter {
     height: 20px;
     width: 100%;
-    background-color: #16a085;
+    background-color: #3d7677;
 }
 .ourBrandBody {
     max-width: 960px;
@@ -1242,7 +1239,7 @@ p::-moz-selection {
     height: 60px;
 }
 #requestButt {
-    background-color: #16a085;
+    background-color: #3d7677;
     text-align: center;
     color: #fff;
     border: 1px solid #b9dcd5;
@@ -1422,15 +1419,10 @@ p::-moz-selection {
     display: none;
 }
 .AddressList {
-    border: 1px solid rgba(120, 120, 120, 0.12);
-    border-left: none;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background: rgba(22, 160, 133, 0.22);
-    background: linear-gradient( to right top, rgba(22, 160, 133, 0.02), rgb(255, 255, 255));
+    background: linear-gradient(to right top, rgb(252, 252, 252), rgb(255, 255, 255));
     padding: 10px;
-    border-top: none;
-    border-right: none;
+    border: 1px none rgba(120, 120, 120, 0.12);
+    border-bottom-style: solid;
 }
 .address {
     padding: 10px;
@@ -1519,7 +1511,7 @@ footer.f .c>ul .kk {
 
 footer.f .c>ul li {
     float: left;
-    width: 29%;
+    width: 33%;
 }
 
 footer.f .c>ul .b {
@@ -1535,4 +1527,14 @@ footer.f .c>ul .b {
     color: #16a085;
     transition: color 0.3s ease-out;
     cursor: pointer;
+}
+
+.headline.centered.mtmb.title {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 5px 0 rgba(0,0,0,0.12)!important;
+    background: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #6d7983;
 }

@@ -40,11 +40,11 @@ $(window).on('scroll', function() {
         return;
     if (window.pageYOffset > 250) {
         topHideButt.show();
-        topHideButt.animate({opacity: 1}, 500);
+        topHideButt.animate({opacity: 1}, 200);
         isShowingUpButton = true;
     } else {
-        topHideButt.animate({opacity: 0}, 300);
-        setTimeout(function() { topHideButt.hide(); }, 300);
+        topHideButt.animate({opacity: 0}, 100);
+        setTimeout(function() { topHideButt.hide(); }, 100);
         isShowingUpButton = false;
     }
 });

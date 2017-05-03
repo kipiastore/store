@@ -76,7 +76,7 @@ public class PortalController {
         for (SubPartition subPartition : subPartitionService.getSubPartitions()) {
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
-            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 24);
+            subPartitionItem.subPartitionName = subPartition.getName();
             if (subPartitionIdToCount.get(subPartition.getId()) != null)
                 subPartitionItem.companyCount = subPartitionIdToCount.get(subPartition.getId());
             if (subPartitionItemsGroupByPartitionId.get(subPartition.getPartitionId()) != null) {
@@ -114,7 +114,7 @@ public class PortalController {
             if (partitionIdToCount.get(partition.getId()) != null)
                 partitionItem.companyCount = partitionIdToCount.get(partition.getId());
             partitionItem.partitionId = partition.getId();
-            partitionItem.partitionName = getNormalName(partition.getName(), 33);
+            partitionItem.partitionName = partition.getName();
             partitionItem.subPartitionItems = subPartitionItemsGroupByPartitionId.get(partition.getId());
             partitionItems.add(partitionItem);
         }
