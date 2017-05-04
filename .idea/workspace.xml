@@ -4,12 +4,7 @@
     <list default="true" id="e6269a35-01bb-4784-bb6c-d693a8b85a14" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/webappstore-1.0.war" afterPath="$PROJECT_DIR$/target/webappstore-1.0.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/portal/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/portal/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/portal/partition.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/portal/partition.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/portal/subpartition.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/portal/subpartition.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/home.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/home.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/home.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/portal/portalSubPartition.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/portal/portalSubPartition.js" />
     </list>
     <ignored path="webappstore.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +49,8 @@
       <file leaf-file-name="subpartition.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/portal/subpartition.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+            <state relative-caret-position="330">
+              <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -1320,14 +1315,7 @@
       <workItem from="1493729169606" duration="9020000" />
       <workItem from="1493745007849" duration="29000" />
       <workItem from="1493798725288" duration="11172000" />
-      <workItem from="1493895262286" duration="8253000" />
-    </task>
-    <task id="LOCAL-00020" summary="operator done">
-      <created>1480510247121</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1480510247121</updated>
+      <workItem from="1493895262286" duration="8262000" />
     </task>
     <task id="LOCAL-00021" summary="portal fix">
       <created>1480521593716</created>
@@ -1665,11 +1653,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493914788619</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="partition fix">
+      <created>1493920227836</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1493920227837</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1019987000" />
+    <option name="totallyTimeSpent" value="1019996000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2168,8 +2163,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/portal/subpartition.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+        <state relative-caret-position="330">
+          <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
           <folding />
         </state>
       </provider>
