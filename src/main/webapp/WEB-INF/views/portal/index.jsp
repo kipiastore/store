@@ -16,7 +16,7 @@
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
-    <div style="margin-top: -30px;background: rgba(126, 126, 126, 0.04);">
+    <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 15px 0;border-bottom: 20px solid #3d7677;">
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb title">Разделы</h2>
@@ -60,6 +60,13 @@
                         </k:forEach>
                     </div>
                 </div>
+                <script>
+                    var rptShort = $('.rptShort');
+                    $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
+                    rptShort.addClass('rptShort-closed');
+                    var isRptShortClosed = true;
+                </script>
+                <div class="open-list-btn">Показать все!</div>
             </div>
         </div>
     </div>
@@ -68,6 +75,7 @@
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>
 <%@include file="/WEB-INF/views/portal/components/emailWindow.jspf"%>
+<span class="style-container"></span>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 </body>
 </html>

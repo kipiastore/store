@@ -513,7 +513,7 @@ html, body, .rua-l-body, .ui-widget {
     padding-top: 170px;
     padding-bottom: 30px;
     margin-top: -90px;
-    margin-bottom: 30px;
+    //margin-bottom: 30px;
     background-size: 100% 100%;
 }
 #header_img .headline {
@@ -998,6 +998,27 @@ footer.f .cr {
     background: white;
     line-height: 1.3em;
 }
+
+.rptShort-closed {
+    max-height: 400px;
+    transition: max-height 0.15s ease-out;
+}
+.rptShort-open {
+    transition: max-height 0.25s ease-in;
+}
+.style-container {
+    display: none;
+}
+.open-list-btn {
+    background: #c3d4d3;
+    height: 30px;
+    width: 100%;
+    box-shadow: 0px 0px 6px 0 rgba(0,0,0,0.16),0 0px 2px 0 rgba(0,0,0,0.12)!important;
+    padding-top: 10px;
+    color: #727e88;
+    text-align: center;
+}
+
 .rptShort div p {
     /*
     background: no-repeat 50% 0;
@@ -1248,7 +1269,7 @@ p::-moz-selection {
 }
 .graphImg {
     width: 160px;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 .show-subsection {
     background-image: url("../images/arrowdown.png");
@@ -1420,8 +1441,8 @@ p::-moz-selection {
     display: none;
 }
 .AddressList {
-    background: linear-gradient(to right top, rgb(252, 252, 252), rgb(255, 255, 255));
-    padding: 10px;
+    background: #fdfbe6;
+    padding: 5px;
     border: 1px none rgba(120, 120, 120, 0.12);
     border-bottom-style: solid;
 }
@@ -1429,8 +1450,9 @@ p::-moz-selection {
     padding: 10px;
 }
 .companyMainInfo {
-    padding: 0px 10px 10px;
+    padding: 1px 10px 10px;
     text-align: justify;
+    background: white;
 }
 .companyMainInfo a h3 {
     text-align: center;
