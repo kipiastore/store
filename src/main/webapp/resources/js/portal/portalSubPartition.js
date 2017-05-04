@@ -117,7 +117,7 @@ var isReady = true;
 $(window).on('scroll', function() {
     if (parseInt($('.companyCounter').html()) === 0)
         isEnd = true;
-    if($(window).scrollTop() + $(window).height() >= $(document).height() - 220  && position != 0 && isReady && !isEnd) {
+    if($(window).scrollTop() + $(window).height() >= $(document).height() - 200  && position != 0 && isReady && !isEnd) {
         isReady = false;
         $('.pre-loading').show();
         $.get('../api/portal/resource/v1/company/SubPartition/' + subPartitionId + '/' + position, function(entry) {

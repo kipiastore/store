@@ -14,6 +14,7 @@
 </head>
 <body>
 <a name="top" id="top"></a>
+<span class="style-container"></span>
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
@@ -39,6 +40,12 @@
                         </k:forEach>
                     </div>
                 </div>
+                <script>
+                    var rptShort = $('.rptShort');
+                    $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
+                    rptShort.addClass('rptShort-closed');
+                </script>
+                <div class="open-list-btn">Показать все!</div>
             </div>
         </div>
     </div>

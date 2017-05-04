@@ -1560,3 +1560,9 @@ footer.f .c>ul .b {
 .open-down {
     background-image: url("../images/arrowdown-open-down.png");
 }
+.container {
+    background: rgba(126, 126, 126, 0.04);
+}
+.container2 {
+    background: rgba(126, 126, 126, 0.04);
+}

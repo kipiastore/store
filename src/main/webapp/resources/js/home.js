@@ -5,8 +5,8 @@ var additionalLeftInnerClass = $('.additionalLeftInner');
 var additionalBlock = $('.additionalBlock');
 var topHideButt = $('.topHideButt');
 var itemId;
-//var rptShort;
-//var isRptShortClosed;
+var rptShort;
+var isRptShortClosed;
 
 function calculateAdditionalBlockPosition() {
     if (window.pageYOffset < 333)
@@ -19,14 +19,10 @@ header.show();
 header.animate({opacity: 1}, 500);
 
 $(window).on('load', function() {
-    /*
     rptShort = $('.rptShort');
     if (rptShort.length > 0) {
-        $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
-        rptShort.addClass('rptShort-closed');
         isRptShortClosed = true;
-    }*/
-
+    }
     var preloader = $('.preloader');
     preloader.animate({opacity: 0}, 300);
     setTimeout(function() { preloader.hide(); }, 300);

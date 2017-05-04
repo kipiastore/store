@@ -13,6 +13,7 @@
 </head>
 <body>
 <a name="top" id="top"></a>
+<span class="style-container"></span>
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
@@ -64,7 +65,6 @@
                     var rptShort = $('.rptShort');
                     $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
                     rptShort.addClass('rptShort-closed');
-                    var isRptShortClosed = true;
                 </script>
                 <div class="open-list-btn">Показать все!</div>
             </div>
@@ -75,7 +75,6 @@
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>
 <%@include file="/WEB-INF/views/portal/components/emailWindow.jspf"%>
-<span class="style-container"></span>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 </body>
 </html>

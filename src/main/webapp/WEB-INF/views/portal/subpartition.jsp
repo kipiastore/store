@@ -14,13 +14,14 @@
 </head>
 <body>
 <a name="top" id="top"></a>
+<span class="style-container"></span>
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
-    <div style="margin-top: -30px;">
-        <div style="padding: 1px 0 0px 0;">
+    <div style="background: rgba(126, 126, 126, 0.04);">
+        <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb"><a class="main-ref" href="../index">Главная страница</a> → <a class="main-ref" href="../partition/${partition.id}">${partition.name}</a> → ${subPartitionName} в Одессе</h2>
+                <h2 class="headline centered mtmb title"><a class="main-ref" href="../index">Главная страница</a> → <a class="main-ref" href="../partition/${partition.id}">${partition.name}</a> → ${subPartitionName} в Одессе</h2>
             </div>
         </div>
     </div>
@@ -67,6 +68,7 @@
             </div>
         </div>
     </div>
+    <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>
