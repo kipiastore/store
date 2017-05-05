@@ -62,62 +62,74 @@
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
-    <div style="margin-top: -30px;">
-        <div style="padding: 1px 0 0px 0;">
+    <div style="background: rgba(126, 126, 126, 0.04);">
+        <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb"><a class="main-ref" href="../index">Главная страница</a> → <a class="main-ref" href="../partition/${partition.id}">${partition.name}</a> → ${company.name}</h2>
+                <h2 class="headline centered mtmb title"><a class="main-ref" href="../index">Главная страница</a> → <a class="main-ref" href="../partition/${partition.id}">${partition.name}</a> → ${company.name}</h2>
             </div>
         </div>
     </div>
-    <div class="rua-l-wrapper2" style="border-color: hsla(0,${color}%,66%,1)">
-        <div class="companyMainInfo">
-            <span>${company.description}</span>
-            <span class="companyAmount">
-                <k:if test="${not empty company.costOf}">
-                    Стоимость: <b>${company.costOf}</b>
-                </k:if>
-            </span>
-        </div>
-        <div class="AddressList">
-            <k:set var="count" value="0" scope="page" />
-            <k:forEach var="addresItem" items="${addresses}">
-                <k:if test="${count == 0}">
-                    <div class="address">
-                        <span class="addressInfo">${addresItem.address}&nbsp;</span>
-                        <span>${addresItem.phones}&nbsp;</span>
-                        <span>${addresItem.information}</span>
-                    </div>
-                </k:if>
-                <k:if test="${count > 0}">
-                    <div class="hiddenAdr-btn">
-                        <p><a class="btn btn-primary" data-id="${company.id}">Филиалы</a></p>
-                    </div>
-                    <div class="address hiddenAdr address-${company.id}">
-                        <span class="addressInfo">${addresItem.address}&nbsp;</span>
-                        <span>${addresItem.phones}&nbsp;</span>
-                        <span>${addresItem.information}</span>
-                    </div>
-                </k:if>
-                <k:set var="count" value="${count + 1}" scope="page"/>
-            </k:forEach>
-        </div>
-        <k:forEach var="item" items="${model.companySubpartitionContentList}">
-            <div class="position-main-container def-block">
-                <div class="position-block">
-                    <div class="position-addintional-block">
-                        <span data-id="${item.companySubpartitionId}" id="subNameId-${item.id}">${item.subPartitionName}</span>
-                    </div>
-                    <div class="position-image-block">
-                        <img class="position-image" id="imageId-${item.id}" data-id="${item.imageId}" src="../download?id=${item.imageId}" title="">
-                    </div>
-                    <div class="position-text-block">
-                        <span id="infoId-${item.id}">${item.info}</span>
-                    </div>
-                    <hr/>
+    <div style="background: rgba(126, 126, 126, 0.04);">
+        <div style="padding: 1px 0 1px 0;">
+            <div class="rua-l-wrapper2" style="border-color: hsla(0,${color}%,66%,1)">
+                <div class="companyMainInfo">
+                    <span>${company.description}</span>
+                    <span class="companyAmount">
+                        <k:if test="${not empty company.costOf}">
+                            Стоимость: <b>${company.costOf}</b>
+                        </k:if>
+                    </span>
                 </div>
+                <k:if test="${addresses.size() > 0}">
+                    <div class="AddressList">
+                        <k:set var="count" value="0" scope="page" />
+                        <k:forEach var="addresItem" items="${addresses}">
+                            <k:if test="${count == 0}">
+                                <div class="address">
+                                    <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                    <span>${addresItem.phones}&nbsp;</span>
+                                    <span>${addresItem.information}</span>
+                                </div>
+                            </k:if>
+                            <k:if test="${count > 0}">
+                                <div class="hiddenAdr-btn">
+                                    <p><a class="btn btn-primary" data-id="${company.id}">Филиалы</a></p>
+                                </div>
+                                <div class="address hiddenAdr address-${company.id}">
+                                    <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                    <span>${addresItem.phones}&nbsp;</span>
+                                    <span>${addresItem.information}</span>
+                                </div>
+                            </k:if>
+                            <k:set var="count" value="${count + 1}" scope="page"/>
+                        </k:forEach>
+                    </div>
+                </k:if>
+                <k:set var="count2" value="0" scope="page" />
+                <k:forEach var="item" items="${model.companySubpartitionContentList}">
+                    <div class="position-main-container def-block">
+                        <div class="position-block">
+                            <div class="position-addintional-block">
+                                <span data-id="${item.companySubpartitionId}" id="subNameId-${item.id}">${item.subPartitionName}</span>
+                            </div>
+                            <div class="position-image-block">
+                                <img class="position-image" id="imageId-${item.id}" data-id="${item.imageId}" src="../download?id=${item.imageId}" title="">
+                            </div>
+                            <div class="position-text-block">
+                                <span id="infoId-${item.id}">${item.info}</span>
+                            </div>
+                            <k:set var="count2" value="${count2 + 1}" scope="page"/>
+                            <k:if test="${count2 != model.companySubpartitionContentList.size()}">
+                                <hr/>
+                            </k:if>
+                        </div>
+                    </div>
+                </k:forEach>
             </div>
-        </k:forEach>
+        </div>
     </div>
+    <div class="line-separator"></div>
+    <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
 </form>

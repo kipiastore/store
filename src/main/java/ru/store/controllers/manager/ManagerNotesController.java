@@ -154,21 +154,21 @@ public class ManagerNotesController {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
         List<Model.CompaniesItem> companyItems = new ArrayList<>();
         Model.CompaniesItem companyItem;
-            for (CompanyReminder companyReminder : companyReminders) {
-                if (company.getId() == companyReminder.getCompanyId()) {
-                    companyItem = new Model.CompaniesItem();
-                    companyItem.id = company.getId();
-                    companyItem.name = getNormalName(companyReminder.getCompanyName());
-                    companyItem.dateOfNote = sdf.format(companyReminder.getDateReminder());
-                    if (companyReminder.getCommentReminder() != null) {
-                        companyItem.commentOfNote = companyReminder.getCommentReminder();
-                    } else {
-                        companyItem.commentOfNote = "";
-                    }
-                    companyItem.typeOfNote = companyReminder.getTypeReminder();
-                    companyItems.add(companyItem);
+        for (CompanyReminder companyReminder : companyReminders) {
+            if (company.getId() == companyReminder.getCompanyId()) {
+                companyItem = new Model.CompaniesItem();
+                companyItem.id = company.getId();
+                companyItem.name = getNormalName(companyReminder.getCompanyName());
+                companyItem.dateOfNote = sdf.format(companyReminder.getDateReminder());
+                if (companyReminder.getCommentReminder() != null) {
+                    companyItem.commentOfNote = companyReminder.getCommentReminder();
+                } else {
+                    companyItem.commentOfNote = "";
                 }
+                companyItem.typeOfNote = companyReminder.getTypeReminder();
+                companyItems.add(companyItem);
             }
+        }
 
         return companyItems;
     }
@@ -408,7 +408,23 @@ public class ManagerNotesController {
                     }
                 }
                 companiesItem.periodOfContract = "c "+sdf.format(company.getDateOfStartContract())+" по "+sdf.format(company.getDateOfEndContract());
-                companiesItem.debt = checkIsDebt(company.getId());
+                if(company.getIsPaid().equals(true)) {
+                    if(company.getCostOf()!=null) {
+                        companiesItem.debt = "оплачен, договор истек, долг: "+checkIsDebt(company);
+                    }
+                    else{
+                        companiesItem.debt = "оплачен, договор истек, стоимость не указана";
+                    }
+                }
+                if(company.getIsPaid().equals(false)) {
+                    if(company.getCostOf()!=null) {
+                        companiesItem.debt = "не оплачен, договор истек, долг: "+checkIsDebt(company);
+                    }
+                    else{
+                        companiesItem.debt = "не оплачен, договор истек, стоимость не указана";
+                    }
+
+                }
                 companiesItem.note = "";
                 if(!companyRemindersAmount.isEmpty()) {
                     for (CompanyReminder companyReminder : companyRemindersAmount) {
@@ -425,9 +441,8 @@ public class ManagerNotesController {
             }
         }
     }
-    private String checkIsDebt(Integer companyId) {
+    private String checkIsDebt(Company company) {
         int debt=0;
-        Company company=companyService.getCompany(companyId);
         if (company.getDateOfEndContract().getTime() < new Date().getTime()){
             long debtDays=((new Date().getTime()-company.getDateOfEndContract().getTime())/86400000);
             Calendar calendar= GregorianCalendar.getInstance();

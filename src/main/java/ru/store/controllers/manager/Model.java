@@ -4,7 +4,9 @@ import ru.store.entities.CompanyAddress;
 import ru.store.entities.CompanyReminder;
 import ru.store.entities.Package;
 import ru.store.entities.Region;
+
 import java.util.List;
+import java.util.Map;
 
 
 public  class Model {
@@ -20,6 +22,7 @@ public  class Model {
     public List<CompaniesItem> reminderList;
     public List<CompaniesItem> companyList;
     public String message;
+    public Map<Filter, List<CompaniesItem>> filterListMap;
     public int getSelectedPageNum() {
         return selectedPageNum;
     }
@@ -54,8 +57,57 @@ public  class Model {
         return message;
     }
 
+    public Map<Filter, List<CompaniesItem>> getFilterListMap() {
+        return filterListMap;
+    }
+
     public List<Package> getPackages() {
         return packages;
+    }
+    public static class Filter implements Comparable {
+        public String name;
+        public int id;
+
+        public Filter(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+        public int getId() {
+            return id;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            if (((Filter) o).id == this.id)
+                return 0;
+            if (((Filter) o).id < this.id)
+                return 1;
+            else
+                return -1;
+        }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Filter filter = (Filter) o;
+
+            return id == filter.id;
+        }
+        @Override
+        public int hashCode() {
+            return id;
+        }
+        @Override
+        public String toString() {
+            return "Filter{" +
+                    "name='" + name + '\'' +
+                    ", id=" + id +
+                    '}';
+        }
     }
 
     public static class CompaniesItem {
@@ -85,6 +137,7 @@ public  class Model {
         public String noteOfActs;
         public String dateOfPaid;
         public String act;
+        public String dateOfEndContract;
         public int getId() {
             return id;
         }
@@ -153,6 +206,10 @@ public  class Model {
             return historyOfNote;
         }
 
+        public String getDateOfEndContract() {
+            return dateOfEndContract;
+        }
+
         @Override
         public String toString() {
             return "CompaniesItem{" +
@@ -179,6 +236,7 @@ public  class Model {
                     ", hourOfNote='" + hourOfNote + '\'' +
                     ", historyOfNote='" + historyOfNote + '\'' +
                     ", nameForNotes='" + nameForNotes + '\'' +
+                    ", dateOfEndContract='" + dateOfEndContract + '\'' +
                     '}';
         }
     }

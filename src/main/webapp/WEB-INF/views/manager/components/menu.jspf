@@ -4,41 +4,59 @@
     <div class="menuTitle">
         <div class="menuTable">
             <form:form action="searchnotesbycalendar" method="post" id="searchDateByMenu">
-                <table class="tableCalendar">
-                    <tr>
-                        <td>
-                            <select name="selectMonth" id="selectMonth">
-                                <option value="12" selected >Месяц</option>
-                                <option value="0">Январь</option>
-                                <option value="1">Февраль</option>
-                                <option value="2">Март</option>
-                                <option value="3">Апрель</option>
-                                <option value="4">Май</option>
-                                <option value="5">Июнь</option>
-                                <option value="6">Июль</option>
-                                <option value="7">Август</option>
-                                <option value="8">Сентябрь</option>
-                                <option value="9">Октябрь</option>
-                                <option value="10">Ноябрь</option>
-                                <option value="11">Декабрь</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <table class="tableCalendar">
-                    <tr style="height: 28px">
-                        <td><input type="submit" value="Сегодня" name="submitSearchToday"id="submitSearchToday"></td>
-                        <td><input type="submit" value="Завтра" name="submitSearchTomorrow"id="submitSearchTomorrow"></td>
-                        <td><input type="submit" value="Неделя" name="submitSearchWeek"id="submitSearchWeek"></td>
-                    </tr>
-                </table>
+            <table class="tableCalendar">
+                <tr>
+                    <td>
+                        <select name="selectMonth" id="selectMonth">
+                            <option value="12" selected >Месяц</option>
+                            <option value="0">Январь</option>
+                            <option value="1">Февраль</option>
+                            <option value="2">Март</option>
+                            <option value="3">Апрель</option>
+                            <option value="4">Май</option>
+                            <option value="5">Июнь</option>
+                            <option value="6">Июль</option>
+                            <option value="7">Август</option>
+                            <option value="8">Сентябрь</option>
+                            <option value="9">Октябрь</option>
+                            <option value="10">Ноябрь</option>
+                            <option value="11">Декабрь</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <table class="tableCalendar">
+                <tr style="height: 28px">
+                    <td><input type="submit" value="Сегодня" name="submitSearchToday"id="submitSearchToday"></td>
+                    <td><input type="submit" value="Завтра" name="submitSearchTomorrow"id="submitSearchTomorrow"></td>
+                    <td><input type="submit" value="Неделя" name="submitSearchWeek"id="submitSearchWeek"></td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="menuBody">
         <div class="menuCalendar">
         </div>
-            <input type="submit" value="Поиск" id="submitSearchDatepicker">
-            <input type="hidden" name="hiddenSearchDate" id="hiddenSearchDate" />
+        <input type="submit" value="Поиск" id="submitSearchDatepicker">
+        <input type="hidden" name="hiddenSearchDate" id="hiddenSearchDate" />
         </form:form>
+
+        <c:forEach var="key" items="${model.filterListMap.keySet()}">
+            <div class="menuBodyItem">
+                <div class="menuBodyItemHeadInfo" data-id="${key.id}">
+                    <span class="soloTest" data-id="${key.id}">${key.name}</span>
+                </div>
+            </div>
+            <div style="display: none" id="itemsID-${key.id}">
+                <c:forEach var="item" items="${model.filterListMap.get(key)}">
+                    <div class="menuBodyItem" >
+                        <div class="menuBodyItemInfo" id="ID-${item.id}">
+                            <span id="ID-${item.id}">Договор до: ${item.dateOfEndContract}</span><br/>
+                            <span id="ID-${item.id}">${item.name}</span>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:forEach>
     </div>
 </div>

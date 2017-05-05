@@ -35,29 +35,31 @@
                     <span>${item.companyInformation}</span>
                     <span class="companyAmount"><k:if test="${not empty item.costOf}">Стоимость: <b>${item.costOf}</b></k:if></span>
                 </div>
-                <div class="AddressList">
-                    <k:set var="count" value="0" scope="page" />
-                    <k:forEach var="addresItem" items="${model.companyToCompanyAddress.get(item.companyId)}">
-                        <k:if test="${count == 0}">
-                            <div class="address">
-                                <span class="addressInfo">${addresItem.address}&nbsp;</span>
-                                <span>${addresItem.phones}&nbsp;</span>
-                                <span>${addresItem.information}</span>
-                            </div>
-                        </k:if>
-                        <k:if test="${count > 0}">
-                            <div class="hiddenAdr-btn">
-                                <p><a class="btn btn-primary" data-id="${item.companyId}">Филиалы</a></p>
-                            </div>
-                            <div class="address hiddenAdr address-${item.companyId}">
-                                <span class="addressInfo">${addresItem.address}&nbsp;</span>
-                                <span>${addresItem.phones}&nbsp;</span>
-                                <span>${addresItem.information}</span>
-                            </div>
-                        </k:if>
-                        <k:set var="count" value="${count + 1}" scope="page"/>
-                    </k:forEach>
-                </div>
+                <k:if test="${model.companyToCompanyAddress.get(item.companyId).size() > 0}">
+                    <div class="AddressList">
+                        <k:set var="count" value="0" scope="page" />
+                        <k:forEach var="addresItem" items="${model.companyToCompanyAddress.get(item.companyId)}">
+                            <k:if test="${count == 0}">
+                                <div class="address">
+                                    <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                    <span>${addresItem.phones}&nbsp;</span>
+                                    <span>${addresItem.information}</span>
+                                </div>
+                            </k:if>
+                            <k:if test="${count > 0}">
+                                <div class="hiddenAdr-btn">
+                                    <p><a class="btn btn-primary" data-id="${item.companyId}">Филиалы</a></p>
+                                </div>
+                                <div class="address hiddenAdr address-${item.companyId}">
+                                    <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                    <span>${addresItem.phones}&nbsp;</span>
+                                    <span>${addresItem.information}</span>
+                                </div>
+                            </k:if>
+                            <k:set var="count" value="${count + 1}" scope="page"/>
+                        </k:forEach>
+                    </div>
+                </k:if>
             </div>
         </k:forEach>
     </div>
@@ -68,6 +70,28 @@
             </div>
         </div>
     </div>
+    <k:if test="${model.companyHiPrior.size() == 10}">
+        <div style="background: rgba(126, 126, 126, 0.04);" class="load-more-container">
+            <div style="padding: 1px 0 15px 0;">
+                <div class="rua-l-wrapper">
+                    <div class="load-more-btn">Показать еще!</div>
+                </div>
+            </div>
+        </div>
+    </k:if>
+    <k:if test="${empty model.companyHiPrior}">
+        <div style="background: rgba(126, 126, 126, 0.04);">
+            <div style="padding: 0px 0 15px 0;">
+                <div class="rua-l-wrapper">
+                    <div class="rptShort">
+                        <h2 class="headline centered mtmb" style="color: #6d7983;">Извините, раздел еще не заполнен!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </k:if>
+
+    <div class="line-separator"></div>
     <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>

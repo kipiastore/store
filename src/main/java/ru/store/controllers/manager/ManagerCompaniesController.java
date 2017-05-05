@@ -14,12 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.store.entities.Company;
 import ru.store.entities.CompanyAddress;
 import ru.store.entities.CompanyReminder;
-import ru.store.service.*;
+import ru.store.service.CompanyAddressService;
+import ru.store.service.CompanyReminderService;
+import ru.store.service.CompanyService;
+import ru.store.service.LoadMapsService;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ManagerCompaniesController {
@@ -133,6 +134,7 @@ public class ManagerCompaniesController {
             companies = companyService.getCompaniesByManagerName(name);
         }
         loadMapsServiceService.load(model,companyReminders,companyAddresses,companies);
+        model.filterListMap = groupByFilter(companies);
         model.message = "Последние редактированные фирмы:";
         model.companyList = new ArrayList<>();
         List<CompanyReminder>companyLastReminders=companyReminderService.getLastCompaniesReminderType();
@@ -187,6 +189,187 @@ public class ManagerCompaniesController {
                 }
             }
         }
+        return companyItem;
+    }
+    private Map<Model.Filter, List<Model.CompaniesItem>> groupByFilter(List<Company> companies) {
+        Map<Model.Filter, List<Model.CompaniesItem>> result = new TreeMap<>();
+        Model.Filter filter;
+        List<Model.CompaniesItem> companyItems;
+        List<Model.CompaniesItem> allCompanyItems = new ArrayList<>();
+        boolean isAdded;
+        for (Company company : companies) {
+            isAdded = false;
+            if (company.getDateOfContract() != null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null) { // 07.03.17!!!!!
+                if (company.getDateOfEndContract().getTime() - new Date().getTime() < 604800000 &&
+                        company.getDateOfEndContract().getTime() - new Date().getTime() > 259200000) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(1)) == null) {
+                        filter = new Model.Filter(1);
+                        filter.name = "До конца договора 7 д.";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(1)).add(convertForFilter(company));
+                    }
+                }
+                if (company.getDateOfEndContract().getTime() - new Date().getTime() < 259200000 &&
+                        company.getDateOfEndContract().getTime() - new Date().getTime() > 86400000) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(2)) == null) {
+                        filter = new Model.Filter(2);
+                        filter.name = "До конца договора 3 д.";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(2)).add(convertForFilter(company));
+                    }
+                }
+                if (company.getDateOfEndContract().getTime() - new Date().getTime() < 86400000 &&
+                        company.getDateOfEndContract().getTime() - new Date().getTime() > 0) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(3)) == null) {
+                        filter = new Model.Filter(3);
+                        filter.name = "До конца договора 1 д.";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(3)).add(convertForFilter(company));
+                    }
+                }
+                if (company.getDateOfEndContract().getTime() < new Date().getTime() &&
+                        (!company.getIsClosed())) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(4)) == null) {
+                        filter = new Model.Filter(4);
+                        filter.name = "Срок истек, не отключены";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(4)).add(convertForFilter(company));
+                    }
+                }
+                if (company.getIsOffPosition()) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(5)) == null) {
+                        filter = new Model.Filter(5);
+                        filter.name = "Отключены позиции";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(5)).add(convertForFilter(company));
+                    }
+                }
+                if (company.getIsRedirect()) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(6)) == null) {
+                        filter = new Model.Filter(6);
+                        filter.name = "Переадресация";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(6)).add(convertForFilter(company));
+                    }
+                }
+                if (company.getIsPriority()) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(7)) == null) {
+                        filter = new Model.Filter(7);
+                        filter.name = "Приоритет";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(7)).add(convertForFilter(company));
+                    }
+                }
+                if (false) { // wtf?!
+                    isAdded = true;
+                    if (result.get(new Model.Filter(8)) == null) {
+                        filter = new Model.Filter(8);
+                        filter.name = "Только сайт";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(8)).add(convertForFilter(company));
+                    }
+                }
+                if (!company.getIsShowForOperator()) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(9)) == null) {
+                        filter = new Model.Filter(9);
+                        filter.name = "Выкл. в справочной";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(9)).add(convertForFilter(company));
+                    }
+                }
+                if (!company.getIsShowForSite()) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(10)) == null) {
+                        filter = new Model.Filter(10);
+                        filter.name = "Выкл. на сайте";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(10)).add(convertForFilter(company));
+                    }
+                }
+                if (false) { // wtf..
+                    isAdded = true;
+                    if (result.get(new Model.Filter(11)) == null) {
+                        filter = new Model.Filter(11);
+                        filter.name = "Доп. услуги";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(11)).add(convertForFilter(company));
+                    }
+                }
+                if (company.getDateOfEndContract().getTime() < new Date().getTime() && company.getIsPriority()) {
+                    isAdded = true;
+                    if (result.get(new Model.Filter(12)) == null) {
+                        filter = new Model.Filter(12);
+                        filter.name = "Срок истек. Приоритет вкл.";
+                        companyItems = new ArrayList<>();
+                        companyItems.add(convertForFilter(company));
+                        result.put(filter, companyItems);
+                    } else {
+                        result.get(new Model.Filter(12)).add(convertForFilter(company));
+                    }
+                }
+                if (!isAdded)
+                    allCompanyItems.add(convertForFilter(company));
+            }
+            if (allCompanyItems.size() != 0) {
+                filter = new Model.Filter(16);
+                filter.name = "Остальные";
+                result.put(filter, allCompanyItems);
+            }
+        }
+        return result;
+    }
+    private Model.CompaniesItem convertForFilter(Company company) {
+        Model.CompaniesItem companyItem = new Model.CompaniesItem();
+        companyItem.id = company.getId();
+        companyItem.name = getNormalName(company.getName());
+        if(company.getDateOfEndContract()!=null) {
+            companyItem.dateOfEndContract = company.getDateOfEndContract().toString().substring(0, 11);
+        }
+        else{
+            companyItem.dateOfEndContract = "";
+        }
+        companyItem.manager = company.getManager();
         return companyItem;
     }
     @RequestMapping(value = "/manager/updatecompany", method = RequestMethod.GET)

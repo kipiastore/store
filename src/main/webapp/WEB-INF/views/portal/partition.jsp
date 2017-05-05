@@ -19,33 +19,41 @@
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
     <div style="background: rgba(126, 126, 126, 0.04);">
-        <div style="padding: 1px 0 0px 0;">
+        <div style="padding: 1px 0 15px 0;">
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb title"><a class="main-ref" href="../index">Главная страница</a> → ${model.partitionItem.partitionName} в Одессе</h2>
                 <div class="rptShort">
-                    <div style="float: left;width: 450px;">
-                        <k:forEach var="item" items="${model.partitionItem.subPartitionItems2}">
-                            <p>
-                                <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
-                                <span class="rua-p-c-red"><b>${item.companyCount}</b></span>
-                            </p>
-                        </k:forEach>
-                    </div>
-                    <div style="float: right;width: 450px;">
-                        <k:forEach var="item" items="${model.partitionItem.subPartitionItems1}">
-                            <p>
-                                <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
-                                <span class="rua-p-c-red"><b>${item.companyCount}</b></span>
-                            </p>
-                        </k:forEach>
-                    </div>
+                    <k:if test="${model.partitionItem.subPartitionItems2.size() > 0}">
+                        <div style="float: left;width: 450px;">
+                            <k:forEach var="item" items="${model.partitionItem.subPartitionItems2}">
+                                <p>
+                                    <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                                    <span class="rua-p-c-red"><b>${item.companyCount}</b></span>
+                                </p>
+                            </k:forEach>
+                        </div>
+                        <div style="float: right;width: 450px;">
+                            <k:forEach var="item" items="${model.partitionItem.subPartitionItems1}">
+                                <p>
+                                    <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                                    <span class="rua-p-c-red"><b>${item.companyCount}</b></span>
+                                </p>
+                            </k:forEach>
+                        </div>
+                    </k:if>
+                    <k:if test="${model.partitionItem.subPartitionItems2.size() == 0}">
+                        <h2 class="headline centered mtmb" style="color: #6d7983;">Извините, раздел еще не заполнен!</h2>
+                    </k:if>
                 </div>
+                <div class="open-list-btn">Показать все!</div>
                 <script>
                     var rptShort = $('.rptShort');
                     $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
-                    rptShort.addClass('rptShort-closed');
+                    if (rptShort.height() < 550)
+                        $('.open-list-btn').hide();
+                    else
+                        rptShort.addClass('rptShort-closed');
                 </script>
-                <div class="open-list-btn">Показать все!</div>
             </div>
         </div>
     </div>
@@ -53,7 +61,7 @@
         <div style="margin-top: 0px;background: rgba(126, 126, 126, 0.04);">
             <div style="padding: 1px 0 1px 0">
                 <div class="rua-l-wrapper">
-                    <h2 class="headline centered mtmb title">Редакция рекомендует</h2>
+                    <h2 class="headline centered mtmb title" style="margin-top: 0px;">Редакция рекомендует</h2>
                 </div>
             </div>
         </div>
@@ -68,33 +76,38 @@
                             <span>${item.companyInformation}</span>
                             <span class="companyAmount"><k:if test="${not empty item.costOf}">Стоимость: <b>${item.costOf}</b></k:if></span>
                         </div>
-                        <div class="AddressList">
-                            <k:set var="count" value="0" scope="page" />
-                            <k:forEach var="addresItem" items="${model.companyToCompanyAddress.get(item.companyId)}">
-                                <k:if test="${count == 0}">
-                                    <div class="address">
-                                        <span class="addressInfo">${addresItem.address}&nbsp;</span>
-                                        <span>${addresItem.phones}&nbsp;</span>
-                                        <span>${addresItem.information}</span>
-                                    </div>
-                                </k:if>
-                                <k:if test="${count > 0}">
-                                    <div class="hiddenAdr-btn">
-                                        <p><a class="btn btn-primary" data-id="${item.companyId}">Филиалы</a></p>
-                                    </div>
-                                    <div class="address hiddenAdr address-${item.companyId}">
-                                        <span class="addressInfo">${addresItem.address}&nbsp;</span>
-                                        <span>${addresItem.phones}&nbsp;</span>
-                                        <span>${addresItem.information}</span>
-                                    </div>
-                                </k:if>
-                                <k:set var="count" value="${count + 1}" scope="page"/>
-                            </k:forEach>
-                        </div>
+                        <k:if test="${model.companyToCompanyAddress.get(item.companyId).size() > 0}">
+                            <div class="AddressList">
+                                <k:set var="count" value="0" scope="page" />
+                                <k:forEach var="addresItem" items="${model.companyToCompanyAddress.get(item.companyId)}">
+                                    <k:if test="${count == 0}">
+                                        <div class="address">
+                                            <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                            <span>${addresItem.phones}&nbsp;</span>
+                                            <span>${addresItem.information}</span>
+                                        </div>
+                                    </k:if>
+                                    <k:if test="${count > 0}">
+                                        <div class="hiddenAdr-btn">
+                                            <p><a class="btn btn-primary" data-id="${item.companyId}">Филиалы</a></p>
+                                        </div>
+                                        <div class="address hiddenAdr address-${item.companyId}">
+                                            <span class="addressInfo">${addresItem.address}&nbsp;</span>
+                                            <span>${addresItem.phones}&nbsp;</span>
+                                            <span>${addresItem.information}</span>
+                                        </div>
+                                    </k:if>
+                                    <k:set var="count" value="${count + 1}" scope="page"/>
+                                </k:forEach>
+                            </div>
+                        </k:if>
                     </div>
                 </k:forEach>
             </div>
         </div>
+    </k:if>
+    <k:if test="${empty model.companyHiPrior}">
+        <div class="line-separator"></div>
     </k:if>
     <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>

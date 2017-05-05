@@ -60,7 +60,7 @@ public class ManagerDebtorsController {
         model.message = "Результаты поиска:";
         model.companyList = new ArrayList<>();
         for (Company company : companies) {
-            if (company.getCostOf()!=null && company.getIsPaid().equals(false)&&company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null&&company.getDateOfEndContract().getTime() < new Date().getTime()) {
+            if (company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null&&company.getDateOfEndContract().getTime() < new Date().getTime()) {
                 if (iSChoiceComments == false) {
                     List<Model.CompaniesItem> list = convert(company,packages,companyReminders,companyAddresses);
                     for (Model.CompaniesItem m : list) {
@@ -106,7 +106,7 @@ public class ManagerDebtorsController {
         List<CompanyReminder> companyLstReminders=companyReminderService.getLastCompaniesReminderType();
         model.companyList = new ArrayList<>();
         for (Company company : companies) {
-            if (company.getCostOf()!=null && company.getIsPaid().equals(false)&&company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
+            if (company.getDateOfContract()!=null&&company.getDateOfStartContract()!=null&&company.getDateOfEndContract()!=null && company.getDateOfEndContract().getTime() < new Date().getTime()) {
                 List<Model.CompaniesItem> list = convert(company,packages,companyLstReminders,companyAddresses);
                 for (Model.CompaniesItem m : list) {
                     model.companyList.add(m);
@@ -149,7 +149,24 @@ public class ManagerDebtorsController {
                 }
             }
         }
-        companyItem.debt = checkIsDebt(company);
+
+        if(company.getIsPaid().equals(true)) {
+            if(company.getCostOf()!=null) {
+                companyItem.debt = "оплачен, договор истек, долг: "+checkIsDebt(company);
+            }
+            else{
+                companyItem.debt = "оплачен, договор истек, стоимость не указана";
+            }
+        }
+        if(company.getIsPaid().equals(false)) {
+            if(company.getCostOf()!=null) {
+                companyItem.debt = "не оплачен, договор истек, долг: "+checkIsDebt(company);
+            }
+            else{
+                companyItem.debt = "не оплачен, договор истек, стоимость не указана";
+            }
+
+        }
         companyItem.directorFullName=company.getDirectorFullName();
         companyItem.companyAddresses= new ArrayList<>();
         if(!companyAddresses.isEmpty()) {
