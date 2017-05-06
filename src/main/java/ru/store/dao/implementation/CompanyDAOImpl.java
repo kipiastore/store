@@ -350,14 +350,14 @@ public class CompanyDAOImpl implements CompanyDAO {
     @Transactional
     public List<Company> findPortalCompaniesByName(String name) {
         String hql = "from Company where isOffPosition = false and isShowForSite = true and lower(name) LIKE lower(:name) order by name desc";
-        return sessionFactory.getCurrentSession().createQuery(hql).setString("name",name + "%").list();
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("name", "%" + name + "%").list();
     }
     //15.02.2017
     @Override
     @Transactional
     public List<Company> findPortalCompaniesByKeyword(String keywords) {
         String hql = "from Company where isOffPosition = false and isShowForSite = true and lower(keywords) LIKE lower(:keywords) order by name desc";
-        return sessionFactory.getCurrentSession().createQuery(hql).setString("keywords",keywords + "%").list();
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("keywords", "%" + keywords + "%").list();
     }
 
 }

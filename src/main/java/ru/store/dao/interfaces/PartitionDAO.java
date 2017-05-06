@@ -21,4 +21,7 @@ public interface PartitionDAO {
 
     Partition getPartitionByName(String name);
 
+    List<Partition> findPortalPartitionsByName(String name);
+
+    List<Partition> getPartitions(List<Integer> partitionIds);
 }

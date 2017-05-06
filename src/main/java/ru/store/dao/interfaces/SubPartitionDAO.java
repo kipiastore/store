@@ -31,4 +31,6 @@ public interface SubPartitionDAO {
     void deleteSubPartitionByPartition(int partitionId);
 
     SubPartition getSubPartition(int id);
+
+    List<SubPartition> findPortalSubPartitionsByName(String name);
 }

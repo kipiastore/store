@@ -83,4 +83,8 @@ public class SubPartitionService {
         companySubPartitionService.deleteCompanySubpartitionBySubPartitionIds(subPartitionIdList);
     }
 
+    public List<SubPartition> findPortalSubPartitionsByName(String name) {
+        return subPartitionDAO.findPortalSubPartitionsByName(name);
+    }
+
 }

@@ -73,7 +73,8 @@ public class PortalController {
         Map<Integer, List<Model.PartitionItem.SubPartitionItem>> subPartitionItemsGroupByPartitionId = new HashMap<>();
         List<Model.PartitionItem.SubPartitionItem> subPartitionItems;
         Model.PartitionItem.SubPartitionItem subPartitionItem;
-        for (SubPartition subPartition : subPartitionService.getSubPartitions()) {
+        List<SubPartition> subPartitions = subPartitionService.getSubPartitions();
+        for (SubPartition subPartition : subPartitions) {
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
             subPartitionItem.subPartitionName = subPartition.getName();
@@ -92,8 +93,6 @@ public class PortalController {
             Collections.sort(subPartitionItemsGroupByPartitionId.get(idKey));
         }
 
-
-        List<SubPartition> subPartitions = subPartitionService.getSubPartitions();
         Map<Integer, Integer> partitionIdToCount = new HashMap<>();
         for (SubPartition subPartition : subPartitions) {
             if (subPartitionIdToCount.get(subPartition.getId()) != null) {

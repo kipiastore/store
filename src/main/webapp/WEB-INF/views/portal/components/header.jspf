@@ -36,7 +36,7 @@
                     <div class="rua-g-clearfix">
                         <div>
                             <input name="value" type="text" class="keyword input-block-level ui-autocomplete-input"
-                                   placeholder="Введите ключевые слова" autocomplete="off"/>
+                                   placeholder="Введите ключевые слова" autocomplete="off" id="search-param"/>
                         </div>
                     </div>
                 </div>

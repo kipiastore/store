@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.entities.Partition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,4 +66,21 @@ public class PartitionDAOImpl implements PartitionDAO {
         else
             return null;
     }
+
+    @Override
+    @Transactional
+    public List<Partition> findPortalPartitionsByName(String name) {
+        String hql = "from Partition where lower(name) LIKE lower(:name) order by name desc";
+        return sessionFactory.getCurrentSession().createQuery(hql).setString("name", "%" + name + "%").list();
+    }
+
+    @Override
+    @Transactional
+    public List<Partition> getPartitions(List<Integer> partitionIds) {
+        if (partitionIds.size() == 0)
+            return new ArrayList<>();
+        String hql = "from Partition where id IN (:partitionIds) order by name";
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("partitionIds", partitionIds).list();
+    }
+
 }

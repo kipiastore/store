@@ -18,7 +18,19 @@ var header = $('#Header_header');
 header.show();
 header.animate({opacity: 1}, 500);
 
+$.urlParam = function(name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results == null) {
+        return null;
+    } else {
+        return results[1] || 0;
+    }
+}
+
 $(window).on('load', function() {
+    //var currentSearchParam = $.urlParam('value');
+    //if (currentSearchParam != null && currentSearchParam != '')
+        //$('#search-param').val(encodeURIComponent(currentSearchParam).replace(/%20/g,'+'));
     rptShort = $('.rptShort');
     if (rptShort.length > 0) {
         isRptShortClosed = true;
@@ -36,9 +48,11 @@ $('.open-list-btn').on("click", function () {
         if (isRptShortClosed) {
             rptShort.addClass('rptShort-open');
             isRptShortClosed = false;
+            $('.open-list-btn').html('Скрыть!');
         } else {
             rptShort.removeClass("rptShort-open");
             isRptShortClosed = true;
+            $('.open-list-btn').html('Показать все!');
         }
     }
 });

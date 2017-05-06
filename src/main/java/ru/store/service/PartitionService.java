@@ -52,4 +52,11 @@ public class PartitionService {
         return partitionDAO.getPartitionById(id);
     }
 
+    public List<Partition> findPortalPartitionsByName(String name) {
+        return partitionDAO.findPortalPartitionsByName(name);
+    }
+
+    public List<Partition> getPartitions(List<Integer> partitionIds) {
+        return partitionDAO.getPartitions(partitionIds);
+    }
 }
