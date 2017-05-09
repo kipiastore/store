@@ -6,7 +6,7 @@
     <div class="" id="UpAdd${num}" style="display: none;">
         <div class="left-body">
             <label>Адрес<span class="required"></span></label>
-            <input disabled type="text"  maxlength="255" type="text" name="address" id="UpAdAd${num}" />
+            <input disabled type="text" maxlength="255" type="text" name="address" id="UpAdAd${num}" />
         </div>
         <div class="right-body">
             <label>Район</label>
@@ -22,7 +22,7 @@
             <textarea disabled type="text" rows="3" name="phones" maxlength="255" id="UpPhAd${num}"></textarea>
         </div>
         <div class="right-body">
-            <label>Информация</label>
+            <label>График работы</label>
             <textarea disabled type="text" rows="3" name="information" maxlength="255" id="UpInfAd${num}"></textarea>
         </div>
     </div>

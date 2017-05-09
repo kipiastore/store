@@ -82,7 +82,7 @@ public class DirectorReportsController {
     }
 
 
-    @RequestMapping(value = "/mainAdmin/reportssearchcompany", method = RequestMethod.POST)
+    @RequestMapping(value = "/director/reportssearchcompany", method = RequestMethod.POST)
     public ModelAndView searchCompany(@RequestParam MultiValueMap<String, String> searchMap) {
         ModelAndView modelAndView = new ModelAndView();
         List<Company> companies = new ArrayList<>();

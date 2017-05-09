@@ -1057,6 +1057,8 @@ footer.f .cr {
 .rptShort div p {
     background-position: 0 50%;
     text-align: left;
+    margin: 0;
+    padding: 0;
 }
 .rptShort span {
     float: right;
@@ -1286,7 +1288,7 @@ p::-moz-selection {
     margin: auto;
 }
 .rptShort .subsection .subsection-list a {
-    width: 290px;
+    width: 260px;
 }
 .mail-container {
     width: 100%;

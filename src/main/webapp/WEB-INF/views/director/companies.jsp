@@ -44,7 +44,7 @@
                         <th>Название</th>
                         <th>Менеджер</th>
                         <th>Пакет</th>
-                        <th>Истекает</th>
+                        <th>Срок окончания</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -239,7 +239,7 @@
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="hiddenId" id="hiddenId" />
                 <%@include file="/WEB-INF/views/director/components/updateAddress.jspf"%>
-                <input type="submit" value="Обновить" />
+                <input type="submit" value="Сохранить" />
             </form:form>
         </div>
     </div>

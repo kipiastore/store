@@ -244,7 +244,7 @@ public class ManagerCompaniesController {
                     isAdded = true;
                     if (result.get(new Model.Filter(4)) == null) {
                         filter = new Model.Filter(4);
-                        filter.name = "Срок истек, не отключены";
+                        filter.name = "Срок договора истек, не отключены";
                         companyItems = new ArrayList<>();
                         companyItems.add(convertForFilter(company));
                         result.put(filter, companyItems);

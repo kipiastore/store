@@ -108,13 +108,13 @@
                         <label>Факс</label>
                         <input title="Введите номер факса." maxlength="15" type="text" name="fax" id="fax"/>
                     </div>
-                    <div class="openAddress">Адресса</div>
+                    <div class="openAddress">Адреса</div>
                     <div class="address">
                         <%@include file="/WEB-INF/views/manager/components/updateAddress.jspf"%>
                     </div>
                     <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                     <input type="hidden" name="hiddenId" id="hiddenId" />
-                    <input type="submit" value="Обновить" id="submitManagerFormUpdate" />
+                    <input type="submit" value="Сохранить" id="submitManagerFormUpdate" />
                 </div>
             </form:form>
 

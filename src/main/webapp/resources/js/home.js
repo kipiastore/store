@@ -110,7 +110,6 @@ $(document).on('click', function (event) {
 
 $('.show-subsection').on('click', function(event) {
     $('.show-subsection').removeClass("open-down");
-    $(event.target).addClass("open-down");
     if (itemId != undefined && itemId != event.target.getAttribute('data-id'))
         $('#item-'+itemId).hide();
     if (itemId != undefined && itemId == event.target.getAttribute('data-id')) {
@@ -119,6 +118,7 @@ $('.show-subsection').on('click', function(event) {
         return;
     }
     itemId = event.target.getAttribute('data-id');
+    $(event.target).addClass("open-down");
     $('#item-'+itemId).show();
 });
 
