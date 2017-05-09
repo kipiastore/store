@@ -14,6 +14,7 @@
 </head>
 <body>
 <a name="top" id="top"></a>
+<span class="style-container"></span>
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
@@ -27,7 +28,7 @@
     <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper">
-                <div class="rptShort">
+                <div class="rptShort hide-bt">
                     <k:if test="${model.partitionItems2.size() > 0}">
                         <div style="float: left;width: 450px;">
                             <k:forEach var="partitionItem" items="${model.partitionItems2}">
@@ -72,7 +73,15 @@
                         <h2 class="headline centered mtmb" style="color: #6d7983;">К сожалению, по Вашему запросу ничего не найдено.</h2>
                     </k:if>
                 </div>
-
+                <div class="open-list-btn">Показать все!</div>
+                <script>
+                    var rptShort = $('.rptShort.hide-bt');
+                    $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
+                    if (rptShort.height() < 550)
+                        $('.open-list-btn').hide();
+                    else
+                        rptShort.addClass('rptShort-closed');
+                </script>
             </div>
         </div>
     </div>

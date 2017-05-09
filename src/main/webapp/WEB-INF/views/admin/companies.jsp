@@ -29,13 +29,16 @@
         <span class="pageMenuButt">Создать</span>
     </div>
     <div class="menuBody">
-        <div class="generalContent">
+        <div class="pre-loading">
+            <div class="loading">
 
+            </div>
+        </div>
+        <div class="generalContent">
             <span class="error" id="addError">${addError}</span>
             <span class="error">${updateError}</span>
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
-
             <div class="container">
                 <span class="message">${model.message}</span>
                 <table class="table table-striped">

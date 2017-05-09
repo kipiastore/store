@@ -40,6 +40,7 @@ var isClosed;
 var isPriority;
 var email;
 var site;
+var prLoader = $(".pre-loading");
 
 var addressArray;
 var BreakException = {};
@@ -144,7 +145,10 @@ $(".tableName").on("click", function (event) {
     updateForm = $("#updateForm");
     setTimeout(function() {
         updateForm.show();
-        updateForm.animate({opacity: 1}, 200);
+        //updateForm.animate({opacity: 1}, 200);
+        $('.error').hide();
+        $('.success').hide();
+        prLoader.show();
     }, 200);
     isShowUpdateForm = true;
 
@@ -185,18 +189,26 @@ $(".menuBodyItemInfo").on("click", function (event) {
     if (isShowCreateForm && !isShowUpdateForm) {
         setTimeout(function() {
             updateForm.show();
-            updateForm.animate({opacity: 1}, 200);
+            //updateForm.animate({opacity: 1}, 200);
+            $('.error').hide();
+            $('.success').hide();
+            prLoader.show();
         }, 200);
     } else if (isShowUpdateForm) {
         updateForm.animate({opacity: 0}, 200);
         setTimeout(function() {
-            updateForm.hide();
             updateForm.show();
-            updateForm.animate({opacity: 1}, 200);
+            //updateForm.animate({opacity: 1}, 200);
+            $('.error').hide();
+            $('.success').hide();
+            prLoader.show();
         }, 200);
     } else {
         updateForm.show();
-        updateForm.animate({opacity: 1}, 200);
+        //updateForm.animate({opacity: 1}, 200);
+        $('.error').hide();
+        $('.success').hide();
+        prLoader.show();
     }
     isShowUpdateForm = true;
     isShowCreateForm = false;
@@ -357,6 +369,8 @@ function loadCompany(id) {
                 calculatePosition(addressArray, "UpAdd");
             }
         });
+        prLoader.hide();
+        updateForm.animate({opacity: 1}, 200);
     });
 }
 

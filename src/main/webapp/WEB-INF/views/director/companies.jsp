@@ -29,6 +29,11 @@
         <span class="pageMenuButt">Создать</span>
     </div>
     <div class="menuBody">
+        <div class="pre-loading">
+            <div class="loading">
+
+            </div>
+        </div>
         <div class="generalContent">
 
             <span class="error" id="addError">${addError}</span>

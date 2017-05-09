@@ -123,10 +123,6 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.multi-select.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/admin/adminPosition.js" />"></script>
 <style>
-    .pr {
-        //float: left;
-        //height: 40px;
-    }
     .ms-container {
         background: transparent url(<c:url value="/resources/images/switch.png" />) no-repeat 50% 50%;
         width: auto;

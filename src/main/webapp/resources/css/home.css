@@ -30,7 +30,7 @@ html, body, .rua-l-body, .ui-widget {
     width: 68px;
     height:68px;
     margin:auto;
-    top: 130px;
+    top: 160px;
 }
 .windows8 .wBall {
     position: absolute;
@@ -1450,7 +1450,7 @@ p::-moz-selection {
     padding: 10px;
     color: #d67b7b;
 }
-
+/*
 .loading {
     margin: auto;
     border-radius: 50%;
@@ -1460,6 +1460,17 @@ p::-moz-selection {
     border-top-color: #16a085;
     -webkit-animation: spin 1s infinite linear;
     animation: spin 1s infinite linear;
+}
+*/
+.loading {
+    margin: auto;
+    border-radius: 29%;
+    width: 39px;
+    height: 0px;
+    border: 0.25rem solid rgb(182, 182, 182);
+    -webkit-animation: spin 0.1s infinite linear;
+    animation: spin 0.1s infinite linear;
+    border-top-color: #16a085;
 }
 @keyframes spin {
     0% {
@@ -1536,6 +1547,7 @@ footer.f .c>ul .b {
     padding-top: 20px;
     padding-bottom: 20px;
     color: #6d7983;
+    border-radius: 3px;
 }
 .open-down {
     background-image: url("../images/arrowdown-open-down.png");

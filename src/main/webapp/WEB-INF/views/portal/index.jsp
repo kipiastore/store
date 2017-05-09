@@ -21,7 +21,7 @@
         <div style="padding: 1px 0 15px 0;border-bottom: 20px solid #3d7677;">
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb title">Разделы</h2>
-                <div class="rptShort">
+                <div class="rptShort hide-bt">
                     <k:if test="${model.partitionItems2.size() > 0}">
                         <div style="float: left;width: 450px;">
                             <k:forEach var="partitionItem" items="${model.partitionItems2}">

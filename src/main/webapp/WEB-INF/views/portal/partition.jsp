@@ -22,7 +22,7 @@
         <div style="padding: 1px 0 15px 0;">
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb title"><a class="main-ref" href="../index">Главная страница</a> → ${model.partitionItem.partitionName} в Одессе</h2>
-                <div class="rptShort">
+                <div class="rptShort hide-bt">
                     <k:if test="${model.partitionItem.subPartitionItems2.size() > 0}">
                         <div style="float: left;width: 450px;">
                             <k:forEach var="item" items="${model.partitionItem.subPartitionItems2}">

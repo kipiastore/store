@@ -18,26 +18,17 @@ var header = $('#Header_header');
 header.show();
 header.animate({opacity: 1}, 500);
 
-$.urlParam = function(name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    if (results == null) {
-        return null;
-    } else {
-        return results[1] || 0;
-    }
-}
-
 $(window).on('load', function() {
     //var currentSearchParam = $.urlParam('value');
     //if (currentSearchParam != null && currentSearchParam != '')
         //$('#search-param').val(encodeURIComponent(currentSearchParam).replace(/%20/g,'+'));
-    rptShort = $('.rptShort');
+    rptShort = $('.rptShort.hide-bt');
     if (rptShort.length > 0) {
         isRptShortClosed = true;
     }
     var preloader = $('.preloader');
-    preloader.animate({opacity: 0}, 300);
-    setTimeout(function() { preloader.hide(); }, 300);
+    setTimeout(function() { preloader.animate({opacity: 0}, 300); }, 510);
+    setTimeout(function() { preloader.hide(); }, 820);
 
     calculateAdditionalBlockPosition();
     additionalBlock.animate({left: 0}, 500);

@@ -92,7 +92,7 @@ $(".tableName").on("click", function (event) {
             htmlCode += '</tr>';
         });
         $("#companyIdAdd").val(id);
-        $(".pageMenuButt").animate({opacity: 1}, 200);
+        $(".pageMenuButt").animate({opacity: 1}, 50);
         $("#bodyReports").html(htmlCode);
 
         $("#deleteRep").on("click", function (event) {

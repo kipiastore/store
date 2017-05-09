@@ -19,16 +19,12 @@ $(window).on('load', function() {
 function showLoading() {
     var preLoad = $('.pre-loading');
     preLoad.show();
-    preLoad.animate({paddingTop: 65}, 200);
-    preLoad.animate({paddingBottom: 80}, 200);
-    preLoad.animate({opacity: 1}, 200);
+    preLoad.animate({paddingTop: 15, paddingBottom: 30, opacity: 1}, 200);
 }
 
 function hideLoading() {
     var preLoad = $('.pre-loading');
-    preLoad.animate({opacity: 0}, 200);
-    preLoad.animate({paddingBottom: 0}, 200);
-    preLoad.animate({paddingTop: 0}, 200);
+    preLoad.animate({paddingTop: 0, paddingBottom: 0, opacity: 0}, 200);
     setTimeout(function() {
         preLoad.hide();
     }, 200);
@@ -45,7 +41,9 @@ $('.load-more-btn').on('click', function() {
         $.get('../api/portal/resource/v1/company/SubPartition/' + subPartitionId + '/' + position, function(entry) {
             if (entry.length < 10) {
                 isEnd = true;
-                $('.load-more-container').hide();
+                $('.load-more-btn').animate({backgroundColor: "#ffffff"}, 200);
+                $('.load-more-btn').html('В этом разделе больше нет доступных позиций.');
+                $('.load-more-btn').css('cursor','auto');
             }
             if (entry.length == 0) {
                 hideLoading();

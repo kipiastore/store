@@ -12,7 +12,7 @@ body {
     z-index: 2;
     color: #738dae;
     font-family: Consolas;
-    font-size: 22px;
+    font-size: 18px;
     font-style: normal;
     font-variant: small-caps;
     font-weight: 400;
@@ -34,8 +34,8 @@ body {
     margin: auto;
     height: 40px;
     position: relative;
-    top: 10px;
-    padding-top: 12px;
+    top: 9px;
+    padding-top: 14px;
     text-align: center;
     min-width: 770px;
 }
@@ -180,6 +180,10 @@ a {
     height: 50px;
     background: #f0f8ff;
     border-bottom: 3px solid #eaefed;
+    position: relative;
+}
+.subItemsList {
+    position: relative;
 }
 .menuBody .menuBodyItem:nth-child(2n+1) {
     background: #f1fff4;
@@ -224,6 +228,8 @@ form {
     float: right;
     width: 32px;
     height: 100%;
+    position: absolute;
+    right: 5px;
 }
 .menuBodyItemButtDel {
     cursor: pointer;

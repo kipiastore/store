@@ -83,8 +83,7 @@
 </div>
 <style>
     .menuBodyItemHeadInfo {
-        //float: right;
-        width: 300px;
+        width: 285px;
     }
 </style>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
