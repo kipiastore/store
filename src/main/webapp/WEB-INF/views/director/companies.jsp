@@ -154,7 +154,7 @@
 
                 <%@include file="/WEB-INF/views/director/components/address.jspf"%>
 
-                <input type="submit" value="Создать" />
+                <input type="submit" value="Сохранить" />
             </form:form>
 
             <form:form action="updatecompany" modelAttribute="company" method="post" id="updateForm">

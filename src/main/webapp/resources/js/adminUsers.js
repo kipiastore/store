@@ -4,7 +4,7 @@ var currentItem;
 var pageMenuButtTarget;
 
 var data;
-var pageInformation;
+var pageInformation1;
 // user fileds
 var updateForm;
 var fullName;
@@ -48,6 +48,7 @@ var BreakException = {};
 var dataCompanyAddressJson;
 
 $(window).on("load", function () {
+    pageInformation1 = $("#pageInformation").val();
     if ($("#addError")[0].innerHTML != "") {
         try {
             var user = $.parseJSON($(".addingUserJson")[0].innerHTML);
@@ -156,9 +157,9 @@ $(".tableName").on("click", function (event) {
     $("div#" + currentItem).css("border-left", "2px solid #d87f7f");
     $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
-    if (pageInformation == undefined)
-        pageInformation = $("#pageInformation").val();
-    if (pageInformation == 1) {
+    if (pageInformation1 == undefined)
+        pageInformation1 = $("#pageInformation").val();
+    if (pageInformation1 == 1) {
         loadCompany(id);
     }
     if (pageInformation == 2) {
@@ -173,9 +174,9 @@ $(".menuBodyItemInfo").on("click", function (event) {
     setTimeout(function() { container.hide(); }, 190);
     isShowUpdateForm = true;
 
-    if (pageInformation == undefined)
-        pageInformation = $("#pageInformation").val();
-    if (!(pageInformation == 4 || pageInformation == 5 || pageInformation == 1))
+    if (pageInformation1 == undefined)
+        pageInformation1 = $("#pageInformation").val();
+    if (!(pageInformation1 == 4 || pageInformation1 == 5 || pageInformation1 == 1))
         return;
     $(".error").hide();
     $(".success").hide();
@@ -222,7 +223,7 @@ $(".menuBodyItemInfo").on("click", function (event) {
     $(".menuBodyItemButtDel").css("border-left", "0");
     var id = currentItem.replace("ID-", "");
 
-    if (pageInformation == 4 || pageInformation == 5) {
+    if (pageInformation1 == 4 || pageInformation1 == 5) {
         if (data == undefined) {
             data = $.parseJSON($(".dataJson")[0].innerHTML);
             fullName = $("#fullName");
@@ -243,7 +244,7 @@ $(".menuBodyItemInfo").on("click", function (event) {
             }
         });
     }
-    if (pageInformation == 1) {
+    if (pageInformation1 == 1) {
         loadCompany(id);
     }
 });
@@ -283,9 +284,7 @@ function loadCompany(id) {
     var item;
     addressArray = [];
     cleanAddressBlocks();
-
     $.get('../api/admin/resource/v1/company/'+id, function(entry) {
-        console.log('sd');
         companyName.val(entry.name);
         keywords.val(entry.keywords);
 
@@ -587,7 +586,6 @@ $(".searchButt").on("click", function () {
 $(document).ready(function(){
     $("#partitionLevel").click(function() {
         var val = $("#partitionLevel").val();
-        console.log(val);
         if (val == 2)
             $("#show").show();
         else
@@ -596,9 +594,9 @@ $(document).ready(function(){
 });
 
 //http://loudev.com/
-if (pageInformation == undefined)
-    pageInformation = $("#pageInformation").val();
-if (pageInformation == 2)
+if (pageInformation1 == undefined)
+    pageInformation1 = $("#pageInformation").val();
+if (pageInformation1 == 2)
     $('#optgroup').multiSelect({ selectableOptgroup: true });
 
 Date.prototype.customFormat = function(formatString){

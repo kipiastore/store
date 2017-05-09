@@ -13,6 +13,7 @@ var numOfPositions;
 var hiddenId;
 
 $(window).on("load", function () {
+    pageInformation = $("#pageInformation").val();
     var container = $(".container");
     container.show();
     container.animate({opacity: 1}, 200);

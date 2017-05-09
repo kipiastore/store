@@ -12,6 +12,7 @@ var hiddenId;
 
 $(window).on("load", function () {
     var container = $(".container");
+    pageInformation = $("#pageInformation").val();
     container.show();
     container.animate({opacity: 1}, 200);
     if ($("#addError")[0].innerHTML != "") {

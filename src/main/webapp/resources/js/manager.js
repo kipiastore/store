@@ -56,6 +56,7 @@ var hiddenIdCompanyReminder;
 var hiddenNameCompanyReminder;
 var idReminder;
 $(window).on("load", function () {
+    pageInformation = $("#pageInformation").val();
     var container = $(".container");
     container.show();
 });

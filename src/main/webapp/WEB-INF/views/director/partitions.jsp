@@ -55,21 +55,21 @@
         <form:form action="deletepartition" method="post" id="deleteForm">
             <c:forEach var="key" items="${model.subPartitionsGroupedByPartition2.keySet()}">
                 <div class="menuBodyItem">
-                    <div class="menuBodyItemHeadInfo" id="ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">
-                        <span class="soloTest" id="ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">${key.name}</span>
+                    <div class="menuBodyItemHeadInfo" id="pr-ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">
+                        <span class="soloTest" id="pr-ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">${key.name}</span>
                     </div>
                     <div class="menuBodyItemButt">
-                        <div class="menuBodyItemButtDel" data-type="partition" id="ID-${key.id}"></div>
+                        <div class="menuBodyItemButtDel" data-type="partition" id="pr-ID-${key.id}"></div>
                     </div>
                 </div>
                 <div style="display: none" class="subItemsList" id="itemsID-${key.id}">
                     <c:forEach var="item" items="${model.subPartitionsGroupedByPartition2.get(key)}">
                         <div class="menuBodyItem" >
-                            <div class="menuBodyItemInfo" id="ID-${item.id}">
-                                <span class="soloTest" data-type="subPartition" data-name="${item.fullName}" id="ID-${item.id}">${item.name}</span>
+                            <div class="menuBodyItemInfo" id="sub-pr-ID-${item.id}">
+                                <span class="soloTest" data-type="subPartition" data-name="${item.fullName}" id="sub-pr-ID-${item.id}">${item.name}</span>
                             </div>
                             <div class="menuBodyItemButt" id="menuBodyItemButtId">
-                                <div class="menuBodyItemButtDel" data-type="subPartition" id="ID-${item.id}"></div>
+                                <div class="menuBodyItemButtDel" data-type="subPartition" id="sub-pr-ID-${item.id}"></div>
                             </div>
                         </div>
                     </c:forEach>
