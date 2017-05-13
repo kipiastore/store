@@ -2,5 +2,6 @@ CREATE TABLE subpartition
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     partition_id INT(11) NOT NULL,
-    name VARCHAR(120) NOT NULL
+    name VARCHAR(120) NOT NULL,
+    count_sub_partition INT(11) DEFAULT '0'
 );

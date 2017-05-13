@@ -1559,3 +1559,6 @@ footer.f .c>ul .b {
 .container2 {
     background: rgba(126, 126, 126, 0.04);
 }
+#search-param {
+    width: 938px;
+}

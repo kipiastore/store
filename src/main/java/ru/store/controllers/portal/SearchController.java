@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.api.portal.PriorityResource;
+import ru.store.beans.BadWordsFilter;
+import ru.store.beans.SearchRequestKeeper;
 import ru.store.entities.*;
 import ru.store.service.*;
 
@@ -29,11 +31,23 @@ public class SearchController {
     private SubPartitionService subPartitionService;
     @Autowired
     private PartitionService partitionService;
+    @Autowired
+    private SearchRequestKeeper searchRequestKeeper;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         String searchKey = request.getParameter("value");
+
+        searchKey = searchKey.trim();
+        if (searchKey.length() > 255)
+            searchKey = searchKey.substring(0, 254);
+
+        if (!searchKey.isEmpty()) {
+            searchKey = searchKey.toLowerCase();
+            searchRequestKeeper.save(searchKey);
+        }
+
         List<Company> companies = companyService.findPortalCompaniesByName(searchKey);
         companies.addAll(companyService.findPortalCompaniesByKeyword(searchKey));
 

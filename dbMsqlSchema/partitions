@@ -1,5 +1,6 @@
 CREATE TABLE partitions
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(120) NOT NULL
+    name VARCHAR(120) NOT NULL,
+    count_partition INT(11) DEFAULT '0'
 );

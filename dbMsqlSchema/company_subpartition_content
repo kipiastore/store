@@ -1,0 +1,8 @@
+CREATE TABLE company_subpartition_content
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    image_id INT(11),
+    info LONGTEXT,
+    company_id INT(11) NOT NULL,
+    company_subpartition_id INT(11) NOT NULL
+);

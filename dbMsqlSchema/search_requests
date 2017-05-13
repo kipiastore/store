@@ -1,0 +1,7 @@
+CREATE TABLE search_requests
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    value VARCHAR(255) NOT NULL,
+    counter INT(11) NOT NULL
+);
+CREATE UNIQUE INDEX search_requests_value_uindex ON search_requests (value);

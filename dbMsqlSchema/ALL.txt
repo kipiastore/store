@@ -110,11 +110,8 @@ CREATE TABLE user_roles
 (
     user_role_id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     username VARCHAR(45) NOT NULL,
-    role VARCHAR(45) NOT NULL,
-    CONSTRAINT user_roles_ibfk_1 FOREIGN KEY (username) REFERENCES users (username)
+    role VARCHAR(45) NOT NULL
 );
-CREATE INDEX fk_username_idx ON user_roles (username);
-CREATE UNIQUE INDEX uni_username_role ON user_roles (role, username);
 CREATE TABLE users
 (
     username VARCHAR(45) PRIMARY KEY NOT NULL,
@@ -149,14 +146,24 @@ CREATE TABLE company_subpartition_content
     company_id INT(11) NOT NULL,
     company_subpartition_id INT(11) NOT NULL
 );
+CREATE TABLE counting_portal_page
+(
+    id INT(11) DEFAULT '1',
+    count_portal INT(11) DEFAULT '0'
+);
 CREATE TABLE images
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     file MEDIUMBLOB NOT NULL,
     name VARCHAR(255) NOT NULL
 );
-CREATE TABLE counting_portal_page
+CREATE TABLE search_requests
 (
-    id INT(11) DEFAULT '1',
-    count_portal INT(11) DEFAULT '0'
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    value VARCHAR(255) NOT NULL,
+    counter INT(11) NOT NULL
 );
+ALTER TABLE user_roles ADD FOREIGN KEY (username) REFERENCES users (username);
+CREATE INDEX fk_username_idx ON user_roles (username);
+CREATE UNIQUE INDEX uni_username_role ON user_roles (role, username);
+CREATE UNIQUE INDEX search_requests_value_uindex ON search_requests (value);
