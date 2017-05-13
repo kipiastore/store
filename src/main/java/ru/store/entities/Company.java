@@ -39,6 +39,7 @@ public class Company {
     private String email;
     private String site;
     private Integer countCompany=0;
+    private Integer imageId;
 
     //private String site;
     //private Partition partition;
@@ -231,7 +232,12 @@ public class Company {
     public void setSite(String site) {
         this.site = site;
     }
-
+    public Integer getImageId() {
+        return imageId;
+    }
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
+    }
     public Integer getCountCompany() {
         return countCompany;
     }
@@ -272,6 +278,7 @@ public class Company {
                 "\"isPriority\":\"" + isPriority + "\"," +
                 "\"email\":\"" + email + "\"," +
                 "\"site\":\"" + site + "\"," +
+                "\"imageId\":\"" + imageId + "\"," +
                 "\"description\":\"" + description + "\"" +
                 '}';
     }

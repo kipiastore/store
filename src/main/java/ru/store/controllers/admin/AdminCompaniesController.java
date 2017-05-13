@@ -8,13 +8,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import ru.store.beans.ImageHandler;
+import ru.store.controllers.designer.DesignerCompanyPositionsController;
 import ru.store.entities.*;
+import ru.store.entities.Image;
 import ru.store.entities.Package;
+import ru.store.exceptions.NotSupportedFormat;
 import ru.store.service.*;
+import ru.store.servlets.DownloadImage;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -32,6 +44,10 @@ public class AdminCompaniesController {
     private PackageService packageService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private ImageHandler imageHandler;
 
     //@Autowired
     //private LoadMapsService loadMapsServiceService;
@@ -53,9 +69,13 @@ public class AdminCompaniesController {
 
     @RequestMapping(value = "/admin/addcompany", method = RequestMethod.POST)
     public ModelAndView createCompany(@ModelAttribute("company") Company company,
+                                      @RequestParam("file") MultipartFile multipartFile,
                                       @RequestParam("addressJson") String addressJson) {
         ModelAndView modelAndView = new ModelAndView();
         try {
+            Image image = imageHandler.handle(multipartFile);
+            imageService.createImage(image);
+            company.setImageId(image.getId());
             companyService.createCompany(company);
             companyAddressService.createCompanyAddress(buildCompanyAddress(company, addressJson));
             modelAndView.addObject("successMessage", "Компания успешно добавлена.");
@@ -72,10 +92,22 @@ public class AdminCompaniesController {
     @RequestMapping(value = "/admin/updatecompany", method = RequestMethod.POST)
     public ModelAndView updateCompany(@ModelAttribute("company") Company company,
                                       @RequestParam("hiddenId") String id,
+                                      @RequestParam("file") MultipartFile multipartFile,
                                       @RequestParam("UpAddressJson") String UpAddressJson,
+                                      @RequestParam("imageId") String imageId,
                                       @RequestParam("UpDelete") String UpDelete) {
         ModelAndView modelAndView = new ModelAndView();
         try {
+            Image image = imageHandler.handle(multipartFile);
+            if (image != null) {
+                imageService.createImage(image);
+                if (imageId != null && !imageId.isEmpty())
+                    imageService.deleteImage(Integer.valueOf(imageId));
+                company.setImageId(image.getId());
+            } else {
+                company.setImageId(Integer.valueOf(imageId));
+            }
+
             company.setId(Integer.valueOf(id));
             companyService.updateCompany(company);
             companyAddressService.updateCompanyAddresses(buildCompanyAddress(company, UpAddressJson));

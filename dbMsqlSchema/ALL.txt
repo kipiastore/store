@@ -30,7 +30,8 @@ CREATE TABLE company
     is_priority TINYINT(4) NOT NULL,
     email VARCHAR(120),
     site VARCHAR(120),
-    count_company INT(11) DEFAULT '0'
+    count_company INT(11) DEFAULT '0',
+    image_id INT(11)
 );
 CREATE TABLE company_address
 (

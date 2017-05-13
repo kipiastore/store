@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import ru.store.beans.ImageHandler;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.*;
 import ru.store.entities.Image;
@@ -38,6 +39,8 @@ public class DesignerCompanyPositionsController {
     private SubPartitionDAO subPartitionService;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private ImageHandler imageHandler;
 
     @RequestMapping(value = "/designer/positions/company/{id}", method = RequestMethod.GET)
     public ModelAndView positions(@PathVariable String id) {
@@ -47,51 +50,14 @@ public class DesignerCompanyPositionsController {
         return modelAndView;
     }
 
-    public static BufferedImage convertToBufferedImage(java.awt.Image image) {
-        BufferedImage newImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = newImage.createGraphics();
-        g.drawImage(image, 0, 0, null);
-        g.dispose();
-        return newImage;
-    }
-
     @RequestMapping(value = "/designer/addsubpartitioninfos", method = RequestMethod.POST)
     public String updateCompany(@ModelAttribute("companySubpartitionContent") CompanySubpartitionContent companySubpartitionContent,
                                 @RequestParam("file") MultipartFile multipartFile,
                                 @RequestParam("companySubpartitionId") String companySubpartitionId) {
         try {
-            String[] tmp = multipartFile.getOriginalFilename().split("\\.");
-            if (tmp.length >= 2) {
-                if (DownloadImage.FILE_TYPE_TO_CONTENT_TYPE.get(tmp[tmp.length-1]) == null) {
-                    throw new NotSupportedFormat("Этот формат не поддерживается.");
-                }
-                Image image = new Image();
-                BufferedImage imageData = ImageIO.read(new ByteArrayInputStream(multipartFile.getBytes()));
-                int currentHeight = imageData.getHeight();
-                int currentWidth = imageData.getWidth();
-                if (currentHeight > 250) {
-
-                    double newWidth = currentWidth * 250 / currentHeight;
-                    java.awt.Image scaled = imageData.getScaledInstance((int) newWidth, 250, java.awt.Image.SCALE_SMOOTH);
-
-                    Graphics2D g = imageData.createGraphics();
-                    g.drawImage(scaled, 0, 0, null);
-                    g.dispose();
-
-
-                    BufferedImage bufferedImage = convertToBufferedImage(scaled);
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ImageIO.write(bufferedImage, tmp[tmp.length-1], baos);
-                    baos.flush();
-                    image.setFile(baos.toByteArray());
-                    baos.close();
-                } else {
-                    image.setFile(multipartFile.getBytes());
-                }
-                image.setName(multipartFile.getOriginalFilename());
-                imageService.createImage(image);
-                companySubpartitionContent.setImageId(image.getId());
-            }
+            Image image = imageHandler.handle(multipartFile);
+            imageService.createImage(image);
+            companySubpartitionContent.setImageId(image.getId());
             companySubpartitionContent.setCompanySubpartitionId(Integer.valueOf(companySubpartitionId));
             companySubpartitionContentService.createCompanySubpartitionContent(companySubpartitionContent);
         } catch (Exception ex) {
@@ -118,14 +84,8 @@ public class DesignerCompanyPositionsController {
                               @RequestParam("companySubpartitionId") String companySubpartitionId,
                               @RequestParam("imageId") String imageId) {
         try {
-            String[] tmp = multipartFile.getOriginalFilename().split("\\.");
-            if (tmp.length >= 2) {
-                if (DownloadImage.FILE_TYPE_TO_CONTENT_TYPE.get(tmp[tmp.length-1]) == null) {
-                    throw new NotSupportedFormat("Этот формат не поддерживается.");
-                }
-                Image image = new Image();
-                image.setFile(multipartFile.getBytes());
-                image.setName(multipartFile.getOriginalFilename());
+            Image image = imageHandler.handle(multipartFile);
+            if (image != null) {
                 imageService.createImage(image);
                 imageService.deleteImage(Integer.valueOf(imageId));
                 companySubpartitionContent.setImageId(image.getId());

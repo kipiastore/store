@@ -63,7 +63,7 @@
                 </table>
             </div>
 
-            <form:form action="addcompany" modelAttribute="company" method="post" id="createForm">
+            <form:form action="addcompany" modelAttribute="company" method="post" id="createForm" enctype="multipart/form-data">
                 <div class="left-body">
                     <label>Название<span class="required">*</span></label>
                     <input title="Введите название фирмы." autofocus type="text" maxlength="255" name="name" id="newName" required />
@@ -94,6 +94,8 @@
                     <input title="Введите e-mail." type="text" maxlength="120" name="email" id="newEmail" />
                     <label>Сайт</label>
                     <input title="Введите название сайта" type="text" maxlength="90" name="site" id="newSite" />
+                    <label>Логотип</label>
+                    <input type="file" name="file" title="gif jpeg jpg png bmp" id="createFile"/>
                     <label>Информация</label>
                     <textarea rows="4" name="description" maxlength="1024" id="newDescription"></textarea>
                 </div>
@@ -155,7 +157,7 @@
                 <input type="submit" value="Сохранить" />
             </form:form>
 
-            <form:form action="updatecompany" modelAttribute="company" method="post" id="updateForm">
+            <form:form action="updatecompany" modelAttribute="company" method="post" id="updateForm" enctype="multipart/form-data">
                 <div class="left-body">
                     <label>Название<span class="required">*</span></label>
                     <input title="Введите название фирмы." maxlength="120" type="text" name="name" id="name"required  />
@@ -186,6 +188,8 @@
                     <input title="Введите e-mail." type="text" maxlength="120" name="email" id="email" />
                     <label>Сайт</label>
                     <input title="Введите название сайта" type="text" maxlength="90" name="site" id="site" />
+                    <label>Логотип</label>
+                    <input type="file" name="file" title="gif jpeg jpg png bmp" id="updateFile"/>
                     <label>Информация</label>
                     <textarea rows="4" name="description" maxlength="1024" id="description"></textarea>
                 </div>
@@ -241,6 +245,7 @@
                 </div>
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="hiddenId" id="hiddenId" />
+                <input type="hidden" name="imageId" id="imageId" />
                 <%@include file="/WEB-INF/views/admin/components/updateAddress.jspf"%>
                 <input type="submit" value="Сохранить" />
             </form:form>

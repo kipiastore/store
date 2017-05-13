@@ -40,6 +40,7 @@ var isClosed;
 var isPriority;
 var email;
 var site;
+var imageId;
 var prLoader = $(".pre-loading");
 
 var addressArray;
@@ -276,6 +277,7 @@ function loadCompany(id) {
         isPriority = $("#isPriority");
         email = $("#email");
         site = $("#site");
+        imageId = $("#imageId");
     }
     if (dataCompanyAddressJson == undefined) {
         dataCompanyAddressJson = $.parseJSON($(".companyAddressJson")[0].innerHTML);
@@ -330,6 +332,7 @@ function loadCompany(id) {
         description.val(entry.description);
         email.val(entry.email);
         site.val(entry.site);
+        imageId.val(entry.imageId);
 
         isShowForOperator.prop('checked', entry.isShowForOperator);
         isShowForSite.prop('checked', entry.isShowForSite);

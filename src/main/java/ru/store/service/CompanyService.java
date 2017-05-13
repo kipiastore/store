@@ -22,6 +22,8 @@ public class CompanyService {
     private CompanyAddressService companyAddressService;
     @Autowired
     private CompanyReminderService companyReminderService;
+    @Autowired
+    private ImageService imageService;
 
     public void createCompany(Company company) {
         companyDAO.createCompany(company);
@@ -43,24 +45,6 @@ public class CompanyService {
         if (oldCompany == null) {
             throw new NotFoundException("Фирма не найдена.");
         }
-        /*
-        company.setName(oldCompany.getName());
-        company.setManager(oldCompany.getManager());
-        company.setDateOfContract(oldCompany.getDateOfContract());
-        company.setDateOfEndContract(oldCompany.getDateOfEndContract());
-        company.setDateOfStartContract(oldCompany.getDateOfStartContract());
-        company.setCreatedDate(oldCompany.getCreatedDate());
-        company.setLastModifiedDate(new Timestamp(new java.util.Date().getTime()));
-        company.setOwner(oldCompany.getOwner());
-        company.setCompanyPackageId(oldCompany.getCompanyPackageId());
-        company.setCostOf(oldCompany.getCostOf());
-        companyDAO.updateCompany(company);
-        */
-        //oldCompany.setName(company.getName());
-        //oldCompany.setManager(company.getManager());
-        //oldCompany.setDateOfContract(company.getDateOfContract());
-        //oldCompany.setDateOfEndContract(company.getDateOfEndContract());
-        //oldCompany.setDateOfStartContract(company.getDateOfStartContract());
         oldCompany.setDirectorFullName(company.getDirectorFullName());
         oldCompany.setContactPerson(company.getContactPerson());
         oldCompany.setEmail(company.getEmail());
@@ -76,7 +60,9 @@ public class CompanyService {
     }
 
     public void deleteCompany(int id) {
-
+        Company tmp = companyDAO.getCompany(id);
+        if (tmp.getImageId() != null)
+            imageService.deleteImage(tmp.getImageId());
         companyDAO.deleteCompany(id);
         companyAddressService.deleteCompanyAddressByCompany(id);
         companyReminderService.deleteCompanyRemindersByCompany(id);
