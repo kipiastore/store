@@ -88,14 +88,13 @@ public class CompanyController {
             item.imageId = content.getImageId();
             item.info = content.getInfo();
 
-            companySubpartitionIds.add(item.companySubpartitionId);
-
             for (CompanySubPartition companySubPartition : companySubPartitions) {
                 if (!Objects.equals(companySubPartition.getId(), content.getCompanySubpartitionId()))
                     continue;
                 for (SubPartition subPartition : subPartitions) {
                     if (companySubPartition.getSubPartitionId() == subPartition.getId()) {
                         item.subPartitionName = subPartition.getName();
+                        companySubpartitionIds.add(subPartition.getId());
                     }
                 }
             }

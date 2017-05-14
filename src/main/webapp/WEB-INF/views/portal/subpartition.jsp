@@ -178,6 +178,7 @@
         -webkit-margin-before: 0;
         -webkit-margin-after: 0;
         padding-top: 5px;
+        margin: 0px;
     }
     .visitors {
         float: right;
