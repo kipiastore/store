@@ -39,12 +39,6 @@ $('.load-more-btn').on('click', function() {
         isReady = false;
         showLoading();
         $.get('../api/portal/resource/v1/company/SubPartition/' + subPartitionId + '/' + position, function(entry) {
-            if (entry.length < 10) {
-                isEnd = true;
-                $('.load-more-btn').animate({backgroundColor: "#ffffff"}, 200);
-                $('.load-more-btn').html('В этом разделе больше нет доступных позиций.');
-                $('.load-more-btn').css('cursor','auto');
-            }
             if (entry.length == 0) {
                 hideLoading();
                 return;
@@ -93,27 +87,50 @@ $('.load-more-btn').on('click', function() {
                             color = tmpCol.priority;
                         }
                     });
-                    var tmpText = '';
+                    var costOf = '';
                     var totalArd = '';
-                    if (company.costOf != '')
-                        tmpText = '<span class="companyAmount">Стоимость: <b>' + company.costOf + '</b></k:if>';
-                    if (company.costOf == null)
-                        tmpText = '';
+                    var imageBlock = '';
+
+                    console.log(company);
+
+                    if (company.costOf != '' && company.costOf != null)
+                        costOf = '<span class="companyAmount">Стоимость: <b>' + company.costOf + '</b></span>';
+                    else
+                        costOf = '<span class="companyAmount">Цену уточняйте</span>';
+
                     if (tmpAddressTxt != '')
                         totalArd = '<div class="AddressList">' + tmpAddressTxt + '</div>';
-                    tmpHtml
-                        += '<div class="rua-l-wrapper2" style="border-color: hsla(0,' + color + '%,66%,1)">'
-                        + '<div class="companyMainInfo">'
-                        + '<a data-id="' + company.id + '" href="../company/' + company.id + '">'
-                        + '<h3>' + company.name + '</h3>'
-                        + '</a>'
-                        + '<span>' + company.description + '</span>'
-                        + tmpText
-                        + '</div>'
-                        + totalArd
-                        + '</div>';
+                    if (company.imageId != '' && company.isPaid)
+                        imageBlock = '<img class="position-image" src="../download?id=' + company.imageId + '" title="">';
+
+                    tmpHtml +=
+                        '<div class="rua-l-wrapper2" style="border-color: hsla(0,' + color + '%,66%,1)">' +
+                            '<div class="companyMainInfo">' +
+                                imageBlock +
+                                '<div class="company-text-block">' +
+                                    '<a data-id="' + company.id + '" href="../company/' + company.id + '">' +
+                                    '<h3>' + company.name + ' → <span class="visitors">Просмотров: ' + company.countCompany + '</span></h3>' +
+                                    '</a>' +
+                                    '<span>' + company.description + '</span>' +
+                                    '<p>' +
+                                    '<a title="' + company.name + ' - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "' + company.name + '"</a>' +
+                                    costOf +
+                                    '</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="container-end"></div>' +
+                            totalArd +
+                        '</div>';
+
                 });
                 container.html(tmpHtml);
+                if (entry.length < 10) {
+                    isEnd = true;
+                    $('.load-more-btn').animate({backgroundColor: "#ffffff"}, 200);
+                    $('.load-more-btn').html('В этом разделе больше нет доступных позиций.');
+                    $('.load-more-btn').css('cursor','auto');
+                }
+
                 position += 10;
                 isReady = true;
                 hideLoading();

@@ -2,6 +2,7 @@ package ru.store.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.store.beans.SearchRequestKeeper;
 import ru.store.dao.interfaces.PartitionDAO;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.Partition;
@@ -19,12 +20,15 @@ public class PartitionService {
     private PartitionDAO partitionDAO;
     @Autowired
     private SubPartitionService subPartitionService;
+    @Autowired
+    private SearchRequestKeeper searchRequestKeeper;
 
     public void createPartition(Partition partition) {
         if (getPartitionByName(partition.getName()) == null)
             partitionDAO.createPartition(partition);
         else
             throw new DuplicateException("Раздел с тиким именем уже существует!");
+        searchRequestKeeper.save(partition.getName(), 3);
     }
 
     public void updatePartition(Partition partition) {

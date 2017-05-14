@@ -61,8 +61,10 @@ public class DirectorCompaniesController {
         ModelAndView modelAndView = new ModelAndView();
         try {
             Image image = imageHandler.handle(multipartFile);
-            imageService.createImage(image);
-            company.setImageId(image.getId());
+            if (image != null) {
+                imageService.createImage(image);
+                company.setImageId(image.getId());
+            }
             companyService.createCompany(company);
             companyAddressService.createCompanyAddress(buildCompanyAddress(company, addressJson));
             modelAndView.addObject("successMessage", "Компания успешно добавлена.");
@@ -92,7 +94,8 @@ public class DirectorCompaniesController {
                     imageService.deleteImage(Integer.valueOf(imageId));
                 company.setImageId(image.getId());
             } else {
-                company.setImageId(Integer.valueOf(imageId));
+                if (imageId != null && !imageId.isEmpty())
+                    company.setImageId(Integer.valueOf(imageId));
             }
 
             company.setId(Integer.valueOf(id));
@@ -103,6 +106,7 @@ public class DirectorCompaniesController {
         }
         catch (Exception ex) {
             modelAndView.addObject("deleteError", "Возникла ошибка. " + ex.getMessage());
+            ex.printStackTrace();
         }
         Model model = new Model();
         loadPage(model, modelAndView);
@@ -117,6 +121,7 @@ public class DirectorCompaniesController {
             modelAndView.addObject("successMessage", "Компания успешно удалена.");
         } catch (Exception ex) {
             modelAndView.addObject("deleteError", "Возникла ошибка. " + ex.getMessage());
+            ex.printStackTrace();
         }
         Model model = new Model();
         loadPage(model, modelAndView);

@@ -3,6 +3,7 @@ package ru.store.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import ru.store.beans.SearchRequestKeeper;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
 import ru.store.exceptions.NotFoundException;
@@ -24,9 +25,12 @@ public class CompanyService {
     private CompanyReminderService companyReminderService;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private SearchRequestKeeper searchRequestKeeper;
 
     public void createCompany(Company company) {
         companyDAO.createCompany(company);
+        searchRequestKeeper.save(company.getName(), 3);
     }
 
     public void updateCompany(Company company) {

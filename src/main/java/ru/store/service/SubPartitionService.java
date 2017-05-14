@@ -2,6 +2,7 @@ package ru.store.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.store.beans.SearchRequestKeeper;
 import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.Partition;
 import ru.store.entities.SubPartition;
@@ -21,14 +22,15 @@ public class SubPartitionService {
     private SubPartitionDAO subPartitionDAO;
     @Autowired
     private CompanySubPartitionService companySubPartitionService;
+    @Autowired
+    private SearchRequestKeeper searchRequestKeeper;
 
     public void createSubPartition(SubPartition subPartition) {
         SubPartition tmp = getSubPartition(subPartition.getName());
         if (tmp != null && Objects.equals(tmp.getPartitionId(), subPartition.getPartitionId()))
             throw new DuplicateException("Подраздел с тиким именем в указанном разделе уже существует!");
-        else
-            subPartitionDAO.createSubPartition(subPartition);
-
+        subPartitionDAO.createSubPartition(subPartition);
+        searchRequestKeeper.save(subPartition.getName(), 3);
     }
 
     public void updateSubPartition(SubPartition subPartition) {

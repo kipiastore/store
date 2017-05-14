@@ -12,9 +12,7 @@ import ru.store.entities.*;
 import ru.store.service.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Controller
 public class CompanyController {
@@ -81,6 +79,7 @@ public class CompanyController {
 
         model.companySubpartitionContentList = new ArrayList<>();
         DesignerCompanyPositionsController.Model.CompanySubpartitionContentItem item;
+        Set<Integer> companySubpartitionIds = new HashSet<>();
         for (CompanySubpartitionContent content : companySubpartitionContentService.getCompanySubpartitionContents(companyId)) {
             item = new DesignerCompanyPositionsController.Model.CompanySubpartitionContentItem();
             item.companyId = content.getCompanyId();
@@ -88,6 +87,8 @@ public class CompanyController {
             item.id = content.getId();
             item.imageId = content.getImageId();
             item.info = content.getInfo();
+
+            companySubpartitionIds.add(item.companySubpartitionId);
 
             for (CompanySubPartition companySubPartition : companySubPartitions) {
                 if (!Objects.equals(companySubPartition.getId(), content.getCompanySubpartitionId()))
@@ -99,6 +100,23 @@ public class CompanyController {
                 }
             }
             model.companySubpartitionContentList.add(item);
+        }
+        for (CompanySubPartition companySubPartition : companySubPartitions) {
+            if (!companySubpartitionIds.contains(companySubPartition.getSubPartitionId())) {
+                item = new DesignerCompanyPositionsController.Model.CompanySubpartitionContentItem();
+                item.companyId = company.getId();
+                item.companySubpartitionId = companySubPartition.getId();
+                //item.id = ;
+                //item.imageId = ;
+                //item.info = ;
+
+                for (SubPartition subPartition : subPartitions) {
+                    if (companySubPartition.getSubPartitionId() == subPartition.getId()) {
+                        item.subPartitionName = subPartition.getName();
+                    }
+                }
+                model.companySubpartitionContentList.add(item);
+            }
         }
 
         modelAndView.addObject("model", model);

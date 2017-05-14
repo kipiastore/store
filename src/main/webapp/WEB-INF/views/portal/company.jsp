@@ -23,11 +23,13 @@
         .position-image-block {
             float: left;
         }
+        /*
         .position-image {
             height: 250px;
             padding: 5px 10px 0px 10px;
             max-width: 936px;
         }
+        */
         .position-text-block {
             padding: 10px;
             text-align: justify;
@@ -52,11 +54,6 @@
             border: none;
             margin-bottom: 15px;
         }
-        .companyAmount {
-            float: right;
-            padding: 30px 0px 10px 10px;
-            color: #d67b7b;
-        }
     </style>
 </head>
 <body>
@@ -75,13 +72,27 @@
         <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper2" style="border-color: hsla(0,${color}%,66%,1)">
                 <div class="companyMainInfo">
-                    <span>${company.description}</span>
-                    <span class="companyAmount">
-                        <k:if test="${not empty company.costOf}">
-                            Стоимость: <b>${company.costOf}</b>
-                        </k:if>
-                    </span>
+                    <k:if test="${not empty company.imageId && company.isPaid == true}">
+                        <img class="position-image" src="../download?id=${company.imageId}" title="">
+                    </k:if>
+                    <div class="company-text-block">
+                        <a >
+                            <h3>${company.name}<span class="visitors">Просмотров: ${company.countCompany}</span></h3>
+                        </a>
+                        <span>${company.description}</span>
+                        <p>
+                            <a title="${company.name} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${company.name}"</a>
+                            <k:if test="${not empty company.costOf}">
+                                <span class="companyAmount">Стоимость: <b>${company.costOf}</b></span>
+                            </k:if>
+                            <k:if test="${empty company.costOf}">
+                                <span class="companyAmount">Цену уточняйте</span>
+                            </k:if>
+                        </p>
+                    </div>
                 </div>
+                <div class="container-end"></div>
+
                 <k:if test="${addresses.size() > 0}">
                     <div class="AddressList">
                         <k:set var="count" value="0" scope="page" />
@@ -107,26 +118,26 @@
                         </k:forEach>
                     </div>
                 </k:if>
+            </div>
+            <div class="rua-l-wrapper" style="border-color: hsla(0,${color}%,66%,1)">
                 <k:set var="count2" value="0" scope="page" />
                 <k:forEach var="item" items="${model.companySubpartitionContentList}">
-                    <div class="position-main-container def-block">
-                        <div class="position-block">
-                            <div class="position-addintional-block">
-                                <span data-id="${item.companySubpartitionId}" id="subNameId-${item.id}">${item.subPartitionName}</span>
-                            </div>
-                            <div class="position-image-block">
+                    <div class="rua-l-wrapper2 position-mini <k:if test="${count2 % 2 == 0}">mod-ct</k:if>">
+                        <div class="companyMainInfo" >
+                            <k:if test="${not empty item.imageId && company.isPaid == true}">
                                 <img class="position-image" id="imageId-${item.id}" data-id="${item.imageId}" src="../download?id=${item.imageId}" title="">
-                            </div>
-                            <div class="position-text-block">
-                                <span id="infoId-${item.id}">${item.info}</span>
-                            </div>
-                            <k:set var="count2" value="${count2 + 1}" scope="page"/>
-                            <k:if test="${count2 != model.companySubpartitionContentList.size()}">
-                                <hr/>
                             </k:if>
+                            <div class="company-text-block" style="padding: 10px 10px 10px 10px;">
+                                <a >
+                                    <h3>${item.subPartitionName}</h3>
+                                </a>
+                                <span>${item.info}</span>
+                            </div>
                         </div>
                     </div>
+                    <k:set var="count2" value="${count2 + 1}" scope="page"/>
                 </k:forEach>
+                <div class="container-end"></div>
             </div>
         </div>
     </div>
@@ -177,6 +188,37 @@
         color: #3d7677;
         box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 1px 0 rgba(0,0,0,0.12)!important;
         border: none;
+    }
+    .position-image {
+        padding: 10px;
+        max-height: 150px;
+        max-width: 150px;
+        margin-right: 10px;
+        float: left;
+        box-shadow: rgba(0, 0, 0, 0.156863) 0px 0px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 1px 0px;
+    }
+    .container-end {
+        clear: both;
+    }
+    .company-text-block {
+        padding: 5px 10px 10px 10px;
+    }
+    .companyMainInfo .company-text-block p {
+        -webkit-margin-before: 0;
+        -webkit-margin-after: 0;
+        padding-top: 5px;
+    }
+    .visitors {
+        float: right;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .rua-l-wrapper2.position-mini {
+        width: 472.5px;
+        float: left;
+    }
+    .mod-ct {
+        margin-right: 15px;
     }
 </style>
 </body>

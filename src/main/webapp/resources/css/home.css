@@ -656,6 +656,7 @@ input[type="color"], .uneditable-input, select {
     border-left: 5px solid #fff;
     margin: 0 auto 15px;
     box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 5px 0 rgba(0,0,0,0.12)!important;
+    background: white;
 }
 .rua-g-clearfix {
     overflow: hidden;
@@ -1429,13 +1430,15 @@ p::-moz-selection {
     padding: 10px;
 }
 .companyMainInfo {
-    padding: 10px 10px 10px;
+    //padding: 10px 10px 0px 10px;
     text-align: justify;
     background: white;
 }
 .companyMainInfo a h3 {
-    text-align: center;
-    padding: 10px;
+    text-align: left;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .companyMainInfo h3 {
     text-align: center;
@@ -1447,8 +1450,9 @@ p::-moz-selection {
 }
 .companyAmount {
     float: right;
-    padding: 10px;
     color: #d67b7b;
+    font-weight: 600;
+    font-size: 12px;
 }
 /*
 .loading {

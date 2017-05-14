@@ -138,6 +138,9 @@ public class PartitionController {
             companyItem.companyInformation = company.getDescription();
             companyItem.companyName = company.getName();
             companyItem.costOf = company.getCostOf();
+            companyItem.imageId = company.getImageId();
+            companyItem.isPaid = company.getIsPaid();
+            companyItem.countCompany = company.getCountCompany();
             companyItems.add(companyItem);
         }
 
@@ -234,7 +237,13 @@ public class PartitionController {
             public String companyInformation;
             public Integer colorPoint;
             public Integer costOf;
+            public Integer imageId;
+            public boolean isPaid;
+            public Integer countCompany;
 
+            public Integer getImageId() {
+                return imageId;
+            }
             public int getCompanyId() {
                 return companyId;
             }
@@ -249,6 +258,12 @@ public class PartitionController {
             }
             public Integer getCostOf() {
                 return costOf;
+            }
+            public boolean getIsPaid() {
+                return isPaid;
+            }
+            public Integer getCountCompany() {
+                return countCompany;
             }
 
             @Override

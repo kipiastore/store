@@ -128,16 +128,26 @@
             <div style="padding: 1px 0 1px 0;">
                 <div class="rua-l-wrapper2" style="border-color: hsla(0,${ packageToColor.get(item.companyPackageId) }%,66%,1)">
                     <div class="companyMainInfo">
-                        <a data-id="${item.id}" href="company/${item.id}">
-                            <h3>${item.name}</h3>
-                        </a>
-                        <span>${item.description}</span>
-                        <span class="companyAmount">
-                            <k:if test="${not empty item.costOf}">
-                                Стоимость: <b>${item.costOf}</b>
-                            </k:if>
-                        </span>
+                        <k:if test="${not empty item.imageId && item.isPaid == true}">
+                            <img class="position-image" src="download?id=${item.imageId}" title="">
+                        </k:if>
+                        <div class="company-text-block">
+                            <a data-id="${item.id}" href="company/${item.id}">
+                                <h3>${item.name} → <span class="visitors">Просмотров: ${item.countCompany}</span></h3>
+                            </a>
+                            <span>${item.description}</span>
+                            <p>
+                                <a title="${item.name} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${item.name}"</a>
+                                <k:if test="${not empty item.costOf}">
+                                    <span class="companyAmount">Стоимость: <b>${item.costOf}</b></span>
+                                </k:if>
+                                <k:if test="${empty item.costOf}">
+                                    <span class="companyAmount">Цену уточняйте</span>
+                                </k:if>
+                            </p>
+                        </div>
                     </div>
+                    <div class="container-end"></div>
                     <k:if test="${companyToCompanyAddress.get(item.id).size() > 0}">
                         <div class="AddressList">
                             <k:set var="count" value="0" scope="page" />
@@ -214,6 +224,30 @@
         color: #3d7677;
         box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 1px 0 rgba(0,0,0,0.12)!important;
         border: none;
+    }
+    .position-image {
+        padding: 10px;
+        max-height: 150px;
+        max-width: 150px;
+        margin-right: 10px;
+        float: left;
+        box-shadow: rgba(0, 0, 0, 0.156863) 0px 0px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 1px 0px;
+    }
+    .container-end {
+        clear: both;
+    }
+    .company-text-block {
+        padding: 5px 10px 10px 10px;
+    }
+    .companyMainInfo .company-text-block p {
+        -webkit-margin-before: 0;
+        -webkit-margin-after: 0;
+        padding-top: 5px;
+    }
+    .visitors {
+        float: right;
+        font-size: 12px;
+        font-weight: 600;
     }
 </style>
 </body>

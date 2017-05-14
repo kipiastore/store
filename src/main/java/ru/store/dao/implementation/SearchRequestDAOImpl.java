@@ -44,7 +44,7 @@ public class SearchRequestDAOImpl implements SearchRequestDAO {
     @Override
     @Transactional
     public List<SearchRequest> findSearchRequests(String value) {
-        String hql = "from SearchRequest where lower(value) LIKE lower(:value) order by counter desc";
+        String hql = "from SearchRequest where counter > 2 and lower(value) LIKE lower(:value) order by counter desc";
         return sessionFactory.getCurrentSession().createQuery(hql).setMaxResults(10).setString("value", value + "%").list();
     }
 }

@@ -79,6 +79,9 @@ public class SubPartitionController {
                 companyItem.companyInformation = company.getDescription();
                 companyItem.companyName = company.getName();
                 companyItem.costOf = company.getCostOf();
+                companyItem.imageId = company.getImageId();
+                companyItem.isPaid = company.getIsPaid();
+                companyItem.countCompany = company.getCountCompany();
                 companyItems.add(companyItem);
             }
             model.companyHiPrior = new ArrayList<>();

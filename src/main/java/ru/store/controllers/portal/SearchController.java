@@ -45,7 +45,7 @@ public class SearchController {
 
         if (!searchKey.isEmpty()) {
             searchKey = searchKey.toLowerCase();
-            searchRequestKeeper.save(searchKey);
+            searchRequestKeeper.save(searchKey, 1);
         }
 
         List<Company> companies = companyService.findPortalCompaniesByName(searchKey);

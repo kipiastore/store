@@ -17,12 +17,12 @@ public class SearchRequestKeeper {
     @Autowired
     private SearchRequestService searchRequestService;
 
-    public void save(String requestString) {
+    public void save(String requestString, int counterValue) {
         if (!badWordsFilter.hasBadWords(requestString)) {
             SearchRequest searchRequest = searchRequestService.findSearchRequest(requestString);
             if (searchRequest == null) {
                 searchRequest = new SearchRequest();
-                searchRequest.setCounter(1);
+                searchRequest.setCounter(counterValue);
                 searchRequest.setValue(requestString);
                 searchRequestService.createSearchRequest(searchRequest);
             } else {
