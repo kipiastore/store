@@ -72,6 +72,13 @@ $(".pageMenuButt").on("click", function (event) {
     container.animate({opacity: 0}, 200);
     setTimeout(function() { container.hide(); }, 190);
 
+    var val = $("#partitionLevel").val();
+
+    if (val == 2)
+        $("#show").show();
+    else
+        $("#show").hide();
+
     //$(".error").hide();
     //$(".success").hide();
     if (isShowUpdateForm) {
