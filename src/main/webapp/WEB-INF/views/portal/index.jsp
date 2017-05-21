@@ -72,10 +72,11 @@
                 <script>
                     var rptShort = $('.rptShort');
                     $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
-                    if (rptShort.height() < 550)
+                    if (rptShort.height() < 550) {
                         $('.open-list-btn').hide();
-                    else
+                    } else {
                         rptShort.addClass('rptShort-closed');
+                    }
                 </script>
             </div>
         </div>
