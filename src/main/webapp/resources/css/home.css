@@ -513,7 +513,6 @@ html, body, .rua-l-body, .ui-widget {
     padding-top: 170px;
     padding-bottom: 30px;
     margin-top: -90px;
-    //margin-bottom: 30px;
     background-size: 100% 100%;
 }
 #header_img .headline {
@@ -608,8 +607,6 @@ h2 small {
     outline: none;
 }
 .searchform input.keyword {
-    //border-top-left-radius: 3px;
-    //border-bottom-left-radius: 3px;
     padding: 16px 10px 13px 10px;
     height: 19px;
 }
@@ -856,21 +853,8 @@ footer.f .c>ul li {
     float: left;
     width: 20%;
 }
-footer.f .c>ul b {
-    //margin: 33px 0 29px 0;
-    //font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    //color: #0F0F0F;
-}
-footer.f .c>ul a, footer.f .c>ul b {
-    //float: left;
-    //clear: left;
-}
 footer.f .c>ul a {
     text-decoration: none;
-}
-footer.f .c>ul a, footer.f .c>ul b {
-    //float: left;
-    //clear: left;
 }
 footer.f a {
     color: #7e7e7e;
@@ -1090,7 +1074,6 @@ footer.f .cr {
     -webkit-border-radius: 50px;
     border-radius: 50px;
     text-align: center;
-    cursor: pointer;
     padding: 5px;
     background: rgba(255, 255, 255, 0.84);
     border-top: 1px solid #e7e7e7;
@@ -1153,7 +1136,6 @@ footer.f .cr {
 }
 .phoneSpanNum {
     color: #ff7f7f;
-    /*font-size: 30px;*/
 }
 .additionalButton {
     margin-top: 5px;
@@ -1430,7 +1412,6 @@ p::-moz-selection {
     padding: 10px;
 }
 .companyMainInfo {
-    //padding: 10px 10px 0px 10px;
     text-align: justify;
     background: white;
 }
@@ -1454,18 +1435,6 @@ p::-moz-selection {
     font-weight: 600;
     font-size: 12px;
 }
-/*
-.loading {
-    margin: auto;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    border: 0.25rem solid rgb(182, 182, 182);
-    border-top-color: #16a085;
-    -webkit-animation: spin 1s infinite linear;
-    animation: spin 1s infinite linear;
-}
-*/
 .loading {
     margin: auto;
     border-radius: 29%;
@@ -1566,4 +1535,33 @@ footer.f .c>ul .b {
 }
 #search-param {
     width: 938px;
+}
+.hiddenAdr {
+    display: none;
+    opacity: 0;
+}
+.hiddenAdr-btn p .btn.btn-primary, .btn.btn-primary:focus {
+    color: white;
+    background: #3d7677 none;
+    border-color: #b9dcd5;
+    text-shadow: none;
+    text-transform: none;
+    padding: 8px 12px 8px 12px;
+}
+.hiddenAdr-btn p {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    margin: 0;
+    padding: 0;
+}
+.AddressList {
+    position: relative;
+}
+.hiddenAdr-btn {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+}
+.position-main-container {
+    background: white;
 }

@@ -7,10 +7,10 @@
 <head>
     <title>Справочная Одессы | Что-то ищете? Доверьте это профессионалам!</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/home.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>">
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
@@ -89,19 +89,16 @@
 <script>
     var previousDateInMilliseconds = new Date().getTime();
     var searchInput = $('#search-param');
-    searchInput.on("input", function(event) {
+    searchInput.on("input", function() {
         var currentDateInMilliseconds = new Date().getTime();
-        console.log(currentDateInMilliseconds);
         if (currentDateInMilliseconds - previousDateInMilliseconds < 300) {
             return;
         } else {
             previousDateInMilliseconds = currentDateInMilliseconds;
         }
         var value = searchInput.val();
-        console.log(value);
         if (value != '') {
             $.get('api/portal/resource/v1/search/' + value, function (entry) {
-                console.log(entry);
                 searchInput.autocomplete({
                     source: entry,
                     minLength: 0,
@@ -112,21 +109,5 @@
         }
     });
 </script>
-<style>
-    .ui-widget.ui-widget-content {
-        box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 5px 0 rgba(0,0,0,0.12)!important;
-        border: none;
-    }
-    .ui-menu .ui-state-focus, .ui-menu .ui-state-active {
-        margin: 0px;
-    }
-    .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-        background: #eef2f7;
-        font-weight: normal;
-        color: #3d7677;
-        box-shadow: 0px 0px 0px 0 rgba(0,0,0,0.16),0 0px 1px 0 rgba(0,0,0,0.12)!important;
-        border: none;
-    }
-</style>
 </body>
 </html>
