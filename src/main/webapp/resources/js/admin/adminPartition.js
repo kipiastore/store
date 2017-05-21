@@ -71,14 +71,16 @@ $(".pageMenuButt").on("click", function (event) {
     var container = $(".container");
     container.animate({opacity: 0}, 200);
     setTimeout(function() { container.hide(); }, 190);
+    /*
+     var val = $("#partitionLevel").val();
 
-    var val = $("#partitionLevel").val();
-
-    if (val == 2)
-        $("#show").show();
-    else
-        $("#show").hide();
-
+     if (val == 2)
+     */
+    $("#show").show();
+    /*
+     else
+     $("#show").hide();
+     */
     //$(".error").hide();
     //$(".success").hide();
     if (isShowUpdateForm) {
@@ -290,16 +292,16 @@ $(".openRequisites").on("click", function () {
 $(".searchButt").on("click", function () {
     $("#searchForm").submit();
 });
-
-$(document).ready(function() {
-    $("#partitionLevel").change(function() {
-        var val = $("#partitionLevel").val();
-        //console.log(val);
-        if (val == 2)
-            $("#show").show();
-        else
-            $("#show").hide();
-    });
-});
-
+/*
+ $(document).ready(function() {
+ $("#partitionLevel").change(function() {
+ var val = $("#partitionLevel").val();
+ //console.log(val);
+ if (val == 2)
+ $("#show").show();
+ else
+ $("#show").hide();
+ });
+ });
+ */
 ////////////////////////////////

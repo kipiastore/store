@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.store.beans.SearchRequestKeeper;
 import ru.store.dao.interfaces.PartitionDAO;
-import ru.store.dao.interfaces.SubPartitionDAO;
 import ru.store.entities.Partition;
 import ru.store.exceptions.DuplicateException;
 
@@ -27,7 +26,7 @@ public class PartitionService {
         if (getPartitionByName(partition.getName()) == null)
             partitionDAO.createPartition(partition);
         else
-            throw new DuplicateException("Раздел с тиким именем уже существует!");
+            throw new DuplicateException("Раздел с таким именем уже существует!");
         searchRequestKeeper.save(partition.getName(), 3);
     }
 

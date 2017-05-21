@@ -12,7 +12,7 @@ import ru.store.entities.Partition;
 import ru.store.entities.SubPartition;
 import ru.store.service.PartitionService;
 import ru.store.service.SubPartitionService;
-
+import ru.store.exceptions.NullPointerException;
 import java.util.*;
 
 @Controller
@@ -33,16 +33,24 @@ public class AdminPartitionsController {
                                         @RequestParam MultiValueMap<String, String> partitionRequestMap) {
         ModelAndView modelAndView = new ModelAndView();
         try {
+            /*
             if(Integer.valueOf(partitionRequestMap.get("partitionLevel").toString().replace("[", "").replace("]", "")) == 1) {
                 partitionService.createPartition(partition);
             }
             else{
+            */
+            if(partitionRequestMap.get("namePartition")!=null) {
                 SubPartition sb = new SubPartition();
                 sb.setPartitionId(Integer.valueOf(partitionRequestMap.get("namePartition").toString().replace("[", "").replace("]", "")));
                 sb.setName(partitionRequestMap.get("name").toString().replace("[", "").replace("]", ""));
                 subPartitionService.createSubPartition(sb);
             }
-            modelAndView.addObject("successMessage", "Раздел успешно добавлен.");
+            else{
+                throw new NullPointerException("Сначало создайте раздел!");
+            }
+
+            //}
+            modelAndView.addObject("successMessage", "Подраздел успешно добавлен.");
         } catch (Exception ex) {
             modelAndView.addObject("addError", "Возникла ошибка. " + ex.getMessage());
         }

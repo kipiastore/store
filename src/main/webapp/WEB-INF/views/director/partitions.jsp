@@ -27,14 +27,14 @@
                     <option value="1">Раздел</option>
                     <option value="2">Подраздел</option>
                 </select>
-                    <div id="show" style="display:none">
-                        <label>Выбирите название раздела к которому будет пренадлижать создаваемый подрездел</label>
-                        <select name="namePartition" title="">
-                            <c:forEach var="item" items="${model.partitionItems}">
-                                <option value="${item.id}">${item.name}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
+                <div id="show" style="display:none">
+                    <label>Выбирите название раздела к которому будет пренадлежать создаваемый подраздел</label>
+                    <select name="namePartition" title="">
+                        <c:forEach var="item" items="${model.partitionItems}">
+                            <option value="${item.id}">${item.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
                 <input type="submit" value="Добавить" />
             </form:form>
             <form:form action="updatepartition" modelAttribute="partition" method="post" id="updateForm">

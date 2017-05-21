@@ -49,6 +49,16 @@ public class CompanyDAOImpl implements CompanyDAO {
         else
             return null;
     }
+    @Override
+    @Transactional
+    public Company getCompanyByName(String name) {
+        String hql = "from Company where name =?";
+        List<Company> companies = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, name).list();
+        if (companies != null && companies.size() > 0)
+            return companies.get(0);
+        else
+            return null;
+    }
 
     @Override
     @Transactional

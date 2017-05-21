@@ -18,6 +18,8 @@ public interface CompanyDAO {
 
     Company getCompany(int id);
 
+    Company getCompanyByName(String name);
+
     List<Company> getCompanies();
 
     List<Company> getCompaniesByManagerName(String name);

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.store.beans.SearchRequestKeeper;
 import ru.store.dao.interfaces.CompanyDAO;
 import ru.store.entities.Company;
+import ru.store.exceptions.DuplicateException;
 import ru.store.exceptions.NotFoundException;
 
 import java.sql.Timestamp;
@@ -29,7 +30,12 @@ public class CompanyService {
     private SearchRequestKeeper searchRequestKeeper;
 
     public void createCompany(Company company) {
-        companyDAO.createCompany(company);
+        if(getCompanyByName(company.getName())==null) {
+            companyDAO.createCompany(company);
+        }
+        else {
+            throw new DuplicateException("Компания с таким именем уже существует!");
+        }
         searchRequestKeeper.save(company.getName(), 3);
     }
 
@@ -74,6 +80,10 @@ public class CompanyService {
 
     public Company getCompany(int id) {
         return companyDAO.getCompany(id);
+    }
+
+    public Company getCompanyByName(String name) {
+        return companyDAO.getCompanyByName(name);
     }
 
     public List<Company> getCompanies() {

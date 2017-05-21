@@ -20,24 +20,26 @@
             <span class="error">${deleteError}</span>
             <span class="success">${successMessage}</span>
             <form:form action="addpartition" modelAttribute="partition"  method="post" id="createForm">
-                <label>Название раздела/подраздела<span class="required">*</span></label>
+                <label>Название подраздела<span class="required">*</span></label>
                 <input title="Введите название раздела." maxlength="120" autofocus type="text" name="name" required />
+                <!--
                 <label>Тип раздел/подраздел</label>
                 <select name="partitionLevel" id="partitionLevel" title="">
-                    <option value="2">Подраздел</option>
+                <option value="2">Подраздел</option>
                 </select>
-                    <div id="show" style="display:none">
-                        <label>Выбирите название раздела к которому будет пренадлижать создаваемый подрездел</label>
-                        <select name="namePartition" title="">
-                            <c:forEach var="item" items="${model.partitionItems}">
-                                <option value="${item.id}">${item.name}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
+                -->
+                <div id="show">
+                    <label>Выбирите название раздела к которому будет пренадлежать создаваемый подраздел</label>
+                    <select name="namePartition" title="">
+                        <c:forEach var="item" items="${model.partitionItems}">
+                            <option value="${item.id}">${item.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
                 <input type="submit" value="Добавить" />
             </form:form>
             <form:form action="updatepartition" modelAttribute="partition" method="post" id="updateForm">
-                <label>Название раздела/подраздела<span class="required">*</span></label>
+                <label>Название подраздела<span class="required">*</span></label>
                 <input title="Введите название раздела." maxlength="120" autofocus type="text" name="name" required id="keyName"/>
                 <input type="hidden" name="id" id="updateKey" />
                 <input type="hidden" name="type" id="updateType" />
