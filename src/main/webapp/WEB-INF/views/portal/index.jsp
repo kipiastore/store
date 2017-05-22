@@ -19,8 +19,8 @@
 <form method="get" action="<c:url value="/search"/>" id="mainForm">
     <%@include file="/WEB-INF/views/portal/components/topBar.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/header.jspf"%>
-    <div style="background: rgba(126, 126, 126, 0.04);">
-        <div style="padding: 1px 0 15px 0;border-bottom: 20px solid #3d7677;">
+
+        <div class="main-container">
             <div class="rua-l-wrapper">
                 <h2 class="headline centered mtmb title">Разделы</h2>
                 <div class="rptShort hide-bt">
@@ -80,7 +80,6 @@
                 </script>
             </div>
         </div>
-    </div>
     <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/brand.jspf"%>
     <%@include file="/WEB-INF/views/portal/components/footer.jspf"%>
@@ -88,27 +87,7 @@
 <%@include file="/WEB-INF/views/portal/components/emailWindow.jspf"%>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 <script>
-    var previousDateInMilliseconds = new Date().getTime();
-    var searchInput = $('#search-param');
-    searchInput.on("input", function() {
-        var currentDateInMilliseconds = new Date().getTime();
-        if (currentDateInMilliseconds - previousDateInMilliseconds < 300) {
-            return;
-        } else {
-            previousDateInMilliseconds = currentDateInMilliseconds;
-        }
-        var value = searchInput.val();
-        if (value != '') {
-            $.get('api/portal/resource/v1/search/' + value, function (entry) {
-                searchInput.autocomplete({
-                    source: entry,
-                    minLength: 0,
-                    autoFocus: true
-                });
-                searchInput.autocomplete('search', value);
-            });
-        }
-    });
+    setAutocomplete('<c:url value="/api/portal/resource/v1/search/"/>');
 </script>
 </body>
 </html>

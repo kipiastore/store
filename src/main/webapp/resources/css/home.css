@@ -1565,3 +1565,37 @@ footer.f .c>ul .b {
 .position-main-container {
     background: white;
 }
+
+
+
+.main-container {
+    padding: 1px 0 15px 0;
+    border-bottom: 20px solid #3d7677;
+    background: rgba(126, 126, 126, 0.04);
+}
+
+.position-image {
+    padding: 10px;
+    max-height: 150px;
+    max-width: 150px;
+    margin-right: 10px;
+    float: left;
+    box-shadow: rgba(0, 0, 0, 0.156863) 0px 0px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 1px 0px;
+}
+.container-end {
+    clear: both;
+}
+.company-text-block {
+    padding: 5px 10px 10px 10px;
+}
+.companyMainInfo .company-text-block p {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    padding-top: 5px;
+    margin: 0px;
+}
+.visitors {
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+}

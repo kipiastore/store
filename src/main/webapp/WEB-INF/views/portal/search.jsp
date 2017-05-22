@@ -184,57 +184,7 @@
 <%@include file="/WEB-INF/views/portal/components/emailWindow.jspf"%>
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 <script>
-    var previousDateInMilliseconds = new Date().getTime();
-    var searchInput = $('#search-param');
-    searchInput.on("input", function() {
-        var currentDateInMilliseconds = new Date().getTime();
-        console.log(currentDateInMilliseconds);
-        if (currentDateInMilliseconds - previousDateInMilliseconds < 300) {
-            return;
-        } else {
-            previousDateInMilliseconds = currentDateInMilliseconds;
-        }
-        var value = searchInput.val();
-        console.log(value);
-        if (value != '') {
-            $.get('api/portal/resource/v1/search/' + value, function (entry) {
-                console.log(entry);
-                searchInput.autocomplete({
-                    source: entry,
-                    minLength: 0,
-                    autoFocus: true
-                });
-                searchInput.autocomplete('search', value);
-            });
-        }
-    });
+    setAutocomplete('<c:url value="/api/portal/resource/v1/search/"/>');
 </script>
-<style>
-    .position-image {
-        padding: 10px;
-        max-height: 150px;
-        max-width: 150px;
-        margin-right: 10px;
-        float: left;
-        box-shadow: rgba(0, 0, 0, 0.156863) 0px 0px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 1px 0px;
-    }
-    .container-end {
-        clear: both;
-    }
-    .company-text-block {
-        padding: 5px 10px 10px 10px;
-    }
-    .companyMainInfo .company-text-block p {
-        -webkit-margin-before: 0;
-        -webkit-margin-after: 0;
-        padding-top: 5px;
-        margin: 0px;
-    }
-    .visitors {
-        float: right;
-        font-size: 12px;
-        font-weight: 600;
-    }
-</style>
 </body>
 </html>

@@ -188,3 +188,30 @@ $('.btn.btn-primary').on("click", function(event) {
         hiddenBlock.animate({opacity: 0}, 200);
     }
 });
+
+var previousDateInMilliseconds = new Date().getTime();
+var searchInput = $('#search-param');
+
+function setAutocomplete(source) {
+    console.log(source);
+    searchInput.on("input", function() {
+        var currentDateInMilliseconds = new Date().getTime();
+        if (currentDateInMilliseconds - previousDateInMilliseconds < 300) {
+            return;
+        } else {
+            previousDateInMilliseconds = currentDateInMilliseconds;
+        }
+        var value = searchInput.val();
+        if (value != '') {
+            $.get(source + value, function (entry) {
+                searchInput.autocomplete({
+                    source: entry,
+                    minLength: 0,
+                    autoFocus: true
+                });
+                searchInput.autocomplete('search', value);
+            });
+        }
+    });
+}
+
