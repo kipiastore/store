@@ -19,9 +19,6 @@ header.show();
 header.animate({opacity: 1}, 500);
 
 $(window).on('load', function() {
-    //var currentSearchParam = $.urlParam('value');
-    //if (currentSearchParam != null && currentSearchParam != '')
-        //$('#search-param').val(encodeURIComponent(currentSearchParam).replace(/%20/g,'+'));
     rptShort = $('.rptShort.hide-bt');
     if (rptShort.length > 0) {
         isRptShortClosed = true;
@@ -189,29 +186,42 @@ $('.btn.btn-primary').on("click", function(event) {
     }
 });
 
-var previousDateInMilliseconds = new Date().getTime();
-var searchInput = $('#search-param');
 
 function setAutocomplete(source) {
-    console.log(source);
-    searchInput.on("input", function() {
-        var currentDateInMilliseconds = new Date().getTime();
-        if (currentDateInMilliseconds - previousDateInMilliseconds < 300) {
-            return;
-        } else {
-            previousDateInMilliseconds = currentDateInMilliseconds;
-        }
-        var value = searchInput.val();
+    window.autocompleteState = {
+        previousDateInMilliseconds : new Date().getTime(),
+        searchInput : $('#search-param'),
+        previousValue : ''
+    };
+
+    window.autocompleteState.searchInput.on("keyup", function() {
+        var value = window.autocompleteState.searchInput.val().trim();
         if (value != '') {
+            var currentDateInMilliseconds = new Date().getTime();
+            if (currentDateInMilliseconds - window.autocompleteState.previousDateInMilliseconds < 200) {
+                return;
+            } else {
+                window.autocompleteState.previousDateInMilliseconds = currentDateInMilliseconds;
+            }
+            window.autocompleteState.previousValue = value;
             $.get(source + value, function (entry) {
-                searchInput.autocomplete({
+                if (window.autocompleteState.previousValue != value) {
+                    return;
+                }
+                window.autocompleteState.searchInput.autocomplete({
                     source: entry,
-                    minLength: 0,
+                    minLength: 1,
                     autoFocus: true
                 });
-                searchInput.autocomplete('search', value);
+                window.autocompleteState.searchInput.autocomplete('search', value);
+            });
+        } else {
+            window.autocompleteState.previousValue = value;
+            window.autocompleteState.searchInput.autocomplete({
+                source: []
             });
         }
     });
+
 }
 

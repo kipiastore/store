@@ -22,7 +22,7 @@
     <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 15px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb title"><a class="main-ref" href="../index">Главная страница</a> → ${model.partitionItem.partitionName} в Одессе</h2>
+                <h2 class="headline centered mtmb title inline-block-cl"><a class="main-ref" href="../index">Главная страница</a> → ${model.partitionItem.partitionName} в Одессе</h2>
                 <div class="rptShort hide-bt">
                     <k:if test="${model.partitionItem.subPartitionItems2.size() > 0}">
                         <div style="float: left;width: 450px;">
@@ -62,7 +62,7 @@
         <div style="margin-top: 0px;background: rgba(126, 126, 126, 0.04);">
             <div style="padding: 1px 0 1px 0">
                 <div class="rua-l-wrapper">
-                    <h2 class="headline centered mtmb title" style="margin-top: 0px;">Редакция рекомендует</h2>
+                    <h2 class="headline centered mtmb title inline-block-cl" style="margin-top: 0px;">Редакция рекомендует</h2>
                 </div>
             </div>
         </div>
@@ -76,11 +76,12 @@
                             </k:if>
                             <div class="company-text-block">
                                 <a data-id="${item.companyId}" href="../company/${item.companyId}">
-                                    <h3>${item.companyName} → <span class="visitors">Просмотров: ${item.countCompany}</span></h3>
+                                    <h3>${item.companyName} → </h3>
                                 </a>
+                                <h3 class="visitors">Просмотров: ${item.countCompany}</h3>
                                 <span>${item.companyInformation}</span>
                                 <p>
-                                    <a title="${item.companyName} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${item.companyName}"</a>
+                                    <a title="${item.companyName} - Каталог товаров Одесса" href="" style="display: inline-block;float: left;padding-bottom: 10px;">Показать весь список товаров/услуг фирмы "${item.companyName}"</a>
                                     <k:if test="${not empty item.costOf}">
                                         <span class="companyAmount">Стоимость: <b>${item.costOf}</b></span>
                                     </k:if>
@@ -106,7 +107,7 @@
                                         <div class="hiddenAdr-btn">
                                             <p><a class="btn btn-primary" data-id="${item.companyId}">Филиалы</a></p>
                                         </div>
-                                        <div class="address hiddenAdr address-${item.companyId}">
+                                        <div class="address hiddenAdr address-${item.companyId}" style="display: none;">
                                             <span class="addressInfo">${addresItem.address}&nbsp;</span>
                                             <span>${addresItem.phones}&nbsp;</span>
                                             <span>${addresItem.information}</span>

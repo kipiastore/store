@@ -24,6 +24,7 @@ html, body, .rua-l-body, .ui-widget {
     background-color: #fff;
     border-bottom: 1px solid #e7e7e7;
     color: rgba(255, 255, 255, 0.01);
+    min-width: 1040px;
 }
 .windows8 {
     position: relative;
@@ -1411,6 +1412,10 @@ p::-moz-selection {
 .address {
     padding: 10px;
 }
+.AddressList .address {
+    display: inline-block;
+    width: 100%;
+}
 .companyMainInfo {
     text-align: justify;
     background: white;
@@ -1504,7 +1509,7 @@ footer.f .c>ul .b {
     font-size: 13px;
 }
 .main-ref {
-    display: inline-block;
+    //display: inline-block;
     color: #7e7e7e;
     text-decoration: none;
 }
@@ -1598,4 +1603,22 @@ footer.f .c>ul .b {
     float: right;
     font-size: 12px;
     font-weight: 600;
+    right: 0;
+    position: absolute;
+    color: #6d7983;
+}
+
+.inline-block-cl {
+    display: inline-block;
+    width: 100%;
+}
+.company-text-block a h3 {
+    display: flex;
+}
+.company-text-block {
+    position: relative;
+}
+.companyMainInfo .company-text-block .visitors {
+    padding: 4px 10px 10px 10px;
+    top: 0px;
 }

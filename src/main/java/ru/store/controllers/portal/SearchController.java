@@ -44,7 +44,6 @@ public class SearchController {
             searchKey = searchKey.substring(0, 254);
 
         if (!searchKey.isEmpty()) {
-            searchKey = searchKey.toLowerCase();
             searchRequestKeeper.save(searchKey, 1);
         }
 

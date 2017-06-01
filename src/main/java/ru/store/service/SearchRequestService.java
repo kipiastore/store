@@ -17,6 +17,7 @@ public class SearchRequestService {
     private SearchRequestDAO searchRequestDAO;
 
     public void createSearchRequest(SearchRequest searchRequest) {
+        searchRequest.setValue(searchRequest.getValue().trim());
         searchRequestDAO.createSearchRequest(searchRequest);
     }
 

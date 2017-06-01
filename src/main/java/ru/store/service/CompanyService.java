@@ -30,13 +30,12 @@ public class CompanyService {
     private SearchRequestKeeper searchRequestKeeper;
 
     public void createCompany(Company company) {
-        if(getCompanyByName(company.getName())==null) {
+        if (getCompanyByName(company.getName()) == null) {
             companyDAO.createCompany(company);
-        }
-        else {
+            searchRequestKeeper.save(company.getName(), 3);
+        } else {
             throw new DuplicateException("Компания с таким именем уже существует!");
         }
-        searchRequestKeeper.save(company.getName(), 3);
     }
 
     public void updateCompany(Company company) {
