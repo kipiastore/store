@@ -7,6 +7,7 @@
 <head>
     <title>Справочная Одессы | ${subPartitionName} в Одессе</title>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="<c:url value="/resources/css/home.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>">
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js" />"></script>
