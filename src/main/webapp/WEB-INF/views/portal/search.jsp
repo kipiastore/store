@@ -75,15 +75,6 @@
                         <h2 class="headline centered mtmb" style="color: #6d7983;">К сожалению, по Вашему запросу ничего не найдено.</h2>
                     </k:if>
                 </div>
-                <div class="open-list-btn">Показать все!</div>
-                <script>
-                    var rptShort = $('.rptShort.hide-bt');
-                    $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
-                    if (rptShort.height() < 550)
-                        $('.open-list-btn').hide();
-                    else
-                        rptShort.addClass('rptShort-closed');
-                </script>
             </div>
         </div>
     </div>
@@ -137,7 +128,7 @@
                             </a>
                             <span>${item.description}</span>
                             <p>
-                                <a title="${item.name} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${item.name}"</a>
+                                <a title="${item.name} - Каталог товаров Одесса" href="company/${item.id}">Показать весь список товаров/услуг фирмы "${item.name}"</a>
                                 <k:if test="${not empty item.costOf}">
                                     <span class="companyAmount">Стоимость: <b>${item.costOf}</b></span>
                                 </k:if>

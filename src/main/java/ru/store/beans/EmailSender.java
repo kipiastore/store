@@ -74,7 +74,7 @@ public class EmailSender {
             message.setReplyTo(new Address[] { replyAddress });
             message.setSubject(subject);
             message.setText(body);
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ok.info24@gmail.com"));
             if (type == SUPPORT_SERVICE) {
                 message.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(technicalSupport));
             }

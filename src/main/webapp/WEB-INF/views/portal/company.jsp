@@ -47,7 +47,7 @@
                         </a>
                         <span>${company.description}</span>
                         <p>
-                            <a title="${company.name} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${company.name}"</a>
+                            <!--<a title="${company.name} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${company.name}"</a>-->
                             <k:if test="${not empty company.costOf}">
                                 <span class="companyAmount">Стоимость: <b>${company.costOf}</b></span>
                             </k:if>

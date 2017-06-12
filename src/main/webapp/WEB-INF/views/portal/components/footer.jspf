@@ -3,18 +3,20 @@
     <div class="c">
         <ul>
             <li>
-                <a class="b"><b>Написать нам</b></a>
+                <a class="b">Написать нам</a>
                 <div>
-                    <p>Присылайте свои замечания и пожелания по работе и наполнению портала.</p>
+                    <p><b>«OK-info» © 2017</b></p>
                 </div>
             </li>
             <li>
-                <p class="kk"><b>ООО «Store» © 2016</b></p>
+                <p class="kk"><b>&nbsp;</b></p>
                 <p>Все права защищены и охраняются действующим законодательством Украины.</p>
             </li>
-            <li style="text-align: right;">
-                <p class="kk">Количество просмотров ${countInfo}: <span class="rua-p-c-red"><b>${portalCount}</b></span></p>
+            <li style="text-align: center;">
+                <p class="kk"><b>&nbsp;</b></p>
+                <p class="">Количество просмотров ${countInfo}: <span class="rua-p-c-red"><b>${portalCount}</b></span></p>
             </li>
         </ul>
     </div>
+    <div class="ourBrandFooter"></div>
 </footer>

@@ -518,7 +518,8 @@ html, body, .rua-l-body, .ui-widget {
 }
 #header_img .headline {
     font-size: 35px;
-    margin-bottom: 70px
+    margin-bottom: 70px;
+    margin-left: 210px;
 }
 #header_img .header-menu-inner,
 #header_img .header-menu-item,
@@ -824,7 +825,7 @@ table {
     padding: 12px 20px 10px 20px;
 }
 footer.f {
-    border-top: 1px solid #e7e7e7;
+    //border-top: 1px solid #e7e7e7;
     background: white;
     overflow: hidden;
     padding: 0;
@@ -834,12 +835,16 @@ footer.f {
     color: #7E7E7E;
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
+footer.f .c>ul li:first-child {
+    float: left;
+    width: 25%;
+}
 footer.f .c {
     max-width: 1210px;
     padding: 0 20px;
     margin: 0 auto;
     overflow: hidden;
-    height: 175px;
+    height: 130px;
 }
 footer.f .c>ul {
     overflow: hidden;
@@ -897,6 +902,7 @@ footer.f .cr {
 }
 #header_img.header_img_variant_1 {
     background-image: url("../images/header.jpg");
+    box-shadow: 0px 0px 1px 0 rgba(0,0,0,1.16),0 4px 8px 0 rgba(0,0,0,0.12)!important;
 }
 #header_img .headline > small {
     display: block;
@@ -1020,7 +1026,7 @@ footer.f .cr {
     width: 100%;
 }
 .rptShort div p a {
-    //display: inline-block;
+    display: inline-block;
     color: #7e7e7e;
     text-decoration: none;
     width: 370px;
@@ -1053,9 +1059,9 @@ footer.f .cr {
 .topHideButt {
     display: none;
     opacity: 0;
-    right: 15px;
+    right: 30px;
     position: fixed;
-    bottom: 30px;
+    bottom: 40px;
     color: #fff;
     width: 55px;
     height: 55px;
@@ -1260,15 +1266,15 @@ p::-moz-selection {
     overflow: auto;
 }
 .logoImg {
-    width: 150px;
+    width: 272px;
     height: 200px;
     background: url("../images/odessa.png");
-    background-size: 150px;
+    background-size: 272px;
     position: absolute;
     top: 90px;
 }
 .logo-div {
-    width: 840px;
+    width: 890px;
     margin: auto;
 }
 .rptShort .subsection .subsection-list a {
@@ -1482,7 +1488,7 @@ p::-moz-selection {
     box-sizing: border-box;
     width: 100%;
     border-radius: 0;
-    padding-right: 20px;
+    //padding-right: 20px;
 }
 
 footer.f .c>ul .kk {
@@ -1496,10 +1502,11 @@ footer.f .c>ul .kk {
     box-sizing: border-box;
     width: 100%;
     border-radius: 0;
+    text-align: center;
 }
 footer.f .c>ul li {
     float: left;
-    width: 33%;
+    width: 37.5%;
 }
 footer.f .c>ul .b {
     font-size: 13px;

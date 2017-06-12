@@ -47,15 +47,6 @@
                         <h2 class="headline centered mtmb" style="color: #6d7983;">Извините, раздел еще не заполнен!</h2>
                     </k:if>
                 </div>
-                <div class="open-list-btn">Показать все!</div>
-                <script>
-                    var rptShort = $('.rptShort');
-                    $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
-                    if (rptShort.height() < 550)
-                        $('.open-list-btn').hide();
-                    else
-                        rptShort.addClass('rptShort-closed');
-                </script>
             </div>
         </div>
     </div>
@@ -81,7 +72,7 @@
                                 </a>
                                 <span>${item.companyInformation}</span>
                                 <p>
-                                    <a title="${item.companyName} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${item.companyName}"</a>
+                                    <a title="${item.companyName} - Каталог товаров Одесса" href="../company/${item.companyId}">Показать весь список товаров/услуг фирмы "${item.companyName}"</a>
                                     <k:if test="${not empty item.costOf}">
                                         <span class="companyAmount">Стоимость: <b>${item.costOf}</b></span>
                                     </k:if>

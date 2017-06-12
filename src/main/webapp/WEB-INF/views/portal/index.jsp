@@ -69,16 +69,6 @@
                         <h2 class="headline centered mtmb" style="color: #6d7983;">Извините, раздел еще не заполнен!</h2>
                     </k:if>
                 </div>
-                <div class="open-list-btn">Показать все!</div>
-                <script>
-                    var rptShort = $('.rptShort');
-                    $('.style-container').html('<style>.rptShort-open { max-height: ' + rptShort.height() + 'px; }</style>');
-                    if (rptShort.height() < 550) {
-                        $('.open-list-btn').hide();
-                    } else {
-                        rptShort.addClass('rptShort-closed');
-                    }
-                </script>
             </div>
         </div>
     <%@include file="/WEB-INF/views/portal/components/invitation.jspf"%>
