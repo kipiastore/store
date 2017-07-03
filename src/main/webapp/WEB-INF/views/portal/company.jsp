@@ -30,7 +30,22 @@
     <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb title"><a class="main-ref" href="../index">Главная страница</a> → <a class="main-ref" href="../partition/${partition.id}">${partition.name}</a> → ${company.name}</h2>
+                <div class="searchform form-inline">
+                    <div class="rua-l-wrapper">
+                        <div>
+                            <div class="rua-g-right">
+                                <a class="btn btn-primary btn-block submit_button" onclick="$('#mainForm').submit()">Поиск</a>
+                            </div>
+                            <div class="rua-g-clearfix">
+                                <div>
+                                    <input name="value" type="text" maxlength="255" class="keyword input-block-level ui-autocomplete-input"
+                                           placeholder="Введите ключевые слова" autocomplete="off" id="search-param"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="headline centered mtmb title as"><a class="main-ref" href="../index">Главная страница</a> → <a class="main-ref" href="../partition/${partition.id}">${partition.name}</a> → ${company.name}</h2>
             </div>
         </div>
     </div>
@@ -42,18 +57,18 @@
                         <img class="position-image" src="../download?id=${company.imageId}" title="">
                     </k:if>
                     <div class="company-text-block">
-                        <a >
-                            <h3>${company.name}<span class="visitors">Просмотров: ${company.countCompany}</span></h3>
+                        <a>
+                            <h3>${company.name}<span class="visitors">Просмотров всего / сегодня: ${company.countCompany} / ${company.countCompanyToday}</span></h3>
                         </a>
                         <span>${company.description}</span>
                         <p>
-                            <!--<a title="${company.name} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${company.name}"</a>-->
+                            <!--<a title="${company.name} - Каталог товаров Одесса" href="">Показать весь список товаров/услуг фирмы "${company.name}"</a>
                             <k:if test="${not empty company.costOf}">
                                 <span class="companyAmount">Стоимость: <b>${company.costOf}</b></span>
                             </k:if>
                             <k:if test="${empty company.costOf}">
                                 <span class="companyAmount">Цену уточняйте</span>
-                            </k:if>
+                            </k:if>-->
                         </p>
                     </div>
                 </div>

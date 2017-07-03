@@ -30,6 +30,7 @@ public class CompanyService {
     private SearchRequestKeeper searchRequestKeeper;
 
     public void createCompany(Company company) {
+        company.setName(company.getName().trim());
         if (getCompanyByName(company.getName()) == null) {
             companyDAO.createCompany(company);
             searchRequestKeeper.save(company.getName(), 3);
@@ -39,6 +40,7 @@ public class CompanyService {
     }
 
     public void updateCompany(Company company) {
+        company.setName(company.getName().trim());
         Company oldCompany = getCompany(company.getId());
         if (oldCompany == null) {
             throw new NotFoundException("Фирма не найдена.");

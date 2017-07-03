@@ -27,20 +27,5 @@
         </div>
     </div>
     <div>
-        <div class="searchform form-inline">
-            <div class="rua-l-wrapper">
-                <div>
-                    <div class="rua-g-right">
-                        <a class="btn btn-primary btn-block submit_button" onclick="$('#mainForm').submit()">Поиск</a>
-                    </div>
-                    <div class="rua-g-clearfix">
-                        <div>
-                            <input name="value" type="text" maxlength="255" class="keyword input-block-level ui-autocomplete-input"
-                                   placeholder="Введите ключевые слова" autocomplete="off" id="search-param"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

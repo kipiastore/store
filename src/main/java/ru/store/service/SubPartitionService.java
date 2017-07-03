@@ -26,6 +26,7 @@ public class SubPartitionService {
     private SearchRequestKeeper searchRequestKeeper;
 
     public void createSubPartition(SubPartition subPartition) {
+        subPartition.setName(subPartition.getName().trim());
         SubPartition tmp = getSubPartition(subPartition.getName());
         if (tmp != null && Objects.equals(tmp.getPartitionId(), subPartition.getPartitionId()))
             throw new DuplicateException("Подраздел с таким именем в указанном разделе уже существует!");
@@ -34,6 +35,7 @@ public class SubPartitionService {
     }
 
     public void updateSubPartition(SubPartition subPartition) {
+        subPartition.setName(subPartition.getName().trim());
         subPartitionDAO.updateSubPartition(subPartition);
     }
 

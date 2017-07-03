@@ -9,5 +9,11 @@
         <property name="countPortal" type="java.lang.Integer" >
             <column name="count_portal" length="11" not-null="true" />
         </property>
+        <property name="countPortalToday" type="java.lang.Integer" >
+            <column name="count_portal_today" length="11" not-null="true" />
+        </property>
+        <property name="countUpdateToday" type="timestamp">
+            <column name="count_update_today" not-null="false" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -247,7 +247,8 @@
                 <input type="hidden" name="hiddenId" id="hiddenId" />
                 <input type="hidden" name="imageId" id="imageId" />
                 <%@include file="/WEB-INF/views/admin/components/updateAddress.jspf"%>
-                <input type="submit" value="Сохранить" />
+                <input type="submit" value="Сохранить" style="display: none;" id="saveBtN" />
+                <input type="button" value="Редактировать" style="margin-top: 20px;" id="preSave" />
             </form:form>
         </div>
     </div>

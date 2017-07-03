@@ -39,6 +39,7 @@ public class Company {
     private String email;
     private String site;
     private Integer countCompany=0;
+    private Integer countCompanyToday=0;
     private Integer imageId;
 
     //private String site;
@@ -249,6 +250,16 @@ public class Company {
         this.countCompany = countCompany+1;
     }
 
+    public Integer getCountCompanyToday() {
+        return countCompanyToday;
+    }
+
+    public void setCountCompanyToday(Integer countCompanyToday) {
+        this.countCompanyToday = countCompanyToday;
+    }
+    public void setCountCompanyToday() {
+        this.countCompanyToday = countCompanyToday+1;
+    }
 
     @Override
     public String toString() {

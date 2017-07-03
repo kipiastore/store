@@ -5,7 +5,7 @@
         <ul class="header-menu-ul">
             <k:if test="${!pageContext.request.requestURL.toString().contains('portal/index.jsp')}" >
                 <li class="header-item">
-                    <a class="header-link" href="<c:url value="/index"/>">Главная страница</a>
+                    <a class="header-link header-link-button" href="<c:url value="/index"/>">Главная страница</a>
                 </li>
             </k:if>
             <!--

@@ -50,9 +50,12 @@ public class SubPartitionController {
                 return modelAndView;
             }
             subPartition.setCountSubPartition();
+            subPartition.setCountSubPartitionToday();
             subPartitionService.updateSubPartition(subPartition);
-            modelAndView.addObject("countInfo","подраздела");
+            modelAndView.addObject("countInfo","подраздела за весь период");
             modelAndView.addObject("portalCount",subPartition.getCountSubPartition());
+            modelAndView.addObject("countTodayInfo","подраздела за сегодня");
+            modelAndView.addObject("portalTodayCount",subPartition.getCountSubPartitionToday());
             //
 
             partition = partitionService.getPartitionById(subPartition.getPartitionId());

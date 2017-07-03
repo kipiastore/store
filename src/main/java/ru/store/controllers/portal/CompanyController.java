@@ -44,9 +44,12 @@ public class CompanyController {
             //подсчет переходов на компании
             Company company=companyService.getCompany(companyId);
             company.setCountCompany();
+            company.setCountCompanyToday();
             companyService.updateCompany(company);
-            modelAndView.addObject("countInfo","компании");
+            modelAndView.addObject("countInfo","компании за весь период");
             modelAndView.addObject("portalCount",company.getCountCompany());
+            modelAndView.addObject("countTodayInfo","компании за сегодня");
+            modelAndView.addObject("portalTodayCount",company.getCountCompanyToday());
             //
 
         } else {

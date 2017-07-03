@@ -9,6 +9,8 @@ public class SubPartition implements Comparable<SubPartition> {
     private Integer partitionId;
     private String name;
     private Integer countSubPartition=0;
+    private Integer countSubPartitionToday=0;
+
     public SubPartition() {
 
     }
@@ -46,6 +48,17 @@ public class SubPartition implements Comparable<SubPartition> {
     }
     public void setCountSubPartition() {
         this.countSubPartition = countSubPartition+1;
+    }
+
+    public int getCountSubPartitionToday() {
+        return countSubPartitionToday;
+    }
+
+    public void setCountSubPartitionToday(int countSubPartitionToday) {
+        this.countSubPartitionToday = countSubPartitionToday;
+    }
+    public void setCountSubPartitionToday() {
+        this.countSubPartitionToday = countSubPartitionToday+1;
     }
 
 }

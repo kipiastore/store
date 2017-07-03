@@ -23,8 +23,23 @@
     <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 15px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb title"><a class="main-ref" href="../index">Главная страница</a> → ${model.partitionItem.partitionName} в Одессе</h2>
+                <div class="searchform form-inline">
+                    <div class="rua-l-wrapper">
+                        <div>
+                            <div class="rua-g-right">
+                                <a class="btn btn-primary btn-block submit_button" onclick="$('#mainForm').submit()">Поиск</a>
+                            </div>
+                            <div class="rua-g-clearfix">
+                                <div>
+                                    <input name="value" type="text" maxlength="255" class="keyword input-block-level ui-autocomplete-input"
+                                           placeholder="Введите ключевые слова" autocomplete="off" id="search-param"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="rptShort hide-bt">
+                    <h2 class="headline centered mtmb title"><a class="main-ref" href="../index">Главная страница</a> → ${model.partitionItem.partitionName} в Одессе</h2>
                     <k:if test="${model.partitionItem.subPartitionItems2.size() > 0}">
                         <div style="float: left;width: 450px;">
                             <k:forEach var="item" items="${model.partitionItem.subPartitionItems2}">
@@ -54,7 +69,7 @@
         <div style="margin-top: 0px;background: rgba(126, 126, 126, 0.04);">
             <div style="padding: 1px 0 1px 0">
                 <div class="rua-l-wrapper">
-                    <h2 class="headline centered mtmb title" style="margin-top: 0px;">Редакция рекомендует</h2>
+                    <h2 class="headline centered mtmb title as" style="margin-top: 0px;">Редакция рекомендует</h2>
                 </div>
             </div>
         </div>
@@ -73,12 +88,15 @@
                                 <span>${item.companyInformation}</span>
                                 <p>
                                     <a title="${item.companyName} - Каталог товаров Одесса" href="../company/${item.companyId}">Показать весь список товаров/услуг фирмы "${item.companyName}"</a>
+                                    <!--
                                     <k:if test="${not empty item.costOf}">
                                         <span class="companyAmount">Стоимость: <b>${item.costOf}</b></span>
                                     </k:if>
+                                    -->
+                                    <!--
                                     <k:if test="${empty item.costOf}">
                                         <span class="companyAmount">Цену уточняйте</span>
-                                    </k:if>
+                                    </k:if>-->
                                 </p>
                             </div>
                         </div>

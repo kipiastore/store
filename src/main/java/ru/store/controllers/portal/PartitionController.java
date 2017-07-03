@@ -39,9 +39,12 @@ public class PartitionController {
             //подсчет переходов на разделы
             Partition partition=partitionService.getPartitionById(partitionId);
             partition.setCountPartition();
+            partition.setCountPartitionToday();
             partitionService.updatePartition(partition);
-            modelAndView.addObject("countInfo","раздела");
+            modelAndView.addObject("countInfo","раздела за весь период");
             modelAndView.addObject("portalCount",partition.getCountPartition());
+            modelAndView.addObject("countTodayInfo","раздела за сегодня");
+            modelAndView.addObject("portalTodayCount",partition.getCountPartitionToday());
             //
 
         } else {

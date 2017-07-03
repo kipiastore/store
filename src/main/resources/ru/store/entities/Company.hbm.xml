@@ -97,6 +97,9 @@
         <property name="countCompany" type="java.lang.Integer" >
             <column name="count_company" length="11" not-null="false" />
         </property>
+        <property name="countCompanyToday" type="java.lang.Integer" >
+            <column name="count_company_today" length="11" not-null="false" />
+        </property>
         <property name="imageId" type="java.lang.Integer" >
             <column name="image_id" length="11" not-null="false" />
         </property>

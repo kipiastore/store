@@ -23,6 +23,7 @@ public class PartitionService {
     private SearchRequestKeeper searchRequestKeeper;
 
     public void createPartition(Partition partition) {
+        partition.setName(partition.getName().trim());
         if (getPartitionByName(partition.getName()) == null)
             partitionDAO.createPartition(partition);
         else
@@ -31,6 +32,7 @@ public class PartitionService {
     }
 
     public void updatePartition(Partition partition) {
+        partition.setName(partition.getName().trim());
         partitionDAO.updatePartition(partition);
     }
 

@@ -46,10 +46,16 @@ public class PortalController {
         //calculating portal visitors
         CountingPortalPage countingPortalPage=countingService.getCountPortalPage();
         countingPortalPage.setCountPortal();
+
+
+        countingPortalPage.setCountPortalToday();
         countingService.addCountPortalPage(countingPortalPage);
-        modelAndView.addObject("countInfo","ресурса");
+        modelAndView.addObject("countInfo","ресурса за весь период");
         modelAndView.addObject("portalCount",countingPortalPage.getCountPortal());
+        modelAndView.addObject("countTodayInfo","ресурса за сегодня");
+        modelAndView.addObject("portalTodayCount",countingPortalPage.getCountPortalToday());
         //
+
         Map<Integer, Integer> subPartitionIdToCount = new HashMap<>();
         List<Integer> companies = companyService.getOptimizationCompanies();
         Set<Integer> availableCompany = new TreeSet<>();
@@ -174,7 +180,6 @@ public class PortalController {
         model.addObject("prefix", "");
         return model;
     }
-
     @RequestMapping(value = "/sendmail", method = RequestMethod.POST)
     public ModelAndView sendMail(@RequestParam MultiValueMap<String, String> mailMap) {
         GoogleCaptcha.CaptchaResponse captchaResponse = googleCaptcha.check(mailMap.get("g-recaptcha-response").get(0));

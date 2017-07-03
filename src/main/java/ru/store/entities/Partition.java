@@ -8,6 +8,7 @@ public class Partition implements Comparable<Partition> {
     private int id;
     private String name;
     private Integer countPartition=0;
+    private Integer countPartitionToday=0;
     public Partition() {
 
     }
@@ -39,7 +40,19 @@ public class Partition implements Comparable<Partition> {
         this.countPartition = countPartition;
     }
 
+    public int getCountPartitionToday() {
+        return countPartitionToday;
+    }
+
+    public void setCountPartitionToday(int countPartitionToday) {
+        this.countPartitionToday = countPartitionToday;
+    }
+
     public void setCountPartition() {
         this.countPartition = countPartition+1;
+    }
+
+    public void setCountPartitionToday() {
+        this.countPartitionToday = countPartitionToday+1;
     }
 }

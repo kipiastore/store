@@ -23,13 +23,28 @@
     <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb title">Найдено в рубриках</h2>
+                <h2 class="headline centered mtmb title as">Найдено в рубриках</h2>
             </div>
         </div>
     </div>
     <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper">
+                <div class="searchform form-inline as">
+                    <div class="rua-l-wrapper">
+                        <div>
+                            <div class="rua-g-right">
+                                <a class="btn btn-primary btn-block submit_button" onclick="$('#mainForm').submit()">Поиск</a>
+                            </div>
+                            <div class="rua-g-clearfix">
+                                <div>
+                                    <input name="value" type="text" maxlength="255" class="keyword input-block-level ui-autocomplete-input"
+                                           placeholder="Введите ключевые слова" autocomplete="off" id="search-param"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="rptShort hide-bt">
                     <k:if test="${model.partitionItems2.size() > 0}">
                         <div style="float: left;width: 450px;">
@@ -81,7 +96,7 @@
     <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb title">Результаты поиска в Одессе</h2>
+                <h2 class="headline centered mtmb title as">Результаты поиска в Одессе</h2>
             </div>
         </div>
     </div>
@@ -129,12 +144,13 @@
                             <span>${item.description}</span>
                             <p>
                                 <a title="${item.name} - Каталог товаров Одесса" href="company/${item.id}">Показать весь список товаров/услуг фирмы "${item.name}"</a>
+                                <!--
                                 <k:if test="${not empty item.costOf}">
                                     <span class="companyAmount">Стоимость: <b>${item.costOf}</b></span>
                                 </k:if>
                                 <k:if test="${empty item.costOf}">
                                     <span class="companyAmount">Цену уточняйте</span>
-                                </k:if>
+                                </k:if>-->
                             </p>
                         </div>
                     </div>

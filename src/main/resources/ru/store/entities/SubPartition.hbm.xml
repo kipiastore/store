@@ -16,5 +16,9 @@
         <property name="countSubPartition" type="java.lang.Integer" >
             <column name="count_sub_partition" length="11" not-null="false" />
         </property>
+
+        <property name="countSubPartitionToday" type="java.lang.Integer" >
+            <column name="count_sub_partition_today" length="11" not-null="false" />
+        </property>
     </class>
 </hibernate-mapping>

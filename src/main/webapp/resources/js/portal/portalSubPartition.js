@@ -93,10 +93,10 @@ $('.load-more-btn').on('click', function() {
 
                     console.log(company);
 
-                    if (company.costOf != '' && company.costOf != null)
-                        costOf = '<span class="companyAmount">Стоимость: <b>' + company.costOf + '</b></span>';
-                    else
-                        costOf = '<span class="companyAmount">Цену уточняйте</span>';
+                    //if (company.costOf != '' && company.costOf != null)
+                        //costOf = '<span class="companyAmount">Стоимость: <b>' + company.costOf + '</b></span>';
+                    //else
+                        //costOf = '<span class="companyAmount">Цену уточняйте</span>';
 
                     if (tmpAddressTxt != '')
                         totalArd = '<div class="AddressList">' + tmpAddressTxt + '</div>';

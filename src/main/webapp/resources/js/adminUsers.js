@@ -120,6 +120,8 @@ function cleanAddressBlocks() {
 }
 
 $(".menuTitleText").on("click", function () {
+    $("#preSave").show();
+    $("#saveBtN").hide();
     if (document.URL.indexOf("searchcompany") != -1) // временное решение
         window.location.replace(document.URL.replace("searchcompany", "companies"));
     cleanAddressBlocks();
@@ -169,7 +171,8 @@ $(".tableName").on("click", function (event) {
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
-
+    $("#preSave").show();
+    $("#saveBtN").hide();
     var container = $(".container");
     container.animate({opacity: 0}, 200);
     setTimeout(function() { container.hide(); }, 190);
@@ -621,3 +624,9 @@ Date.prototype.customFormat = function(formatString){
     ss=(s=this.getSeconds())<10?('0'+s):s;
     return formatString.replace("#hhhh#",hhhh).replace("#hhh#",hhh).replace("#hh#",hh).replace("#h#",h).replace("#mm#",mm).replace("#m#",m).replace("#ss#",ss).replace("#s#",s).replace("#ampm#",ampm).replace("#AMPM#",AMPM);
 };
+
+
+$("#preSave").on("click", function () {
+    $("#preSave").hide();
+    $("#saveBtN").show();
+});
