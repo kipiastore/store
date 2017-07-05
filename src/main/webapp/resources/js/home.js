@@ -293,10 +293,10 @@ function setAutocomplete(source) {
             });
             $('.paulund_inner_modal_box').css({
                 'background-color':'#fff',
-                'height':(options.height - 50) + 'px',
-                'width':(options.width - 50) + 'px',
+                'height':(options.height - 34) + 'px',
+                'width':(options.width - 34) + 'px',
                 'padding':'10px',
-                'margin':'15px',
+                'margin':'7px',
                 'border-radius':'10px',
                 '-moz-border-radius':'10px',
                 '-webkit-border-radius':'10px'
@@ -316,7 +316,7 @@ function setAutocomplete(source) {
          * Creates the modal box
          */
         function add_popup_box(){
-            var pop_up = $('<div class="paulund_modal_box"><a href="" class="paulund_modal_close"></a><div class="paulund_inner_modal_box"><h2>' + options.title + '</h2><p>' + options.description + '</p></div></div>');
+            var pop_up = $('<div class="paulund_modal_box"><a class="paulund_modal_close"></a><div class="paulund_inner_modal_box"><h2>' + options.title + '</h2><p>' + options.description + '</p></div></div>');
             $(pop_up).appendTo('.paulund_block_page');
 
             $('.paulund_modal_close').click(function(){
