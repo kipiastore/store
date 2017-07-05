@@ -141,5 +141,10 @@
         margin-right: 15px;
     }
 </style>
+<script>
+    $(document).ready(function(){
+        $('.paulund_modal').paulund_modal_box();
+    });
+</script>
 </body>
 </html>

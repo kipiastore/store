@@ -842,7 +842,7 @@ footer.f .c>ul li:first-child {
     width: 25%;
 }
 footer.f .c {
-    max-width: 1070px;
+    max-width: 965px;
     padding: 0 20px 25px;
     margin: 0 auto;
     overflow: hidden;
@@ -859,7 +859,7 @@ footer.f ul, footer.f li {
 }
 footer.f .c>ul li {
     float: left;
-    width: 28.5%
+    width: 33.5%;
 }
 footer.f .c>ul a {
     text-decoration: none;
@@ -1524,7 +1524,7 @@ footer.f .c>ul .kk {
 }
 footer.f .c>ul li {
     float: left;
-    width: 28.5%
+    width: 33.5%;
 }
 footer.f .c>ul .b {
     font-size: 13px;
@@ -1637,4 +1637,16 @@ footer.f .c>ul .b {
     float: right;
     font-size: 12px;
     font-weight: 600;
+}
+
+
+.paulund_modal_close {
+position:relative;
+top:-25px;
+left:20px;
+float:right;
+display:block;
+height:50px;
+width:50px;
+background: url("../images/close-paulund-modal-box.png") no-repeat;
 }

@@ -138,5 +138,10 @@
 <script>
     setAutocomplete('<c:url value="/api/portal/resource/v1/search/"/>');
 </script>
+<script>
+    $(document).ready(function(){
+        $('.paulund_modal').paulund_modal_box();
+    });
+</script>
 </body>
 </html>

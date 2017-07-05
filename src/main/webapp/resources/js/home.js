@@ -253,6 +253,7 @@ function setAutocomplete(source) {
          * Add styles to the html markup
          */
         function add_styles(){
+
             $('.paulund_modal_box').css({
                 'position':'absolute',
                 'left':options.left,
@@ -270,6 +271,7 @@ function setAutocomplete(source) {
                 'background': '#f2f2f2',
                 'z-index':'50',
             });
+            /*
             $('.paulund_modal_close').css({
                 'position':'relative',
                 'top':'-25px',
@@ -279,7 +281,7 @@ function setAutocomplete(source) {
                 'height':'50px',
                 'width':'50px',
                 'background': 'url(resources/images/close-paulund-modal-box.png) no-repeat',
-            });
+            });*/
             $('.paulund_block_page').css({
                 'position':'fixed',
                 'top':'0',
@@ -314,7 +316,7 @@ function setAutocomplete(source) {
          * Creates the modal box
          */
         function add_popup_box(){
-            var pop_up = $('<div class="paulund_modal_box"><a href="#" class="paulund_modal_close"></a><div class="paulund_inner_modal_box"><h2>' + options.title + '</h2><p>' + options.description + '</p></div></div>');
+            var pop_up = $('<div class="paulund_modal_box"><a href="" class="paulund_modal_close"></a><div class="paulund_inner_modal_box"><h2>' + options.title + '</h2><p>' + options.description + '</p></div></div>');
             $(pop_up).appendTo('.paulund_block_page');
 
             $('.paulund_modal_close').click(function(){

@@ -23,14 +23,7 @@
     <div style="background: rgba(126, 126, 126, 0.04);">
         <div style="padding: 1px 0 1px 0;">
             <div class="rua-l-wrapper">
-                <h2 class="headline centered mtmb title as">Найдено в рубриках</h2>
-            </div>
-        </div>
-    </div>
-    <div style="background: rgba(126, 126, 126, 0.04);">
-        <div style="padding: 1px 0 1px 0;">
-            <div class="rua-l-wrapper">
-                <div class="searchform form-inline as">
+                <div class="searchform form-inline">
                     <div class="rua-l-wrapper">
                         <div>
                             <div class="rua-g-right">
@@ -45,6 +38,14 @@
                         </div>
                     </div>
                 </div>
+                <h2 class="headline centered mtmb title as">Найдено в рубриках</h2>
+            </div>
+        </div>
+    </div>
+    <div style="background: rgba(126, 126, 126, 0.04);">
+        <div style="padding: 1px 0 1px 0;">
+            <div class="rua-l-wrapper">
+
                 <div class="rptShort hide-bt">
                     <k:if test="${model.partitionItems2.size() > 0}">
                         <div style="float: left;width: 450px;">
@@ -193,6 +194,11 @@
 <script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 <script>
     setAutocomplete('<c:url value="/api/portal/resource/v1/search/"/>');
+</script>
+<script>
+    $(document).ready(function(){
+        $('.paulund_modal').paulund_modal_box();
+    });
 </script>
 </body>
 </html>
