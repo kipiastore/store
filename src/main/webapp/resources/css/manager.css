@@ -900,6 +900,22 @@ input[type="checkbox"] {
 #thNoteCompany{
     width:60px;
 }
+#tdCompanyDateNoteBySearchMenu{
+    max-width:80px;
+}
+#tdCompanyHourNoteBySearchMenu{
+    max-width:60px;
+}
+#tdCompanyNameNoteBySearchMenu{
+    max-width:120px;
+}
+#tdCompanyLastNoteBySearchMenu{
+    max-width:110px;
+}
+#tdCompanyCommentNoteBySearchMenu{
+    max-width:210px;
+}
+
 /*12.12.2016*/
 .table-bordered td,
 .table-bordered th {

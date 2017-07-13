@@ -39,6 +39,10 @@ public class SubPartitionService {
         subPartitionDAO.updateSubPartition(subPartition);
     }
 
+    public void refreshCountSubPartitionToday() {
+        subPartitionDAO.refreshCountSubPartitionToday();
+    }
+
     public void deleteSubPartition(int id) {
         List<SubPartition> tmp = new ArrayList<>();
         tmp.add(subPartitionDAO.getSubPartitionById(id));

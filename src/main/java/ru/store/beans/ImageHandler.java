@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -37,6 +36,7 @@ public class ImageHandler {
             BufferedImage imageData = ImageIO.read(new ByteArrayInputStream(multipartFile.getBytes()));
             int currentHeight = imageData.getHeight();
             int currentWidth = imageData.getWidth();
+            /*
             if (currentHeight > 250) {
                 double newWidth = currentWidth * 250 / currentHeight;
                 java.awt.Image scaled = imageData.getScaledInstance((int) newWidth, 250, java.awt.Image.SCALE_SMOOTH);
@@ -51,9 +51,9 @@ public class ImageHandler {
                 baos.flush();
                 image.setFile(baos.toByteArray());
                 baos.close();
-            } else {
+            } else { */
                 image.setFile(multipartFile.getBytes());
-            }
+            //}
             image.setName(multipartFile.getOriginalFilename());
             return image;
         }

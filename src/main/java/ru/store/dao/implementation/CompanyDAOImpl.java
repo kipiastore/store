@@ -34,6 +34,13 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Override
     @Transactional
+    public void refreshCountCompanyToday() {
+        String hql = "update Company set countCompanyToday = :countCompanyToday";
+        sessionFactory.getCurrentSession().createQuery(hql).setInteger("countCompanyToday", 0).executeUpdate();
+    }
+
+    @Override
+    @Transactional
     public void deleteCompany(int id) {
         String hql = "delete from Company where id =:id";
         sessionFactory.getCurrentSession().createQuery(hql).setInteger("id", id).executeUpdate();

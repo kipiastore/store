@@ -13,6 +13,8 @@ public interface PartitionDAO {
 
     void updatePartition(Partition partition);
 
+    void refreshCountPartitionToday();
+
     void deletePartition(int id);
 
     List<Partition> getPartitions();

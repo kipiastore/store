@@ -51,6 +51,10 @@ public class CompanyService {
         companyDAO.updateCompany(company);
     }
 
+    public void refreshCountCompanyToday() {
+        companyDAO.refreshCountCompanyToday();
+    }
+
     public void updateCompanyByManager(Company company) {
         Company oldCompany = getCompany(company.getId());
         if (oldCompany == null) {

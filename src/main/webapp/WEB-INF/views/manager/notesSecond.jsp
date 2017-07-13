@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="k" %>
 <%@ page session="false"%>
 <html>
 <head>
@@ -33,40 +34,42 @@
     <div class="menuBody">
         <div class="generalContent">
             <div class="container">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th id="thCompanyNameNoteBySearchMenu">Название</th>
-                        <th id="thCompanyHistoryNoteBySearchMenu">История</th>
-                        <th id="thCompanyPeriodNoteBySearchMenu">Срок</th>
-                        <th id="thCompanyAmountNoteBySearchMenu">Сумма</th>
-                        <th id="thCompanyNoteMainBySearchMenu">Примечание</th>
-                        <th id="thCompanyLastNoteBySearchMenu">Последняя заметка</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="item" items="${model.companyList}">
+                <k:if test="${not empty model.companyList}">
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
-                            <td class="tableName" id="ID-${item.id}">${item.nameForNotes}</td>
-                            <td>${item.historyOfNote}</td>
-                            <td>${item.periodOfContract}</td>
-                            <td>${item.debt}</td>
-                            <td>${item.noteMain}</td>
-                            <td>${item.note}</td>
+                            <th id="thCompanyNameNoteBySearchMenu">Название</th>
+                            <th id="thCompanyHistoryNoteBySearchMenu">История</th>
+                            <th id="thCompanyPeriodNoteBySearchMenu">Срок</th>
+                            <th id="thCompanyAmountNoteBySearchMenu">Сумма</th>
+                            <th id="thCompanyNoteMainBySearchMenu">Примечание</th>
+                            <th id="thCompanyLastNoteBySearchMenu">Последняя заметка</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <div id="lineBetweenTables">
-                </div>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="item" items="${model.companyList}">
+                            <tr>
+                                <td class="tableName" id="ID-${item.id}">${item.nameForNotes}</td>
+                                <td>${item.historyOfNote}</td>
+                                <td>${item.periodOfContract}</td>
+                                <td>${item.debt}</td>
+                                <td>${item.noteMain}</td>
+                                <td>${item.note}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <div id="lineBetweenTables">
+                    </div>
+                </k:if>
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <td id="tdCompanyDateNoteBySearchMenu">Дата</td>
-                        <td id="tdCompanyHourNoteBySearchMenu">Время</td>
-                        <td id="tdCompanyNameNoteBySearchMenu">Название</td>
-                        <td id="tdCompanyLastNoteBySearchMenu">Тип заметки</td>
-                        <td id="tdCompanyCommentNoteBySearchMenu">Комментарий</td>
+                        <th id="tdCompanyDateNoteBySearchMenu">Дата</th>
+                        <th id="tdCompanyHourNoteBySearchMenu">Время</th>
+                        <th id="tdCompanyNameNoteBySearchMenu">Название</th>
+                        <th id="tdCompanyLastNoteBySearchMenu">Тип заметки</th>
+                        <th id="tdCompanyCommentNoteBySearchMenu">Комментарий</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -26,7 +26,7 @@ public class PortalCompanyLightResource {
 
     @RequestMapping(value = "/api/portal/resource/v1/company/SubPartition/{subPartitionId}/{position}",
             method = RequestMethod.GET)
-    public List<Company> getCompany(@PathVariable String subPartitionId, @PathVariable String position) {
+    public List<CompanyModel> getCompany(@PathVariable String subPartitionId, @PathVariable String position) {
 
         List<CompanySubPartition> companySubPartitions =
                 companySubPartitionService.findCompanySubpartitionBySubPartitionId(Integer.valueOf(subPartitionId));
@@ -52,8 +52,87 @@ public class PortalCompanyLightResource {
             if (positionCounter == maxPosition)
                 break;
         }
-        return tmpCompanies;
+
+        List<CompanyModel> result = new ArrayList<>();
+        CompanyModel companyModel;
+        for (Company company : tmpCompanies) {
+            companyModel = new CompanyModel();
+            companyModel.id = company.getId();
+            companyModel.name = company.getName();
+            companyModel.description = company.getDescription();
+            companyModel.countCompany = company.getCountCompany();
+            companyModel.imageId = company.getImageId();
+            companyModel.isPaid = company.getIsPaid();
+            companyModel.companyPackageId = company.getCompanyPackageId();
+            result.add(companyModel);
+        }
+        return result;
     }
 
+    public static class CompanyModel {
+        public int id;
+        public String name;
+        public String description;
+        public Integer countCompany;
+        public Integer imageId;
+        public Boolean isPaid;
+        public Integer companyPackageId;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public Integer getCountCompany() {
+            return countCompany;
+        }
+
+        public void setCountCompany(Integer countCompany) {
+            this.countCompany = countCompany;
+        }
+
+        public Integer getImageId() {
+            return imageId;
+        }
+
+        public void setImageId(Integer imageId) {
+            this.imageId = imageId;
+        }
+
+        public Boolean getPaid() {
+            return isPaid;
+        }
+
+        public void setPaid(Boolean paid) {
+            isPaid = paid;
+        }
+
+        public Integer getCompanyPackageId() {
+            return companyPackageId;
+        }
+
+        public void setCompanyPackageId(Integer companyPackageId) {
+            this.companyPackageId = companyPackageId;
+        }
+    }
 
 }

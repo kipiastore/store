@@ -40,6 +40,7 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+
     <task:annotation-driven />
     <bean id="scheduledJob " class="ru.store.controllers.Quartz.ScheduledJob"></bean>
 

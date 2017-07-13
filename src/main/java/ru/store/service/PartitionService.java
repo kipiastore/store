@@ -36,6 +36,10 @@ public class PartitionService {
         partitionDAO.updatePartition(partition);
     }
 
+    public void refreshCountPartitionToday() {
+        partitionDAO.refreshCountPartitionToday();
+    }
+
     public void deletePartition(int id) {
         subPartitionService.deleteSubPartitionByPartition(id);
         partitionDAO.deletePartition(id);

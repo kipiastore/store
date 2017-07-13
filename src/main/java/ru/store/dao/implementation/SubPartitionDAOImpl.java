@@ -34,6 +34,13 @@ public class SubPartitionDAOImpl implements SubPartitionDAO {
 
     @Override
     @Transactional
+    public void refreshCountSubPartitionToday() {
+        String hql = "update SubPartition set countSubPartitionToday = :countSubPartitionToday";
+        sessionFactory.getCurrentSession().createQuery(hql).setInteger("countSubPartitionToday", 0).executeUpdate();
+    }
+
+    @Override
+    @Transactional
     public void deleteSubPartition(int id) {
         String hql = "delete from SubPartition where id =:id";
         sessionFactory.getCurrentSession().createQuery(hql).setInteger("id", id).executeUpdate();

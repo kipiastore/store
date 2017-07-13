@@ -171,7 +171,7 @@ $(".tableName").on("click", function (event) {
 });
 
 $(".menuBodyItemInfo").on("click", function (event) {
-    $("#preSave").show();
+    $("#preEdit").show();
     $("#saveBtN").hide();
     var container = $(".container");
     container.animate({opacity: 0}, 200);
@@ -402,57 +402,6 @@ $(".openRequisites").on("click", function () {
     }
 });
 
-$(".add-addressUp").on("click", function () {
-    var item;
-    if (addressArray == undefined) {
-        addressArray = [];
-        for (var i = 1; i < 13; i++) {
-            item = {};
-            item.id = i;
-            item.isOpen = false;
-            addressArray[i] = item;
-        }
-    }
-    try {
-        addressArray.forEach(function(entry) {
-            if (!entry.isOpen) {
-                entry.isOpen = true;
-                $("#UpAdd" + entry.id).show();
-                $("#UpAdAd" + entry.id).prop("required", true);
-                throw BreakException;
-            }
-        });
-    } catch (e) {
-        if (e !== BreakException) throw e;
-    }
-    calculatePosition(addressArray, "UpAdd");
-});
-
-$(".UpCloseAdButt").on("click", function (event) {
-    var addId = event.target.getAttribute('data-id');
-    try {
-        addressArray.forEach(function(entry) {
-            if (entry.id == addId &&
-                ($("#UpAddId" + entry.id).val() == "" ||
-                confirm("Удалить?\nАдрес будет удален после того, как вы нажмете Обновить."))) {
-                entry.isOpen = false;
-                $("#UpAdd" + entry.id ).hide();
-                $("#UpAdAd" + entry.id ).removeAttr('required');
-                $("#UpAdAd" + entry.id ).val("");
-                $("#UpRegAd" + entry.id ).val("-1");
-                $("#UpPhAd" + entry.id ).val("");
-                $("#UpInfAd" + entry.id ).val("");
-                $("#UpDelete").val($("#UpDelete").val() + "," + $("#UpAddId" + entry.id).val());
-                $("#UpAddId" + entry.id).val("");
-                throw BreakException;
-            }
-        });
-    } catch (e) {
-        if (e !== BreakException) throw e;
-    }
-    calculatePosition(addressArray, "UpAdd");
-});
-
 $(".add-address").on("click", function () {
     var item;
     if (addressArray == undefined) {
@@ -535,29 +484,37 @@ $("#createForm").submit(function() {
     }
 });
 $("#updateForm").submit(function() {
-    var addressArrayJson = [];
-    var companyAddress;
-    var counter = 0;
-    if (addressArray != undefined) {
-        addressArray.forEach(function(entry) {
-            if (entry.isOpen) {
-                companyAddress = {};
-                companyAddress.address = $("#UpAdAd" + entry.id).val();
-                if ($("#UpAddId" + entry.id).val() != "-1")
-                    companyAddress.regionId = Number($("#UpRegAd" + entry.id).val());
-                else
-                    companyAddress.regionId = null;
-                companyAddress.phones = $("#UpPhAd" + entry.id).val();
-                companyAddress.information = $("#UpInfAd" + entry.id).val();
-                if ($("#UpAddId" + entry.id).val() != "")
-                    companyAddress.id = Number($("#UpAddId" + entry.id).val());
-                else
-                    companyAddress.id = null;
-                addressArrayJson[counter] = companyAddress;
-                counter++;
-            }
-        });
-        $("#UpAddressJson").val(JSON.stringify(addressArrayJson));
+    result=confirm("Сохранить?");
+    if (result) {
+        var addressArrayJson = [];
+        var companyAddress;
+        var counter = 0;
+        if (addressArray != undefined) {
+            addressArray.forEach(function (entry) {
+                if (entry.isOpen) {
+                    companyAddress = {};
+                    companyAddress.address = $("#UpAdAd" + entry.id).val();
+                    if ($("#UpAddId" + entry.id).val() != "-1")
+                        companyAddress.regionId = Number($("#UpRegAd" + entry.id).val());
+                    else
+                        companyAddress.regionId = null;
+                    companyAddress.phones = $("#UpPhAd" + entry.id).val();
+                    companyAddress.information = $("#UpInfAd" + entry.id).val();
+                    if ($("#UpAddId" + entry.id).val() != "")
+                        companyAddress.id = Number($("#UpAddId" + entry.id).val());
+                    else
+                        companyAddress.id = null;
+                    addressArrayJson[counter] = companyAddress;
+                    counter++;
+                }
+            });
+            $("#UpAddressJson").val(JSON.stringify(addressArrayJson));
+        }
+    }
+    else{
+        location.reload();
+        return false;
+
     }
 });
 
@@ -590,6 +547,7 @@ $(".searchButt").on("click", function () {
 });
 
 $(document).ready(function(){
+    hideValues();
     $("#partitionLevel").click(function() {
         var val = $("#partitionLevel").val();
         if (val == 2)
@@ -626,7 +584,127 @@ Date.prototype.customFormat = function(formatString){
 };
 
 
-$("#preSave").on("click", function () {
-    $("#preSave").hide();
-    $("#saveBtN").show();
+$("#preEdit").on("click", function () {
+    showValues();
 });
+function hideValues() {
+    $("#name").prop('disabled', true);
+    $("#keywords").prop('disabled', true);
+    $("#dateOfContract").prop('disabled', true);
+    $("#dateOfStartContract").prop('disabled', true);
+    $("#dateOfEndContract").prop('disabled', true);
+    $("#manager").prop('disabled', true);
+    $("#companyPackageId").prop('disabled', true);
+    $("#costOf").prop('disabled', true);
+    $("#email").prop('disabled', true);
+    $("#site").prop('disabled', true);
+    $("#updateFile").prop('disabled', true);
+    $("#description").prop('disabled', true);
+    $("#isShowForOperator").prop('disabled', true);
+    $("#isShowForSite").prop('disabled', true);
+    $("#isPaid").prop('disabled', true);
+    $("#isRedirect").prop('disabled', true);
+    $("#isOffPosition").prop('disabled', true);
+    $("#isClosed").prop('disabled', true);
+    $("#isPriority").prop('disabled', true);
+    $("#legalName").prop('disabled', true);
+    $("#inn").prop('disabled', true);
+    $("#legalAddress").prop('disabled', true);
+    $("#phone").prop('disabled', true);
+    $("#fax").prop('disabled', true);
+    $("#directorFullName").prop('disabled', true);
+    $("#contactPerson").prop('disabled', true);
+    $("#isPriority").prop('disabled', true);
+    for (var i = 1; i < 13; i++) {
+        $("#UpAdAd" + i).prop('disabled', true);
+        $("#UpRegAd" + i).prop('disabled', true);
+        $("#UpPhAd" + i).prop('disabled', true);
+        $("#UpInfAd" + i).prop('disabled', true);
+    }
+}
+function showValues() {
+    $("#preEdit").hide();
+    $("#saveBtN").show();
+    $("#name").prop('disabled', false);
+    $("#keywords").prop('disabled', false);
+    $("#dateOfContract").prop('disabled', false);
+    $("#dateOfStartContract").prop('disabled', false);
+    $("#dateOfEndContract").prop('disabled', false);
+    $("#manager").prop('disabled', false);
+    $("#companyPackageId").prop('disabled', false);
+    $("#costOf").prop('disabled', false);
+    $("#email").prop('disabled', false);
+    $("#site").prop('disabled', false);
+    $("#updateFile").prop('disabled', false);
+    $("#description").prop('disabled', false);
+    $("#isShowForOperator").prop('disabled', false);
+    $("#isShowForSite").prop('disabled', false);
+    $("#isPaid").prop('disabled', false);
+    $("#isRedirect").prop('disabled', false);
+    $("#isOffPosition").prop('disabled', false);
+    $("#isClosed").prop('disabled', false);
+    $("#isPriority").prop('disabled', false);
+    $("#legalName").prop('disabled', false);
+    $("#inn").prop('disabled', false);
+    $("#legalAddress").prop('disabled', false);
+    $("#phone").prop('disabled', false);
+    $("#fax").prop('disabled', false);
+    $("#directorFullName").prop('disabled', false);
+    $("#contactPerson").prop('disabled', false);
+    $("#isPriority").prop('disabled', false);
+    for (var i = 1; i < 13; i++) {
+        $("#UpAdAd" + i).prop('disabled', false);
+        $("#UpRegAd" + i).prop('disabled', false);
+        $("#UpPhAd" + i).prop('disabled', false);
+        $("#UpInfAd" + i).prop('disabled', false);
+    }
+    $(".add-addressUp").on("click", function () {
+        var item;
+        if (addressArray == undefined) {
+            addressArray = [];
+            for (var i = 1; i < 13; i++) {
+                item = {};
+                item.id = i;
+                item.isOpen = false;
+                addressArray[i] = item;
+            }
+        }
+        try {
+            addressArray.forEach(function(entry) {
+                if (!entry.isOpen) {
+                    entry.isOpen = true;
+                    $("#UpAdd" + entry.id).show();
+                    $("#UpAdAd" + entry.id).prop("required", true);
+                    throw BreakException;
+                }
+            });
+        } catch (e) {
+            if (e !== BreakException) throw e;
+        }
+        calculatePosition(addressArray, "UpAdd");
+    });
+    $(".UpCloseAdButt").on("click", function (event) {
+        var addId = event.target.getAttribute('data-id');
+        try {
+            addressArray.forEach(function(entry) {
+                if (entry.id == addId &&
+                    ($("#UpAddId" + entry.id).val() == "" ||
+                    confirm("Удалить?\nАдрес будет удален после того, как вы нажмете Обновить."))) {
+                    entry.isOpen = false;
+                    $("#UpAdd" + entry.id ).hide();
+                    $("#UpAdAd" + entry.id ).removeAttr('required');
+                    $("#UpAdAd" + entry.id ).val("");
+                    $("#UpRegAd" + entry.id ).val("-1");
+                    $("#UpPhAd" + entry.id ).val("");
+                    $("#UpInfAd" + entry.id ).val("");
+                    $("#UpDelete").val($("#UpDelete").val() + "," + $("#UpAddId" + entry.id).val());
+                    $("#UpAddId" + entry.id).val("");
+                    throw BreakException;
+                }
+            });
+        } catch (e) {
+            if (e !== BreakException) throw e;
+        }
+        calculatePosition(addressArray, "UpAdd");
+    });
+}

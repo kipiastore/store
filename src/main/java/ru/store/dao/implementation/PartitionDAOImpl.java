@@ -34,6 +34,13 @@ public class PartitionDAOImpl implements PartitionDAO {
 
     @Override
     @Transactional
+    public void refreshCountPartitionToday() {
+        String hql = "update Partition set countPartitionToday = :countPartitionToday";
+        sessionFactory.getCurrentSession().createQuery(hql).setInteger("countPartitionToday", 0).executeUpdate();
+    }
+
+    @Override
+    @Transactional
     public void deletePartition(int id) {
         String hql = "delete from Partition where id =:id";
         sessionFactory.getCurrentSession().createQuery(hql).setInteger("id", id).executeUpdate();

@@ -20,6 +20,8 @@ public interface SubPartitionDAO {
 
     void updateSubPartition(SubPartition subPartition);
 
+    void refreshCountSubPartitionToday();
+
     void deleteSubPartition(int id);
 
     SubPartition getSubPartition(String name);

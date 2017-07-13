@@ -14,6 +14,8 @@ public interface CompanyDAO {
 
     void updateCompany(Company company);
 
+    void refreshCountCompanyToday();
+
     void deleteCompany(int id);
 
     Company getCompany(int id);

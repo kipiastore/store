@@ -222,7 +222,7 @@
                         <label>Закрыты</label>
                     </div>
                     <div class="check-box-block">
-                        <input type="checkbox" name="isPriority" />
+                        <input type="checkbox" name="isPriority" id="isPriority"/>
                         <label>Приоритет</label>
                     </div>
 
@@ -250,7 +250,7 @@
                 <input type="hidden" name="imageId" id="imageId" />
                 <%@include file="/WEB-INF/views/director/components/updateAddress.jspf"%>
                 <input type="submit" value="Сохранить" style="display: none;" id="saveBtN" />
-                <input type="button" value="Редактировать" style="margin-top: 20px;" id="preSave" />
+                <input type="button" value="Редактировать" style="margin-top: 20px;" id="preEdit" />
             </form:form>
         </div>
     </div>
