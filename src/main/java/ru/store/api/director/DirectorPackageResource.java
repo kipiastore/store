@@ -17,7 +17,7 @@ public class DirectorPackageResource {
     @Autowired
     private PackageService packageService;
 
-    @RequestMapping(value = "/api/mainAdmin/resource/v1/package/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/director/resource/v1/package/{id}", method = RequestMethod.GET)
     public Package getPackage(@PathVariable String id) {
         return packageService.getPackage(Integer.valueOf(id));
     }

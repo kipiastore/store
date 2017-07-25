@@ -80,7 +80,7 @@ public class PartitionController {
             subPartitionIds.add(subPartition.getId());
             subPartitionItem = new Model.PartitionItem.SubPartitionItem();
             subPartitionItem.subPartitionId = subPartition.getId();
-            subPartitionItem.subPartitionName = getNormalName(subPartition.getName(), 31);
+            subPartitionItem.subPartitionName = subPartition.getName();
             if (subPartitionIdToCount.get(subPartition.getId()) != null)
                 subPartitionItem.companyCount = subPartitionIdToCount.get(subPartition.getId());
             subPartitionItems.add(subPartitionItem);
@@ -91,7 +91,7 @@ public class PartitionController {
         Model.PartitionItem partitionItem = new Model.PartitionItem();
         Partition partition = partitionService.getPartitionById(partitionId);
         partitionItem.partitionId = partition.getId();
-        partitionItem.partitionName = getNormalName(partition.getName(), 50);
+        partitionItem.partitionName = partition.getName();
 
         List<Model.PartitionItem.SubPartitionItem> tmp1 = new ArrayList<>();
         List<Model.PartitionItem.SubPartitionItem> tmp2 = new ArrayList<>();

@@ -74,7 +74,7 @@ public class DirectorReportsController {
 
     @RequestMapping(value = "/director/addreport", method = RequestMethod.GET)
     public String redirect1() {
-        return "redirect:/mainAdmin/reports";
+        return "redirect:/director/reports";
     }
     @RequestMapping(value = "/director/reportssearchcompany", method = RequestMethod.GET)
     public String redirect2() {

@@ -19,7 +19,7 @@ public class DirectorCompanySubPartitionResource {
     @Autowired
     private CompanySubPartitionService companySubPartitionService;
 
-    @RequestMapping(value = "/api/mainAdmin/resource/v1/companySubpartition/company/{companyId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/director/resource/v1/companySubpartition/company/{companyId}", method = RequestMethod.GET)
     public List<CompanySubPartition> company(@PathVariable String companyId) {
         return companySubPartitionService.findCompanySubpartitionByCompanyId(Integer.valueOf(companyId));
     }

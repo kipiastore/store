@@ -19,12 +19,12 @@ public class DirectorReportResource {
     @Autowired
     private ReportService reportService;
 
-    @RequestMapping(value = "/api/mainAdmin/resource/v1/report/company/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/director/resource/v1/report/company/{id}", method = RequestMethod.GET)
     public List<Report> getPackage(@PathVariable String id) {
         return reportService.getReportsByCompanyId(Integer.valueOf(id));
     }
 
-    @RequestMapping(value = "/api/mainAdmin/resource/v1/report/erase/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/director/resource/v1/report/erase/{id}", method = RequestMethod.GET)
     public void eraseReport(@PathVariable String id) {
         reportService.deleteReport(Integer.valueOf(id));
     }

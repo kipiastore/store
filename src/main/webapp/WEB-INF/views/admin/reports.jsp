@@ -28,7 +28,7 @@
                 <input type="text" maxlength="120" name="email" placeholder="e-mail"/>
             </form:form>
         </div>
-        <span class="pageMenuButt" style="opacity: 0; cursor: default;">Добавить</span>
+        <span class="pageMenuButt" style="opacity: 0; cursor: pointer;">Добавить</span>
     </div>
     <div class="menuBody">
         <div class="generalContent">

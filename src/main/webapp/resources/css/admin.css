@@ -255,6 +255,10 @@ input {
 }
 input[type="submit"] {
     margin-top: 20px;
+    cursor: pointer;
+}
+input[type="button"] {
+    cursor: pointer;
 }
 select {
     -webkit-appearance: none;

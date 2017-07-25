@@ -17,7 +17,7 @@ public class DirectorCompanyResource {
     @Autowired
     private CompanyService companyService;
 
-    @RequestMapping(value = "/api/mainAdmin/resource/v1/company/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/director/resource/v1/company/{id}", method = RequestMethod.GET)
     public Company getCompany(@PathVariable String id) {
         return companyService.getCompany(Integer.valueOf(id));
     }

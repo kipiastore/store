@@ -44,7 +44,7 @@
                         <div style="float: left;width: 450px;">
                             <k:forEach var="item" items="${model.partitionItem.subPartitionItems2}">
                                 <p>
-                                    <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                                    <a title="${item.subPartitionName}" data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
                                     <span class="rua-p-c-red"><b>${item.companyCount}</b></span>
                                 </p>
                             </k:forEach>
@@ -52,7 +52,7 @@
                         <div style="float: right;width: 450px;">
                             <k:forEach var="item" items="${model.partitionItem.subPartitionItems1}">
                                 <p>
-                                    <a data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
+                                    <a title="${item.subPartitionName}" data-id="${item.subPartitionId}" href="../subPartition/${item.subPartitionId}">${item.subPartitionName}</a>
                                     <span class="rua-p-c-red"><b>${item.companyCount}</b></span>
                                 </p>
                             </k:forEach>
