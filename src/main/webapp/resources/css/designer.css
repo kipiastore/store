@@ -197,7 +197,7 @@ form {
     color: #7c7e82;
     text-align: left;
     float: left;
-    cursor: pointer;
+    //cursor: pointer;
     height: 100%;
     width: 235px;
     padding-left: 5px;
@@ -211,7 +211,7 @@ form {
     line-height: 23px;
     color: #7c7e82;
     float: left;
-    cursor: pointer;
+    //cursor: pointer;
     height: 100%;
     width: 100%;
     text-align: center;
@@ -222,13 +222,14 @@ form {
     float: right;
     width: 32px;
     height: 100%;
+    margin-right: 5px;
 }
 .menuBodyItemButtDel {
-    cursor: pointer;
-    background: url(../images/delete.png) no-repeat;
+    //cursor: pointer;
+    background: url(../images/checked.png) no-repeat;
     width: 100%;
     height: 100%;
-    background-position-y: 12px;
+    background-position-y: 9px;
 }
 .generalContent {
     text-align: left;
@@ -673,9 +674,12 @@ table th[class*=col-] {
 table thead {
     text-align: left;
 }
-tbody {
+tbody a {
     color: #6d847c;
     font-size: 13px;
+}
+tbody a:hover {
+    color: #16b297;
 }
 .container {
     display: none;

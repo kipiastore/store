@@ -95,7 +95,8 @@
                         </div>
                         <label>Файл</label>
                         <input type="file" name="file" title="gif jpeg jpg png bmp" id="updateFile"/>
-                        <textarea rows="10" name="info" maxlength="1600" id="updateDescription"></textarea>
+                        <label>Информация<span class="required">*</span></label>
+                        <textarea required rows="10" name="info" maxlength="1600" id="updateDescription"></textarea>
                         <input type="hidden" name="companyId" value="${model.companyId}" />
                         <input type="hidden" name="contentId" id="updateCompanySubpartitionContentId"  />
                         <input type="hidden" name="companySubpartitionId" id="updateCompanySubpartitionId" />
@@ -120,7 +121,30 @@
         <span class="menuTitleText">Позиции</span>
     </div>
     <div class="menuBody">
-
+        <div class="menuBodyItem">
+            <div class="menuBodyItemHeadInfo">
+                <span class="soloTest">${model.companyName}</span>
+            </div>
+        </div>
+        <div>
+            <c:forEach var="item" items="${model.subPartitionItemList}">
+                <div class="menuBodyItem" >
+                    <div class="menuBodyItemInfo">
+                        <span class="soloTest">${item.subpartitionName}</span>
+                    </div>
+                </div>
+            </c:forEach>
+            <c:forEach var="item" items="${model.doneSubPartitionItemList}">
+                <div class="menuBodyItem" >
+                    <div class="menuBodyItemInfo">
+                        <span class="soloTest">${item.subpartitionName}</span>
+                    </div>
+                    <div class="menuBodyItemButt">
+                        <div class="menuBodyItemButtDel"></div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </div>
 <input type="hidden" name="selectedPageNum" id="pageInformation" value="${model.selectedPageNum}"/>
@@ -173,6 +197,7 @@
         text-align: center;
         padding-bottom: 10px;
         padding-top: 10px;
+        color: #757582;
     }
     .position-addintional-block-a {
         float: left;
@@ -196,7 +221,7 @@
         width: 100%;
         border: 0;
         height: 1px;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0));
     }
     .button a {
         color: #fff;

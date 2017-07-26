@@ -7,23 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.beans.ImageHandler;
 import ru.store.dao.interfaces.SubPartitionDAO;
-import ru.store.entities.*;
+import ru.store.entities.CompanySubPartition;
+import ru.store.entities.CompanySubpartitionContent;
 import ru.store.entities.Image;
-import ru.store.exceptions.NotSupportedFormat;
+import ru.store.entities.SubPartition;
+import ru.store.service.CompanyService;
 import ru.store.service.CompanySubPartitionService;
 import ru.store.service.CompanySubpartitionContentService;
 import ru.store.service.ImageService;
-import ru.store.service.SubPartitionService;
-import ru.store.servlets.DownloadImage;
-import ru.store.servlets.DownloadServlet;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.*;
-import java.util.List;
 
 /**
  *
@@ -41,6 +34,8 @@ public class DesignerCompanyPositionsController {
     private ImageService imageService;
     @Autowired
     private ImageHandler imageHandler;
+    @Autowired
+    private CompanyService companyService;
 
     @RequestMapping(value = "/designer/positions/company/{id}", method = RequestMethod.GET)
     public ModelAndView positions(@PathVariable String id) {
@@ -141,8 +136,10 @@ public class DesignerCompanyPositionsController {
             model.companySubpartitionContentList.add(item);
         }
         model.companyId = id;
+        model.companyName = companyService.getCompany(id).getName();
 
         model.subPartitionItemList = new ArrayList<>();
+        model.doneSubPartitionItemList = new ArrayList<>();
         Model.SubPartitionItem subPartitionItem;
         List<CompanySubpartitionContent> currentContents = companySubpartitionContentService.getCompanySubpartitionContents(id);
 
@@ -163,6 +160,9 @@ public class DesignerCompanyPositionsController {
 
             if (!currentContentSet.contains(companySubPartition.getId()))
                 model.subPartitionItemList.add(subPartitionItem);
+            else {
+                model.doneSubPartitionItemList.add(subPartitionItem);
+            }
         }
     }
 
@@ -194,8 +194,10 @@ public class DesignerCompanyPositionsController {
         public int selectedPageNum;
         public String message;
         public Integer companyId;
+        public String companyName;
         public List<CompanySubpartitionContentItem> companySubpartitionContentList;
         public List<SubPartitionItem> subPartitionItemList;
+        public List<SubPartitionItem> doneSubPartitionItemList;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
@@ -211,6 +213,12 @@ public class DesignerCompanyPositionsController {
         }
         public List<SubPartitionItem> getSubPartitionItemList() {
             return subPartitionItemList;
+        }
+        public String getCompanyName() {
+            return companyName;
+        }
+        public List<SubPartitionItem> getDoneSubPartitionItemList() {
+            return doneSubPartitionItemList;
         }
 
         public static class CompanySubpartitionContentItem {
