@@ -154,6 +154,7 @@ public class AdminPositionsController {
             partitionItem = new Model.PartitionItem();
             partitionItem.id = partition.getId();
             partitionItem.name = getNormalName(partition.getName());
+            partitionItem.fullName = partition.getName();
             partitionIdToPartitionItem.put(partition.getId(), partitionItem);
             partitionItems.add(partitionItem);
             subPartitionsGroupedByPartition.put(partitionItem, null);
@@ -163,6 +164,7 @@ public class AdminPositionsController {
                 partitionItem = new Model.PartitionItem();
                 partitionItem.id = subPartition.getId();
                 partitionItem.name = getNormalName(subPartition.getName());
+                partitionItem.fullName = subPartition.getName();
                 subPartitionsGroupedByPartition.get(new Model.PartitionItem(subPartition.getPartitionId())).add(partitionItem);
             } else {
                 mainPartitionItem = new Model.PartitionItem();
@@ -172,11 +174,29 @@ public class AdminPositionsController {
                 partitionItem = new Model.PartitionItem();
                 partitionItem.id = subPartition.getId();
                 partitionItem.name = getNormalName(subPartition.getName());
+                partitionItem.fullName = subPartition.getName();
                 partitionItems.add(partitionItem);
                 subPartitionsGroupedByPartition.put(mainPartitionItem, partitionItems);
             }
         }
         model.subPartitionsGroupedByPartition = subPartitionsGroupedByPartition;
+
+        Map<Model.PartitionItem2, Set<Model.PartitionItem2>> subPartitionsGroupedByPartition2 = new TreeMap<>();
+        Set<Model.PartitionItem2> partitionItem2List;
+
+        for (Model.PartitionItem partitionItem1 : subPartitionsGroupedByPartition.keySet()) {
+            partitionItem2List = new TreeSet<>();
+            if (subPartitionsGroupedByPartition.get(partitionItem1) == null) {
+                subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName(), partitionItem1.getFullName()), partitionItem2List);
+                continue;
+            }
+
+            for (Model.PartitionItem partitionItem2 : subPartitionsGroupedByPartition.get(partitionItem1)) {
+                partitionItem2List.add(new Model.PartitionItem2(partitionItem2.getId(), partitionItem2.getName(), partitionItem2.getFullName()));
+            }
+            subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName(), partitionItem1.getFullName()), partitionItem2List);
+        }
+        model.subPartitionsGroupedByPartition2 = subPartitionsGroupedByPartition2;
     }
 
     private Model.CompaniesItem convert(Company company) {
@@ -217,6 +237,7 @@ public class AdminPositionsController {
         public List<CompaniesItem> companyList;
         public String message;
         public Map<PartitionItem, List<PartitionItem>> subPartitionsGroupedByPartition;
+        public Map<PartitionItem2, Set<PartitionItem2>> subPartitionsGroupedByPartition2;
 
         public int getSelectedPageNum() {
             return selectedPageNum;
@@ -229,6 +250,9 @@ public class AdminPositionsController {
         }
         public Map<PartitionItem, List<PartitionItem>> getSubPartitionsGroupedByPartition() {
             return subPartitionsGroupedByPartition;
+        }
+        public Map<PartitionItem2, Set<PartitionItem2>> getSubPartitionsGroupedByPartition2() {
+            return subPartitionsGroupedByPartition2;
         }
 
         public static class CompaniesItem {
@@ -251,6 +275,7 @@ public class AdminPositionsController {
         public static class PartitionItem {
             public int id;
             public String name;
+            public String fullName;
 
             public PartitionItem() {
             }
@@ -265,6 +290,9 @@ public class AdminPositionsController {
             public String getName() {
                 return name;
             }
+            public String getFullName() {
+                return fullName;
+            }
 
             @Override
             public boolean equals(Object o) {
@@ -277,6 +305,56 @@ public class AdminPositionsController {
             @Override
             public int hashCode() {
                 return id;
+            }
+        }
+
+        public static class PartitionItem2 implements Comparable<PartitionItem2> {
+            public int id;
+            public String name;
+            public String fullName;
+
+            public int getId() {
+                return id;
+            }
+            public String getName() {
+                return name;
+            }
+            public String getFullName() {
+                return fullName;
+            }
+
+            public PartitionItem2() { }
+            public PartitionItem2(int id, String name, String fullName) {
+                this.id = id;
+                this.name = name;
+                this.fullName = fullName;
+            }
+
+            @Override
+            public int compareTo(PartitionItem2 o) {
+                return this.fullName.compareTo(o.fullName);
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                PartitionItem2 that = (PartitionItem2) o;
+                return Objects.equals(fullName, that.fullName);
+
+            }
+            @Override
+            public int hashCode() {
+                return fullName.hashCode();
+            }
+
+            @Override
+            public String toString() {
+                return "PartitionItem2{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        ", fullName='" + fullName + '\'' +
+                        '}';
             }
         }
     }

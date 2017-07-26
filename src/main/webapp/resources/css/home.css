@@ -1043,7 +1043,7 @@ footer.f .cr {
     display: inline-block;
     color: #7e7e7e;
     text-decoration: none;
-    width: 370px;
+    width: 390px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -1293,7 +1293,7 @@ p::-moz-selection {
     margin: auto;
 }
 .rptShort .subsection .subsection-list a {
-    width: 260px;
+    width: 270px;
 }
 .mail-container {
     width: 100%;
@@ -1641,12 +1641,13 @@ footer.f .c>ul .b {
 
 
 .paulund_modal_close {
-position:relative;
-top:-25px;
-left:20px;
-float:right;
-display:block;
-height:50px;
-width:50px;
-background: url("../images/close-paulund-modal-box.png") no-repeat;
+    position:relative;
+    top:-25px;
+    left:20px;
+    float:right;
+    display:block;
+    height:50px;
+    width:50px;
+    cursor: pointer;
+    background: url("../images/close-paulund-modal-box.png") no-repeat;
 }

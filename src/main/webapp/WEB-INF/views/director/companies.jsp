@@ -244,6 +244,10 @@
                         <label>Контактное лицо</label>
                         <input title="Введите контактное лицо." maxlength="120" type="text" name="contactPerson" id="contactPerson"/>
                     </div>
+                    <div class="image-container" style="text-align: center;position: relative;">
+                        <img class="delete-image" src="<c:url value="/resources/images/delete.png" />">
+                        <img class="company-image" src="" title="">
+                    </div>
                 </div>
                 <input type="hidden" name="lastModifiedBy" value="${pageContext.request.userPrincipal.name}" />
                 <input type="hidden" name="hiddenId" id="hiddenId" />

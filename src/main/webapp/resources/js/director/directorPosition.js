@@ -63,6 +63,7 @@ $(".pageMenuButt").on("click", function (event) {
 */
 
 $(".menuTitleText").on("click", function () {
+    $(".localMessage").hide();
     if (document.URL.indexOf("searchcompany") != -1) // временное решение
         window.location.replace(document.URL.replace("searchcompany", "s"));
     updateForm = $("#updateForm");
@@ -123,6 +124,17 @@ $(".tableName").on("click", function (event) {
                         });
                         $('#optgroup').multiSelect('select', tmpArray);
                     }
+                    $('.pickListItem.ms-elem-selectable').hide();
+                    $(".ms-optgroup-label").unbind();
+                    $(".ms-optgroup-label").on("click", function (event) {
+                        var partitionName = $(this).find('span').html();
+                        partitionArray.forEach(function(entry) {
+                            if (partitionName == entry.name) {
+                                $(".pickListItem." + entry.id + ".ms-elem-selectable").toggle();
+                                $(".pickListItem." + entry.id + ".ms-elem-selectable" + ".ms-selected").hide();
+                            }
+                        });
+                    });
                     prLoader.hide();
                     updateForm.animate({opacity: 1}, 200);
                 });
@@ -227,6 +239,7 @@ if (pageInformation == 2) {
             numOfSelectedItems += values.length;
             if (numOfSelectedItems > numOfMaxSelected) {
                 $('#optgroup').multiSelect('deselect', values);
+                localMessage.show();
                 localMessage.html("Вы можете выбрать только " + numOfMaxSelected + " позиций.");
             }
         },

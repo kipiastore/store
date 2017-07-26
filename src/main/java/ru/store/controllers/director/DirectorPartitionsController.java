@@ -152,6 +152,7 @@ public class DirectorPartitionsController {
                 subPartitionsGroupedByPartition2.put(new Model.PartitionItem2(partitionItem1.getId(), partitionItem1.getName(), partitionItem1.getFullName()), partitionItem2List);
                 continue;
             }
+
             for (Model.PartitionItem partitionItem2 : subPartitionsGroupedByPartition.get(partitionItem1)) {
                 partitionItem2List.add(new Model.PartitionItem2(partitionItem2.getId(), partitionItem2.getName(), partitionItem2.getFullName()));
             }
@@ -243,6 +244,14 @@ public class DirectorPartitionsController {
             public int hashCode() {
                 return id;
             }
+            @Override
+            public String toString() {
+                return "PartitionItem{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        ", fullName='" + fullName + '\'' +
+                        '}';
+            }
         }
 
         public static class PartitionItem2 implements Comparable<PartitionItem2> {
@@ -269,7 +278,7 @@ public class DirectorPartitionsController {
 
             @Override
             public int compareTo(PartitionItem2 o) {
-                return this.name.compareTo(o.name);
+                return this.fullName.compareTo(o.fullName);
             }
 
             @Override
@@ -277,12 +286,12 @@ public class DirectorPartitionsController {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 PartitionItem2 that = (PartitionItem2) o;
-                return Objects.equals(name, that.name);
+                return Objects.equals(fullName, that.fullName);
 
             }
             @Override
             public int hashCode() {
-                return name.hashCode();
+                return fullName.hashCode();
             }
 
             @Override
@@ -290,6 +299,7 @@ public class DirectorPartitionsController {
                 return "PartitionItem2{" +
                         "id=" + id +
                         ", name='" + name + '\'' +
+                        ", fullName='" + fullName + '\'' +
                         '}';
             }
         }

@@ -55,7 +55,7 @@
         <form:form action="deletepartition" method="post" id="deleteForm">
             <c:forEach var="key" items="${model.subPartitionsGroupedByPartition2.keySet()}">
                 <div class="menuBodyItem">
-                    <div class="menuBodyItemHeadInfo" id="pr-ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">
+                    <div class="menuBodyItemHeadInfo" title="${key.fullName}" id="pr-ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">
                         <span class="soloTest" id="pr-ID-${key.id}" data-name="${key.fullName}" data-id="${key.id}">${key.name}</span>
                     </div>
                     <div class="menuBodyItemButt">
@@ -65,7 +65,7 @@
                 <div style="display: none" class="subItemsList" id="itemsID-${key.id}">
                     <c:forEach var="item" items="${model.subPartitionsGroupedByPartition2.get(key)}">
                         <div class="menuBodyItem" >
-                            <div class="menuBodyItemInfo" id="sub-pr-ID-${item.id}">
+                            <div class="menuBodyItemInfo" title="${item.fullName}" id="sub-pr-ID-${item.id}">
                                 <span class="soloTest" data-type="subPartition" data-name="${item.fullName}" id="sub-pr-ID-${item.id}">${item.name}</span>
                             </div>
                             <div class="menuBodyItemButt" id="menuBodyItemButtId">

@@ -46,8 +46,6 @@ public class PortalController {
         //calculating portal visitors
         CountingPortalPage countingPortalPage=countingService.getCountPortalPage();
         countingPortalPage.setCountPortal();
-
-
         countingPortalPage.setCountPortalToday();
         countingService.addCountPortalPage(countingPortalPage);
         modelAndView.addObject("countInfo","ресурса за весь период");

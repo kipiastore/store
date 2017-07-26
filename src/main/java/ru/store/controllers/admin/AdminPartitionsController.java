@@ -285,7 +285,7 @@ public class AdminPartitionsController {
 
             @Override
             public int compareTo(PartitionItem2 o) {
-                return this.name.compareTo(o.name);
+                return this.fullName.compareTo(o.fullName);
             }
 
             @Override
@@ -293,12 +293,12 @@ public class AdminPartitionsController {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 PartitionItem2 that = (PartitionItem2) o;
-                return Objects.equals(name, that.name);
+                return Objects.equals(fullName, that.fullName);
 
             }
             @Override
             public int hashCode() {
-                return name.hashCode();
+                return fullName.hashCode();
             }
 
             @Override

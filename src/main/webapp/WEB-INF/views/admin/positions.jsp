@@ -72,14 +72,22 @@
                     </tbody>
                 </table>
             </div>
-
+            <script>
+                var partitionArray = [];
+            </script>
+            <c:forEach var="key" items="${model.subPartitionsGroupedByPartition2.keySet()}">
+                <script>
+                    var partitionItemKey = { name : '${key.fullName}', id : '${key.id}'};
+                    partitionArray.push(partitionItemKey);
+                </script>
+            </c:forEach>
             <form:form action="addsubpartitions" method="post" id="updateForm">
                 <select id='optgroup' name="positions" multiple='multiple'>
                     <option style="display: none" value="-1"></option>
-                    <c:forEach var="key" items="${model.subPartitionsGroupedByPartition.keySet()}">
-                        <optgroup label='${key.name}'>
-                            <c:forEach var="item" items="${model.subPartitionsGroupedByPartition.get(key)}">
-                                <option class="pickListItem" data="ID-${item.id}" value="${item.id}">${item.name}</option>
+                    <c:forEach var="key" items="${model.subPartitionsGroupedByPartition2.keySet()}">
+                        <optgroup label='${key.fullName}'>
+                            <c:forEach var="item" items="${model.subPartitionsGroupedByPartition2.get(key)}">
+                                <option class="pickListItem ${key.id}" data="ID-${item.id}" value="${item.id}">${item.fullName}</option>
                             </c:forEach>
                         </optgroup>
                     </c:forEach>
@@ -129,6 +137,9 @@
     }
     @media screen and (max-width : 1136px) {
         .body .pageMenu { height: 76px; }
+    }
+    .ms-container .ms-list {
+        height: 400px;
     }
 </style>
 </body>

@@ -17,6 +17,7 @@ public class ImageService {
     private ImageDAO imageDAO;
 
     public void createImage(Image image) {
+        image.setName(image.getName().replaceAll(",", "").replaceAll("_", "").replaceAll(" ", ""));
         imageDAO.createImage(image);
     }
 
@@ -25,6 +26,7 @@ public class ImageService {
     }
 
     public void updateImage(Image image) {
+        image.setName(image.getName().replaceAll(",", "").replaceAll("_", "").replaceAll(" ", ""));
         imageDAO.updateImage(image);
     }
 

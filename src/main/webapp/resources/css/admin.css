@@ -798,3 +798,13 @@ pre {
 
 
 */
+.company-image {
+    padding: 2%;
+    max-width: 96%;
+    box-shadow: rgba(0, 0, 0, 0.156863) 0px 0px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 1px 0px;
+}
+.delete-image {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}

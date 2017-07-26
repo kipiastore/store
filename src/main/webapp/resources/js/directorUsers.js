@@ -338,6 +338,13 @@ function loadCompany(id) {
         site.val(entry.site);
         imageId.val(entry.imageId);
 
+        if (entry.imageId == undefined || entry.imageId == null || entry.imageId == '') {
+            $('.image-container').hide();
+        } else {
+            $('.company-image').attr("src", "../download?id=" + entry.imageId);
+            $('.image-container').show();
+        }
+
         isShowForOperator.prop('checked', entry.isShowForOperator);
         isShowForSite.prop('checked', entry.isShowForSite);
         isPaid.prop('checked', entry.isPaid);
@@ -687,7 +694,7 @@ function showValues() {
             addressArray.forEach(function(entry) {
                 if (entry.id == addId &&
                     ($("#UpAddId" + entry.id).val() == "" ||
-                    confirm("Удалить?\nАдрес будет удален после того, как вы нажмете Обновить."))) {
+                    confirm("Удалить?\nАдрес будет удален после того, как вы нажмете Сохранить."))) {
                     entry.isOpen = false;
                     $("#UpAdd" + entry.id ).hide();
                     $("#UpAdAd" + entry.id ).removeAttr('required');
@@ -704,5 +711,11 @@ function showValues() {
             if (e !== BreakException) throw e;
         }
         calculatePosition(addressArray, "UpAdd");
+    });
+    $(".image-container").on("click", function (event) {
+        if (confirm("Удалить?\nЛоготип будет удален после того, как вы нажмете Сохранить.")) {
+            $('.image-container').hide();
+            imageId.val('');
+        }
     });
 }

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.store.api.portal.PriorityResource;
-import ru.store.beans.BadWordsFilter;
 import ru.store.beans.SearchRequestKeeper;
 import ru.store.entities.*;
 import ru.store.service.*;
@@ -53,9 +52,12 @@ public class SearchController {
         //calculating portal visitors
         CountingPortalPage countingPortalPage = countingService.getCountPortalPage();
         countingPortalPage.setCountPortal();
+        countingPortalPage.setCountPortalToday();
         countingService.addCountPortalPage(countingPortalPage);
-        modelAndView.addObject("countInfo","ресурса");
+        modelAndView.addObject("countInfo","ресурса за весь период");
         modelAndView.addObject("portalCount",countingPortalPage.getCountPortal());
+        modelAndView.addObject("countTodayInfo","ресурса за сегодня");
+        modelAndView.addObject("portalTodayCount",countingPortalPage.getCountPortalToday());
         //
 
         Set<Integer> companyIds = new HashSet<>();
